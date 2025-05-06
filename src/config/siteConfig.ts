@@ -320,6 +320,36 @@ export const siteConfig = {
   ],
   caseStudies: [
     {
+      title: 'Career Counseling Platform',
+      summary: 'A modern career counseling platform built with Next.js, enabling users to explore counseling packages, read reviews, and book sessions.',
+      image: '/assets/career-path-case.png',
+      url: 'https://preeminent-heliotrope-7d4b20.netlify.app',
+      openInNewTab: true,
+      openInDialog: true,
+      content: {
+        description: 'A comprehensive career counseling platform designed to connect users with professional career guidance services. The platform offers various counseling packages, client testimonials, and an easy-to-use contact form for inquiries.',
+        features: [
+          'User authentication and profile management',
+          'Interactive package selection and booking system',
+          'Client review and testimonial section',
+          'Contact form with education level validation',
+          'Responsive design for all devices',
+          'Secure payment integration',
+          'Admin dashboard for session management'
+        ],
+        technologies: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Firebase', 'Stripe', 'Framer Motion'],
+        links: [
+          { text: 'Live Website', url: 'https://preeminent-heliotrope-7d4b20.netlify.app', target: '_blank' },
+          { text: 'Live Prototype', url: 'https://preeminent-heliotrope-7d4b20.netlify.app', target: '_self' }
+        ]
+      },
+      cta: {
+        text: 'View Platform',
+        url: 'https://preeminent-heliotrope-7d4b20.netlify.app',
+        target: '_blank'
+      },
+    },
+    {
       title: 'UX HIGH BIAS',
       summary: 'A zine-inspired Vibe portfolio framework, under development, but very much like this site you are watching now.',
       image: '/assets/ux-high-bias.png',

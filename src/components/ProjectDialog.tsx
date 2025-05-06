@@ -182,17 +182,19 @@ export function ProjectDialog({ project, open, onOpenChange }: ProjectDialogProp
                     </Button>
                   )}
 
-                  {project.content?.links?.map((link, index) => (
-                    <Button
-                      key={index}
-                      variant="outline"
-                      onClick={() => handleExternalLink(link.url, link.target || '_blank')}
-                      className="flex items-center gap-2"
-                    >
-                      {link.text}
-                      <ExternalLink className="h-4 w-4" />
-                    </Button>
-                  ))}
+                  {project.content?.links
+                    ?.filter(link => !link.text.toLowerCase().includes('prototype') && !link.text.toLowerCase().includes('demo'))
+                    .map((link, index) => (
+                      <Button
+                        key={index}
+                        variant="outline"
+                        onClick={() => handleExternalLink(link.url, link.target || '_blank')}
+                        className="flex items-center gap-2"
+                      >
+                        {link.text}
+                        <ExternalLink className="h-4 w-4" />
+                      </Button>
+                    ))}
                 </div>
               </div>
             ) : (
