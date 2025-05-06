@@ -2,7 +2,8 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { siteConfig } from '@/config/siteConfig';
-import { Button } from './ui/button';
+import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from "@/components/ui/carousel"
@@ -78,13 +79,15 @@ export function HeroSection() {
             </CarouselContent>
             <div className="flex justify-center gap-2 mt-4">
               {Array.from({ length: count }).map((_, index) => (
-                <button
+                <Button
                   key={index}
-                  type="button"
+                  variant="ghost"
+                  size="icon"
                   onClick={() => api?.scrollTo(index)}
-                  className={`h-2 w-2 rounded-full transition-colors ${
-                    index === current - 1 ? 'bg-primary' : 'bg-gray-300'
-                  }`}
+                  className={cn(
+                    'h-2 w-2 p-0 rounded-full transition-colors',
+                    index === current - 1 ? 'bg-primary' : 'bg-muted hover:bg-muted/80'
+                  )}
                   aria-label={`Go to slide ${index + 1}`}
                 />
               ))}

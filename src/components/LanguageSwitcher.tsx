@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useLanguage } from '@/context/LanguageContext';
 import { siteConfig } from '@/config/siteConfig';
+import { Button } from '@/components/ui/button';
 
 const languageNames: Record<string, string> = {
   en: 'English',
@@ -54,21 +55,19 @@ export function LanguageSwitcher() {
       {siteConfig.locales.map((loc) => {
         const isActive = locale === loc;
         return (
-          <button
+          <Button
             key={loc}
             onClick={() => handleLocaleChange(loc)}
-            className={`px-3 py-1 rounded-2xl transition-colors ${
-              isActive
-                ? 'bg-primary text-primary-foreground' 
-                : 'bg-muted text-foreground hover:bg-muted/80'
-            } ${isChanging ? 'opacity-70' : ''}`}
+            variant={isActive ? 'default' : 'outline'}
+            size="sm"
+            className={`rounded-2xl transition-opacity ${isChanging ? 'opacity-70' : ''}`}
             aria-label={`${languageNames[loc] || loc.toUpperCase()} ${isActive ? '(selected)' : ''}`}
             role="radio"
             aria-checked={isActive}
             disabled={isChanging}
           >
             {loc.toUpperCase()}
-          </button>
+          </Button>
         );
       })}
     </div>

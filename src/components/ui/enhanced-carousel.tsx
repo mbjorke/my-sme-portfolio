@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 import useEmblaCarousel from "embla-carousel-react"
 import { ArrowLeft, ArrowRight } from "lucide-react"
 import { cn } from "@/lib/utils"
@@ -324,13 +325,15 @@ function CarouselDots({
   return (
     <div className={cn("flex justify-center gap-2 mt-4", className)}>
       {slides.map((_, index) => (
-        <button
+        <Button
           key={index}
-          type="button"
+          variant="ghost"
+          size="icon"
           onClick={() => scrollTo(index)}
           className={cn(
-            "h-2 w-2 rounded-full bg-gray-300 transition-colors",
+            "h-2 w-2 p-0 rounded-full transition-colors",
             dotClassName,
+            index !== selectedIndex && "bg-muted hover:bg-muted/80",
             index === selectedIndex && ["bg-primary", activeDotClassName]
           )}
           aria-label={`Go to slide ${index + 1}`}

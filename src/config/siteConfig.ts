@@ -362,6 +362,7 @@ export const siteConfig = {
           'Responsive design that works on all devices',
           'Dark/light mode support, disablable',
           'Shadcn/ui components with TailwindCSS',
+          'New Theme Editor coming soon from Shadcn',
           'Multilanguage support, makes it super easy to add how many languages you want by just instructing Windsurf.ai what languages you want',
           'Easy Customizable color schemes, and even multiple themes if you want',
           'Markdown support for content, i.e. LinkedIn templates',

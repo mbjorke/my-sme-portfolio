@@ -5,8 +5,8 @@ import { usePathname } from 'next/navigation';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { ExternalLink, Monitor, FileText, X } from 'lucide-react';
-import { ProjectCaseStudy } from '@/types/project';
 import { cn } from '@/lib/utils';
+import { ProjectCaseStudy } from '@/types/project';
 
 interface ProjectDialogProps {
   project: ProjectCaseStudy | null;
@@ -84,38 +84,36 @@ export function ProjectDialog({ project, open, onOpenChange }: ProjectDialogProp
           {/* Tabs */}
           <div className="border-b px-6 mt-4">
             <div className="flex space-x-4">
-              <button
-                type="button"
+              <Button
+                variant="ghost"
+                size="sm"
                 onClick={() => setActiveTab('details')}
                 className={cn(
-                  'py-2 px-3 border-b-2 font-medium text-sm',
+                  'rounded-none border-b-2 h-auto py-2 px-3',
                   activeTab === 'details'
-                    ? 'border-primary text-primary'
-                    : 'border-transparent text-muted-foreground hover:text-foreground'
+                    ? 'border-primary text-primary bg-secondary/50'
+                    : 'border-transparent text-muted-foreground hover:bg-transparent hover:text-foreground'
                 )}
               >
-                <div className="flex items-center gap-2">
-                  <FileText className="h-4 w-4" />
-                  Details
-                </div>
-              </button>
+                <FileText className="h-4 w-4 mr-2" />
+                Details
+              </Button>
               
               {hasPrototypeLink && (
-                <button
-                  type="button"
+                <Button
+                  variant="ghost"
+                  size="sm"
                   onClick={() => setActiveTab('prototype')}
                   className={cn(
-                    'py-2 px-3 border-b-2 font-medium text-sm',
+                    'rounded-none border-b-2 h-auto py-2 px-3',
                     activeTab === 'prototype'
-                      ? 'border-primary text-primary'
-                      : 'border-transparent text-muted-foreground hover:text-foreground'
+                      ? 'border-primary text-primary bg-secondary/50'
+                      : 'border-transparent text-muted-foreground hover:bg-transparent hover:text-foreground'
                   )}
                 >
-                  <div className="flex items-center gap-2">
-                    <Monitor className="h-4 w-4" />
-                    Live Prototype
-                  </div>
-                </button>
+                  <Monitor className="h-4 w-4 mr-2" />
+                  Live Prototype
+                </Button>
               )}
             </div>
           </div>
