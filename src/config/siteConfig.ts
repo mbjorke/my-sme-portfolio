@@ -321,34 +321,92 @@ export const siteConfig = {
   caseStudies: [
     {
       title: 'UX HIGH BIAS',
-      summary: 'A zine-inspired Vibe portfolio framework for vibe coders and visual tinkers.',
-      image: '/images/high-bias.png',
+      summary: 'A zine-inspired Vibe portfolio framework, under development, but very much like this site you are watching now.',
+      image: '/assets/ux-high-bias.png',
       url: 'https://ux-high-bias.framer.website',
+      openInNewTab: false,
+      openInDialog: true,
+      content: {
+        description: 'A modern, customizable portfolio framework built with Next.js and Tailwind CSS. Designed for developers and designers who want to showcase their work. The base will be with a unique, zine-inspired aesthetic, but that is easily customizable with Modern Vibe Coding Tools like Windsurf.ai.',
+        features: [
+          'Responsive design that works on all devices',
+          'Dark/light mode support, disablable',
+          'Shadcn/ui components with TailwindCSS',
+          'Multilanguage support, makes it super easy to add how many languages you want by just instructing Windsurf.ai what languages you want',
+          'Easy Customizable color schemes, and even multiple themes if you want',
+          'Markdown support for content, i.e. LinkedIn templates',
+          'Built-in analytics',
+          'Wizard to populate content',
+          'AAA+ accessible from start',
+          'SEO optimized'
+        ],
+        technologies: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion', 'MDX'],
+        links: [
+          { text: 'GitHub Repository', url: 'https://github.com/yourusername/ux-high-bias' },
+          { text: 'Live Demo', url: 'https://ux-high-bias.framer.website' }
+        ]
+      },
       cta: {
         text: 'See the case',
         url: 'https://ux-high-bias.framer.website',
+        target: '_blank'
       },
     },
     {
       title: 'Project Blueberry Banking',
-      summary:
-        'A mobile Business Banking App themed for a small business owner, surfer vibes, this is built with Framer just to showcase interaction examples',
-      image: '/images/blueberry-case.png',
+      summary: 'A mobile Business Banking App themed for a small business owner, surfer vibes, built with Framer to showcase interaction examples',
+      image: '/assets/blueberry-banking-case.png',
       url: 'https://blueberry-bank.framer.website',
+      openInNewTab: false,
+      openInDialog: true,
+      content: {
+        description: 'A concept mobile banking application designed specifically for small business owners with a passion for surfing. This project showcases modern UI/UX patterns for financial applications with a unique, engaging visual style.',
+        features: [
+          'Interactive prototypes with Framer',
+          'Custom animation system',
+          'User flows for common banking tasks',
+          'Design system with dark/light modes',
+          'Responsive design patterns'
+        ],
+        technologies: ['Framer'],
+        links: [
+          { text: 'Case Study', url: 'https://yourportfolio.com/case-studies/blueberry-banking', target: '_blank' },
+          { text: 'Live Prototype', url: 'https://blueberry-bank.framer.website', target: '_self' }
+        ]
+      },
       cta: {
-        text: 'Explore this project',
-        url: 'https://blueberry-bank.framer.website',
+        text: 'Open Prototype',
+        url: '#',
+        target: '_self'
       },
     },
     {
       title: 'Rob Watkins Photography',
-      summary:
-        'Rob had too many ideas about his business, basically stuck from what to offer and when.  instead of trying to fit into a template, I made Rob realise to which picture to choose. I helped him realize that he first needed to focus on his own storytelling. In 1 hour I drafted the first version. Rob is now in control of the code for lower price than he used to pay to his old website service he is now in full controll of all the creative aspects of having his website.',
+      summary: 'A custom photography portfolio website that puts the focus on stunning visual storytelling and seamless content management.',
       image: '/assets/rob-watkins-offers.png',
       url: 'https://robw.framer.photos',
+      openInNewTab: false,
+      openInDialog: true,
+      content: {
+        description: 'A custom photography portfolio website built with a focus on performance and visual impact. The site features a clean, minimal design that puts the focus on Rob\'s stunning photography work, with a custom content management system that allows him to easily update his portfolio.',
+        features: [
+          'Custom image optimization pipeline',
+          'Dynamic gallery with filtering',
+          'Client proofing system',
+          'SEO optimized for photographers',
+          'Mobile-first responsive design',
+          'Fast-loading image delivery'
+        ],
+        technologies: ['Framer'],
+        links: [
+          { text: 'Visit Live Site', url: 'https://robw.framer.photos' },
+          { text: 'Case Study', url: 'https://yourportfolio.com/case-studies/rob-watkins' }
+        ]
+      },
       cta: {
         text: "Visit Rob's site",
         url: 'https://robw.framer.photos',
+        target: '_blank'
       },
     },
   ],
