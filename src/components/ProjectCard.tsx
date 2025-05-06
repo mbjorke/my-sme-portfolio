@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useLanguage } from '@/context/LanguageContext';
 import { usePathname, useRouter } from 'next/navigation';
 import { ExternalLink } from 'lucide-react';
 import { ProjectCaseStudy } from '@/types/project';
@@ -50,6 +51,10 @@ export function ProjectCard({ project, className = '' }: ProjectCardProps) {
     }
   };
 
+  const viewDetailsText = useLanguage().locale === 'sv' ? 'Visa detaljer' : 'View details';
+  const viewProjectText = useLanguage().locale === 'sv' ? 'Visa projekt' : 'View project';
+  const viewProjectCta = useLanguage().locale === 'sv' ? 'Visa projekt' : 'View Project';
+
   return (
     <>
       <div
@@ -65,7 +70,7 @@ export function ProjectCard({ project, className = '' }: ProjectCardProps) {
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
             <span className="text-white text-sm font-medium">
-              {project.openInDialog ? 'View details' : 'View project'}
+              {project.openInDialog ? viewDetailsText : viewProjectText}
               {project.openInNewTab && <ExternalLink className="inline-block ml-1 h-4 w-4" />}
             </span>
           </div>
@@ -77,7 +82,7 @@ export function ProjectCard({ project, className = '' }: ProjectCardProps) {
           <p className="mb-4 text-muted-foreground line-clamp-2">{project.summary}</p>
           <div className="flex items-center justify-between pt-2 border-t border-border">
             <span className="text-sm font-medium text-primary flex items-center">
-              {project.cta?.text || 'View Project'}
+              {project.cta?.text || viewProjectCta}
               <ExternalLink className="ml-1 h-3 w-3" />
             </span>
             {project.content?.technologies && project.content.technologies.length > 0 && (

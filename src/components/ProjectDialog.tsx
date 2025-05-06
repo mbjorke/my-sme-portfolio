@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useLanguage } from '@/context/LanguageContext';
 import { usePathname } from 'next/navigation';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
@@ -18,9 +19,22 @@ type TabType = 'details' | 'prototype';
 
 export function ProjectDialog({ project, open, onOpenChange }: ProjectDialogProps) {
   const pathname = usePathname();
+  const { locale } = useLanguage();
   const [mounted, setMounted] = useState(false);
   const [activeTab, setActiveTab] = useState<TabType>('details');
   const [isIframeLoaded, setIsIframeLoaded] = useState(false);
+
+  // Get translations from siteConfig based on current locale
+  const translations = {
+    details: locale === 'sv' ? 'Detaljer' : 'Details',
+    livePrototype: locale === 'sv' ? 'Live Prototyp' : 'Live Prototype',
+    aboutProject: locale === 'sv' ? 'Om projektet' : 'About this project',
+    keyFeatures: locale === 'sv' ? 'Nyckelfunktioner' : 'Key Features',
+    technologiesUsed: locale === 'sv' ? 'Använda tekniker' : 'Technologies Used',
+    loadingPrototype: locale === 'sv' ? 'Laddar prototyp...' : 'Loading prototype...',
+    noPrototype: locale === 'sv' ? 'Ingen prototyp tillgänglig' : 'No prototype URL available',
+    embeddedPrototype: locale === 'sv' ? 'Inbäddad prototyp' : 'Embedded Prototype'
+  };
 
   useEffect(() => {
     setMounted(true);
@@ -96,7 +110,7 @@ export function ProjectDialog({ project, open, onOpenChange }: ProjectDialogProp
                 )}
               >
                 <FileText className="h-4 w-4 mr-2" />
-                Details
+                {translations.details}
               </Button>
               
               {hasPrototypeLink && (
@@ -112,7 +126,7 @@ export function ProjectDialog({ project, open, onOpenChange }: ProjectDialogProp
                   )}
                 >
                   <Monitor className="h-4 w-4 mr-2" />
-                  Live Prototype
+                  {translations.livePrototype}
                 </Button>
               )}
             </div>
@@ -136,14 +150,14 @@ export function ProjectDialog({ project, open, onOpenChange }: ProjectDialogProp
                 <div className="prose dark:prose-invert max-w-none">
                   {project.content?.description && (
                     <div className="mb-6">
-                      <h3 className="text-xl font-semibold mb-2">About this project</h3>
+                      <h3 className="text-xl font-semibold mb-2">{translations.aboutProject}</h3>
                       <p>{project.content.description}</p>
                     </div>
                   )}
 
                   {project.content?.features && project.content.features.length > 0 && (
                     <div className="mb-6">
-                      <h3 className="text-xl font-semibold mb-2">Key Features</h3>
+                      <h3 className="text-xl font-semibold mb-2">{translations.keyFeatures}</h3>
                       <ul className="list-disc pl-5 space-y-1">
                         {project.content.features.map((feature, index) => (
                           <li key={index}>{feature}</li>
@@ -154,7 +168,7 @@ export function ProjectDialog({ project, open, onOpenChange }: ProjectDialogProp
 
                   {project.content?.technologies && project.content.technologies.length > 0 && (
                     <div className="mb-6">
-                      <h3 className="text-xl font-semibold mb-2">Technologies Used</h3>
+                      <h3 className="text-xl font-semibold mb-2">{translations.technologiesUsed}</h3>
                       <div className="flex flex-wrap gap-2">
                         {project.content.technologies.map((tech, index) => (
                           <span
@@ -199,7 +213,7 @@ export function ProjectDialog({ project, open, onOpenChange }: ProjectDialogProp
               <div className="h-[70vh] min-h-[500px] relative border rounded-lg overflow-hidden bg-muted/20">
                 <div className="absolute inset-0 flex flex-col">
                   <div className="bg-muted/30 p-2 text-xs text-muted-foreground">
-                    Embedded Prototype: {prototypeUrl}
+                    {translations.embeddedPrototype}: {prototypeUrl}
                   </div>
                   <div className="flex-1 relative">
                     {prototypeUrl ? (
@@ -218,13 +232,13 @@ export function ProjectDialog({ project, open, onOpenChange }: ProjectDialogProp
                         />
                         {!isIframeLoaded && (
                           <div className="absolute inset-0 flex items-center justify-center bg-background/80">
-                            <div className="animate-pulse">Loading prototype...</div>
+                            <div className="animate-pulse">{translations.loadingPrototype}</div>
                           </div>
                         )}
                       </>
                     ) : (
                       <div className="h-full flex items-center justify-center text-muted-foreground">
-                        No prototype URL available
+                        {translations.noPrototype}
                       </div>
                     )}
                   </div>

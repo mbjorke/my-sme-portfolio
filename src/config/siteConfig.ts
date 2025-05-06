@@ -192,6 +192,65 @@ export const siteConfig = {
           url: '#pricing',
         },
       },
+      caseStudies: {
+        careerCounseling: {
+          title: 'Karriärvägledningsplattform',
+          summary: 'En modern karriärvägledningsplattform byggd med Next.js, där användare kan utforska olika vägledningspaket, läsa recensioner och boka sessioner.',
+          description: 'En omfattande karriärvägledningsplattform utformad för att koppla samman användare med professionell karriärvägledning. Plattformen erbjuder olika vägledningspaket, kundrecensioner och ett användarvänligt kontaktformulär för förfrågningar.',
+          features: [
+            'Användarautentisering och profilanpassning',
+            'Interaktiv paketvals- och bokningsfunktion',
+            'Sektion för kundrecensioner och erfarenheter',
+            'Kontaktformulär med validering av utbildningsnivå',
+            'Responsiv design för alla enheter',
+            'Säker betalningsintegration',
+            'Adminpanel för sessionshantering'
+          ]
+        },
+        uxHighBias: {
+          title: 'UX HIGH BIAS',
+          summary: 'Ett zine-inspirerat Vibe-portföljramverk, under utveckling, men mycket likt den här webbplatsen du tittar på just nu.',
+          description: 'Ett modernt, anpassningsbart portföljramverk byggt med Next.js och Tailwind CSS. Designat för utvecklare och designers som vill visa upp sitt arbete. Grunden har en unik, zine-inspirerad estetik som enkelt kan anpassas med moderna utvecklingsverktyg som Windsurf.ai.',
+          features: [
+            'Responsiv design som fungerar på alla enheter',
+            'Stöd för mörkt/ljust läge, kan inaktiveras',
+            'Shadcn/ui-komponenter med TailwindCSS',
+            'Nytt temaredigeringsverktyg kommer snart från Shadcn',
+            'Flerspråksstöd, gör det superenkelt att lägga till hur många språk som helst',
+            'Enkelt anpassningsbara färgscheman och flera teman om så önskas',
+            'Stöd för Markdown för innehåll, t.ex. LinkedIn-mallar',
+            'Inbyggd analysfunktionalitet',
+            'Guide för att fylla i innehåll',
+            'AAA+ tillgänglighet från start',
+            'SEO-optimerad'
+          ]
+        },
+        blueberryBanking: {
+          title: 'Project Blueberry Banking',
+          summary: 'En mobil affärsbankapp med tema för småföretagare, surfarvibbar, byggd med Framer för att visa upp interaktionsmöjligheter',
+          description: 'En konceptuell mobilbankapp speciellt utformad för småföretagare med en passion för surfing. Detta projekt visar moderna UI/UX-mönster för finansiella applikationer med en unik och engagerande visuell stil.',
+          features: [
+            'Interaktiva prototyper med Framer',
+            'Anpassat animationssystem',
+            'Användarflöden för vanliga bankärenden',
+            'Designsystem med mörkt/ljust läge',
+            'Responsiva designmönster'
+          ]
+        },
+        robWatkins: {
+          title: 'Rob Watkins Fotografi',
+          summary: 'En anpassad portföljwebbplats för fotografering som fokuserar på fantastisk visuell berättande och sömlös innehållshantering.',
+          description: 'En anpassad portföljwebbplats för fotografering byggd med fokus på prestanda och visuell effekt. Webbplatsen har en ren, minimal design som fokuserar på Robs fantastiska fotografiska arbete, med ett anpassat innehållshanteringssystem som gör det enkelt för honom att uppdatera sin portfölj.',
+          features: [
+            'Anpassad bildoptimeringspipeline',
+            'Dynamiskt galleri med filtrering',
+            'System för kundgranskning',
+            'SEO-optimerad för fotografer',
+            'Mobil-först responsiv design',
+            'Snabbladdande bildleverans'
+          ]
+        }
+      },
     },
   },
 

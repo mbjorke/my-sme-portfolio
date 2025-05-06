@@ -12,15 +12,23 @@ export interface ProjectLink {
 
 export interface ProjectCaseStudy {
   title: string;
+  titleSv?: string;
   summary: string;
+  summarySv?: string;
   image: string;
   url: string;
-  cta: ProjectLink;
+  cta: ProjectLink & {
+    textSv?: string;
+  };
   content?: {
     description: string;
+    descriptionSv?: string;
     features?: string[];
+    featuresSv?: string[];
     technologies?: string[];
-    links?: ProjectLink[];
+    links?: Array<ProjectLink & {
+      textSv?: string;
+    }>;
     openInDialog?: boolean;
   };
   openInNewTab?: boolean;
