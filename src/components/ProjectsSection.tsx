@@ -1,9 +1,11 @@
 import { useLanguage } from '@/context/LanguageContext';
 import { siteConfig } from '@/config/siteConfig';
 
+type Locale = 'en' | 'sv'; // Add all supported locales here
+
 export function ProjectsSection() {
   const { locale } = useLanguage();
-  const sectionTitle = siteConfig.translations[locale].projectsSection.title;
+  const sectionTitle = siteConfig.translations[locale as Locale].projectsSection.title;
   const projects = siteConfig.projects;
 
   return (
