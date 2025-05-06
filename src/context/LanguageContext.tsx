@@ -1,5 +1,5 @@
-import { createContext, useContext, useState, useEffect } from "react";
-import { siteConfig } from "@/config/siteConfig";
+import { createContext, useContext, useState, useEffect } from 'react';
+import { siteConfig } from '@/config/siteConfig';
 
 type Locale = (typeof siteConfig.locales)[number];
 
@@ -21,15 +21,13 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   if (!mounted) return null;
 
   return (
-    <LanguageContext.Provider value={{ locale, setLocale }}>
-      {children}
-    </LanguageContext.Provider>
+    <LanguageContext.Provider value={{ locale, setLocale }}>{children}</LanguageContext.Provider>
   );
 }
 
 export function useLanguage() {
   const context = useContext(LanguageContext);
-  if (!context) throw new Error("useLanguage must be used within a LanguageProvider");
+  if (!context) throw new Error('useLanguage must be used within a LanguageProvider');
   return context;
 }
 
@@ -62,9 +60,7 @@ export function LanguageSwitcher() {
           key={loc}
           onClick={() => setLocale(loc)}
           className={`px-3 py-1 rounded-2xl ${
-            locale === loc
-              ? "bg-primary text-primary-foreground"
-              : "bg-muted text-foreground"
+            locale === loc ? 'bg-primary text-primary-foreground' : 'bg-muted text-foreground'
           }`}
         >
           {loc.toUpperCase()}

@@ -1,5 +1,5 @@
-import { useLanguage } from "@/context/LanguageContext";
-import { siteConfig } from "@/config/siteConfig";
+import { useLanguage } from '@/context/LanguageContext';
+import { siteConfig } from '@/config/siteConfig';
 
 export function ProjectsSection() {
   const { locale } = useLanguage();

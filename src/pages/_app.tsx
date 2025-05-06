@@ -1,13 +1,15 @@
-// src/pages/_app.tsx
-import { ThemeProvider } from "@/components/ThemeProvider";
-import { LanguageProvider } from "@/context/LanguageContext";
-import "@/styles/globals.css"; // Make sure this path matches your global CSS
+import { ThemeProvider } from '@/components/ThemeProvider';
+import { LanguageProvider } from '@/context/LanguageContext';
+import { Layout } from '@/components/Layout';
+import '@/styles/globals.css';
 
 export default function App({ Component, pageProps }) {
   return (
     <ThemeProvider>
       <LanguageProvider>
-        <Component {...pageProps} />
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
       </LanguageProvider>
     </ThemeProvider>
   );

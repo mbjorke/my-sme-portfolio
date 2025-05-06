@@ -1,4 +1,4 @@
-import { siteConfig } from "@/config/siteConfig";
+import { siteConfig } from '@/config/siteConfig';
 
 export function HeroSection() {
   const hero = siteConfig.translations.en.hero;
@@ -10,7 +10,10 @@ export function HeroSection() {
         {hero.heading} <span className="text-primary">{hero.highlight}</span> {hero.description}
       </h1>
       <p className="text-xl mb-8">{hero.callToAction}</p>
-      <a href="#contact" className="inline-block px-8 py-4 bg-primary text-white rounded-2xl shadow-lg">
+      <a
+        href="#contact"
+        className="inline-block px-8 py-4 bg-primary text-white rounded-2xl shadow-lg"
+      >
         Let’s chat
       </a>
     </section>

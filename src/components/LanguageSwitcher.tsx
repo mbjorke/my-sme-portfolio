@@ -1,5 +1,5 @@
-import { useLanguage } from "@/context/LanguageContext";
-import { siteConfig } from "@/config/siteConfig";
+import { useLanguage } from '@/context/LanguageContext';
+import { siteConfig } from '@/config/siteConfig';
 
 export function LanguageSwitcher() {
   const { locale, setLocale } = useLanguage();
@@ -11,9 +11,7 @@ export function LanguageSwitcher() {
           key={loc}
           onClick={() => setLocale(loc)}
           className={`px-3 py-1 rounded-2xl ${
-            locale === loc
-              ? "bg-primary text-primary-foreground"
-              : "bg-muted text-foreground"
+            locale === loc ? 'bg-primary text-primary-foreground' : 'bg-muted text-foreground'
           }`}
         >
           {loc.toUpperCase()}
