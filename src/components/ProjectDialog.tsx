@@ -75,19 +75,9 @@ export function ProjectDialog({ project, open, onOpenChange }: ProjectDialogProp
         <div className="flex flex-col h-full">
           {/* Header */}
           <DialogHeader className="p-6 pb-0">
-            <div className="flex justify-between items-start">
-              <div>
-                <DialogTitle className="text-2xl font-bold">{project.title}</DialogTitle>
-                <DialogDescription>{project.summary}</DialogDescription>
-              </div>
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => onOpenChange(false)}
-                className="h-8 w-8"
-              >
-                <X className="h-4 w-4" />
-              </Button>
+            <div>
+              <DialogTitle className="text-2xl font-bold">{project.title}</DialogTitle>
+              <DialogDescription>{project.summary}</DialogDescription>
             </div>
           </DialogHeader>
 

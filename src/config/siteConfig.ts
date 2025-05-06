@@ -370,12 +370,12 @@ export const siteConfig = {
         ],
         technologies: ['Framer'],
         links: [
-          { text: 'Case Study', url: 'https://yourportfolio.com/case-studies/blueberry-banking', target: '_blank' },
+          { text: 'Live Website', url: 'https://blueberry-bank.framer.website', target: '_blank' },
           { text: 'Live Prototype', url: 'https://blueberry-bank.framer.website', target: '_self' }
         ]
       },
       cta: {
-        text: 'Open Prototype',
+        text: 'See the case',
         url: '#',
         target: '_self'
       },
@@ -399,12 +399,11 @@ export const siteConfig = {
         ],
         technologies: ['Framer'],
         links: [
-          { text: 'Visit Live Site', url: 'https://robw.framer.photos' },
-          { text: 'Case Study', url: 'https://yourportfolio.com/case-studies/rob-watkins' }
+          { text: 'Visit Live Site', url: 'https://robw.framer.photos' }
         ]
       },
       cta: {
-        text: "Visit Rob's site",
+        text: "See the case",
         url: 'https://robw.framer.photos',
         target: '_blank'
       },
@@ -446,7 +445,7 @@ export const siteConfig = {
     {
       name: 'Marcus Björke',
       title: 'SaaS Dreamer, CEO',
-      avatar: '/assets/no-clients-yet.png',
+      avatar: '/assets/ux-high-bias.png',
       bio: 'Dreaming about a future where Blueberry can build the next big thing with AI',
       skills: ['Strategic Thinking', 'Growth Mindset', 'Customer Development'],
       funFact:
@@ -459,7 +458,7 @@ export const siteConfig = {
     {
       name: 'Marcus Björke',
       title: 'Surfer, Rider, Skier',
-      avatar: '/assets/surfer-playing-speed.png',
+      avatar: '/assets/alone-surfer.jpg',
       bio: "I have a passion for the sea, the wind, and the snow. I'm currently dreaming about making Åland a famous destination for eMTB riders from all over the world.",
       skills: [
         'Windsurf',
