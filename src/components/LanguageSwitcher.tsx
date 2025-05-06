@@ -22,8 +22,16 @@ export function LanguageSwitcher() {
     if (newLocale === locale || isChanging) return;
     
     setIsChanging(true);
-    setLocale(newLocale as any);
-    setIsChanging(false);
+    
+    // Use a small timeout to ensure the UI updates before the navigation
+    setTimeout(() => {
+      try {
+        setLocale(newLocale as any);
+      } catch (error) {
+        console.error('Failed to change language:', error);
+        setIsChanging(false);
+      }
+    }, 50);
   };
 
   if (!mounted) {

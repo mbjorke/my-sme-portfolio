@@ -1,7 +1,7 @@
 'use client';
 
 import { createContext, useContext, useState, useEffect, useCallback } from 'react';
-import { useRouter, usePathname, useSearchParams } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import { siteConfig } from '@/config/siteConfig';
 
 const COOKIE_NAME = 'NEXT_LOCALE';
@@ -17,8 +17,7 @@ const LanguageContext = createContext<LanguageContextProps | undefined>(undefine
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const router = useRouter();
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
+  const pathname = usePathname() || '';
   
   const [locale, setLocaleState] = useState<Locale>(
     siteConfig.defaultLocale as Locale
@@ -40,7 +39,7 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   // Update the locale in the URL and cookie when it changes
-  const setLocale = useCallback((newLocale: Locale) => {
+  const setLocale = useCallback(async (newLocale: Locale) => {
     if (newLocale === locale) return;
     
     // Update the state
@@ -49,20 +48,31 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     // Set the cookie
     document.cookie = `${COOKIE_NAME}=${newLocale}; path=/; max-age=31536000; SameSite=Lax`;
     
-    // Update the URL with the new locale
-    const segments = pathname.split('/');
-    if (siteConfig.locales.includes(segments[1] as Locale)) {
-      segments[1] = newLocale;
-    } else {
-      segments.splice(1, 0, newLocale);
+    // Get the current path without the locale
+    const pathSegments = pathname.split('/');
+    let pathWithoutLocale = pathname;
+    
+    // If the first segment is a locale, remove it
+    if (pathSegments.length > 1 && siteConfig.locales.includes(pathSegments[1] as Locale)) {
+      pathWithoutLocale = '/' + pathSegments.slice(2).join('/');
     }
     
-    const newPath = segments.join('/');
-    const search = searchParams.toString();
-    const url = search ? `${newPath}?${search}` : newPath;
+    // Handle root path
+    if (pathWithoutLocale === '') {
+      pathWithoutLocale = '/';
+    }
     
-    router.push(url);
-  }, [locale, pathname, router, searchParams]);
+    // Construct the new URL with the new locale
+    const newPath = newLocale === siteConfig.defaultLocale 
+      ? pathWithoutLocale 
+      : `/${newLocale}${pathWithoutLocale}`;
+    
+    // Use replace with shallow routing to prevent full page reload
+    await router.replace(newPath, { scroll: false });
+    
+    // Force a full page reload to ensure all content is updated
+    window.location.href = newPath;
+  }, [locale, pathname, router]);
 
   if (!mounted) return null;
 
