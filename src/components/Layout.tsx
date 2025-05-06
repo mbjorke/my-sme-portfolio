@@ -1,7 +1,7 @@
 import React, { ReactNode } from "react";
 import Link from "next/link";
 import Head from "next/head";
-
+import { ThemeSwitcher } from "./ThemeSwitcher";
 type Props = {
   children?: ReactNode;
   title?: string;
@@ -20,6 +20,7 @@ const Layout = ({ children, title = "This is the default title" }: Props) => (
         <Link href="/users">Users List</Link> |{" "}
         <a href="/api/users">Users API</a>
       </nav>
+      <ThemeSwitcher />
     </header>
     {children}
     <footer>
