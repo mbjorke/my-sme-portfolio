@@ -1,25 +1,51 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { siteConfig } from '@/config/siteConfig';
 import { Button } from './ui/button';
 import Link from 'next/link';
-import { Carousel, CarouselContent, CarouselItem } from './ui/enhanced-carousel';
 import Image from 'next/image';
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from "@/components/ui/carousel"
 
-const staffMembers = siteConfig.teamMembers.slice(0, 3); // Get first 3 team members
+const carouselMembers = siteConfig.teamMembers.slice(0, 3); // Get first 3 team members
 
 export function HeroSection() {
   const hero = siteConfig.translations.en.hero;
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [api, setApi] = useState<CarouselApi>()
+  const [current, setCurrent] = useState(0)
+  const [count, setCount] = useState(0)
+
+  const onSelect = useCallback(() => {
+    if (!api) return
+    setCurrent(api.selectedScrollSnap() + 1)
+  }, [api])
+
+  useEffect(() => {
+    if (!api) return
+
+    setCount(api.scrollSnapList().length)
+    setCurrent(api.selectedScrollSnap() + 1)
+    api.on("select", onSelect)
+    
+    return () => {
+      api.off("select", onSelect)
+    }
+  }, [api, onSelect])
 
   // Auto-advance the carousel
   useEffect(() => {
+    if (!api) return
+    
     const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % staffMembers.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, []);
+      if (api.canScrollNext()) {
+        api.scrollNext()
+      } else {
+        api.scrollTo(0)
+      }
+    }, 3000)
+    
+    return () => clearInterval(interval)
+  }, [api])
 
   return (
     <section id="hero" className="py-20 text-center">
@@ -31,18 +57,10 @@ export function HeroSection() {
         </h1>
 
         <div className="w-full max-w-xs">
-          <div className="relative">
-            <div className="flex overflow-hidden">
-              {staffMembers.map((member, index) => (
-                <div 
-                  key={index}
-                  className={`transition-transform duration-500 ease-in-out w-full flex-shrink-0 flex flex-col items-center ${
-                    index === currentIndex ? 'opacity-100' : 'opacity-0 absolute'
-                  }`}
-                  style={{
-                    transform: `translateX(${(index - currentIndex) * 100}%)`,
-                  }}
-                >
+          <Carousel className="w-full" setApi={setApi}>
+            <CarouselContent>
+              {carouselMembers.map((member, index) => (
+                <CarouselItem key={index} className="flex flex-col items-center">
                   <div className="overflow-hidden relative mb-2 w-16 h-16 rounded-full border-2 md:w-20 md:h-20 border-primary/20">
                     <Image
                       src={member.avatar}
@@ -55,25 +73,23 @@ export function HeroSection() {
                   </div>
                   <p className="text-sm font-medium text-center">{member.name}</p>
                   <p className="text-xs text-center text-muted-foreground">{member.title}</p>
-                </div>
+                </CarouselItem>
               ))}
-            </div>
-            
-            {/* Dots */}
+            </CarouselContent>
             <div className="flex justify-center gap-2 mt-4">
-              {staffMembers.map((_, index) => (
+              {Array.from({ length: count }).map((_, index) => (
                 <button
                   key={index}
                   type="button"
-                  onClick={() => setCurrentIndex(index)}
+                  onClick={() => api?.scrollTo(index)}
                   className={`h-2 w-2 rounded-full transition-colors ${
-                    index === currentIndex ? 'bg-primary' : 'bg-gray-300'
+                    index === current - 1 ? 'bg-primary' : 'bg-gray-300'
                   }`}
                   aria-label={`Go to slide ${index + 1}`}
                 />
               ))}
             </div>
-          </div>
+          </Carousel>
         </div>
       </div>
 
