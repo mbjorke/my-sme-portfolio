@@ -1,22 +1,68 @@
+'use client';
+
+import { useState, useEffect } from 'react';
 import { useLanguage } from '@/context/LanguageContext';
 import { siteConfig } from '@/config/siteConfig';
 
+const languageNames: Record<string, string> = {
+  en: 'English',
+  sv: 'Svenska',
+};
+
 export function LanguageSwitcher() {
   const { locale, setLocale } = useLanguage();
+  const [mounted, setMounted] = useState(false);
+  const [isChanging, setIsChanging] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const handleLocaleChange = (newLocale: string) => {
+    if (newLocale === locale || isChanging) return;
+    
+    setIsChanging(true);
+    setLocale(newLocale as any);
+    setIsChanging(false);
+  };
+
+  if (!mounted) {
+    return (
+      <div className="flex gap-2" aria-label="Loading language switcher">
+        {siteConfig.locales.map((loc) => (
+          <div
+            key={loc}
+            className="w-10 h-8 rounded-2xl bg-muted animate-pulse"
+            aria-hidden="true"
+          />
+        ))}
+      </div>
+    );
+  }
+
 
   return (
-    <div className="flex gap-2">
-      {siteConfig.locales.map((loc) => (
-        <button
-          key={loc}
-          onClick={() => setLocale(loc)}
-          className={`px-3 py-1 rounded-2xl ${
-            locale === loc ? 'bg-primary text-primary-foreground' : 'bg-muted text-foreground'
-          }`}
-        >
-          {loc.toUpperCase()}
-        </button>
-      ))}
+    <div className="flex gap-2" role="radiogroup" aria-label="Select language">
+      {siteConfig.locales.map((loc) => {
+        const isActive = locale === loc;
+        return (
+          <button
+            key={loc}
+            onClick={() => handleLocaleChange(loc)}
+            className={`px-3 py-1 rounded-2xl transition-colors ${
+              isActive
+                ? 'bg-primary text-primary-foreground' 
+                : 'bg-muted text-foreground hover:bg-muted/80'
+            } ${isChanging ? 'opacity-70' : ''}`}
+            aria-label={`${languageNames[loc] || loc.toUpperCase()} ${isActive ? '(selected)' : ''}`}
+            role="radio"
+            aria-checked={isActive}
+            disabled={isChanging}
+          >
+            {loc.toUpperCase()}
+          </button>
+        );
+      })}
     </div>
   );
 }
