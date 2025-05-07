@@ -13,14 +13,14 @@ import { cn } from "@/lib/utils";
 
 export function AboutSection() {
   return (
-    <section className="py-20 px-4">
-      <h2 className="text-3xl font-bold mb-8 text-center">Meet the Team</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4">
+    <section className="px-4 py-20">
+      <h2 className="mb-8 text-3xl font-bold text-center">Meet the Team</h2>
+      <div className="grid grid-cols-1 gap-6 px-4 md:grid-cols-2 lg:grid-cols-3">
         {siteConfig.teamMembers.map((member, idx) => (
-          <Card key={idx} className={cn(cardBase, cardGlow, 'h-full flex flex-col items-center justify-between', 'hover:border-primary/20')}>
+          <Card key={idx} className={cn(cardBase, cardGlow, 'flex flex-col justify-between items-center h-full')}>
             <div className={cardGradient} />
             <CardHeader className="flex flex-col items-center w-full">
-              <div className="relative w-24 h-24 rounded-full border-2 border-primary shadow-lg mb-2 overflow-hidden">
+              <div className="overflow-hidden relative mb-2 w-24 h-24 rounded-full border-2 shadow-lg border-primary">
                 <Image
                   src={member.avatar}
                   alt={member.name}
@@ -30,16 +30,16 @@ export function AboutSection() {
                   unoptimized={member.avatar.includes('github')}
                 />
               </div>
-              <CardTitle className="text-xl font-semibold mt-2 text-center">{member.name}</CardTitle>
+              <CardTitle className="mt-2 text-xl font-semibold text-center">{member.name}</CardTitle>
               <CardDescription className="mb-2 text-center">{member.title}</CardDescription>
             </CardHeader>
-            <CardContent className="flex-1 flex flex-col items-center gap-2 w-full">
-              <p className="text-sm text-muted-foreground font-medium text-center">{member.funFact}</p>
+            <CardContent className="flex flex-col flex-1 gap-2 items-center w-full">
+              <p className="text-sm font-medium text-center text-muted-foreground">{member.funFact}</p>
               <div className="flex flex-wrap gap-2 justify-center mt-2">
                 {member.skills?.map((skill, i) => (
                   <span
                     key={i}
-                    className="bg-secondary/20 text-secondary-foreground px-3 py-1 rounded-full text-xs font-medium"
+                    className="px-3 py-1 text-xs font-medium rounded-full bg-secondary/20 text-secondary-foreground"
                   >
                     {skill}
                   </span>
@@ -47,7 +47,7 @@ export function AboutSection() {
               </div>
             </CardContent>
             <CardFooter className="w-full">
-              <span className="text-xs text-muted-foreground text-center w-full">
+              <span className="w-full text-xs text-center text-muted-foreground">
                 Favorite snack: {member.favoriteSnack}
               </span>
             </CardFooter>

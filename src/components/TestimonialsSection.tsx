@@ -3,10 +3,10 @@ import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardContent } from "@/components/ui/card";
 import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
-import { 
-  cardBase, 
-  cardGradient, 
-  cardContent, 
+import {
+  cardBase,
+  cardGradient,
+  cardContent,
   cardQuoteIcon,
   cardGlow,
   cardBlur
@@ -61,9 +61,9 @@ export function TestimonialsSection() {
         </div>
 
         <div className="relative mx-auto w-full max-w-4xl">
-          <Card className={cn(cardBase, cardGlow, 'hover:border-primary/20')}>
-            <CardContent className={cardContent}>
-              <div className={cn(cardGradient, cardBlur)} />
+          <Card className={cn(cardBase, cardGlow, 'p-8 md:p-12 rounded-xl')}>
+            <CardContent className={cn(cardContent, 'p-0')}>
+              <div className={cn(cardGradient, cardBlur, 'rounded-xl')} />
               <Quote className={cardQuoteIcon} />
               <div className="relative z-10 flex flex-col items-center md:flex-row md:items-start">
                 <div className="mb-6 md:mb-0 md:mr-8">

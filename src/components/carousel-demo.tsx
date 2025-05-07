@@ -39,9 +39,9 @@ export function CarouselDemo({
       <CarouselContent>
         {items.map((item, index) => (
           <CarouselItem key={index}>
-            <Card className={cn(cardBase, cardGlow, 'relative', 'hover:border-primary/20')}>
+            <Card className={cn(cardBase, cardGlow)}>
               <div className={cardGradient} />
-              <CardContent className={cn("flex aspect-square items-center justify-center p-6 relative z-10")}>
+              <CardContent className={cn("flex relative z-10 justify-center items-center p-6 aspect-square")}>
                 <div className="space-y-4 text-center">
                   <h3 className="text-xl font-semibold">{item.title}</h3>
                   <p className="text-muted-foreground">{item.description}</p>

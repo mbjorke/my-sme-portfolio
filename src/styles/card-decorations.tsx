@@ -4,10 +4,8 @@ import React, { HTMLAttributes, ReactNode } from 'react';
 // Card glow effect styles
 export const cardGlow = [
   "relative",
-  "before:absolute before:inset-0 before:rounded-xl before:z-[-1]",
-  "before:transition-all before:duration-300",
-  "before:shadow-[0_0_20px_rgba(99,102,241,0.3)]",
-  "hover:before:shadow-[0_0_30px_rgba(99,102,241,0.7)]"
+  "inset-0 rounded-xl before:z-[-1]",
+  "hover:border-primary/20"
 ].join(' ');
 
 // Card gradient background styles
