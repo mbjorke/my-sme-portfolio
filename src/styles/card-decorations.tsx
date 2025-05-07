@@ -34,14 +34,6 @@ export const cardBlur = [
   'backdrop-blur-sm'
 ].join(' ');
 
-// Quote icon styles - specific to testimonial cards
-export const cardQuoteIcon = [
-  'absolute',
-  'top-8 left-8',
-  'w-16 h-16',
-  'text-primary/20',
-  'z-10'
-].join(' ');
 
 // Card hover effects - for standard cards (border and shadow only)
 export const cardHover = [

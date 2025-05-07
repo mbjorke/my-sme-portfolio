@@ -7,7 +7,6 @@ import {
   cardBase,
   cardGradient,
   cardContent,
-  cardQuoteIcon,
   cardBlur,
   cardHover,
 } from "@/styles/card-decorations";
@@ -61,11 +60,14 @@ export function TestimonialsSection() {
         </div>
 
         <div className="relative mx-auto w-full max-w-4xl">
-          <Card className={cn(cardBase, cardHover, 'p-8 md:p-12')}>
-            <CardContent className={cn(cardContent, 'p-0')}>
-              <div className={cn(cardGradient, cardBlur, 'rounded-xl')} />
-              <Quote className={cardQuoteIcon} />
-              <div className="relative z-10 flex flex-col items-center md:flex-row md:items-start">
+          <Card className={cn(cardBase, cardHover, 'relative group p-0')}>
+            <div className={cn(cardGradient, cardBlur, 'rounded-xl')} />
+            <Quote 
+              className="absolute top-8 left-8 w-12 h-12 text-primary/10 z-0 pointer-events-none md:w-16 md:h-16"
+              strokeWidth={1.5}
+            />
+            <CardContent className={cn('relative z-10 p-8 md:p-12')}>
+              <div className="flex relative z-10 flex-col items-center md:flex-row md:items-start">
                 <div className="mb-6 md:mb-0 md:mr-8">
                   <div className="overflow-hidden w-24 h-24 rounded-full border-4 border-primary/20 shadow-glow">
                     <AvatarImage
