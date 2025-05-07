@@ -11,7 +11,7 @@ import {
   cardHover,
 } from "@/styles/card-decorations";
 import { useLanguage } from "@/context/LanguageContext";
-import { useCallback, useState } from "react";
+import { useCallback, useState, useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
 
 interface Testimonial {
@@ -27,7 +27,27 @@ interface Testimonial {
 export function TestimonialsSection() {
   const { locale } = useLanguage();
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const intervalRef = useRef<NodeJS.Timeout>();
   const testimonials = (siteConfig.testimonials as Testimonial[]).filter(t => t.show && !!t.quote);
+
+  // Auto-advance testimonials
+  useEffect(() => {
+    if (isPaused || testimonials.length <= 1) return;
+
+    intervalRef.current = setInterval(() => {
+      setCurrentIndex(prev => (prev + 1) % testimonials.length);
+    }, 5000); // Change testimonial every 5 seconds
+
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    };
+  }, [testimonials.length, isPaused]);
+
+  const handleMouseEnter = () => setIsPaused(true);
+  const handleMouseLeave = () => setIsPaused(false);
 
   if (testimonials.length === 0) return null;
 
@@ -59,26 +79,30 @@ export function TestimonialsSection() {
           <div className="mx-auto w-20 h-1 bg-primary"></div>
         </div>
 
-        <div className="relative mx-auto w-full max-w-4xl">
+        <div 
+          className="relative mx-auto w-full max-w-4xl"
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
           <Card className={cn(cardBase, cardHover, 'relative group p-0')}>
             <div className={cn(cardGradient, cardBlur, 'rounded-xl')} />
             <Quote 
               className="absolute top-8 left-8 w-12 h-12 text-primary/10 z-0 pointer-events-none md:w-16 md:h-16"
               strokeWidth={1.5}
             />
-            <CardContent className={cn('relative z-10 p-8 md:p-12')}>
+            <CardContent className={cn(cardContent, 'relative z-10')}>
               <div className="flex relative z-10 flex-col items-center md:flex-row md:items-start">
                 <div className="mb-6 md:mb-0 md:mr-8">
-                  <div className="overflow-hidden w-24 h-24 rounded-full border-4 border-primary/20 shadow-glow">
+                  <Avatar className="w-24 h-24 border-4 border-primary/20 shadow-glow">
                     <AvatarImage
                       src={currentTestimonial.badgeUrl}
                       alt={currentTestimonial.badge}
-                      className="object-cover w-full h-full"
+                      className="object-cover"
                     />
-                    <AvatarFallback className="flex justify-center items-center w-full h-full text-2xl bg-primary/10 text-primary">
+                    <AvatarFallback className="text-2xl bg-primary/10 text-primary">
                       {currentTestimonial.name.split(' ').map(n => n[0]).join('')}
                     </AvatarFallback>
-                  </div>
+                  </Avatar>
                 </div>
                 <div className="flex-1">
                   <blockquote className="relative z-10 mb-6 text-lg md:text-xl text-foreground/80">
@@ -108,8 +132,9 @@ export function TestimonialsSection() {
               {testimonials.map((_, index) => (
                 <button
                   key={index}
-                  className={`w-3 h-3 rounded-full transition-all duration-300 ${index === currentIndex ? 'bg-primary' : 'bg-primary/20'
-                    }`}
+                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                    index === currentIndex ? 'bg-primary scale-110' : 'bg-primary/20 hover:bg-primary/40'
+                  }`}
                   onClick={() => goToTestimonial(index)}
                   aria-label={`Go to testimonial ${index + 1}`}
                 />

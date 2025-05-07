@@ -288,22 +288,6 @@ export const siteConfig = {
       },
     },
   },
-
-  personal: {
-    name: 'Marcus Björke',
-    title: 'UX High Bias',
-    avatar: '/images/avatar.jpg',
-    bio: 'Developer & designer crafting digital mixtapes.',
-    oneLiner: 'Where design clarity meets dev mixtape energy.',
-    social: {
-      linkedin: 'https://www.linkedin.com/in/mbjorke',
-      github: 'https://github.com/mbjorke',
-    },
-    cta: {
-      text: 'Connect with Marcus',
-      url: '#contact',
-    },
-  },
   navLinks: [
     { label: 'About', url: '#about' },
     { label: 'Services', url: '#services' },

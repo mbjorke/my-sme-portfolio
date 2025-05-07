@@ -1,8 +1,11 @@
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
 import Image from "next/image";
+import Link from "next/link";
 import { siteConfig } from "@/config/siteConfig";
 import { cn } from "@/lib/utils";
 import { cardBase, cardGradient, cardHover } from "@/styles/card-decorations";
+import { Badge } from "./ui/badge";
+import { Github, Linkedin, Instagram } from "lucide-react";
 
 export function AboutSection() {
   return (
@@ -13,29 +16,55 @@ export function AboutSection() {
           <Card key={idx} className={cn(cardBase, cardHover, 'flex flex-col justify-between items-center h-full')}>
             <div className={cardGradient} />
             <CardHeader className="flex flex-col items-center w-full">
-              <div className="overflow-hidden relative mb-2 w-24 h-24 rounded-full border-2 shadow-lg border-primary">
-                <Image
-                  src={member.avatar}
-                  alt={member.name}
-                  width={96}
-                  height={96}
-                  className="object-cover w-full h-full"
-                  unoptimized={member.avatar.includes('github')}
-                />
+              <div className="flex flex-col items-center mb-2">
+                <div className="overflow-hidden relative w-24 h-24 rounded-full border-2 shadow-lg border-primary">
+                  <Image
+                    src={member.avatar}
+                    alt={member.name}
+                    width={96}
+                    height={96}
+                    className="object-cover w-full h-full"
+                    unoptimized={member.avatar.includes('github')}
+                  />
+                </div>
+                {member.social && (
+                  <div className="flex gap-3 mt-3">
+                    {member.social.github && (
+                      <Link href={member.social.github} target="_blank" className="transition-colors text-muted-foreground hover:text-foreground">
+                        <Github size={20} />
+                      </Link>
+                    )}
+                    {member.social.linkedin && (
+                      <Link href={member.social.linkedin} target="_blank" className="transition-colors text-muted-foreground hover:text-foreground">
+                        <Linkedin size={20} />
+                      </Link>
+                    )}
+                    {member.social.instagram && (
+                      <Link href={member.social.instagram} target="_blank" className="transition-colors text-muted-foreground hover:text-foreground">
+                        <Instagram size={20} />
+                      </Link>
+                    )}
+                    {member.social.bluesky && (
+                      <Link href={member.social.bluesky} target="_blank" className="transition-colors text-muted-foreground hover:text-foreground">
+                        <span className="text-sm">𝕏</span>
+                      </Link>
+                    )}
+                  </div>
+                )}
               </div>
               <CardTitle className="mt-2 text-xl font-semibold text-center">{member.name}</CardTitle>
               <CardDescription className="mb-2 text-center">{member.title}</CardDescription>
             </CardHeader>
             <CardContent className="flex flex-col flex-1 gap-2 items-center w-full">
-              <p className="text-sm font-medium text-center text-muted-foreground">{member.funFact}</p>
+              <p className="text-sm font-medium text-muted-foreground">{member.funFact}</p>
               <div className="flex flex-wrap gap-2 justify-center mt-2">
                 {member.skills?.map((skill, i) => (
-                  <span
+                  <Badge
                     key={i}
-                    className="px-3 py-1 text-xs font-medium rounded-full bg-secondary/20 text-secondary-foreground"
+                    variant="secondary"
                   >
                     {skill}
-                  </span>
+                  </Badge>
                 ))}
               </div>
             </CardContent>
