@@ -3,7 +3,7 @@
 import * as React from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/enhanced-carousel"
-import { cardBase, cardGradient, cardGlow } from "@/styles/card-decorations"
+import { cardBase, cardHover, cardGradient } from "@/styles/card-decorations"
 import { cn } from "@/lib/utils"
 
 type CarouselDemoProps = {
@@ -39,7 +39,7 @@ export function CarouselDemo({
       <CarouselContent>
         {items.map((item, index) => (
           <CarouselItem key={index}>
-            <Card className={cn(cardBase, cardGlow)}>
+            <Card className={cn(cardBase, cardHover, "relative")}>
               <div className={cardGradient} />
               <CardContent className={cn("flex relative z-10 justify-center items-center p-6 aspect-square")}>
                 <div className="space-y-4 text-center">

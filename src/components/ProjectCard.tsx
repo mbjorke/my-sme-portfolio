@@ -4,11 +4,13 @@ import { useState } from 'react';
 import { useLanguage } from '@/context/LanguageContext';
 import { usePathname, useRouter } from 'next/navigation';
 import { ExternalLink } from 'lucide-react';
-import { ProjectCaseStudy } from '@/types/project';
+import { ProjectCaseStudy } from "@/types/project";
 import { ProjectDialog } from './ProjectDialog';
-import { cardGradient, cardGlow } from '@/styles/card-decorations';
+import { cardBase, cardHover, cardGradient } from '@/styles/card-decorations';
 import { cn } from '@/lib/utils';
-import { Card, CardContent } from '@/components/ui/card';
+import { Card, CardContent } from "./ui/card";
+import Image from "next/image";
+import Link from "next/link";
 
 interface ProjectCardProps {
   project: ProjectCaseStudy;
@@ -20,21 +22,35 @@ export function ProjectCard({ project, className = '' }: ProjectCardProps) {
   const pathname = usePathname();
   const router = useRouter();
 
-  const handleClick = (e: React.MouseEvent) => {
+  const handleClick = (e: React.MouseEvent, link: string) => {
+    e.preventDefault();
+    window.open(link, '_blank', 'noopener,noreferrer');
+  };
+
+  // Combine technologies from both root and content for display
+  const allTechnologies = [
+    ...(project.technologies || []),
+    ...(project.content?.technologies || [])
+  ];
+
+  const displayTechnologies = allTechnologies.slice(0, 3);
+  const hasMoreTechnologies = allTechnologies.length > 3;
+
+  const handleCardClick = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    
+
     console.log('Project clicked:', project.title);
-    
+
     // Check if there's a prototype URL in the links or if it's a Framer URL
-    const hasPrototypeLink = project.content?.links?.some(link => 
-      link.url.includes('framer.website') || 
+    const hasPrototypeLink = project.content?.links?.some(link =>
+      link.url.includes('framer.website') ||
       link.url.includes('framer.site') ||
       link.text.toLowerCase().includes('prototype') ||
       link.text.toLowerCase().includes('demo')
-    ) || 
-    project.url?.includes('framer.website') || 
-    project.url?.includes('framer.site');
+    ) ||
+      project.url?.includes('framer.website') ||
+      project.url?.includes('framer.site');
 
     console.log('Has prototype link:', hasPrototypeLink);
 
@@ -60,56 +76,56 @@ export function ProjectCard({ project, className = '' }: ProjectCardProps) {
 
   return (
     <>
-      <Card 
+      <Card
         className={cn(
-          'group relative overflow-hidden',
-          cardGlow,
-          'hover:border-primary/20',
-          'h-full flex flex-col',
+          cardBase,
+          'group flex flex-col h-full',
+          'hover:shadow-lg hover:border-primary/70 hover:z-10',
+          'transition-all duration-300',
           className
         )}
-        onClick={handleClick}
+        onClick={handleCardClick}
       >
         <div className={cardGradient} />
-        <div className="relative z-0 aspect-video overflow-hidden">
+        <div className="overflow-hidden relative z-0 aspect-video">
           <img
             src={project.image}
             alt={project.title}
-            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+            className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110 transform-gpu"
             loading="lazy"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4 z-10">
-            <span className="text-white text-sm font-medium">
+          <div className="flex absolute inset-0 z-10 items-end p-4 bg-gradient-to-t to-transparent opacity-0 transition-opacity duration-300 from-black/60 group-hover:opacity-100">
+            <span className="text-sm font-medium text-white">
               {project.openInDialog ? viewDetailsText : viewProjectText}
-              {project.openInNewTab && <ExternalLink className="inline-block ml-1 h-4 w-4" />}
+              {project.openInNewTab && <ExternalLink className="inline-block ml-1 w-4 h-4" />}
             </span>
           </div>
         </div>
-        <CardContent className="p-6 flex-1 flex flex-col">
-          <h3 className="mb-2 text-xl font-semibold group-hover:text-primary transition-colors">
+        <CardContent className="flex flex-col flex-1 p-6">
+          <h3 className="mb-2 text-xl font-semibold transition-colors group-hover:text-primary">
             {project.title}
           </h3>
           <p className="mb-4 text-muted-foreground line-clamp-2">{project.summary}</p>
-          <div className="mt-auto pt-4 border-t border-border">
-            <div className="flex items-center justify-between">
-              <span className="text-sm font-medium text-primary flex items-center">
+          <div className="pt-4 mt-auto border-t border-border">
+            <div className="flex justify-between items-center">
+              <span className="flex items-center text-sm font-medium text-primary">
                 {project.cta?.text || viewProjectCta}
-                <ExternalLink className="ml-1 h-3 w-3" />
+                <ExternalLink className="ml-1 w-3 h-3" />
               </span>
-              {project.content?.technologies && project.content.technologies.length > 0 && (
+              {displayTechnologies.length > 0 && (
                 <div className="flex -space-x-1">
-                  {project.content.technologies.slice(0, 3).map((tech, i) => (
-                    <span 
+                  {displayTechnologies.map((tech: string, i: number) => (
+                    <span
                       key={i}
-                      className="h-6 w-6 rounded-full bg-muted text-xs flex items-center justify-center border border-background shadow-sm"
+                      className="flex justify-center items-center w-6 h-6 text-xs rounded-full border shadow-sm bg-muted border-background"
                       title={tech}
                     >
                       {tech.charAt(0).toUpperCase()}
                     </span>
                   ))}
-                  {project.content.technologies.length > 3 && (
-                    <span className="h-6 w-6 rounded-full bg-muted text-xs flex items-center justify-center border border-background shadow-sm">
-                      +{project.content.technologies.length - 3}
+                  {hasMoreTechnologies && (
+                    <span className="flex justify-center items-center w-6 h-6 text-xs rounded-full border shadow-sm bg-muted border-background">
+                      +{allTechnologies.length - 3}
                     </span>
                   )}
                 </div>

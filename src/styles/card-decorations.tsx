@@ -1,35 +1,55 @@
 import { cn } from "@/lib/utils";
 import React, { HTMLAttributes, ReactNode } from 'react';
 
-// Card glow effect styles
-export const cardGlow = [
-  "relative",
-  "inset-0 rounded-xl before:z-[-1]",
-  "hover:border-primary/20"
-].join(' ');
-
-// Card gradient background styles
-export const cardGradient = [
-  "absolute inset-0",
-  "bg-gradient-to-br from-card/50 via-card/30 to-card/50"
-].join(' ');
-
-// Card blur effect (use sparingly as it can impact performance)
-export const cardBlur = [
-  "backdrop-blur-sm"
-].join(' ');
-
-// Base card styles
+// Base card styles - should be applied to all cards
 export const cardBase = [
-  "relative overflow-hidden rounded-xl"
+  'relative',
+  'overflow-hidden',
+  'rounded-xl',
+  'bg-card/50 dark:bg-card/70',
+  'backdrop-blur-sm',
+  'border',
+  'border-border/50',
+  'shadow-lg',
+  'transition-all duration-200',
+  'cursor-pointer'
 ].join(' ');
 
-// Card content padding
-export const cardContent = "p-8 md:p-12";
+// Card content padding - use for main content areas
+export const cardContent = [
+  'p-8',
+  'md:p-12'
+].join(' ');
 
-// Quote icon styles
+// Gradient overlay - for decorative backgrounds
+export const cardGradient = [
+  'absolute inset-0',
+  'rounded-xl',
+  'bg-gradient-to-br from-card/50 via-card/30 to-card/50',
+  'z-0'
+].join(' ');
+
+// Blur effect - use sparingly for glass-like effects
+export const cardBlur = [
+  'backdrop-blur-sm'
+].join(' ');
+
+// Quote icon styles - specific to testimonial cards
 export const cardQuoteIcon = [
-  "absolute top-8 left-8 w-16 h-16 text-primary/20"
+  'absolute',
+  'top-8 left-8',
+  'w-16 h-16',
+  'text-primary/20',
+  'z-10'
+].join(' ');
+
+// Card hover effects - for standard cards (border and shadow only)
+export const cardHover = [
+  'hover:shadow-lg',
+  'hover:border-primary/70',
+  'transition-all duration-200',
+  'hover:z-10',
+  'relative'
 ].join(' ');
 
 // Card wrapper component props

@@ -1,15 +1,8 @@
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { siteConfig } from "@/config/siteConfig";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import Image from "next/image";
-import { cardBase, cardGradient, cardGlow } from "@/styles/card-decorations";
+import { siteConfig } from "@/config/siteConfig";
 import { cn } from "@/lib/utils";
+import { cardBase, cardGradient, cardHover } from "@/styles/card-decorations";
 
 export function AboutSection() {
   return (
@@ -17,7 +10,7 @@ export function AboutSection() {
       <h2 className="mb-8 text-3xl font-bold text-center">Meet the Team</h2>
       <div className="grid grid-cols-1 gap-6 px-4 md:grid-cols-2 lg:grid-cols-3">
         {siteConfig.teamMembers.map((member, idx) => (
-          <Card key={idx} className={cn(cardBase, cardGlow, 'flex flex-col justify-between items-center h-full')}>
+          <Card key={idx} className={cn(cardBase, cardHover, 'flex flex-col justify-between items-center h-full')}>
             <div className={cardGradient} />
             <CardHeader className="flex flex-col items-center w-full">
               <div className="overflow-hidden relative mb-2 w-24 h-24 rounded-full border-2 shadow-lg border-primary">

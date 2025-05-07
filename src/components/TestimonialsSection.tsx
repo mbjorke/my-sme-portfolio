@@ -8,8 +8,8 @@ import {
   cardGradient,
   cardContent,
   cardQuoteIcon,
-  cardGlow,
-  cardBlur
+  cardBlur,
+  cardHover,
 } from "@/styles/card-decorations";
 import { useLanguage } from "@/context/LanguageContext";
 import { useCallback, useState } from "react";
@@ -61,7 +61,7 @@ export function TestimonialsSection() {
         </div>
 
         <div className="relative mx-auto w-full max-w-4xl">
-          <Card className={cn(cardBase, cardGlow, 'p-8 md:p-12 rounded-xl')}>
+          <Card className={cn(cardBase, cardHover, 'p-8 md:p-12')}>
             <CardContent className={cn(cardContent, 'p-0')}>
               <div className={cn(cardGradient, cardBlur, 'rounded-xl')} />
               <Quote className={cardQuoteIcon} />

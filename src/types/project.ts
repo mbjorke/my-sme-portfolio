@@ -17,6 +17,7 @@ export interface ProjectCaseStudy {
   summarySv?: string;
   image: string;
   url: string;
+  technologies?: string[];
   cta: ProjectLink & {
     textSv?: string;
   };
