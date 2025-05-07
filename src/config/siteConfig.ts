@@ -1,5 +1,40 @@
 import type { TeamMember, WorkProcessStep, WorkProcessImage } from '@/types/siteConfig';
 
+interface Testimonial {
+  type: string;
+  name: string;
+  badge: string;
+  badgeUrl: string;
+  url: string;
+  quote: string;
+  show: boolean;
+}
+
+interface CaseStudy {
+  id: string;
+  title: string;
+  summary: string;
+  image: string;
+  url: string;
+  openInNewTab: boolean;
+  openInDialog: boolean;
+  content: {
+    description: string;
+    features: string[];
+    technologies: string[];
+    links: Array<{
+      text: string;
+      url: string;
+      target: string;
+    }>;
+  };
+  cta: {
+    text: string;
+    url: string;
+    target: string;
+  };
+}
+
 export const siteConfig = {
   locales: ['en', 'sv'],
   defaultLocale: 'en',
@@ -296,10 +331,7 @@ export const siteConfig = {
   projectsSection: {
     title: 'Projects / Case Studies',
   },
-  testimonials: {
-    title: 'Testimonials',
-    subtitle: 'What clients and collaborators say about working together',
-  },
+  // Testimonials section configuration moved to translations
   buttons: {
     letsChat: "Let's chat",
     sendMessage: 'Send Message',
@@ -315,27 +347,67 @@ export const siteConfig = {
   // Ensure comma after pricing
   projects: [
     {
+      id: 'blueberry-banking',
       title: 'Project Blueberry Banking',
-      summary:
-        'A mobile Business Banking App themed for a small business owner, surfer vibes, this is built with Framer just to showcase interaction examples',
+      summary: 'A mobile Business Banking App themed for a small business owner, surfer vibes, this is built with Framer just to showcase interaction examples',
       image: '/assets/alone-surfer.jpg',
       url: 'https://blueberry-bank.framer.website',
+      openInNewTab: true,
+      openInDialog: false,
       cta: {
         text: 'Explore this project',
         url: 'https://blueberry-bank.framer.website',
+        target: '_blank'
       },
+      content: {
+        description: 'A mobile Business Banking App themed for a small business owner with surfer vibes, built with Framer to showcase interaction examples.',
+        features: [
+          'Interactive mobile banking interface',
+          'Surf-themed design system',
+          'Transaction history and analytics',
+          'Bill payment and transfers'
+        ],
+        technologies: ['Framer', 'React', 'TypeScript'],
+        links: [
+          {
+            text: 'View Prototype',
+            url: 'https://blueberry-bank.framer.website',
+            target: '_blank'
+          }
+        ]
+      }
     },
     {
+      id: 'rob-watkins-photography',
       title: 'Rob Watkins Photography',
-      summary:
-        'Rob had ideas—too many. He was stuck, unsure what to offer or how to show it. I helped him cut through the noise and focus on his story. In an hour, we had a solid draft. Now he runs his own site, fully in control and paying less than before.',
+      summary: 'Rob had ideas—too many. He was stuck, unsure what to offer or how to show it. I helped him cut through the noise and focus on his story. In an hour, we had a solid draft. Now he runs his own site, fully in control and paying less than before.',
       image: '/assets/rob-watkins-offers.png',
       url: 'https://robw.framer.photos',
+      openInNewTab: true,
+      openInDialog: false,
       cta: {
         text: "Visit Rob's site",
         url: 'https://robw.framer.photos',
+        target: '_blank'
       },
-    },
+      content: {
+        description: 'A photography portfolio website for Rob Watkins, showcasing his work with a clean and focused design.',
+        features: [
+          'Portfolio gallery',
+          'Contact form',
+          'Responsive design',
+          'Easy content management'
+        ],
+        technologies: ['Framer', 'React', 'TypeScript'],
+        links: [
+          {
+            text: 'View Website',
+            url: 'https://robw.framer.photos',
+            target: '_blank'
+          }
+        ]
+      }
+    }
   ],
   // Ensure comma after projects array
   projectsCta: {
@@ -348,37 +420,38 @@ export const siteConfig = {
     url: '#contact',
   },
   // Ensure comma after callToAction
-  socialProof: [
+  testimonials: [
     {
-      type: 'Mentor & Coach',
+      type: 'Mentor & Coach at backlog.design',
       name: 'Chris Nguyen',
       badge: 'backlog.design',
       badgeUrl: 'https://media.licdn.com/dms/image/v2/D5603AQG7s9wiZpzjJQ/profile-displayphoto-shrink_400_400/B56ZXr7hy7GoAk-/0/1743420006324?e=1752105600&v=beta&t=LaDmU7MJ8-o0n3cJJ-3S8Nvg-kqtCj4tBcgvxnwv7Hg',
-      url: 'https://www.linkedin.com/in/uxchrisnguyen',
+      url: 'https://www.linkedin.com/in/chris-nguyen',
       quote: 'Marcus is a creative force and a true community builder.',
-      show: true,
+      show: true
     },
     {
-      type: 'Client',
+      type: 'Client at Rob Watkins Photography',
       name: 'Robert Watkins',
       badge: 'Rob Watkins Photography',
       badgeUrl: 'https://cdn.bsky.app/img/avatar/plain/did:plc:vaujvoit5yzhraewb2z4mm64/bafkreicolsdblo66sdvbaopkb5wvkdadkutd5bq4f2jkmxtz4vdjzudwr4@jpeg',
       url: 'https://www.linkedin.com/in/robwatkins',
-      quote: 'Working with Marcus has been a revelation. He’s opened up my mind allowing me to see my projects in a different light. The resulting products have been sharper, more robust and better focussed. Did I mention he’s really good company too? I guess I have now.',
-      show: true,
+      quote: 'Working with Marcus has been a revelation. He\'s opened up my mind allowing me to see my projects in a different light. The resulting products have been sharper, more robust and better focussed. Did I mention he\'s really good company too? I guess I have now.',
+      show: true
     },
     {
-      type: 'Former Colleague',
+      type: 'Product Manager at Crosskey',
       name: 'Emil Friman',
       badge: 'Product Manager, Crosskey',
       badgeUrl: 'https://media.licdn.com/dms/image/v2/C4D03AQE0JGiCnzfuYg/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1521614349566?e=1752105600&v=beta&t=so75ov3gM26I_pH7PB5HAXgoNFbxWq-Z08-UB-VdudU',
       url: 'https://www.linkedin.com/in/emil-friman-9422a964/',
-      quote: 'I’ve had the opportunity to work with Marcus at Crosskey, where he contributed with many creative ideas and suggestions on how we could improve how we work. His ability to think outside the box was always valuable in projects that needed innovation. ',
-      show: true,
-    },
+      quote: 'I\'ve had the opportunity to work with Marcus at Crosskey, where he constantly contributed with creative ideas and suggestions. Whether it was product or workflow improvements, his ability to think outside the box was always valuable in projects that needed innovation.',
+      show: true
+    }
   ],
   caseStudies: [
     {
+      id: 'career-counseling',
       title: 'Career Counseling Platform',
       summary: 'A modern career counseling platform built with Next.js, enabling users to explore counseling packages, read reviews, and book sessions.',
       image: '/assets/career-path-case.png',
@@ -409,6 +482,7 @@ export const siteConfig = {
       },
     },
     {
+      id: 'ux-high-bias',
       title: 'UX HIGH BIAS',
       summary: 'A zine-inspired Vibe portfolio framework, under development, but very much like this site you are watching now.',
       image: '/assets/ux-high-bias.png',
@@ -471,6 +545,7 @@ export const siteConfig = {
       },
     },
     {
+      id: 'rob-watkins-photography',
       title: 'Rob Watkins Photography',
       summary: 'A custom photography portfolio website that puts the focus on stunning visual storytelling and seamless content management.',
       image: '/assets/rob-watkins-offers.png',
@@ -535,7 +610,7 @@ export const siteConfig = {
     {
       name: 'Marcus Björke',
       title: 'SaaS Dreamer, CEO',
-      avatar: '/assets/ux-high-bias.png',
+      avatar: '/assets/marcus-at-wedding.jpeg',
       bio: 'Dreaming about a future where Blueberry can build the next big thing with AI',
       skills: ['Strategic Thinking', 'Growth Mindset', 'Customer Development'],
       funFact:
@@ -548,7 +623,7 @@ export const siteConfig = {
     {
       name: 'Marcus Björke',
       title: 'Surfer, Rider, Skier',
-      avatar: '/assets/alone-surfer.jpg',
+      avatar: '/assets/love-ice.jpeg',
       bio: "I have a passion for the sea, the wind, and the snow. I'm currently dreaming about making Åland a famous destination for eMTB riders from all over the world.",
       skills: [
         'Windsurf',
