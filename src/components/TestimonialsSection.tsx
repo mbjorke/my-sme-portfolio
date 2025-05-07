@@ -7,10 +7,13 @@ import {
   cardBase, 
   cardGradient, 
   cardContent, 
-  cardQuoteIcon 
+  cardQuoteIcon,
+  cardGlow,
+  cardBlur
 } from "@/styles/card-decorations";
 import { useLanguage } from "@/context/LanguageContext";
 import { useCallback, useState } from "react";
+import { cn } from "@/lib/utils";
 
 interface Testimonial {
   type: string;
@@ -58,9 +61,9 @@ export function TestimonialsSection() {
         </div>
 
         <div className="relative mx-auto w-full max-w-4xl">
-          <Card className={cardBase}>
+          <Card className={cn(cardBase, cardGlow, 'hover:border-primary/20')}>
             <CardContent className={cardContent}>
-              <div className={cardGradient} />
+              <div className={cn(cardGradient, cardBlur)} />
               <Quote className={cardQuoteIcon} />
               <div className="relative z-10 flex flex-col items-center md:flex-row md:items-start">
                 <div className="mb-6 md:mb-0 md:mr-8">

@@ -3,22 +3,27 @@ import React, { HTMLAttributes, ReactNode } from 'react';
 
 // Card glow effect styles
 export const cardGlow = [
-  "shadow-[0_0_20px_rgba(99,102,241,0.3)]",
-  "transition-all duration-300",
-  "hover:shadow-[0_0_30px_rgba(99,102,241,0.5)]"
+  "relative",
+  "before:absolute before:inset-0 before:rounded-xl before:z-[-1]",
+  "before:transition-all before:duration-300",
+  "before:shadow-[0_0_20px_rgba(99,102,241,0.3)]",
+  "hover:before:shadow-[0_0_30px_rgba(99,102,241,0.7)]"
 ].join(' ');
 
 // Card gradient background styles
 export const cardGradient = [
   "absolute inset-0",
-  "bg-gradient-to-br from-card/50 via-card/30 to-card/50",
+  "bg-gradient-to-br from-card/50 via-card/30 to-card/50"
+].join(' ');
+
+// Card blur effect (use sparingly as it can impact performance)
+export const cardBlur = [
   "backdrop-blur-sm"
 ].join(' ');
 
 // Base card styles
 export const cardBase = [
-  "relative overflow-hidden rounded-xl",
-  cardGlow
+  "relative overflow-hidden rounded-xl"
 ].join(' ');
 
 // Card content padding

@@ -6,6 +6,9 @@ import { usePathname, useRouter } from 'next/navigation';
 import { ExternalLink } from 'lucide-react';
 import { ProjectCaseStudy } from '@/types/project';
 import { ProjectDialog } from './ProjectDialog';
+import { cardGradient, cardGlow } from '@/styles/card-decorations';
+import { cn } from '@/lib/utils';
+import { Card, CardContent } from '@/components/ui/card';
 
 interface ProjectCardProps {
   project: ProjectCaseStudy;
@@ -57,55 +60,64 @@ export function ProjectCard({ project, className = '' }: ProjectCardProps) {
 
   return (
     <>
-      <div
-        className={`group relative overflow-hidden rounded-xl border border-border bg-card shadow-sm transition-all hover:shadow-lg hover:-translate-y-1 ${className}`}
+      <Card 
+        className={cn(
+          'group relative overflow-hidden',
+          cardGlow,
+          'hover:border-primary/20',
+          'h-full flex flex-col',
+          className
+        )}
         onClick={handleClick}
       >
-        <div className="aspect-video overflow-hidden relative">
+        <div className={cardGradient} />
+        <div className="relative z-0 aspect-video overflow-hidden">
           <img
             src={project.image}
             alt={project.title}
             className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
             loading="lazy"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4 z-10">
             <span className="text-white text-sm font-medium">
               {project.openInDialog ? viewDetailsText : viewProjectText}
               {project.openInNewTab && <ExternalLink className="inline-block ml-1 h-4 w-4" />}
             </span>
           </div>
         </div>
-        <div className="p-6">
+        <CardContent className="p-6 flex-1 flex flex-col">
           <h3 className="mb-2 text-xl font-semibold group-hover:text-primary transition-colors">
             {project.title}
           </h3>
           <p className="mb-4 text-muted-foreground line-clamp-2">{project.summary}</p>
-          <div className="flex items-center justify-between pt-2 border-t border-border">
-            <span className="text-sm font-medium text-primary flex items-center">
-              {project.cta?.text || viewProjectCta}
-              <ExternalLink className="ml-1 h-3 w-3" />
-            </span>
-            {project.content?.technologies && project.content.technologies.length > 0 && (
-              <div className="flex -space-x-1">
-                {project.content.technologies.slice(0, 3).map((tech, i) => (
-                  <span 
-                    key={i}
-                    className="h-6 w-6 rounded-full bg-muted text-xs flex items-center justify-center border border-background shadow-sm"
-                    title={tech}
-                  >
-                    {tech.charAt(0).toUpperCase()}
-                  </span>
-                ))}
-                {project.content.technologies.length > 3 && (
-                  <span className="h-6 w-6 rounded-full bg-muted text-xs flex items-center justify-center border border-background shadow-sm">
-                    +{project.content.technologies.length - 3}
-                  </span>
-                )}
-              </div>
-            )}
+          <div className="mt-auto pt-4 border-t border-border">
+            <div className="flex items-center justify-between">
+              <span className="text-sm font-medium text-primary flex items-center">
+                {project.cta?.text || viewProjectCta}
+                <ExternalLink className="ml-1 h-3 w-3" />
+              </span>
+              {project.content?.technologies && project.content.technologies.length > 0 && (
+                <div className="flex -space-x-1">
+                  {project.content.technologies.slice(0, 3).map((tech, i) => (
+                    <span 
+                      key={i}
+                      className="h-6 w-6 rounded-full bg-muted text-xs flex items-center justify-center border border-background shadow-sm"
+                      title={tech}
+                    >
+                      {tech.charAt(0).toUpperCase()}
+                    </span>
+                  ))}
+                  {project.content.technologies.length > 3 && (
+                    <span className="h-6 w-6 rounded-full bg-muted text-xs flex items-center justify-center border border-background shadow-sm">
+                      +{project.content.technologies.length - 3}
+                    </span>
+                  )}
+                </div>
+              )}
+            </div>
           </div>
-        </div>
-      </div>
+        </CardContent>
+      </Card>
 
       <ProjectDialog
         project={project}
