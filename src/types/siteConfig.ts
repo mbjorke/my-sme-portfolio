@@ -23,3 +23,13 @@ export interface WorkProcessStep {
 }
 
 export type WorkProcessImage = string; // emoji or image path
+
+export interface Testimonial {
+  type: string;
+  name: string;
+  badge: string;
+  badgeUrl: string;
+  url: string;
+  quote: string;
+  show: boolean;
+}
