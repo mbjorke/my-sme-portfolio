@@ -628,6 +628,7 @@ export const siteConfig = {
       social: {
         github: 'https://github.com/mbjorke',
       },
+      showLogo: true,
     },
     {
       name: 'Marcus Björke',
@@ -641,6 +642,7 @@ export const siteConfig = {
       social: {
         linkedin: 'https://linkedin.com/in/mbjorke',
       },
+      showLogo: true,
     },
     {
       name: 'Marcus Björke',
@@ -660,6 +662,7 @@ export const siteConfig = {
       social: {
         bluesky: 'https://instagram.com/mbjorke',
       },
+      showLogo: false,
     },
   ] as TeamMember[],
 };
