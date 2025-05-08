@@ -6,30 +6,40 @@ import { ThemeProvider } from './ThemeProvider';
 
 export default function BorderGradientShowcase() {
   const { theme } = useTheme();
-  const [localTheme, setLocalTheme] = useState<'light' | 'dark'>('light');
+  // previewTheme: null = use global, 'light'/'dark' = local override
+  const [previewTheme, setPreviewTheme] = useState<'light' | 'dark' | null>(null);
 
-  // Set initial localTheme based on global theme, but only on mount
+  // Button toggles between 'light' and 'dark' preview override
+  const isLightPreview = previewTheme === 'light' || (previewTheme === null && theme === 'light');
+  const nextPreviewTheme = isLightPreview ? 'dark' : 'light';
+
+  // Debug: log theme state changes
   useEffect(() => {
-    if (theme === 'dark') {
-      setLocalTheme('dark');
-    } else {
-      setLocalTheme('light');
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    console.log('[BorderGradientShowcase] previewTheme:', previewTheme, 'global theme:', theme);
+  }, [previewTheme, theme]);
+
+  function handlePreviewToggle() {
+    setPreviewTheme(isLightPreview ? 'dark' : 'light');
+    console.log(
+      '[BorderGradientShowcase] Button clicked, toggling previewTheme from',
+      previewTheme,
+      'to',
+      isLightPreview ? 'dark' : 'light',
+    );
+  }
 
   return (
     <main className="flex flex-col gap-8 p-8">
       <div className="flex justify-end mb-2">
         <button
           className="px-3 py-1 rounded-xl border text-sm font-medium bg-background hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-          onClick={() => setLocalTheme(localTheme === 'dark' ? 'light' : 'dark')}
+          onClick={handlePreviewToggle}
           aria-label="Toggle showcase theme"
         >
-          {localTheme === 'dark' ? '🌞 Light Preview' : '🌙 Dark Preview'}
+          {isLightPreview ? '🌙 Dark Preview' : '🌞 Light Preview'}
         </button>
       </div>
-      <ThemeProvider theme={localTheme}>
+      <div className={(previewTheme ?? theme) === 'dark' ? 'dark-preview' : 'light-preview'}>
         <h1 className="text-2xl font-bold mb-4">UnoCSS Border Gradient Showcase</h1>
         <div className="text-lg font-bold mb-2 text-center w-full">Vivid & Visible Borders</div>
         <div className="flex flex-row gap-4 flex-wrap justify-center mb-8">
@@ -457,7 +467,7 @@ export default function BorderGradientShowcase() {
             </div>
           </div>
         </div>
-      </ThemeProvider>
+      </div>
     </main>
   );
 }
