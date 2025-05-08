@@ -27,9 +27,11 @@ export interface ProjectCaseStudy {
     features?: string[];
     featuresSv?: string[];
     technologies?: string[];
-    links?: Array<ProjectLink & {
-      textSv?: string;
-    }>;
+    links?: Array<
+      ProjectLink & {
+        textSv?: string;
+      }
+    >;
     openInDialog?: boolean;
   };
   openInNewTab?: boolean;

@@ -10,7 +10,7 @@ declare module 'next' {
 
 declare module 'next/link' {
   import { LinkProps as NextLinkProps } from 'next/link';
-  
+
   interface LinkProps extends Omit<NextLinkProps, 'locale'> {
     locale?: string | false;
   }

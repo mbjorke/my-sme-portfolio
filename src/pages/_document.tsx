@@ -24,7 +24,7 @@ export default function Document({ locale = siteConfig.defaultLocale }: Document
 Document.getInitialProps = async (ctx: DocumentContext) => {
   const initialProps = await ctx.defaultGetInitialProps(ctx);
   const { locale } = ctx;
-  
+
   return {
     ...initialProps,
     locale,

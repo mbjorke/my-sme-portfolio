@@ -230,8 +230,10 @@ export const siteConfig = {
       caseStudies: {
         careerCounseling: {
           title: 'Karriärvägledningsplattform',
-          summary: 'En modern karriärvägledningsplattform byggd med Next.js, där användare kan utforska olika vägledningspaket, läsa recensioner och boka sessioner.',
-          description: 'En omfattande karriärvägledningsplattform utformad för att koppla samman användare med professionell karriärvägledning. Plattformen erbjuder olika vägledningspaket, kundrecensioner och ett användarvänligt kontaktformulär för förfrågningar.',
+          summary:
+            'En modern karriärvägledningsplattform byggd med Next.js, där användare kan utforska olika vägledningspaket, läsa recensioner och boka sessioner.',
+          description:
+            'En omfattande karriärvägledningsplattform utformad för att koppla samman användare med professionell karriärvägledning. Plattformen erbjuder olika vägledningspaket, kundrecensioner och ett användarvänligt kontaktformulär för förfrågningar.',
           features: [
             'Användarautentisering och profilanpassning',
             'Interaktiv paketvals- och bokningsfunktion',
@@ -239,13 +241,15 @@ export const siteConfig = {
             'Kontaktformulär med validering av utbildningsnivå',
             'Responsiv design för alla enheter',
             'Säker betalningsintegration',
-            'Adminpanel för sessionshantering'
-          ]
+            'Adminpanel för sessionshantering',
+          ],
         },
         uxHighBias: {
           title: 'UX HIGH BIAS',
-          summary: 'Ett zine-inspirerat Vibe-portföljramverk, under utveckling, men mycket likt den här webbplatsen du tittar på just nu.',
-          description: 'Ett modernt, anpassningsbart portföljramverk byggt med Next.js och Tailwind CSS. Designat för utvecklare och designers som vill visa upp sitt arbete. Grunden har en unik, zine-inspirerad estetik som enkelt kan anpassas med moderna utvecklingsverktyg som Windsurf.ai.',
+          summary:
+            'Ett zine-inspirerat Vibe-portföljramverk, under utveckling, men mycket likt den här webbplatsen du tittar på just nu.',
+          description:
+            'Ett modernt, anpassningsbart portföljramverk byggt med Next.js och Tailwind CSS. Designat för utvecklare och designers som vill visa upp sitt arbete. Grunden har en unik, zine-inspirerad estetik som enkelt kan anpassas med moderna utvecklingsverktyg som Windsurf.ai.',
           features: [
             'Responsiv design som fungerar på alla enheter',
             'Stöd för mörkt/ljust läge, kan inaktiveras',
@@ -257,34 +261,38 @@ export const siteConfig = {
             'Inbyggd analysfunktionalitet',
             'Guide för att fylla i innehåll',
             'AAA+ tillgänglighet från start',
-            'SEO-optimerad'
-          ]
+            'SEO-optimerad',
+          ],
         },
         blueberryBanking: {
           title: 'Project Blueberry Banking',
-          summary: 'En mobil affärsbankapp med tema för småföretagare, surfarvibbar, byggd med Framer för att visa upp interaktionsmöjligheter',
-          description: 'En konceptuell mobilbankapp speciellt utformad för småföretagare med en passion för surfing. Detta projekt visar moderna UI/UX-mönster för finansiella applikationer med en unik och engagerande visuell stil.',
+          summary:
+            'En mobil affärsbankapp med tema för småföretagare, surfarvibbar, byggd med Framer för att visa upp interaktionsmöjligheter',
+          description:
+            'En konceptuell mobilbankapp speciellt utformad för småföretagare med en passion för surfing. Detta projekt visar moderna UI/UX-mönster för finansiella applikationer med en unik och engagerande visuell stil.',
           features: [
             'Interaktiva prototyper med Framer',
             'Anpassat animationssystem',
             'Användarflöden för vanliga bankärenden',
             'Designsystem med mörkt/ljust läge',
-            'Responsiva designmönster'
-          ]
+            'Responsiva designmönster',
+          ],
         },
         robWatkins: {
           title: 'Rob Watkins Fotografi',
-          summary: 'En anpassad portföljwebbplats för fotografering som fokuserar på fantastisk visuell berättande och sömlös innehållshantering.',
-          description: 'En anpassad portföljwebbplats för fotografering byggd med fokus på prestanda och visuell effekt. Webbplatsen har en ren, minimal design som fokuserar på Robs fantastiska fotografiska arbete, med ett anpassat innehållshanteringssystem som gör det enkelt för honom att uppdatera sin portfölj.',
+          summary:
+            'En anpassad portföljwebbplats för fotografering som fokuserar på fantastisk visuell berättande och sömlös innehållshantering.',
+          description:
+            'En anpassad portföljwebbplats för fotografering byggd med fokus på prestanda och visuell effekt. Webbplatsen har en ren, minimal design som fokuserar på Robs fantastiska fotografiska arbete, med ett anpassat innehållshanteringssystem som gör det enkelt för honom att uppdatera sin portfölj.',
           features: [
             'Anpassad bildoptimeringspipeline',
             'Dynamiskt galleri med filtrering',
             'System för kundgranskning',
             'SEO-optimerad för fotografer',
             'Mobil-först responsiv design',
-            'Snabbladdande bildleverans'
-          ]
-        }
+            'Snabbladdande bildleverans',
+          ],
+        },
       },
     },
   },
@@ -333,7 +341,8 @@ export const siteConfig = {
     {
       id: 'blueberry-banking',
       title: 'Project Blueberry Banking',
-      summary: 'A mobile Business Banking App themed for a small business owner, surfer vibes, this is built with Framer just to showcase interaction examples',
+      summary:
+        'A mobile Business Banking App themed for a small business owner, surfer vibes, this is built with Framer just to showcase interaction examples',
       image: '/assets/alone-surfer.jpg',
       url: 'https://blueberry-bank.framer.website',
       openInNewTab: true,
@@ -341,30 +350,32 @@ export const siteConfig = {
       cta: {
         text: 'Explore this project',
         url: 'https://blueberry-bank.framer.website',
-        target: '_blank'
+        target: '_blank',
       },
       content: {
-        description: 'A mobile Business Banking App themed for a small business owner with surfer vibes, built with Framer to showcase interaction examples.',
+        description:
+          'A mobile Business Banking App themed for a small business owner with surfer vibes, built with Framer to showcase interaction examples.',
         features: [
           'Interactive mobile banking interface',
           'Surf-themed design system',
           'Transaction history and analytics',
-          'Bill payment and transfers'
+          'Bill payment and transfers',
         ],
         technologies: ['Framer', 'React', 'TypeScript'],
         links: [
           {
             text: 'View Prototype',
             url: 'https://blueberry-bank.framer.website',
-            target: '_blank'
-          }
-        ]
-      }
+            target: '_blank',
+          },
+        ],
+      },
     },
     {
       id: 'rob-watkins-photography',
       title: 'Rob Watkins Photography',
-      summary: 'Rob had ideas—too many. He was stuck, unsure what to offer or how to show it. I helped him cut through the noise and focus on his story. In an hour, we had a solid draft. Now he runs his own site, fully in control and paying less than before.',
+      summary:
+        'Rob had ideas—too many. He was stuck, unsure what to offer or how to show it. I helped him cut through the noise and focus on his story. In an hour, we had a solid draft. Now he runs his own site, fully in control and paying less than before.',
       image: '/assets/rob-watkins-offers.png',
       url: 'https://robw.framer.photos',
       openInNewTab: true,
@@ -372,26 +383,27 @@ export const siteConfig = {
       cta: {
         text: "Visit Rob's site",
         url: 'https://robw.framer.photos',
-        target: '_blank'
+        target: '_blank',
       },
       content: {
-        description: 'A photography portfolio website for Rob Watkins, showcasing his work with a clean and focused design.',
+        description:
+          'A photography portfolio website for Rob Watkins, showcasing his work with a clean and focused design.',
         features: [
           'Portfolio gallery',
           'Contact form',
           'Responsive design',
-          'Easy content management'
+          'Easy content management',
         ],
         technologies: ['Framer', 'React', 'TypeScript'],
         links: [
           {
             text: 'View Website',
             url: 'https://robw.framer.photos',
-            target: '_blank'
-          }
-        ]
-      }
-    }
+            target: '_blank',
+          },
+        ],
+      },
+    },
   ],
   // Ensure comma after projects array
   projectsCta: {
@@ -409,41 +421,48 @@ export const siteConfig = {
       type: 'Mentor & Coach at backlog.design',
       name: 'Chris Nguyen',
       badge: 'backlog.design',
-      badgeUrl: 'https://media.licdn.com/dms/image/v2/D5603AQG7s9wiZpzjJQ/profile-displayphoto-shrink_400_400/B56ZXr7hy7GoAk-/0/1743420006324?e=1752105600&v=beta&t=LaDmU7MJ8-o0n3cJJ-3S8Nvg-kqtCj4tBcgvxnwv7Hg',
+      badgeUrl:
+        'https://media.licdn.com/dms/image/v2/D5603AQG7s9wiZpzjJQ/profile-displayphoto-shrink_400_400/B56ZXr7hy7GoAk-/0/1743420006324?e=1752105600&v=beta&t=LaDmU7MJ8-o0n3cJJ-3S8Nvg-kqtCj4tBcgvxnwv7Hg',
       url: 'https://www.linkedin.com/in/chris-nguyen',
       quote: 'Marcus is a creative force and a true community builder.',
-      show: true
+      show: true,
     },
     {
       type: 'Client at Rob Watkins Photography',
       name: 'Robert Watkins',
       badge: 'Rob Watkins Photography',
-      badgeUrl: 'https://cdn.bsky.app/img/avatar/plain/did:plc:vaujvoit5yzhraewb2z4mm64/bafkreicolsdblo66sdvbaopkb5wvkdadkutd5bq4f2jkmxtz4vdjzudwr4@jpeg',
+      badgeUrl:
+        'https://cdn.bsky.app/img/avatar/plain/did:plc:vaujvoit5yzhraewb2z4mm64/bafkreicolsdblo66sdvbaopkb5wvkdadkutd5bq4f2jkmxtz4vdjzudwr4@jpeg',
       url: 'https://www.linkedin.com/in/robwatkins',
-      quote: 'Working with Marcus has been a revelation. He\'s opened up my mind allowing me to see my projects in a different light. The resulting products have been sharper, more robust and better focussed. Did I mention he\'s really good company too? I guess I have now.',
-      show: true
+      quote:
+        "Working with Marcus has been a revelation. He's opened up my mind allowing me to see my projects in a different light. The resulting products have been sharper, more robust and better focussed. Did I mention he's really good company too? I guess I have now.",
+      show: true,
     },
     {
       type: 'Product Manager at Crosskey',
       name: 'Emil Friman',
       badge: 'Product Manager, Crosskey',
-      badgeUrl: 'https://media.licdn.com/dms/image/v2/C4D03AQE0JGiCnzfuYg/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1521614349566?e=1752105600&v=beta&t=so75ov3gM26I_pH7PB5HAXgoNFbxWq-Z08-UB-VdudU',
+      badgeUrl:
+        'https://media.licdn.com/dms/image/v2/C4D03AQE0JGiCnzfuYg/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1521614349566?e=1752105600&v=beta&t=so75ov3gM26I_pH7PB5HAXgoNFbxWq-Z08-UB-VdudU',
       url: 'https://www.linkedin.com/in/emil-friman-9422a964/',
-      quote: 'I\'ve had the opportunity to work with Marcus at Crosskey, where he constantly contributed with creative ideas and suggestions. Whether it was product or workflow improvements, his ability to think outside the box was always valuable in projects that needed innovation.',
-      show: true
-    }
+      quote:
+        "I've had the opportunity to work with Marcus at Crosskey, where he constantly contributed with creative ideas and suggestions. Whether it was product or workflow improvements, his ability to think outside the box was always valuable in projects that needed innovation.",
+      show: true,
+    },
   ],
   caseStudies: [
     {
       id: 'career-counseling',
       title: 'Career Counseling Platform',
-      summary: 'A modern career counseling platform built with Next.js, enabling users to explore counseling packages, read reviews, and book sessions.',
+      summary:
+        'A modern career counseling platform built with Next.js, enabling users to explore counseling packages, read reviews, and book sessions.',
       image: '/assets/career-path-case.png',
       url: 'https://preeminent-heliotrope-7d4b20.netlify.app',
       openInNewTab: true,
       openInDialog: true,
       content: {
-        description: 'A comprehensive career counseling platform designed to connect users with professional career guidance services. The platform offers various counseling packages, client testimonials, and an easy-to-use contact form for inquiries.',
+        description:
+          'A comprehensive career counseling platform designed to connect users with professional career guidance services. The platform offers various counseling packages, client testimonials, and an easy-to-use contact form for inquiries.',
         features: [
           'User authentication and profile management',
           'Interactive package selection and booking system',
@@ -451,30 +470,47 @@ export const siteConfig = {
           'Contact form with education level validation',
           'Responsive design for all devices',
           'Secure payment integration',
-          'Admin dashboard for session management'
+          'Admin dashboard for session management',
         ],
-        technologies: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Firebase', 'Stripe', 'Framer Motion'],
+        technologies: [
+          'Next.js',
+          'TypeScript',
+          'Tailwind CSS',
+          'Firebase',
+          'Stripe',
+          'Framer Motion',
+        ],
         links: [
-          { text: 'Live Website', url: 'https://preeminent-heliotrope-7d4b20.netlify.app', target: '_blank' },
-          { text: 'Live Prototype', url: 'https://preeminent-heliotrope-7d4b20.netlify.app', target: '_self' }
-        ]
+          {
+            text: 'Live Website',
+            url: 'https://preeminent-heliotrope-7d4b20.netlify.app',
+            target: '_blank',
+          },
+          {
+            text: 'Live Prototype',
+            url: 'https://preeminent-heliotrope-7d4b20.netlify.app',
+            target: '_self',
+          },
+        ],
       },
       cta: {
         text: 'View Platform',
         url: 'https://preeminent-heliotrope-7d4b20.netlify.app',
-        target: '_blank'
+        target: '_blank',
       },
     },
     {
       id: 'ux-high-bias',
       title: 'UX HIGH BIAS',
-      summary: 'A zine-inspired Vibe portfolio framework, under development, but very much like this site you are watching now.',
+      summary:
+        'A zine-inspired Vibe portfolio framework, under development, but very much like this site you are watching now.',
       image: '/assets/ux-high-bias.png',
       url: 'https://ux-high-bias.framer.website',
       openInNewTab: false,
       openInDialog: true,
       content: {
-        description: 'A modern, customizable portfolio framework built with Next.js and Tailwind CSS. Designed for developers and designers who want to showcase their work. The base will be with a unique, zine-inspired aesthetic, but that is easily customizable with Modern Vibe Coding Tools like Windsurf.ai.',
+        description:
+          'A modern, customizable portfolio framework built with Next.js and Tailwind CSS. Designed for developers and designers who want to showcase their work. The base will be with a unique, zine-inspired aesthetic, but that is easily customizable with Modern Vibe Coding Tools like Windsurf.ai.',
         features: [
           'Responsive design that works on all devices',
           'Dark/light mode support, disablable',
@@ -486,75 +522,77 @@ export const siteConfig = {
           'Built-in analytics',
           'Wizard to populate content',
           'AAA+ accessible from start',
-          'SEO optimized'
+          'SEO optimized',
         ],
         technologies: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion', 'MDX'],
         links: [
           { text: 'GitHub Repository', url: 'https://github.com/yourusername/ux-high-bias' },
-          { text: 'Live Demo', url: 'https://ux-high-bias.framer.website' }
-        ]
+          { text: 'Live Demo', url: 'https://ux-high-bias.framer.website' },
+        ],
       },
       cta: {
         text: 'See the case',
         url: 'https://ux-high-bias.framer.website',
-        target: '_blank'
+        target: '_blank',
       },
     },
     {
       title: 'Project Blueberry Banking',
-      summary: 'A mobile Business Banking App themed for a small business owner, surfer vibes, built with Framer to showcase interaction examples',
+      summary:
+        'A mobile Business Banking App themed for a small business owner, surfer vibes, built with Framer to showcase interaction examples',
       image: '/assets/blueberry-banking-case.png',
       url: 'https://blueberry-bank.framer.website',
       openInNewTab: false,
       openInDialog: true,
       content: {
-        description: 'A concept mobile banking application designed specifically for small business owners with a passion for surfing. This project showcases modern UI/UX patterns for financial applications with a unique, engaging visual style.',
+        description:
+          'A concept mobile banking application designed specifically for small business owners with a passion for surfing. This project showcases modern UI/UX patterns for financial applications with a unique, engaging visual style.',
         features: [
           'Interactive prototypes with Framer',
           'Custom animation system',
           'User flows for common banking tasks',
           'Design system with dark/light modes',
-          'Responsive design patterns'
+          'Responsive design patterns',
         ],
         technologies: ['Framer'],
         links: [
           { text: 'Live Website', url: 'https://blueberry-bank.framer.website', target: '_blank' },
-          { text: 'Live Prototype', url: 'https://blueberry-bank.framer.website', target: '_self' }
-        ]
+          { text: 'Live Prototype', url: 'https://blueberry-bank.framer.website', target: '_self' },
+        ],
       },
       cta: {
         text: 'See the case',
         url: '#',
-        target: '_self'
+        target: '_self',
       },
     },
     {
       id: 'rob-watkins-photography',
       title: 'Rob Watkins Photography',
-      summary: 'A custom photography portfolio website that puts the focus on stunning visual storytelling and seamless content management.',
+      summary:
+        'A custom photography portfolio website that puts the focus on stunning visual storytelling and seamless content management.',
       image: '/assets/rob-watkins-offers.png',
       url: 'https://robw.framer.photos',
       openInNewTab: false,
       openInDialog: true,
       content: {
-        description: 'A custom photography portfolio website built with a focus on performance and visual impact. The site features a clean, minimal design that puts the focus on Rob\'s stunning photography work, with a custom content management system that allows him to easily update his portfolio.',
+        description:
+          "A custom photography portfolio website built with a focus on performance and visual impact. The site features a clean, minimal design that puts the focus on Rob's stunning photography work, with a custom content management system that allows him to easily update his portfolio.",
         features: [
           'Custom image optimization pipeline',
           'Dynamic gallery with filtering',
           'Client proofing system',
           'SEO optimized for photographers',
           'Mobile-first responsive design',
-          'Fast-loading image delivery'
+          'Fast-loading image delivery',
         ],
         technologies: ['Framer'],
-        links: [
-          { text: 'Visit Live Site', url: 'https://robw.framer.photos' }
-        ]
+        links: [{ text: 'Visit Live Site', url: 'https://robw.framer.photos' }],
       },
       cta: {
-        text: "See the case",
+        text: 'See the case',
         url: 'https://robw.framer.photos',
-        target: '_blank'
+        target: '_blank',
       },
     },
   ],

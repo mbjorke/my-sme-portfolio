@@ -4,13 +4,13 @@ import { useState } from 'react';
 import { useLanguage } from '@/context/LanguageContext';
 import { usePathname, useRouter } from 'next/navigation';
 import { ExternalLink } from 'lucide-react';
-import { ProjectCaseStudy } from "@/types/project";
+import { ProjectCaseStudy } from '@/types/project';
 import { ProjectDialog } from './ProjectDialog';
 import { cardBase, cardHover, cardGradient } from '@/styles/card-decorations';
 import { cn } from '@/lib/utils';
-import { Card, CardContent } from "./ui/card";
-import Image from "next/image";
-import Link from "next/link";
+import { Card, CardContent } from './ui/card';
+import Image from 'next/image';
+import Link from 'next/link';
 
 interface ProjectCardProps {
   project: ProjectCaseStudy;
@@ -30,7 +30,7 @@ export function ProjectCard({ project, className = '' }: ProjectCardProps) {
   // Combine technologies from both root and content for display
   const allTechnologies = [
     ...(project.technologies || []),
-    ...(project.content?.technologies || [])
+    ...(project.content?.technologies || []),
   ];
 
   const displayTechnologies = allTechnologies.slice(0, 3);
@@ -43,12 +43,14 @@ export function ProjectCard({ project, className = '' }: ProjectCardProps) {
     console.log('Project clicked:', project.title);
 
     // Check if there's a prototype URL in the links or if it's a Framer URL
-    const hasPrototypeLink = project.content?.links?.some(link =>
-      link.url.includes('framer.website') ||
-      link.url.includes('framer.site') ||
-      link.text.toLowerCase().includes('prototype') ||
-      link.text.toLowerCase().includes('demo')
-    ) ||
+    const hasPrototypeLink =
+      project.content?.links?.some(
+        (link) =>
+          link.url.includes('framer.website') ||
+          link.url.includes('framer.site') ||
+          link.text.toLowerCase().includes('prototype') ||
+          link.text.toLowerCase().includes('demo'),
+      ) ||
       project.url?.includes('framer.website') ||
       project.url?.includes('framer.site');
 
@@ -82,7 +84,7 @@ export function ProjectCard({ project, className = '' }: ProjectCardProps) {
           'group flex flex-col h-full',
           'hover:shadow-lg hover:border-primary/70 hover:z-10',
           'transition-all duration-300',
-          className
+          className,
         )}
         onClick={handleCardClick}
       >
@@ -135,11 +137,7 @@ export function ProjectCard({ project, className = '' }: ProjectCardProps) {
         </CardContent>
       </Card>
 
-      <ProjectDialog
-        project={project}
-        open={isDialogOpen}
-        onOpenChange={setIsDialogOpen}
-      />
+      <ProjectDialog project={project} open={isDialogOpen} onOpenChange={setIsDialogOpen} />
     </>
   );
 }

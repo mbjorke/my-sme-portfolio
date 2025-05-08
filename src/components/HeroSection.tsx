@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { useState, useEffect, useCallback } from 'react';
 import { siteConfig } from '@/config/siteConfig';
@@ -6,47 +6,54 @@ import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from "@/components/ui/carousel"
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+  type CarouselApi,
+} from '@/components/ui/carousel';
 
 const carouselMembers = siteConfig.teamMembers.slice(0, 3); // Get first 3 team members
 
 export function HeroSection() {
   const hero = siteConfig.translations.en.hero;
-  const [api, setApi] = useState<CarouselApi>()
-  const [current, setCurrent] = useState(0)
-  const [count, setCount] = useState(0)
+  const [api, setApi] = useState<CarouselApi>();
+  const [current, setCurrent] = useState(0);
+  const [count, setCount] = useState(0);
 
   const onSelect = useCallback(() => {
-    if (!api) return
-    setCurrent(api.selectedScrollSnap() + 1)
-  }, [api])
+    if (!api) return;
+    setCurrent(api.selectedScrollSnap() + 1);
+  }, [api]);
 
   useEffect(() => {
-    if (!api) return
+    if (!api) return;
 
-    setCount(api.scrollSnapList().length)
-    setCurrent(api.selectedScrollSnap() + 1)
-    api.on("select", onSelect)
-    
+    setCount(api.scrollSnapList().length);
+    setCurrent(api.selectedScrollSnap() + 1);
+    api.on('select', onSelect);
+
     return () => {
-      api.off("select", onSelect)
-    }
-  }, [api, onSelect])
+      api.off('select', onSelect);
+    };
+  }, [api, onSelect]);
 
   // Auto-advance the carousel
   useEffect(() => {
-    if (!api) return
-    
+    if (!api) return;
+
     const interval = setInterval(() => {
       if (api.canScrollNext()) {
-        api.scrollNext()
+        api.scrollNext();
       } else {
-        api.scrollTo(0)
+        api.scrollTo(0);
       }
-    }, 3000)
-    
-    return () => clearInterval(interval)
-  }, [api])
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [api]);
 
   return (
     <section id="hero" className="py-20 text-center">
@@ -86,7 +93,7 @@ export function HeroSection() {
                   onClick={() => api?.scrollTo(index)}
                   className={cn(
                     'h-2 w-2 p-0 rounded-full transition-colors',
-                    index === current - 1 ? 'bg-primary' : 'bg-muted hover:bg-muted/80'
+                    index === current - 1 ? 'bg-primary' : 'bg-muted hover:bg-muted/80',
                   )}
                   aria-label={`Go to slide ${index + 1}`}
                 />
