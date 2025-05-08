@@ -21,9 +21,9 @@ export function LanguageSwitcher() {
 
   const handleLocaleChange = (newLocale: string) => {
     if (newLocale === locale || isChanging) return;
-    
+
     setIsChanging(true);
-    
+
     // Use a small timeout to ensure the UI updates before the navigation
     setTimeout(() => {
       try {
@@ -48,7 +48,6 @@ export function LanguageSwitcher() {
       </div>
     );
   }
-
 
   return (
     <div className="flex gap-2" role="radiogroup" aria-label="Select language">

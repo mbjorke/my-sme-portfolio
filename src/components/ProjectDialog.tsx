@@ -3,7 +3,13 @@
 import { useState, useEffect } from 'react';
 import { useLanguage } from '@/context/LanguageContext';
 import { usePathname } from 'next/navigation';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { ExternalLink, Monitor, FileText, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -33,7 +39,7 @@ export function ProjectDialog({ project, open, onOpenChange }: ProjectDialogProp
     technologiesUsed: locale === 'sv' ? 'Använda tekniker' : 'Technologies Used',
     loadingPrototype: locale === 'sv' ? 'Laddar prototyp...' : 'Loading prototype...',
     noPrototype: locale === 'sv' ? 'Ingen prototyp tillgänglig' : 'No prototype URL available',
-    embeddedPrototype: locale === 'sv' ? 'Inbäddad prototyp' : 'Embedded Prototype'
+    embeddedPrototype: locale === 'sv' ? 'Inbäddad prototyp' : 'Embedded Prototype',
   };
 
   useEffect(() => {
@@ -63,16 +69,17 @@ export function ProjectDialog({ project, open, onOpenChange }: ProjectDialogProp
   // Get the prototype URL from the project
   const getPrototypeUrl = () => {
     console.log('Getting prototype URL...');
-    
+
     // First check for a 'Live Prototype' link
-    const prototypeLink = project.content?.links?.find(link => 
-      link.text.toLowerCase().includes('prototype') || 
-      link.text.toLowerCase().includes('demo')
+    const prototypeLink = project.content?.links?.find(
+      (link) =>
+        link.text.toLowerCase().includes('prototype') || link.text.toLowerCase().includes('demo'),
     );
 
     // If no prototype link found, check if main URL is a Framer site
-    const isFramerUrl = project.url?.includes('framer.website') || project.url?.includes('framer.site');
-    
+    const isFramerUrl =
+      project.url?.includes('framer.website') || project.url?.includes('framer.site');
+
     const url = prototypeLink?.url || (isFramerUrl ? project.url : '');
     console.log('Prototype URL:', url);
     return url;
@@ -80,7 +87,7 @@ export function ProjectDialog({ project, open, onOpenChange }: ProjectDialogProp
 
   const prototypeUrl = getPrototypeUrl();
   const hasPrototypeLink = !!prototypeUrl;
-  
+
   console.log('hasPrototypeLink:', hasPrototypeLink, 'prototypeUrl:', prototypeUrl);
 
   return (
@@ -106,13 +113,13 @@ export function ProjectDialog({ project, open, onOpenChange }: ProjectDialogProp
                   'rounded-none border-b-2 h-auto py-2 px-3',
                   activeTab === 'details'
                     ? 'border-primary text-primary bg-secondary/50'
-                    : 'border-transparent text-muted-foreground hover:bg-transparent hover:text-foreground'
+                    : 'border-transparent text-muted-foreground hover:bg-transparent hover:text-foreground',
                 )}
               >
                 <FileText className="h-4 w-4 mr-2" />
                 {translations.details}
               </Button>
-              
+
               {hasPrototypeLink && (
                 <Button
                   variant="ghost"
@@ -122,7 +129,7 @@ export function ProjectDialog({ project, open, onOpenChange }: ProjectDialogProp
                     'rounded-none border-b-2 h-auto py-2 px-3',
                     activeTab === 'prototype'
                       ? 'border-primary text-primary bg-secondary/50'
-                      : 'border-transparent text-muted-foreground hover:bg-transparent hover:text-foreground'
+                      : 'border-transparent text-muted-foreground hover:bg-transparent hover:text-foreground',
                   )}
                 >
                   <Monitor className="h-4 w-4 mr-2" />
@@ -168,7 +175,9 @@ export function ProjectDialog({ project, open, onOpenChange }: ProjectDialogProp
 
                   {project.content?.technologies && project.content.technologies.length > 0 && (
                     <div className="mb-6">
-                      <h3 className="text-xl font-semibold mb-2">{translations.technologiesUsed}</h3>
+                      <h3 className="text-xl font-semibold mb-2">
+                        {translations.technologiesUsed}
+                      </h3>
                       <div className="flex flex-wrap gap-2">
                         {project.content.technologies.map((tech, index) => (
                           <span
@@ -186,7 +195,12 @@ export function ProjectDialog({ project, open, onOpenChange }: ProjectDialogProp
                 <div className="flex flex-wrap gap-4 pt-4">
                   {project.cta && (
                     <Button
-                      onClick={() => handleExternalLink(project.cta.url, project.openInNewTab ? '_blank' : '_self')}
+                      onClick={() =>
+                        handleExternalLink(
+                          project.cta.url,
+                          project.openInNewTab ? '_blank' : '_self',
+                        )
+                      }
                       className="flex items-center gap-2"
                     >
                       {project.cta.text}
@@ -195,7 +209,11 @@ export function ProjectDialog({ project, open, onOpenChange }: ProjectDialogProp
                   )}
 
                   {project.content?.links
-                    ?.filter(link => !link.text.toLowerCase().includes('prototype') && !link.text.toLowerCase().includes('demo'))
+                    ?.filter(
+                      (link) =>
+                        !link.text.toLowerCase().includes('prototype') &&
+                        !link.text.toLowerCase().includes('demo'),
+                    )
                     .map((link, index) => (
                       <Button
                         key={index}

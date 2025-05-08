@@ -1,22 +1,22 @@
-"use client"
+'use client';
 
-import * as React from "react"
-import { Card, CardContent } from "@/components/ui/card"
-import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/enhanced-carousel"
-import { cardBase, cardHover, cardGradient } from "@/styles/card-decorations"
-import { cn } from "@/lib/utils"
+import * as React from 'react';
+import { Card, CardContent } from '@/components/ui/card';
+import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/enhanced-carousel';
+import { cardBase, cardHover, cardGradient } from '@/styles/card-decorations';
+import { cn } from '@/lib/utils';
 
 type CarouselDemoProps = {
   items: {
-    title: string
-    description: string
-    content: React.ReactNode
-  }[]
-  autoPlay?: boolean
-  showControls?: boolean
-  showDots?: boolean
-  className?: string
-}
+    title: string;
+    description: string;
+    content: React.ReactNode;
+  }[];
+  autoPlay?: boolean;
+  showControls?: boolean;
+  showDots?: boolean;
+  className?: string;
+};
 
 export function CarouselDemo({
   items,
@@ -28,7 +28,7 @@ export function CarouselDemo({
   return (
     <Carousel
       opts={{
-        align: "start",
+        align: 'start',
         loop: true,
       }}
       autoPlay={autoPlay}
@@ -39,9 +39,11 @@ export function CarouselDemo({
       <CarouselContent>
         {items.map((item, index) => (
           <CarouselItem key={index}>
-            <Card className={cn(cardBase, cardHover, "relative")}>
+            <Card className={cn(cardBase, cardHover, 'relative')}>
               <div className={cardGradient} />
-              <CardContent className={cn("flex relative z-10 justify-center items-center p-6 aspect-square")}>
+              <CardContent
+                className={cn('flex relative z-10 justify-center items-center p-6 aspect-square')}
+              >
                 <div className="space-y-4 text-center">
                   <h3 className="text-xl font-semibold">{item.title}</h3>
                   <p className="text-muted-foreground">{item.description}</p>
@@ -53,5 +55,5 @@ export function CarouselDemo({
         ))}
       </CarouselContent>
     </Carousel>
-  )
+  );
 }

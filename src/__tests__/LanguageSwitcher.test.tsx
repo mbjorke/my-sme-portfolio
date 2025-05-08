@@ -21,7 +21,7 @@ describe('LanguageSwitcher', () => {
     return render(
       <LanguageProvider>
         <LanguageSwitcher />
-      </LanguageProvider>
+      </LanguageProvider>,
     );
   };
 
@@ -40,27 +40,27 @@ describe('LanguageSwitcher', () => {
 
   it('should switch language when clicking a button', async () => {
     renderWithProvider();
-    
+
     // Click on SV button
     const svButton = screen.getByText('SV');
     fireEvent.click(svButton);
-    
+
     // Wait for the state to update
-    await new Promise(resolve => setTimeout(resolve, 100));
-    
+    await new Promise((resolve) => setTimeout(resolve, 100));
+
     // Check if the URL was updated correctly
     expect(mockPush).toHaveBeenCalledWith('/sv', { scroll: false });
-    
+
     // Check if the cookie was set
     expect(document.cookie).toContain('NEXT_LOCALE=sv');
-    
+
     // Click on EN button
     const enButton = screen.getByText('EN');
     fireEvent.click(enButton);
-    
+
     // Wait for the state to update
-    await new Promise(resolve => setTimeout(resolve, 100));
-    
+    await new Promise((resolve) => setTimeout(resolve, 100));
+
     // Check if the URL was updated back to default
     expect(mockPush).toHaveBeenCalledWith('/', { scroll: false });
   });

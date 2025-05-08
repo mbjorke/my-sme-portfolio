@@ -6,7 +6,7 @@ export function middleware(request: NextRequest) {
   // Check if there is any supported locale in the pathname
   const { pathname } = request.nextUrl;
   const pathnameHasLocale = siteConfig.locales.some(
-    (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
+    (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`,
   );
 
   if (pathnameHasLocale) return;
@@ -14,7 +14,7 @@ export function middleware(request: NextRequest) {
   // Redirect if there is no locale
   const locale = request.cookies.get('NEXT_LOCALE')?.value || siteConfig.defaultLocale;
   request.nextUrl.pathname = `/${locale}${pathname}`;
-  
+
   // Redirect to the path with the locale prefixed
   return NextResponse.redirect(request.nextUrl);
 }
