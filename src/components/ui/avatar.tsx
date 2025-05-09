@@ -14,8 +14,28 @@ function Avatar({ className, children, ...props }: React.HTMLAttributes<HTMLDivE
   );
 }
 
-function AvatarImage({ className, ...props }: React.ImgHTMLAttributes<HTMLImageElement>) {
-  return <img className={cn('aspect-square h-full w-full', className)} {...props} />;
+import Image from 'next/image';
+
+import type { ImageProps } from 'next/image';
+
+interface AvatarImageProps extends Omit<ImageProps, 'src' | 'alt'> {
+  src: string;
+  alt?: string;
+  className?: string;
+}
+
+function AvatarImage({ className, src, alt = '', ...props }: AvatarImageProps) {
+  return (
+    <Image
+      className={cn('aspect-square h-full w-full', className)}
+      src={src}
+      alt={alt}
+      fill
+      sizes="40px"
+      priority={false}
+      {...props}
+    />
+  );
 }
 
 function AvatarFallback({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {

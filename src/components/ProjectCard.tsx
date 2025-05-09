@@ -90,11 +90,13 @@ export function ProjectCard({ project, className = '' }: ProjectCardProps) {
       >
         <div className={cardGradient} />
         <div className="overflow-hidden relative z-0 aspect-video">
-          <img
+          <Image
             src={project.image}
             alt={project.title}
             className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110 transform-gpu"
-            loading="lazy"
+            fill
+            sizes="(max-width: 768px) 100vw, 100vw"
+            priority={false}
           />
           <div className="flex absolute inset-0 z-10 items-end p-4 bg-gradient-to-t to-transparent opacity-0 transition-opacity duration-300 from-black/60 group-hover:opacity-100">
             <span className="text-sm font-medium text-white">

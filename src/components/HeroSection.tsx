@@ -14,6 +14,7 @@ import {
   CarouselPrevious,
   type CarouselApi,
 } from '@/components/ui/carousel';
+import { TeamMemberDialog } from './TeamMemberDialog';
 
 const carouselMembers = siteConfig.teamMembers.slice(0, 3); // Get first 3 team members
 
@@ -22,6 +23,8 @@ export function HeroSection() {
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
   const [count, setCount] = useState(0);
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [selectedMember, setSelectedMember] = useState<(typeof carouselMembers)[0] | null>(null);
 
   const onSelect = useCallback(() => {
     if (!api) return;
@@ -68,7 +71,14 @@ export function HeroSection() {
           <Carousel className="w-full" setApi={setApi}>
             <CarouselContent>
               {carouselMembers.map((member, index) => (
-                <CarouselItem key={index} className="flex flex-col items-center">
+                <CarouselItem
+                  key={index}
+                  className="flex flex-col items-center cursor-pointer hover:scale-105 transition-transform"
+                  onClick={() => {
+                    setSelectedMember(member);
+                    setDialogOpen(true);
+                  }}
+                >
                   <div className="overflow-hidden relative mb-2 w-16 h-16 rounded-full border-2 md:w-20 md:h-20 border-primary/20">
                     <Image
                       src={member.avatar}
@@ -107,6 +117,12 @@ export function HeroSection() {
       <Button asChild>
         <Link href="#contact">{hero.callToAction}</Link>
       </Button>
+      <TeamMemberDialog
+        open={dialogOpen}
+        onOpenChange={setDialogOpen}
+        member={selectedMember}
+        showLogo={selectedMember?.showLogo}
+      />
     </section>
   );
 }

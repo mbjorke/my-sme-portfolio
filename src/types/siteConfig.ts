@@ -14,6 +14,7 @@ export interface TeamMember {
     linkedin?: string;
     instagram?: string;
   };
+  showLogo?: boolean;
 }
 
 export interface WorkProcessStep {
