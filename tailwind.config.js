@@ -18,6 +18,10 @@ module.exports = {
       fontFamily: {
         sans: ['DM Sans', 'sans-serif'],
       },
+      backgroundImage: {
+        'gradient-border':
+          'linear-gradient(158deg, #01fdee 0%, #02d19d 10%, #07fae3 19%, #000000 29%)',
+      },
       colors: {
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',

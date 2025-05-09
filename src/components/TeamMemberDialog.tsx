@@ -1,5 +1,6 @@
 'use client';
 
+import * as DialogPrimitive from '@radix-ui/react-dialog';
 import {
   Dialog,
   DialogContent,
@@ -9,7 +10,7 @@ import {
 } from '@/components/ui/dialog';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Github, Linkedin, Instagram } from 'lucide-react';
+import { Github, Linkedin, Instagram, X } from 'lucide-react';
 
 const BLUEBERRY_LOGO = '/blueberry-logo.svg';
 
@@ -45,9 +46,13 @@ interface TeamMemberDialogProps {
 export function TeamMemberDialog({ open, onOpenChange, member }: TeamMemberDialogProps) {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="p-0 bg-transparent shadow-none">
-        <div className="p-4 bg-gradient-to-r from-fuchsia-500 via-cyan-400 to-yellow-300 rounded-3xl">
-          <div className="p-8 max-w-sm rounded-xl bg-background text-foreground sm:max-w-md">
+      <DialogContent className="p-0 bg-transparent shadow-none rounded-2xl max-w-md w-full">
+        <div className="bg-gradient-border p-1 rounded-2xl w-full">
+          <div className="relative bg-background rounded-2xl w-full p-8 text-foreground">
+            <DialogPrimitive.Close className="absolute right-4 top-4 rounded-2xl opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground">
+              <X className="h-4 w-4" />
+              <span className="sr-only">Close</span>
+            </DialogPrimitive.Close>
             {member ? (
               <>
                 {/* Blueberry logo for first two members (index 0 or 1) */}
