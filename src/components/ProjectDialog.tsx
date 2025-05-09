@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useLanguage } from '@/context/LanguageContext';
 import { usePathname } from 'next/navigation';
+import Image from 'next/image';
 import {
   Dialog,
   DialogContent,
@@ -145,11 +146,13 @@ export function ProjectDialog({ project, open, onOpenChange }: ProjectDialogProp
               <div className="p-6 space-y-6">
                 {project.image && (
                   <div className="relative w-full h-64 md:h-80 rounded-lg overflow-hidden">
-                    <img
+                    <Image
                       src={project.image}
                       alt={project.title}
                       className="w-full h-full object-cover"
-                      loading="lazy"
+                      fill
+                      sizes="(max-width: 768px) 100vw, 100vw"
+                      priority={false}
                     />
                   </div>
                 )}
