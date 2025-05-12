@@ -9,7 +9,7 @@ export function ThemeProvider({
   theme?: 'light' | 'dark';
 }) {
   return (
-    <NextThemesProvider attribute="class" defaultTheme="dark" enableSystem theme={theme}>
+    <NextThemesProvider attribute="class" defaultTheme="dark" enableSystem>
       {children}
     </NextThemesProvider>
   );

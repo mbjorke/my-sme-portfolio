@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 import { User } from '../../interfaces';
 import { sampleUserData } from '../../utils/sample-data';
-import Layout from '../../components/Layout';
+import { Layout } from '../../components/Layout';
 import List from '../../components/List';
 
 type Props = {
@@ -11,8 +11,8 @@ type Props = {
 };
 
 const WithStaticProps = ({ items }: Props) => (
-  <Layout title="Users List | Next.js + TypeScript Example">
-    <h1>Users List</h1>
+  <Layout>
+    <h1>Users List | Next.js + TypeScript Example</h1>
     <p>
       Example fetching data from inside <code>getStaticProps()</code>.
     </p>

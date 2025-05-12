@@ -108,11 +108,11 @@ export const siteConfig = {
         message: 'Message',
       },
       hero: {
-        subheading: 'Modern development',
-        heading: 'design',
-        highlight: 'and',
-        description: 'automation',
-        callToAction: 'Let’s improve your UX solutions together',
+        subheading: 'Building digital products since 1997',
+        heading: 'Where development meets design',
+        description:
+          "I approach projects with a kaizen mindset. 'Kai' means 'change' and 'zen' means 'for the better'.",
+        callToAction: 'Let’s improve your products together.',
       },
       error: {
         noTeamMembers: 'No team members found. Check your siteConfig.ts!',
@@ -141,6 +141,13 @@ export const siteConfig = {
         Pricing: 'Prissättning',
         Contact: 'Kontakt',
         Projects: 'Projekt',
+      },
+      hero: {
+        subheading: 'Bygger digitala produkter sedan 1997',
+        heading: 'Där utveckling möter design',
+        description:
+          'Jag närmar mig projekt med ett kaizen-tänk. “Kai” betyder förändring och “zen” betyder till det bättre.',
+        callToAction: 'Låt oss förbättra dina produkter tillsammans.',
       },
       about: {
         title: 'Om mig',
@@ -200,14 +207,7 @@ export const siteConfig = {
         email: 'E-post',
         message: 'Meddelande',
       },
-      hero: {
-        subheading: 'Bygger digitala produkter sedan 1997',
-        heading: 'Där utveckling möter',
-        highlight: 'design',
-        description:
-          "Blueberry tillämpar ett fokuserat kaizen-tänk i allt vi gör. 'Kai' betyder 'förändring' och 'zen' betyder 'till det bättre'.",
-        callToAction: 'Låt oss förbättra dina UX-lösningar tillsammans.',
-      },
+
       error: {
         noTeamMembers: 'Inga teammedlemmar hittades. Kontrollera din siteConfig.ts!',
       },

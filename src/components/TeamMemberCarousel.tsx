@@ -20,11 +20,11 @@ export interface TeamMember {
   funFact?: string;
 }
 
-interface TeamMemberCardBananaProps {
+interface TeamMemberCarouselProps {
   member: TeamMember;
 }
 
-export function TeamMemberCard({ member }: TeamMemberCardBananaProps) {
+export function TeamMemberCarousel({ member }: TeamMemberCarouselProps) {
   return (
     <div className="p-0 w-full max-w-2xl rounded-3xl border-4 shadow-none bg-card border-border">
       <div className="bg-card p-6 rounded-3xl w-full flex flex-row items-center gap-8 min-h-[220px] relative overflow-hidden">
