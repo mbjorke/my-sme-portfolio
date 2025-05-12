@@ -8,7 +8,6 @@ export function ThemeSwitcher() {
     <Button
       variant="outline"
       size="sm"
-      className="rounded-2xl"
       onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
       aria-label="Toggle theme"
     >

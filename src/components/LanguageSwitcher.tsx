@@ -39,11 +39,7 @@ export function LanguageSwitcher() {
     return (
       <div className="flex gap-2" aria-label="Loading language switcher">
         {siteConfig.locales.map((loc) => (
-          <div
-            key={loc}
-            className="w-10 h-8 rounded-2xl bg-muted animate-pulse"
-            aria-hidden="true"
-          />
+          <div key={loc} className="w-10 h-8  bg-muted animate-pulse" aria-hidden="true" />
         ))}
       </div>
     );
@@ -59,7 +55,7 @@ export function LanguageSwitcher() {
             onClick={() => handleLocaleChange(loc)}
             variant={isActive ? 'default' : 'outline'}
             size="sm"
-            className={`rounded-2xl transition-opacity ${isChanging ? 'opacity-70' : ''}`}
+            className={` transition-opacity ${isChanging ? 'opacity-70' : ''}`}
             aria-label={`${languageNames[loc] || loc.toUpperCase()} ${isActive ? '(selected)' : ''}`}
             role="radio"
             aria-checked={isActive}

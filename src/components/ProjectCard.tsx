@@ -78,67 +78,67 @@ export function ProjectCard({ project, className = '' }: ProjectCardProps) {
 
   return (
     <>
-      <Card
-        className={cn(
-          cardBase,
-          'group flex flex-col h-full',
-          'hover:shadow-lg hover:border-primary/70 hover:z-10',
-          'transition-all duration-300',
-          className,
-        )}
-        onClick={handleCardClick}
-      >
-        <div className={cardGradient} />
-        <div className="overflow-hidden relative z-0 aspect-video">
-          <Image
-            src={project.image}
-            alt={project.title}
-            className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110 transform-gpu"
-            fill
-            sizes="(max-width: 768px) 100vw, 100vw"
-            priority={false}
-          />
-          <div className="flex absolute inset-0 z-10 items-end p-4 bg-gradient-to-t to-transparent opacity-0 transition-opacity duration-300 from-black/60 group-hover:opacity-100">
-            <span className="text-sm font-medium text-white">
-              {project.openInDialog ? viewDetailsText : viewProjectText}
-              {project.openInNewTab && <ExternalLink className="inline-block ml-1 w-4 h-4" />}
-            </span>
-          </div>
-        </div>
-        <CardContent className="flex flex-col flex-1 p-6">
-          <h3 className="mb-2 text-xl font-semibold transition-colors group-hover:text-primary">
-            {project.title}
-          </h3>
-          <p className="mb-4 text-muted-foreground line-clamp-2">{project.summary}</p>
-          <div className="pt-4 mt-auto border-t border-border">
-            <div className="flex justify-between items-center">
-              <span className="flex items-center text-sm font-medium text-primary">
-                {project.cta?.text || viewProjectCta}
-                <ExternalLink className="ml-1 w-3 h-3" />
+      <div className="p-[2px] rounded-xl bg-transparent transition-all duration-300 group hover:bg-gradient-to-r hover:from-[#7ed6df] hover:via-[#16a085] hover:to-[#1de9b6]">
+        <Card
+          className={cn(
+            cardBase,
+            'flex flex-col h-full',
+            'transition-all duration-300',
+            'group-hover:bg-[rgba(20,23,28,0.92)]',
+            className,
+          )}
+          onClick={handleCardClick}
+        >
+          <div className="overflow-hidden relative z-0 aspect-video">
+            <Image
+              src={project.image}
+              alt={project.title}
+              className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110 transform-gpu"
+              fill
+              sizes="(max-width: 768px) 100vw, 100vw"
+              priority={false}
+            />
+            <div className="flex absolute inset-0 z-10 items-end p-4 bg-gradient-to-t to-transparent opacity-0 transition-opacity duration-300 from-black/60 group-hover:opacity-100">
+              <span className="text-sm font-medium text-white">
+                {project.openInDialog ? viewDetailsText : viewProjectText}
+                {project.openInNewTab && <ExternalLink className="inline-block ml-1 w-4 h-4" />}
               </span>
-              {displayTechnologies.length > 0 && (
-                <div className="flex -space-x-1">
-                  {displayTechnologies.map((tech: string, i: number) => (
-                    <span
-                      key={i}
-                      className="flex justify-center items-center w-6 h-6 text-xs rounded-full border shadow-sm bg-muted border-background"
-                      title={tech}
-                    >
-                      {tech.charAt(0).toUpperCase()}
-                    </span>
-                  ))}
-                  {hasMoreTechnologies && (
-                    <span className="flex justify-center items-center w-6 h-6 text-xs rounded-full border shadow-sm bg-muted border-background">
-                      +{allTechnologies.length - 3}
-                    </span>
-                  )}
-                </div>
-              )}
             </div>
           </div>
-        </CardContent>
-      </Card>
-
+          <CardContent className="flex flex-col flex-1 p-6">
+            <h3 className="mb-2 text-xl font-semibold transition-colors group-hover:text-primary">
+              {project.title}
+            </h3>
+            <p className="mb-4 text-muted-foreground line-clamp-2">{project.summary}</p>
+            <div className="pt-4 mt-auto border-t border-border">
+              <div className="flex justify-between items-center">
+                <span className="flex items-center text-sm font-medium text-primary">
+                  {project.cta?.text || viewProjectCta}
+                  <ExternalLink className="ml-1 w-3 h-3" />
+                </span>
+                {displayTechnologies.length > 0 && (
+                  <div className="flex -space-x-1">
+                    {displayTechnologies.map((tech: string, i: number) => (
+                      <span
+                        key={i}
+                        className="flex justify-center items-center w-6 h-6 text-xs rounded-full border shadow-sm bg-muted border-background"
+                        title={tech}
+                      >
+                        {tech.charAt(0).toUpperCase()}
+                      </span>
+                    ))}
+                    {hasMoreTechnologies && (
+                      <span className="flex justify-center items-center w-6 h-6 text-xs rounded-full border shadow-sm bg-muted border-background">
+                        +{allTechnologies.length - 3}
+                      </span>
+                    )}
+                  </div>
+                )}
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
       <ProjectDialog project={project} open={isDialogOpen} onOpenChange={setIsDialogOpen} />
     </>
   );

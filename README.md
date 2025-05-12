@@ -1,44 +1,65 @@
-# TypeScript Next.js example
+# SME Portfolio & Contact Site
 
-This is a really simple project that shows the usage of Next.js with TypeScript.
+A modern, accessible portfolio and contact site for small businesses or professionals, built with Next.js, TypeScript, and Supabase.
 
-## Deploy your own
+## Features
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-typescript&project-name=with-typescript&repository-name=with-typescript)
+- Beautiful, consistent UI with unified button and card styles
+- Responsive carousel and testimonials
+- Accessible contact form with anti-bot honeypot
+- Stores contact messages securely in Supabase
+- Ready for deployment on Spaceship, Vercel, or any Next.js host
 
-## How to use it?
+## Getting Started
 
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init), [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/), or [pnpm](https://pnpm.io) to bootstrap the example:
+1. **Clone the repo**
+   ```bash
+   git clone https://github.com/yourusername/your-repo.git
+   cd your-repo
+   ```
 
-```bash
-npx create-next-app --example with-typescript with-typescript-app
-```
+````
 
-```bash
-yarn create next-app --example with-typescript with-typescript-app
-```
+2. **Install dependencies**
+   ```bash
+npm install
+````
 
-```bash
-pnpm create next-app --example with-typescript with-typescript-app
-```
+3. **Set up environment variables**
+   Create a `.env.local` file in the project root:
+   ```env
+   NEXT_PUBLIC_SUPABASE_URL=your-supabase-url
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key
+   ```
 
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+````
 
-## Notes
+4. **Start the development server**
+   ```bash
+npm run dev
+````
 
-This example shows how to integrate the TypeScript type system into Next.js. Since TypeScript is supported out of the box with Next.js, all we have to do is to install TypeScript.
+Visit [http://localhost:3000](http://localhost:3000)
 
-```shell
-npm install --save-dev typescript
-```
+## Deployment
 
-```shell
-yarn install --save-dev typescript
-```
+- Connect your repo to Spaceship, Vercel, or your preferred Next.js host
+- Set the same environment variables in your deployment dashboard
+- For Spaceship, see their docs for custom domain and email setup
 
-```shell
-pnpm install --save-dev typescript
-```
+## Contact Form & Supabase
+
+- Submits messages to the `contact_messages` table in Supabase
+- Anti-bot protection via hidden honeypot field
+- Easily extend to send email notifications (see `/api/contact`)
+
+## License
+
+See [LICENSE](./LICENSE).
+
+---
+
+Built with ❤️ by [yourname].
 
 To enable TypeScript's features, we install the type declarations for React and Node.
 

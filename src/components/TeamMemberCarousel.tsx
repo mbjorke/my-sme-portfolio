@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { Github, Linkedin, Instagram, X } from 'lucide-react';
+import { SiGithub, SiLinkedin, SiInstagram, SiBluesky } from 'react-icons/si';
 import { Badge } from './ui/badge';
 
 export interface TeamMember {
@@ -26,13 +26,7 @@ interface TeamMemberCarouselProps {
 
 export function TeamMemberCarousel({ member }: TeamMemberCarouselProps) {
   return (
-    <div
-      className="w-full max-w-2xl rounded-3xl shadow-none bg-card bg-clip-padding border-[6px] border-solid border-transparent"
-      style={{
-        background:
-          'linear-gradient(white,white) padding-box,linear-gradient(90deg,#7ed6df,#16a085,#1de9b6) border-box',
-      }}
-    >
+    <div className="w-full max-w-2xl p-[2px] rounded-3xl bg-transparent transition-all duration-300 group hover:bg-gradient-to-r hover:from-[#7ed6df] hover:via-[#16a085] hover:to-[#1de9b6]">
       <div className="bg-card p-6 rounded-3xl w-full flex flex-row items-center gap-8 min-h-[220px] relative overflow-hidden">
         {/* Avatar */}
         <div className="flex z-10 flex-col flex-shrink-0 items-center">
@@ -44,6 +38,53 @@ export function TeamMemberCarousel({ member }: TeamMemberCarouselProps) {
             className="rounded-full border-4 shadow-lg border-primary bg-background"
             unoptimized={!!member?.avatar && member.avatar.includes('github')}
           />
+          {/* Social icons themed */}
+          <div className="flex justify-center gap-4 mt-4">
+            {member?.social?.github && (
+              <Link
+                href={member.social.github}
+                target="_blank"
+                className="flex items-center justify-center w-10 h-10 rounded-full transition-colors group"
+              >
+                <span className="text-white hover:text-[#1de9b6] transition-colors">
+                  <SiGithub size={24} />
+                </span>
+              </Link>
+            )}
+            {member?.social?.linkedin && (
+              <Link
+                href={member.social.linkedin}
+                target="_blank"
+                className="flex items-center justify-center w-10 h-10 rounded-full transition-colors group"
+              >
+                <span className="text-white hover:text-[#1de9b6] transition-colors">
+                  <SiLinkedin size={24} />
+                </span>
+              </Link>
+            )}
+            {member?.social?.instagram && (
+              <Link
+                href={member.social.instagram}
+                target="_blank"
+                className="flex items-center justify-center w-10 h-10 rounded-full transition-colors group"
+              >
+                <span className="text-white hover:text-[#1de9b6] transition-colors">
+                  <SiInstagram size={24} />
+                </span>
+              </Link>
+            )}
+            {member?.social?.bluesky && (
+              <Link
+                href={member.social.bluesky}
+                target="_blank"
+                className="flex items-center justify-center w-10 h-10 rounded-full transition-colors group"
+              >
+                <span className="text-white hover:text-[#1de9b6] transition-colors">
+                  <SiBluesky size={24} />
+                </span>
+              </Link>
+            )}
+          </div>
         </div>
         {/* Info */}
         <div className="flex z-10 flex-col flex-1 gap-2 justify-center items-start">
@@ -58,45 +99,6 @@ export function TeamMemberCarousel({ member }: TeamMemberCarouselProps) {
               {member.bio}
             </p>
           )}
-          <div className="flex gap-4 mt-4">
-            {/* Social icons themed */}
-            {member?.social?.github && (
-              <Link
-                href={member.social.github}
-                target="_blank"
-                className="text-[#16a085] hover:text-[#1de9b6] transition-colors"
-              >
-                <Github size={28} />
-              </Link>
-            )}
-            {member?.social?.linkedin && (
-              <Link
-                href={member.social.linkedin}
-                target="_blank"
-                className="text-[#16a085] hover:text-[#1de9b6] transition-colors"
-              >
-                <Linkedin size={28} />
-              </Link>
-            )}
-            {member?.social?.instagram && (
-              <Link
-                href={member.social.instagram}
-                target="_blank"
-                className="text-[#16a085] hover:text-[#1de9b6] transition-colors"
-              >
-                <Instagram size={28} />
-              </Link>
-            )}
-            {member?.social?.bluesky && (
-              <Link
-                href={member.social.bluesky}
-                target="_blank"
-                className="text-[#16a085] hover:text-[#1de9b6] transition-colors"
-              >
-                <span className="text-2xl">𝕏</span>
-              </Link>
-            )}
-          </div>
           {member?.skills && member.skills.length > 0 && (
             <div className="flex flex-wrap gap-2 mt-2">
               {member.skills.map((skill) => (
