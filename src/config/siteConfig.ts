@@ -109,7 +109,8 @@ export const siteConfig = {
       },
       hero: {
         subheading: 'Building digital products since 1997',
-        heading: 'Where development meets design',
+        heading: 'Where development meets',
+        highlight: 'design',
         description:
           "I approach projects with a kaizen mindset. 'Kai' means 'change' and 'zen' means 'for the better'.",
         callToAction: 'Let’s improve your products together.',
@@ -144,7 +145,8 @@ export const siteConfig = {
       },
       hero: {
         subheading: 'Bygger digitala produkter sedan 1997',
-        heading: 'Där utveckling möter design',
+        heading: 'Där utveckling möter',
+        highlight: 'design',
         description:
           'Jag närmar mig projekt med ett kaizen-tänk. “Kai” betyder förändring och “zen” betyder till det bättre.',
         callToAction: 'Låt oss förbättra dina produkter tillsammans.',

@@ -35,7 +35,10 @@ export function HeroSection() {
           {hero.subheading}
         </span>
         <h1 className="text-white text-[clamp(2.5rem,8vw,4rem)] leading-tight text-left mb-2 font-normal">
-          {hero.heading}
+          {hero.heading}{' '}
+          <span className="text-transparent bg-gradient-to-r from-[#7ed6df] via-[#16a085] to-[#1de9b6] bg-clip-text font-bold">
+            {hero.highlight}
+          </span>
         </h1>
         <p className="mb-2 max-w-xl text-base text-left md:text-lg text-white/80">
           {hero.description}

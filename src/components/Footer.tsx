@@ -17,6 +17,12 @@ export function Footer() {
         >
           Card Gradient Color Picker Showcase
         </Link>
+        <Link
+          href="/card-showcase"
+          className="text-primary underline hover:text-emerald-500 transition-colors"
+        >
+          Card Component Showcase
+        </Link>
       </div>
     </footer>
   );

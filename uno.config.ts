@@ -1,10 +1,6 @@
-import { defineConfig, presetUno } from 'unocss';
+// uno.config.ts
+import { defineConfig, presetUno, presetAttributify, presetIcons } from 'unocss';
 
 export default defineConfig({
-  presets: [
-    presetUno({
-      dark: 'class', // or 'media'
-    }),
-  ],
-  // ...other config
+  presets: [presetUno(), presetAttributify(), presetIcons()],
 });
