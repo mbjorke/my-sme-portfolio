@@ -14,7 +14,7 @@ import {
   CarouselPrevious,
   type CarouselApi,
 } from '@/components/ui/carousel';
-import { TeamMemberDialog } from './TeamMemberDialog';
+import { TeamMemberDialogBanana } from './TeamMemberDialogBanana';
 
 const carouselMembers = siteConfig.teamMembers.slice(0, 3); // Get first 3 team members
 
@@ -73,11 +73,7 @@ export function HeroSection() {
               {carouselMembers.map((member, index) => (
                 <CarouselItem
                   key={index}
-                  className="flex flex-col items-center cursor-pointer hover:scale-105 transition-transform"
-                  onClick={() => {
-                    setSelectedMember(member);
-                    setDialogOpen(true);
-                  }}
+                  className="flex flex-col items-center transition-transform cursor-pointer hover:scale-105"
                 >
                   <div className="overflow-hidden relative mb-2 w-16 h-16 rounded-full border-2 md:w-20 md:h-20 border-primary/20">
                     <Image
@@ -94,7 +90,7 @@ export function HeroSection() {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <div className="flex justify-center gap-2 mt-4">
+            <div className="flex gap-2 justify-center mt-4">
               {Array.from({ length: count }).map((_, index) => (
                 <Button
                   key={index}
@@ -117,7 +113,7 @@ export function HeroSection() {
       <Button asChild>
         <Link href="#contact">{hero.callToAction}</Link>
       </Button>
-      <TeamMemberDialog
+      <TeamMemberDialogBanana
         open={dialogOpen}
         onOpenChange={setDialogOpen}
         member={selectedMember}
