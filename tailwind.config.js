@@ -16,7 +16,19 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        sans: ['DM Sans', 'sans-serif'],
+        sans: [
+          'Montserrat',
+          'ui-sans-serif',
+          'system-ui',
+          '-apple-system',
+          'BlinkMacSystemFont',
+          'Segoe UI',
+          'Roboto',
+          'Helvetica Neue',
+          'Arial',
+          'Noto Sans',
+          'sans-serif',
+        ],
       },
       backgroundImage: {
         'gradient-border':

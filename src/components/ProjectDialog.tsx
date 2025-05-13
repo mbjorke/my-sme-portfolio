@@ -11,7 +11,7 @@ import {
   DialogTitle,
   DialogDescription,
 } from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button';
+import Button from '@/components/ui/Button';
 import { ExternalLink, Monitor, FileText, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { ProjectCaseStudy } from '@/types/project';

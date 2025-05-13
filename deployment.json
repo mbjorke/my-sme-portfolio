@@ -1,0 +1,14 @@
+{
+  "projectName": "My SME Portfolio",
+  "version": "1.0.0",
+  "hosting": {
+    "provider": "Spaceship",
+    "region": "eu-central-1"
+  },
+  "settings": {
+    "baseUrl": "https://blueberry.surf",
+    "databaseUrl": "${DATABASE_URL}",
+    "databaseApiKey": "${DATABASE_API_KEY}",
+    "apiEndpoint": "https://api.yourdomain.com"
+  }
+}

@@ -8,9 +8,8 @@ import { ProjectCaseStudy } from '@/types/project';
 import { ProjectDialog } from './ProjectDialog';
 import { cardBase, cardHover, cardGradient } from '@/styles/card-decorations';
 import { cn } from '@/lib/utils';
-import { Card, CardContent } from './ui/card';
+import { Card, CardContent } from '@/components/ui/Card';
 import Image from 'next/image';
-import Link from 'next/link';
 
 interface ProjectCardProps {
   project: ProjectCaseStudy;
@@ -80,20 +79,18 @@ export function ProjectCard({ project, className = '' }: ProjectCardProps) {
     <>
       <Card
         className={cn(
+          'group flex flex-col h-full transition-all duration-300',
           cardBase,
-          'group flex flex-col h-full',
-          'hover:shadow-lg hover:border-primary/70 hover:z-10',
-          'transition-all duration-300',
+          'group-hover:bg-[rgba(20,23,28,0.92)]',
           className,
         )}
         onClick={handleCardClick}
       >
-        <div className={cardGradient} />
         <div className="overflow-hidden relative z-0 aspect-video">
           <Image
             src={project.image}
             alt={project.title}
-            className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110 transform-gpu"
+            className="object-cover w-full h-full transition-transform duration-500 transform-gpu group-hover:scale-110"
             fill
             sizes="(max-width: 768px) 100vw, 100vw"
             priority={false}
@@ -138,7 +135,6 @@ export function ProjectCard({ project, className = '' }: ProjectCardProps) {
           </div>
         </CardContent>
       </Card>
-
       <ProjectDialog project={project} open={isDialogOpen} onOpenChange={setIsDialogOpen} />
     </>
   );

@@ -1,128 +1,57 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
 import { siteConfig } from '@/config/siteConfig';
-import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
+import Button from '@/components/ui/Button';
 import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
 import Image from 'next/image';
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-  type CarouselApi,
-} from '@/components/ui/carousel';
-import { TeamMemberDialog } from './TeamMemberDialog';
 
-const carouselMembers = siteConfig.teamMembers.slice(0, 3); // Get first 3 team members
+import { useLanguage } from '@/context/LanguageContext';
 
 export function HeroSection() {
-  const hero = siteConfig.translations.en.hero;
-  const [api, setApi] = useState<CarouselApi>();
-  const [current, setCurrent] = useState(0);
-  const [count, setCount] = useState(0);
-  const [dialogOpen, setDialogOpen] = useState(false);
-  const [selectedMember, setSelectedMember] = useState<(typeof carouselMembers)[0] | null>(null);
-
-  const onSelect = useCallback(() => {
-    if (!api) return;
-    setCurrent(api.selectedScrollSnap() + 1);
-  }, [api]);
-
-  useEffect(() => {
-    if (!api) return;
-
-    setCount(api.scrollSnapList().length);
-    setCurrent(api.selectedScrollSnap() + 1);
-    api.on('select', onSelect);
-
-    return () => {
-      api.off('select', onSelect);
-    };
-  }, [api, onSelect]);
-
-  // Auto-advance the carousel
-  useEffect(() => {
-    if (!api) return;
-
-    const interval = setInterval(() => {
-      if (api.canScrollNext()) {
-        api.scrollNext();
-      } else {
-        api.scrollTo(0);
-      }
-    }, 3000);
-
-    return () => clearInterval(interval);
-  }, [api]);
+  const { locale } = useLanguage();
+  const hero = siteConfig.translations[locale as keyof typeof siteConfig.translations].hero;
 
   return (
-    <section id="hero" className="py-20 text-center">
-      <h2 className="mb-2 text-lg text-teal-400">{hero.subheading}</h2>
-
-      <div className="flex flex-col gap-6 items-center px-4 mb-8 md:flex-row md:justify-center md:items-center">
-        <h1 className="text-4xl font-bold text-center md:text-5xl md:text-left">
-          {hero.heading} <span className="text-primary">{hero.highlight}</span> {hero.description}
-        </h1>
-
-        <div className="w-full max-w-xs">
-          <Carousel className="w-full" setApi={setApi}>
-            <CarouselContent>
-              {carouselMembers.map((member, index) => (
-                <CarouselItem
-                  key={index}
-                  className="flex flex-col items-center cursor-pointer hover:scale-105 transition-transform"
-                  onClick={() => {
-                    setSelectedMember(member);
-                    setDialogOpen(true);
-                  }}
-                >
-                  <div className="overflow-hidden relative mb-2 w-16 h-16 rounded-full border-2 md:w-20 md:h-20 border-primary/20">
-                    <Image
-                      src={member.avatar}
-                      alt={member.name}
-                      width={80}
-                      height={80}
-                      className="object-cover w-full h-full"
-                      unoptimized={member.avatar.includes('github')}
-                    />
-                  </div>
-                  <p className="text-sm font-medium text-center">{member.name}</p>
-                  <p className="text-xs text-center text-muted-foreground">{member.title}</p>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            <div className="flex justify-center gap-2 mt-4">
-              {Array.from({ length: count }).map((_, index) => (
-                <Button
-                  key={index}
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => api?.scrollTo(index)}
-                  className={cn(
-                    'h-2 w-2 p-0 rounded-full transition-colors',
-                    index === current - 1 ? 'bg-primary' : 'bg-muted hover:bg-muted/80',
-                  )}
-                  aria-label={`Go to slide ${index + 1}`}
-                />
-              ))}
-            </div>
-          </Carousel>
-        </div>
+    <section
+      id="hero"
+      className="relative flex items-center justify-center min-h-[60vh] w-full overflow-hidden text-center"
+    >
+      {/* Background image */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="/assets/alone-surfer.jpg"
+          alt="Surfer background"
+          fill
+          className="object-cover w-full h-full"
+          priority
+        />
+        {/* Overlay for readability */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70" />
       </div>
-
-      <p className="mb-8 text-xl">{hero.callToAction}</p>
-      <Button asChild>
-        <Link href="#contact">{hero.callToAction}</Link>
-      </Button>
-      <TeamMemberDialog
-        open={dialogOpen}
-        onOpenChange={setDialogOpen}
-        member={selectedMember}
-        showLogo={selectedMember?.showLogo}
-      />
+      {/* Content */}
+      <div className="flex relative z-10 flex-col gap-6 justify-center items-start px-4 py-24 mx-auto w-full max-w-3xl md:py-44">
+        <span className="mb-2 text-xs font-bold tracking-widest text-left uppercase md:text-sm text-white/70">
+          {hero.subheading}
+        </span>
+        <h1 className="text-white text-[clamp(2.5rem,8vw,4rem)] leading-tight text-left mb-2 font-normal">
+          {hero.heading} {/* Classic Tailwind gradient */}
+          <span className="text-transparent bg-gradient-to-r from-[#7ed6df] via-[#16a085] to-[#1de9b6] bg-clip-text font-bold">
+            {hero.highlight}
+          </span>
+        </h1>
+        <p className="mb-2 max-w-xl text-base text-left md:text-lg text-white/80">
+          {hero.description}
+        </p>
+        <Button
+          asChild
+          className="flex justify-center items-center mt-2 w-16 h-16 text-black bg-white rounded-full shadow-xl transition-all duration-200 hover:bg-gray-200"
+        >
+          <Link href="#contact" aria-label={hero.callToAction}>
+            <ArrowRight className="w-8 h-8" />
+          </Link>
+        </Button>
+      </div>
     </section>
   );
 }

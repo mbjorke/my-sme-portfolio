@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { Card, CardContent } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/Card';
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/enhanced-carousel';
 import { cardBase, cardHover, cardGradient } from '@/styles/card-decorations';
 import { cn } from '@/lib/utils';

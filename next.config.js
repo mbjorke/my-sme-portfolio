@@ -1,4 +1,6 @@
 /** @type {import('next').NextConfig} */
+const UnoCSS = require('@unocss/webpack');
+
 const nextConfig = {
   i18n: {
     locales: ['en', 'sv'],
@@ -26,6 +28,10 @@ const nextConfig = {
   },
   experimental: {
     optimizePackageImports: ['lucide-react'],
+  },
+  webpack(config) {
+    config.plugins.push(UnoCSS());
+    return config;
   },
 };
 
