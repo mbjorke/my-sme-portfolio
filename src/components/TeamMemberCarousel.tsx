@@ -26,16 +26,16 @@ interface TeamMemberCarouselProps {
 
 export function TeamMemberCarousel({ member }: TeamMemberCarouselProps) {
   return (
-    <div className="w-full max-w-2xl p-[2px] rounded-3xl bg-transparent transition-all duration-300 group hover:bg-gradient-to-r hover:from-[#7ed6df] hover:via-[#16a085] hover:to-[#1de9b6]">
-      <div className="bg-card p-6 rounded-3xl w-full flex flex-row items-center gap-8 min-h-[220px] relative overflow-hidden">
-        {/* Avatar */}
-        <div className="flex z-10 flex-col flex-shrink-0 items-center">
+    <div className="w-full max-w-2xl p-[2px] rounded-3xl bg-transparent transition-all duration-300 group hover:bg-gradient-to-r hover:from-[#7ed6df] hover:via-[#16a085] hover:to-[#1de9b6] h-full">
+      <div className="bg-[#023a47] p-8 rounded-3xl w-full flex flex-col items-center gap-6 min-h-[380px] h-full relative overflow-hidden flex-1">
+        {/* Avatar & Socials */}
+        <div className="flex z-10 flex-col items-center mb-2">
           <Image
             src={member?.avatar || '/default-avatar.png'}
             alt={member?.name || 'Avatar'}
             width={120}
             height={120}
-            className="rounded-full border-4 shadow-lg border-primary bg-background"
+            className="rounded-full aspect-square object-cover border-4 shadow-lg border-primary bg-background"
             unoptimized={!!member?.avatar && member.avatar.includes('github')}
           />
           {/* Social icons themed */}
@@ -87,7 +87,7 @@ export function TeamMemberCarousel({ member }: TeamMemberCarouselProps) {
           </div>
         </div>
         {/* Info */}
-        <div className="flex z-10 flex-col flex-1 gap-2 justify-center items-start">
+        <div className="flex z-10 flex-col flex-1 gap-2 justify-center items-center mt-2">
           <span className="text-3xl font-extrabold drop-shadow-lg text-primary">
             {member?.name || 'No Name'}
           </span>
@@ -105,7 +105,7 @@ export function TeamMemberCarousel({ member }: TeamMemberCarouselProps) {
                 <Badge
                   key={skill}
                   variant={skill === 'Vibe Code Wizard' ? 'outline' : 'secondary'}
-                  className="text-white bg-[#062e2e] border border-[#062e2e] hover:bg-gradient-to-r hover:from-[#7ed6df] hover:via-[#16a085] hover:to-[#1de9b6] hover:text-[#062e2e] transition-colors duration-300"
+                  className="text-white bg-[#023a47] border border-[#062e2e] hover:bg-gradient-to-r hover:from-[#7ed6df] hover:via-[#16a085] hover:to-[#1de9b6] hover:text-[#062e2e] transition-colors duration-300"
                 >
                   {skill}
                 </Badge>

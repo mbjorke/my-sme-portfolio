@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useLanguage } from '@/context/LanguageContext';
 import { siteConfig } from '@/config/siteConfig';
-import { Button } from '@/components/ui/button';
+import Button from '@/components/ui/Button';
 
 const languageNames: Record<string, string> = {
   en: 'English',

@@ -1,7 +1,7 @@
 'use client';
 
 import { siteConfig } from '@/config/siteConfig';
-import { Button } from '@/components/ui/button';
+import Button from '@/components/ui/Button';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import Image from 'next/image';
@@ -35,7 +35,7 @@ export function HeroSection() {
           {hero.subheading}
         </span>
         <h1 className="text-white text-[clamp(2.5rem,8vw,4rem)] leading-tight text-left mb-2 font-normal">
-          {hero.heading}{' '}
+          {hero.heading} {/* Classic Tailwind gradient */}
           <span className="text-transparent bg-gradient-to-r from-[#7ed6df] via-[#16a085] to-[#1de9b6] bg-clip-text font-bold">
             {hero.highlight}
           </span>

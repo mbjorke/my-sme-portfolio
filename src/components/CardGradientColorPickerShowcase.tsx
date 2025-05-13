@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import GradientPicker from './GradientPicker';
 import { Slider } from './ui/slider';
-import { Card, CardContent } from './ui/card';
+import { Card, CardContent } from '@/components/ui/Card';
 
 export default function CardGradientColorPickerShowcase() {
   const [palette, setPalette] = useState([
@@ -19,7 +19,7 @@ export default function CardGradientColorPickerShowcase() {
     .join(', ')})`;
 
   return (
-    <div className="px-8 py-8 max-w-xl mx-auto">
+    <div className="px-8 py-8 mx-auto max-w-xl">
       <h2 className="mb-4 text-lg font-semibold">Card Gradient Color Picker Showcase</h2>
       <GradientPicker palette={palette} angle={angle} onPaletteChange={setPalette} />
       <div className="my-6 mb-2">
@@ -30,7 +30,7 @@ export default function CardGradientColorPickerShowcase() {
             <CardContent>{/* ...your content here */}</CardContent>
           </Card>
         </div>
-        <div className="flex items-center gap-3 mt-4">
+        <div className="flex gap-3 items-center mt-4">
           <span className="text-sm font-medium">Border Thickness:</span>
           <Slider
             min={1}

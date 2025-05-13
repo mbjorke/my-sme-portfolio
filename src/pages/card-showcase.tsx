@@ -5,13 +5,13 @@ import {
   CardContent,
   CardDescription,
   CardFooter,
-} from '@/components/ui/card';
+} from '@/components/ui/Card';
 
 export default function CardShowcase() {
   return (
-    <div className="min-h-screen bg-background py-16 px-4 flex flex-col gap-12 items-center">
-      <h1 className="text-4xl font-bold mb-8 text-primary">Card Component Showcase</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12 w-full max-w-4xl">
+    <div className="flex flex-col gap-12 items-center px-4 py-16 min-h-screen bg-background">
+      <h1 className="mb-8 text-4xl font-bold text-primary">Card Component Showcase</h1>
+      <div className="grid grid-cols-1 gap-12 w-full max-w-4xl md:grid-cols-2">
         {/* Default Card */}
         <Card>
           <CardHeader>
@@ -28,7 +28,7 @@ export default function CardShowcase() {
 
         {/* Gradient Border p-[2px] */}
         <div className="p-[2px] rounded-2xl bg-gradient-to-r from-[#7ed6df] via-[#16a085] to-[#1de9b6] transition-all duration-300 group hover:bg-gradient-to-tr hover:from-[#1de9b6] hover:via-[#16a085] hover:to-[#7ed6df] hover:shadow-lg">
-          <Card className="rounded-2xl bg-card text-card-foreground shadow-sm">
+          <Card className="rounded-2xl shadow-sm bg-card text-card-foreground">
             <CardHeader>
               <CardTitle>Gradient Border p-[2px]</CardTitle>
               <CardDescription>
@@ -45,7 +45,7 @@ export default function CardShowcase() {
         {/* Gradient Border p-1 */}
         {/* Use slightly smaller rounding for inner card to keep border natural */}
         <div className="p-1 rounded-2xl bg-gradient-to-r from-[#7ed6df] via-[#16a085] to-[#1de9b6] transition-all duration-300 group hover:bg-gradient-to-tr hover:from-[#1de9b6] hover:via-[#16a085] hover:to-[#7ed6df] hover:shadow-lg">
-          <Card className="rounded-xl bg-card text-card-foreground shadow-sm">
+          <Card className="rounded-xl shadow-sm bg-card text-card-foreground">
             <CardHeader>
               <CardTitle>Gradient Border p-1</CardTitle>
               <CardDescription>
@@ -102,24 +102,22 @@ export default function CardShowcase() {
           </Card>
         </div>
         {/* Reveal Gradient on Hover */}
-        <div className="p-[2px] rounded-2xl transition-all duration-300 group bg-transparent hover:bg-gradient-to-r hover:from-[#7ed6df] hover:via-[#16a085] hover:to-[#1de9b6]">
-          <Card className="rounded-2xl bg-card text-card-foreground shadow-sm transition-all duration-300">
-            <CardHeader>
-              <CardTitle>Reveal Gradient on Hover</CardTitle>
-              <CardDescription>
-                Looks like a default card until hovered.{' '}
-                <span className="text-emerald-500">
-                  Hover to reveal a thin gradient border (p-[2px]).
-                </span>
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <p className="text-muted-foreground">
-                This is a popular interactive effect for modern UI cards.
-              </p>
-            </CardContent>
-          </Card>
-        </div>
+        <Card gradientBorder>
+          <CardHeader>
+            <CardTitle>Reveal Gradient on Hover</CardTitle>
+            <CardDescription>
+              Looks like a default card until hovered.{' '}
+              <span className="text-emerald-500">
+                Hover to reveal a thin gradient border (p-[2px]).
+              </span>
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <p className="text-muted-foreground">
+              This is a popular interactive effect for modern UI cards.
+            </p>
+          </CardContent>
+        </Card>
       </div>
     </div>
   );

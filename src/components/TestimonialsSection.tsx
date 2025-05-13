@@ -1,7 +1,7 @@
 import { siteConfig } from '@/config/siteConfig';
-import { Button } from '@/components/ui/button';
+import Button from '@/components/ui/Button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Card, CardContent } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/Card';
 import { ChevronLeft, ChevronRight, Quote } from 'lucide-react';
 import {
   cardBase,

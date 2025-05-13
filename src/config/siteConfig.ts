@@ -69,23 +69,25 @@ export const siteConfig = {
             title: 'Share your idea.',
             description:
               'See your site come to life—fast. Bring your brand colors and a few images—let’s see the potential right away.',
-            images: ['💡', '👨‍🍳'],
+            images: ['SiNotion', 'SiMiro', 'SiSlack'],
           },
           {
             title: 'Build together.',
             description:
-              'We’ll shape your site or app idea using windsurf.ai, making updates and improvements as we go. You’ll see your vision take form in real time.',
-            images: ['🛠️', '👩‍🍳'],
+              'We’ll shape your site or app together, making updates and improvements as we go. You’ll see your vision take form in real time.',
+            images: ['SiGithub', 'SiReact', 'SiNextdotjs'],
           },
           {
             title: 'Edit & Own.',
             description:
-              'You’ll learn how to use git and windsurf.ai to keep improving your site yourself. My goal is to empower you to own and evolve your digital product.',
+              'You’ll learn how to use git and Windsurf.ai or Cursor to keep improving your site yourself. My goal is to empower you to own and evolve your digital product.',
+            images: ['SiGit', 'SiVisualstudiocode', 'SiCursor'],
           },
           {
             title: 'Go live & scale.',
             description:
-              'We’ll set up production-ready pipelines with AWS. You’ll have the option to add environments like development and staging, so your workflow can grow as your project does.',
+              'We’ll set up production-ready pipelines with Spaceship for hosting, Supabase for database. You’ll have the option to add environments like development and staging, so your workflow can grow as your project does.',
+            images: ['SiVercel', 'SiSupabase', 'SiAmazonaws'],
           },
         ],
       },

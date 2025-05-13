@@ -1,7 +1,7 @@
 // UI Components
 export * from './avatar';
-export * from './button';
-export * from './card';
+export * from './Button';
+export * from './Card';
 // Export only the enhanced carousel components to avoid naming conflicts
 export {
   Carousel,

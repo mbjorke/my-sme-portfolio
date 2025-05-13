@@ -5,6 +5,18 @@
 @unocss all;
 
 /* Standards-compliant variable utilities */
+input,
+textarea,
+select {
+  color: #000;
+  background-color: #fff;
+  border: 1px solid #6b7280;
+  border-radius: 0;
+  padding: 0.5rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
 @layer utilities {
   .bg-background {
     background-color: hsl(var(--background));
@@ -17,6 +29,12 @@
 
 @layer base {
   :root {
+    --gradient-start: #7ed6df;
+    --gradient-middle: #16a085;
+    --gradient-end: #1de9b6;
+    --gradient-start: #7ed6df;
+    --gradient-middle: #16a085;
+    --gradient-end: #1de9b6;
     --muted-foreground: 220 9% 46%;
     --font-sans:
       'Montserrat', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
@@ -83,5 +101,13 @@
     font-feature-settings:
       'rlig' 1,
       'calt' 1;
+  }
+
+  input:focus,
+  textarea:focus,
+  select:focus {
+    border-color: #3b82f6;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
   }
 }
