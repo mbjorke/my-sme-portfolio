@@ -1,3 +1,4 @@
+import React from 'react';
 import { Html, Head, Main, NextScript, DocumentContext } from 'next/document';
 import { siteConfig } from '@/config/siteConfig';
 

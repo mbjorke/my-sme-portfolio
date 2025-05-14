@@ -1,6 +1,7 @@
+import React from 'react';
 import Nav from '@/components/Nav';
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
-import { ThemeSwitcher } from '@/components/ThemeSwitcher';
+import ThemeSwitcher from '@/components/ThemeSwitcher';
 import type { ReactNode } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';

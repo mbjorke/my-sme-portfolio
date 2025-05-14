@@ -1,39 +1,4 @@
-import type { TeamMember, WorkProcessStep, WorkProcessImage } from '@/types/siteConfig';
-
-interface Testimonial {
-  type: string;
-  name: string;
-  badge: string;
-  badgeUrl: string;
-  url: string;
-  quote: string;
-  show: boolean;
-}
-
-interface CaseStudy {
-  id: string;
-  title: string;
-  summary: string;
-  image: string;
-  url: string;
-  openInNewTab: boolean;
-  openInDialog: boolean;
-  content: {
-    description: string;
-    features: string[];
-    technologies: string[];
-    links: Array<{
-      text: string;
-      url: string;
-      target: string;
-    }>;
-  };
-  cta: {
-    text: string;
-    url: string;
-    target: string;
-  };
-}
+import type { TeamMember } from '@/types/siteConfig';
 
 export const siteConfig = {
   locales: ['en', 'sv'],
@@ -75,13 +40,12 @@ export const siteConfig = {
             title: 'Build together.',
             description:
               'We’ll shape your site or app together, making updates and improvements as we go. You’ll see your vision take form in real time.',
-            images: ['SiGithub', 'SiReact', 'SiNextdotjs'],
+            images: ['SiGithub', 'SiReact', 'SiNextdotjs', 'SiFramer'],
           },
           {
             title: 'Edit & Own.',
-            description:
-              'You’ll learn how to use git and Windsurf.ai or Cursor to keep improving your site yourself. My goal is to empower you to own and evolve your digital product.',
-            images: ['SiGit', 'SiVisualstudiocode', 'SiCursor'],
+            description: 'My goal is to empower you to own and evolve your digital product.',
+            images: ['SiGit', 'SiVisualstudiocode', 'SiCursor', 'SiFramer'],
           },
           {
             title: 'Go live & scale.',

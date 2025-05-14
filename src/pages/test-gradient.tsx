@@ -2,10 +2,6 @@
 import React from 'react';
 import dynamic from 'next/dynamic';
 
-const GradientPickerDemo = dynamic(() => import('../components/GradientPickerDemo'), {
-  ssr: false,
-});
-
 const CardGradientColorPickerShowcase = dynamic(
   () => import('../components/CardGradientColorPickerShowcase'),
   { ssr: false },
@@ -18,7 +14,6 @@ export default function TestGradientPage() {
   const { theme } = useTheme();
   const [previewTheme, setPreviewTheme] = useState<'light' | 'dark' | null>(null);
   const isLightPreview = previewTheme === 'light' || (previewTheme === null && theme === 'light');
-  const nextPreviewTheme = isLightPreview ? 'dark' : 'light';
 
   function handlePreviewToggle() {
     setPreviewTheme(isLightPreview ? 'dark' : 'light');

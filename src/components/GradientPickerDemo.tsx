@@ -17,7 +17,7 @@ export default function GradientPickerDemo() {
 
   return (
     <div style={{ padding: 24 }}>
-      <h2 className="text-lg font-semibold mb-4">Gradient Picker Demo</h2>
+      <h2 className="mb-4 text-lg font-semibold">Gradient Picker Demo</h2>
       <div style={{ marginBottom: 24 }}>
         <GradientPicker
           width={320}

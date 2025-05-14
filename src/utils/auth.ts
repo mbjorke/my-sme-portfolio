@@ -1,8 +1,9 @@
 import { supabase } from './supabase/client';
+import { User } from '@supabase/supabase-js';
 
 interface CustomAuthResponse {
-  user?: any; // Replace 'any' with the actual user type if known
-  error?: any; // Replace 'any' with the actual error type if known
+  user?: User | null;
+  error?: { message: string } | null;
 }
 
 export const signUp = async (email: string, password: string): Promise<CustomAuthResponse> => {

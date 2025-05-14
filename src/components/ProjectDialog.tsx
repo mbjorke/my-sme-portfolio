@@ -1,5 +1,5 @@
 'use client';
-
+import React from 'react';
 import { useState, useEffect } from 'react';
 import { useLanguage } from '@/context/LanguageContext';
 import { usePathname } from 'next/navigation';
@@ -12,7 +12,7 @@ import {
   DialogDescription,
 } from '@/components/ui/dialog';
 import Button from '@/components/ui/Button';
-import { ExternalLink, Monitor, FileText, X } from 'lucide-react';
+import { ExternalLink, Monitor, FileText } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { ProjectCaseStudy } from '@/types/project';
 

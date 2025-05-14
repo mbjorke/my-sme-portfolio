@@ -1,3 +1,4 @@
+import React from 'react';
 import { useLanguage } from '@/context/LanguageContext';
 import { siteConfig } from '@/config/siteConfig';
 import { ProjectCard } from './ProjectCard';
@@ -43,9 +44,9 @@ export function ProjectsSection() {
       : 'Explore some of my recent projects. Click on a project to learn more.';
 
   return (
-    <section id="projects" className="py-20 px-4 max-w-6xl mx-auto">
-      <div className="max-w-3xl mx-auto text-center mb-12">
-        <h2 className="text-4xl font-bold mb-4">{sectionTitle}</h2>
+    <section id="projects" className="px-4 py-20 mx-auto max-w-7xl">
+      <div className="mx-auto mb-12 max-w-3xl text-center">
+        <h2 className="mb-4 text-4xl font-bold">{sectionTitle}</h2>
         <p className="text-lg text-muted-foreground">{description}</p>
       </div>
 
@@ -54,7 +55,7 @@ export function ProjectsSection() {
           <ProjectCard
             key={`${project.title}-${index}`}
             project={project}
-            className="cursor-pointer hover:shadow-lg transition-shadow duration-300"
+            className="transition-shadow duration-300 cursor-pointer hover:shadow-lg"
           />
         ))}
       </div>

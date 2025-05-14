@@ -1,19 +1,12 @@
+import React from 'react';
 import { siteConfig } from '@/config/siteConfig';
-import Button from '@/components/ui/Button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Card, CardContent } from '@/components/ui/Card';
-import { ChevronLeft, ChevronRight, Quote } from 'lucide-react';
-import {
-  cardBase,
-  cardGradient,
-  cardContent,
-  cardBlur,
-  cardHover,
-} from '@/styles/card-decorations';
+import { Quote } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
-import { useCallback, useState, useEffect, useRef } from 'react';
 import { Carousel } from './Carousel';
 import { cn } from '@/lib/utils';
+import { cardBase, cardContent } from '@/styles/card-decorations';
 
 interface Testimonial {
   type: string;

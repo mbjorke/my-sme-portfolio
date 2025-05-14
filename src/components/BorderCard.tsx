@@ -27,9 +27,9 @@ export const BorderCard: React.FC<BorderCardProps> = ({
         animated ? 'animate-gradient-border-hue' : '',
       ].join(' ')}
     >
-      <div className="bg-background text-foreground text-center p-6 rounded-xl shadow-xl">
-        <div className="font-bold mb-1 text-base">{label}</div>
-        {description && <div className="text-gray-500 text-xs">{description}</div>}
+      <div className="p-6 text-center rounded-xl shadow-xl bg-background text-foreground">
+        <div className="mb-1 text-base font-bold">{label}</div>
+        {description && <div className="text-xs text-gray-500">{description}</div>}
         {children}
       </div>
     </div>

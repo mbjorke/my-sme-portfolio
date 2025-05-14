@@ -1,8 +1,9 @@
+import React from 'react';
 import { useState } from 'react';
 import { signUp } from '../utils/auth';
-import { Card } from './Card'; // Assuming you have a Card component
-import Button from '@/components/ui/Button'; // Example path for ShadCN Button
-import { Input } from '@/components/ui/Input'; // Example path for ShadCN Input
+import Card from '@/components/ui/Card';
+import Button from '@/components/ui/Button';
+import Input from '@/components/ui/Input';
 
 const SignUp = () => {
   const [email, setEmail] = useState('');
@@ -27,6 +28,9 @@ const SignUp = () => {
       <Card>
         <h1 className="mb-4 text-xl font-bold">Sign Up</h1>
         <form onSubmit={handleSignUp}>
+          {status === 'loading' && <p>Loading...</p>}
+          {status === 'error' && <p>Error signing up. Please try again.</p>}
+          {status === 'success' && <p>Sign up successful!</p>}
           <div className="mb-4">
             <label htmlFor="email" className="block text-sm font-medium text-gray-700">
               Email

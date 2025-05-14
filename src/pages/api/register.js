@@ -1,4 +1,4 @@
-import { supabase } from '../../lib/supabaseClient'; // Adjust the path as necessary
+import { supabase } from '../../lib/supabaseClient';
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
@@ -20,7 +20,7 @@ export default async function handler(req, res) {
     }
 
     // Insert user into the users table
-    const { data, error: insertError } = await supabase.from('users').insert([
+    const { error: insertError } = await supabase.from('users').insert([
       {
         customer_id: 1,
         email,
