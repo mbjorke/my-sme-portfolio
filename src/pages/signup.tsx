@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import { IChangeEvent } from '@rjsf/core';
+import { RJSFSchema } from '@rjsf/utils';
+import React, { FormEvent } from 'react';
 import Form from '@rjsf/core';
 
 import { JSONSchema7 } from 'json-schema';
@@ -16,15 +18,10 @@ const schema: JSONSchema7 = {
 };
 
 const SignUp = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [username, setUsername] = useState('');
+  const handleSignup = async (data: IChangeEvent<any, RJSFSchema, any>, event: FormEvent<any>) => {
+    const { email, password } = data.formData;
 
-  const handleSignup = async () => {
-    const {
-      data: { user, session },
-      error,
-    } = await supabase.auth.signUp({
+    const { data: userData, error } = await supabase.auth.signUp({
       email,
       password,
     });
@@ -32,6 +29,7 @@ const SignUp = () => {
     if (error) {
       console.error('Error signing up:', error.message);
     } else {
+      const user = userData.user;
       console.log('User signed up:', user);
     }
   };

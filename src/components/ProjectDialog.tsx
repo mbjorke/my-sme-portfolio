@@ -69,8 +69,6 @@ export function ProjectDialog({ project, open, onOpenChange }: ProjectDialogProp
 
   // Get the prototype URL from the project
   const getPrototypeUrl = () => {
-    console.log('Getting prototype URL...');
-
     // First check for a 'Live Prototype' link
     const prototypeLink = project.content?.links?.find(
       (link) =>
@@ -82,14 +80,11 @@ export function ProjectDialog({ project, open, onOpenChange }: ProjectDialogProp
       project.url?.includes('framer.website') || project.url?.includes('framer.site');
 
     const url = prototypeLink?.url || (isFramerUrl ? project.url : '');
-    console.log('Prototype URL:', url);
     return url;
   };
 
   const prototypeUrl = getPrototypeUrl();
   const hasPrototypeLink = !!prototypeUrl;
-
-  console.log('hasPrototypeLink:', hasPrototypeLink, 'prototypeUrl:', prototypeUrl);
 
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
@@ -104,7 +99,7 @@ export function ProjectDialog({ project, open, onOpenChange }: ProjectDialogProp
           </DialogHeader>
 
           {/* Tabs */}
-          <div className="border-b px-6 mt-4">
+          <div className="px-6 mt-4 border-b">
             <div className="flex space-x-4">
               <Button
                 variant="ghost"
@@ -117,7 +112,7 @@ export function ProjectDialog({ project, open, onOpenChange }: ProjectDialogProp
                     : 'border-transparent text-muted-foreground hover:bg-transparent hover:text-foreground',
                 )}
               >
-                <FileText className="h-4 w-4 mr-2" />
+                <FileText className="mr-2 w-4 h-4" />
                 {translations.details}
               </Button>
 
@@ -133,7 +128,7 @@ export function ProjectDialog({ project, open, onOpenChange }: ProjectDialogProp
                       : 'border-transparent text-muted-foreground hover:bg-transparent hover:text-foreground',
                   )}
                 >
-                  <Monitor className="h-4 w-4 mr-2" />
+                  <Monitor className="mr-2 w-4 h-4" />
                   {translations.livePrototype}
                 </Button>
               )}
@@ -141,15 +136,15 @@ export function ProjectDialog({ project, open, onOpenChange }: ProjectDialogProp
           </div>
 
           {/* Content */}
-          <div className="flex-1 overflow-auto">
+          <div className="overflow-auto flex-1">
             {activeTab === 'details' ? (
               <div className="p-6 space-y-6">
                 {project.image && (
-                  <div className="relative w-full h-64 md:h-80 rounded-lg overflow-hidden">
+                  <div className="overflow-hidden relative w-full h-64 rounded-lg md:h-80">
                     <Image
                       src={project.image}
                       alt={project.title}
-                      className="w-full h-full object-cover"
+                      className="object-cover w-full h-full"
                       fill
                       sizes="(max-width: 768px) 100vw, 100vw"
                       priority={false}
@@ -157,18 +152,18 @@ export function ProjectDialog({ project, open, onOpenChange }: ProjectDialogProp
                   </div>
                 )}
 
-                <div className="prose dark:prose-invert max-w-none">
+                <div className="max-w-none prose dark:prose-invert">
                   {project.content?.description && (
                     <div className="mb-6">
-                      <h3 className="text-xl font-semibold mb-2">{translations.aboutProject}</h3>
+                      <h3 className="mb-2 text-xl font-semibold">{translations.aboutProject}</h3>
                       <p>{project.content.description}</p>
                     </div>
                   )}
 
                   {project.content?.features && project.content.features.length > 0 && (
                     <div className="mb-6">
-                      <h3 className="text-xl font-semibold mb-2">{translations.keyFeatures}</h3>
-                      <ul className="list-disc pl-5 space-y-1">
+                      <h3 className="mb-2 text-xl font-semibold">{translations.keyFeatures}</h3>
+                      <ul className="pl-5 space-y-1 list-disc">
                         {project.content.features.map((feature, index) => (
                           <li key={index}>{feature}</li>
                         ))}
@@ -178,14 +173,14 @@ export function ProjectDialog({ project, open, onOpenChange }: ProjectDialogProp
 
                   {project.content?.technologies && project.content.technologies.length > 0 && (
                     <div className="mb-6">
-                      <h3 className="text-xl font-semibold mb-2">
+                      <h3 className="mb-2 text-xl font-semibold">
                         {translations.technologiesUsed}
                       </h3>
                       <div className="flex flex-wrap gap-2">
                         {project.content.technologies.map((tech, index) => (
                           <span
                             key={index}
-                            className="px-3 py-1 bg-muted text-muted-foreground rounded-full text-sm"
+                            className="px-3 py-1 text-sm rounded-full bg-muted text-muted-foreground"
                           >
                             {tech}
                           </span>
@@ -204,10 +199,10 @@ export function ProjectDialog({ project, open, onOpenChange }: ProjectDialogProp
                           project.openInNewTab ? '_blank' : '_self',
                         )
                       }
-                      className="flex items-center gap-2"
+                      className="flex gap-2 items-center"
                     >
                       {project.cta.text}
-                      <ExternalLink className="h-4 w-4" />
+                      <ExternalLink className="w-4 h-4" />
                     </Button>
                   )}
 
@@ -222,21 +217,21 @@ export function ProjectDialog({ project, open, onOpenChange }: ProjectDialogProp
                         key={index}
                         variant="outline"
                         onClick={() => handleExternalLink(link.url, link.target || '_blank')}
-                        className="flex items-center gap-2"
+                        className="flex gap-2 items-center"
                       >
                         {link.text}
-                        <ExternalLink className="h-4 w-4" />
+                        <ExternalLink className="w-4 h-4" />
                       </Button>
                     ))}
                 </div>
               </div>
             ) : (
               <div className="h-[70vh] min-h-[500px] relative border rounded-lg overflow-hidden bg-muted/20">
-                <div className="absolute inset-0 flex flex-col">
-                  <div className="bg-muted/30 p-2 text-xs text-muted-foreground">
+                <div className="flex absolute inset-0 flex-col">
+                  <div className="p-2 text-xs bg-muted/30 text-muted-foreground">
                     {translations.embeddedPrototype}: {prototypeUrl}
                   </div>
-                  <div className="flex-1 relative">
+                  <div className="relative flex-1">
                     {prototypeUrl ? (
                       <>
                         <iframe
@@ -247,18 +242,17 @@ export function ProjectDialog({ project, open, onOpenChange }: ProjectDialogProp
                           loading="eager"
                           title={`${project.title} Prototype`}
                           onLoad={() => {
-                            console.log('Iframe loaded');
                             setIsIframeLoaded(true);
                           }}
                         />
                         {!isIframeLoaded && (
-                          <div className="absolute inset-0 flex items-center justify-center bg-background/80">
+                          <div className="flex absolute inset-0 justify-center items-center bg-background/80">
                             <div className="animate-pulse">{translations.loadingPrototype}</div>
                           </div>
                         )}
                       </>
                     ) : (
-                      <div className="h-full flex items-center justify-center text-muted-foreground">
+                      <div className="flex justify-center items-center h-full text-muted-foreground">
                         {translations.noPrototype}
                       </div>
                     )}
