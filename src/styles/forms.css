@@ -1,0 +1,32 @@
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: #3b82f6;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
+}
+
+/* styles.css */
+.form-container {
+  @apply flex justify-center items-center min-h-screen;
+}
+
+.form-card {
+  @apply p-6 w-full max-w-md bg-white rounded-lg shadow-md;
+}
+
+.form-group {
+  @apply mb-4;
+}
+
+.form-group label {
+  @apply block text-sm font-medium text-gray-700;
+}
+
+.form-control {
+  @apply block p-2 mt-1 w-full rounded-md border border-gray-300 shadow-sm focus:ring focus:ring-blue-500 focus:border-blue-500;
+}
+
+.btn {
+  @apply py-2 w-full text-base font-bold rounded bg-accent-foreground hover:bg-primary/80;
+}

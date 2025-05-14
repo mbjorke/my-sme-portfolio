@@ -43,6 +43,9 @@ export function HeroSection() {
         <p className="mb-2 max-w-xl text-base text-left md:text-lg text-white/80">
           {hero.description}
         </p>
+        <p className="mb-2 max-w-xl text-base text-left md:text-lg text-white/80">
+          {hero.callToAction}
+        </p>
         <Button
           asChild
           className="flex justify-center items-center mt-2 w-16 h-16 text-black bg-white rounded-full shadow-xl transition-all duration-200 hover:bg-gray-200"

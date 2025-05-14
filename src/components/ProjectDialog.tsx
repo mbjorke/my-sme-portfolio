@@ -69,7 +69,6 @@ export function ProjectDialog({ project, open, onOpenChange }: ProjectDialogProp
 
   // Get the prototype URL from the project
   const getPrototypeUrl = () => {
-
     // First check for a 'Live Prototype' link
     const prototypeLink = project.content?.links?.find(
       (link) =>
