@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React from 'react';
 import { GradientPicker as RLGradientPicker } from 'react-linear-gradient-picker';
 import 'react-linear-gradient-picker/dist/index.css';
 
@@ -24,7 +24,7 @@ export default function GradientPicker({ palette, angle, onPaletteChange }: Grad
     .join(', ')})`;
 
   // Render color stops for selection
-  const stops = palette.map((stop, idx) => {
+  palette.map((stop, idx) => {
     const left = `${stop.offset * 100}%`;
     return (
       <div
@@ -37,7 +37,7 @@ export default function GradientPicker({ palette, angle, onPaletteChange }: Grad
           zIndex: 2,
           cursor: 'pointer',
         }}
-        onClick={(e) => {
+        onClick={() => {
           setSelectedStop(idx);
           // Calculate popup position relative to viewport
           if (pickerRef.current) {

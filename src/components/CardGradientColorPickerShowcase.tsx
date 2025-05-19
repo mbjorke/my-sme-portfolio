@@ -1,5 +1,6 @@
 'use client';
 import React, { useState } from 'react';
+
 import GradientPicker from './GradientPicker';
 import { Slider } from './ui/slider';
 import { Card, CardContent } from '@/components/ui/Card';

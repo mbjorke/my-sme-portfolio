@@ -1,12 +1,12 @@
 'use client';
-
+import React from 'react';
 import { useState } from 'react';
 import { useLanguage } from '@/context/LanguageContext';
 import { usePathname, useRouter } from 'next/navigation';
 import { ExternalLink } from 'lucide-react';
 import { ProjectCaseStudy } from '@/types/project';
 import { ProjectDialog } from './ProjectDialog';
-import { cardBase, cardHover, cardGradient } from '@/styles/card-decorations';
+import { cardBase } from '@/styles/card-decorations';
 import { cn } from '@/lib/utils';
 import { Card, CardContent } from '@/components/ui/Card';
 import Image from 'next/image';
@@ -20,11 +20,6 @@ export function ProjectCard({ project, className = '' }: ProjectCardProps) {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
-
-  const handleClick = (e: React.MouseEvent, link: string) => {
-    e.preventDefault();
-    window.open(link, '_blank', 'noopener,noreferrer');
-  };
 
   // Combine technologies from both root and content for display
   const allTechnologies = [

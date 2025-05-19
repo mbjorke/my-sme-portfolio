@@ -1,13 +1,8 @@
+import React from 'react';
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
-import type { ReactNode } from 'react';
+import { ReactNode } from 'react';
 
-export function ThemeProvider({
-  children,
-  theme,
-}: {
-  children: React.ReactNode;
-  theme?: 'light' | 'dark';
-}) {
+export function ThemeProvider({ children }: { children: ReactNode }) {
   return (
     <NextThemesProvider attribute="class" defaultTheme="dark" enableSystem>
       {children}

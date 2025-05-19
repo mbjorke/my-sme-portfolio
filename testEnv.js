@@ -1,1 +1,1 @@
-require('dotenv').config({ path: './customers/blueberry-site/.env.local' });
+import 'dotenv/config';

@@ -1,4 +1,5 @@
-import { useState } from 'react';
+'use client';
+import React, { useState } from 'react';
 import Button from '@/components/ui/Button';
 
 export function ContactSection() {
@@ -39,7 +40,12 @@ export function ContactSection() {
       } else {
         setStatus('error');
       }
-    } catch (err) {
+    } catch (err: Error | unknown) {
+      if (err instanceof Error) {
+        console.error('Error submitting form:', err.message);
+      } else {
+        console.error('An unknown error occurred');
+      }
       setStatus('error');
     }
   };

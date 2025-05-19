@@ -1,5 +1,5 @@
-import { cn } from '@/lib/utils';
 import React, { HTMLAttributes, ReactNode } from 'react';
+import { cn } from '@/lib/utils';
 
 // Base card styles - should be applied to all cards
 export const cardBase = [

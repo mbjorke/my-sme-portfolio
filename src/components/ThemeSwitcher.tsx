@@ -1,7 +1,9 @@
+import React from 'react';
 import { useTheme } from 'next-themes';
+import { Sun, Moon } from 'lucide-react';
 import Button from '@/components/ui/Button';
 
-export function ThemeSwitcher() {
+const ThemeSwitcher = () => {
   const { theme, setTheme } = useTheme();
 
   return (
@@ -9,9 +11,17 @@ export function ThemeSwitcher() {
       variant="outline"
       size="sm"
       onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-      aria-label="Toggle theme"
+      className={`flex items-center justify-center p-2 rounded-lg transition-colors duration-300 
+                  ${theme === 'dark' ? 'text-white bg-gray-800' : 'text-black bg-gray-200'}`}
     >
-      {theme === 'dark' ? '🌞 Light' : '🌙 Dark'}
+      <span className="check">
+        <span className="icon">
+          <Sun className={`w-5 h-5 ${theme === 'dark' ? 'hidden' : ''}`} />
+          <Moon className={`w-5 h-5 ${theme === 'dark' ? '' : 'hidden'}`} />
+        </span>
+      </span>
     </Button>
   );
-}
+};
+
+export default ThemeSwitcher;

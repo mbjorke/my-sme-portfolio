@@ -1,3 +1,4 @@
+import React from 'react';
 import { HeroSection } from '@/components/HeroSection';
 import { AboutSection } from '@/components/AboutSection';
 import { ProjectsSection } from '@/components/ProjectsSection';
@@ -10,11 +11,11 @@ export default function HomePage() {
   return (
     <main>
       <HeroSection />
-      <AboutSection />
-      <ProjectsSection />
       <TestimonialsSection />
       <HowSection />
+      <ProjectsSection />
       <ContactSection />
+      <AboutSection />
       <Footer />
     </main>
   );

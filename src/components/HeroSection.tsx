@@ -1,12 +1,11 @@
 'use client';
-
-import { siteConfig } from '@/config/siteConfig';
-import Button from '@/components/ui/Button';
-import Link from 'next/link';
+import React from 'react';
 import { ArrowRight } from 'lucide-react';
-import Image from 'next/image';
-
+import { siteConfig } from '@/config/siteConfig';
 import { useLanguage } from '@/context/LanguageContext';
+import Button from '@/components/ui/Button';
+import Image from 'next/image';
+import Link from 'next/link';
 
 export function HeroSection() {
   const { locale } = useLanguage();

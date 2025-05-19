@@ -1,3 +1,5 @@
+'use client';
+import React from 'react';
 import { siteConfig } from '@/config/siteConfig';
 import { TeamMemberCarousel } from './TeamMemberCarousel';
 import { Carousel } from './Carousel';
@@ -5,10 +7,10 @@ import type { TeamMember } from './TeamMemberCarousel';
 
 export function AboutSection() {
   return (
-    <section className="max-w-7xl mx-auto px-4 py-20">
-      <div className="flex flex-col lg:flex-row gap-12 items-center">
+    <section className="px-4 py-20 mx-auto max-w-7xl">
+      <div className="flex flex-col gap-12 items-center lg:flex-row">
         {/* Left: About Text */}
-        <div className="basis-1/2 space-y-8">
+        <div className="space-y-8 basis-1/2">
           <h2 className="text-3xl font-bold">Laser focused on results</h2>
           <p className="text-lg">I help build trust, drive engagement and support your growth.</p>
           <p>
@@ -17,7 +19,7 @@ export function AboutSection() {
             and providing better insights. But it&apos;s still people who create the best
             experiences.
           </p>
-          <blockquote className="italic border-l-4 border-primary/60 pl-6 py-2 text-muted-foreground bg-muted/30 rounded-md">
+          <blockquote className="py-2 pl-6 italic rounded-md border-l-4 border-primary/60 text-muted-foreground bg-muted/30">
             User Centered Design is at the heart of everything I do. My mission is to help your Team
             or Business achieve its next success.
           </blockquote>
@@ -42,7 +44,7 @@ export function AboutSection() {
           </div>
         </div>
         {/* Right: Carousel */}
-        <div className="basis-1/2 flex justify-center w-full">
+        <div className="flex justify-center w-full basis-1/2">
           <Carousel
             autoPlay={3000}
             items={siteConfig.teamMembers}

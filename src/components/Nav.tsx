@@ -1,20 +1,22 @@
+'use client';
+import React from 'react';
 import Link from 'next/link';
 import { siteConfig } from '@/config/siteConfig';
 
 const Nav = () => {
   return (
-    <nav className="hidden md:flex gap-6 text-sm font-medium">
+    <nav className="hidden gap-6 text-sm font-medium md:flex">
       {Object.entries(siteConfig.translations.en.navLinks).map(([key, value]) => (
         <Link
           key={key}
           href={`#${key.toLowerCase()}`}
-          className="hover:text-primary transition-colors"
+          className="transition-colors hover:text-primary"
         >
           {value}
         </Link>
       ))}
-      <Link href="/signup" className="hover:text-primary transition-colors">
-        Sign Up
+      <Link href="/login" className="transition-colors hover:text-primary">
+        Login
       </Link>
     </nav>
   );

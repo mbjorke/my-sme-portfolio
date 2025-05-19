@@ -1,5 +1,5 @@
 'use client';
-
+import React from 'react';
 import { useState, useEffect } from 'react';
 import { useLanguage } from '@/context/LanguageContext';
 import { siteConfig } from '@/config/siteConfig';
@@ -27,7 +27,7 @@ export function LanguageSwitcher() {
     // Use a small timeout to ensure the UI updates before the navigation
     setTimeout(() => {
       try {
-        setLocale(newLocale as any);
+        setLocale(newLocale);
       } catch (error) {
         console.error('Failed to change language:', error);
         setIsChanging(false);
@@ -39,7 +39,7 @@ export function LanguageSwitcher() {
     return (
       <div className="flex gap-2" aria-label="Loading language switcher">
         {siteConfig.locales.map((loc) => (
-          <div key={loc} className="w-10 h-8  bg-muted animate-pulse" aria-hidden="true" />
+          <div key={loc} className="w-10 h-8 animate-pulse bg-muted" aria-hidden="true" />
         ))}
       </div>
     );

@@ -1,4 +1,5 @@
-import React, { useState, ReactNode } from 'react';
+'use client';
+import React, { ReactNode, useEffect, useRef, useState } from 'react';
 
 interface CarouselProps<T> {
   items: T[];
@@ -10,12 +11,12 @@ interface CarouselProps<T> {
 export function Carousel<T>({ items, renderItem, className = '', autoPlay }: CarouselProps<T>) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
-  const intervalRef = React.useRef<NodeJS.Timeout | null>(null);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   const prev = () => setCurrentIndex((i) => (i === 0 ? items.length - 1 : i - 1));
   const next = () => setCurrentIndex((i) => (i === items.length - 1 ? 0 : i + 1));
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!autoPlay || items.length <= 1 || isPaused) return;
     const interval = typeof autoPlay === 'number' ? autoPlay : 5000;
     intervalRef.current = setInterval(() => {
@@ -31,14 +32,14 @@ export function Carousel<T>({ items, renderItem, className = '', autoPlay }: Car
 
   return (
     <div
-      className={`w-full max-w-2xl mx-auto ${className}`}
+      className={`mx-auto w-full max-w-2xl ${className}`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
       <div>{renderItem(items[currentIndex], currentIndex)}</div>
       <div className="flex justify-center mt-8 space-x-4">
         <button
-          className="w-10 h-10 rounded-full text-primary hover:bg-primary/10 flex items-center justify-center"
+          className="flex justify-center items-center w-10 h-10 rounded-full text-primary hover:bg-primary/10"
           onClick={prev}
           aria-label="Previous"
         >
@@ -58,7 +59,7 @@ export function Carousel<T>({ items, renderItem, className = '', autoPlay }: Car
           ))}
         </div>
         <button
-          className="w-10 h-10 rounded-full text-primary hover:bg-primary/10 flex items-center justify-center"
+          className="flex justify-center items-center w-10 h-10 rounded-full text-primary hover:bg-primary/10"
           onClick={next}
           aria-label="Next"
         >

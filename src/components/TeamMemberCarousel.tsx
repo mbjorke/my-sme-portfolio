@@ -1,3 +1,4 @@
+import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { SiGithub, SiLinkedin, SiInstagram, SiBluesky } from 'react-icons/si';
@@ -35,16 +36,16 @@ export function TeamMemberCarousel({ member }: TeamMemberCarouselProps) {
             alt={member?.name || 'Avatar'}
             width={120}
             height={120}
-            className="rounded-full aspect-square object-cover border-4 shadow-lg border-primary bg-background"
+            className="object-cover rounded-full border-4 shadow-lg aspect-square border-primary bg-background"
             unoptimized={!!member?.avatar && member.avatar.includes('github')}
           />
           {/* Social icons themed */}
-          <div className="flex justify-center gap-4 mt-4">
+          <div className="flex gap-4 justify-center mt-4">
             {member?.social?.github && (
               <Link
                 href={member.social.github}
                 target="_blank"
-                className="flex items-center justify-center w-10 h-10 rounded-full transition-colors group"
+                className="flex justify-center items-center w-10 h-10 rounded-full transition-colors group"
               >
                 <span className="text-white hover:text-[#1de9b6] transition-colors">
                   <SiGithub size={24} />
@@ -55,7 +56,7 @@ export function TeamMemberCarousel({ member }: TeamMemberCarouselProps) {
               <Link
                 href={member.social.linkedin}
                 target="_blank"
-                className="flex items-center justify-center w-10 h-10 rounded-full transition-colors group"
+                className="flex justify-center items-center w-10 h-10 rounded-full transition-colors group"
               >
                 <span className="text-white hover:text-[#1de9b6] transition-colors">
                   <SiLinkedin size={24} />
@@ -66,7 +67,7 @@ export function TeamMemberCarousel({ member }: TeamMemberCarouselProps) {
               <Link
                 href={member.social.instagram}
                 target="_blank"
-                className="flex items-center justify-center w-10 h-10 rounded-full transition-colors group"
+                className="flex justify-center items-center w-10 h-10 rounded-full transition-colors group"
               >
                 <span className="text-white hover:text-[#1de9b6] transition-colors">
                   <SiInstagram size={24} />
@@ -77,7 +78,7 @@ export function TeamMemberCarousel({ member }: TeamMemberCarouselProps) {
               <Link
                 href={member.social.bluesky}
                 target="_blank"
-                className="flex items-center justify-center w-10 h-10 rounded-full transition-colors group"
+                className="flex justify-center items-center w-10 h-10 rounded-full transition-colors group"
               >
                 <span className="text-white hover:text-[#1de9b6] transition-colors">
                   <SiBluesky size={24} />
