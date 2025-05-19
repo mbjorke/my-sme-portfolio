@@ -73,7 +73,7 @@ const Login = () => {
   return (
     <div className="flex flex-col min-h-screen">
       <div className="flex flex-1 justify-center items-center px-4 py-12">
-        <div className="overflow-hidden w-full max-w-md bg-white rounded-xl shadow-lg">
+        <div className="overflow-hidden w-full max-w-md rounded-xl shadow-lg">
           <div className="p-6 sm:p-8">
             <div className="mb-8 text-center">
               <Link href="/" className="inline-block">

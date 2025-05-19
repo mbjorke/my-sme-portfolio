@@ -15,8 +15,8 @@ const Nav = () => {
           {value}
         </Link>
       ))}
-      <Link href="/signup" className="transition-colors hover:text-primary">
-        Sign Up
+      <Link href="/login" className="transition-colors hover:text-primary">
+        Login
       </Link>
     </nav>
   );
