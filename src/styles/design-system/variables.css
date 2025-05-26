@@ -1,0 +1,180 @@
+:root {
+  /* ===== Base Colors ===== */
+  --white: 0 0% 100%;
+  --black: 0 0% 0%;
+
+  /* ===== Brand Colors ===== */
+  /* --ocean-blue: 187 80% 52%; */
+  --ocean-blue: 185 96% 90%;
+  --surf-teal: 158 64% 52%;
+  --sand: 45 30% 85%;
+  --deep-navy: 191 87% 6%;
+  
+  /* Theme colors */
+  --primary: var(--ocean-blue);
+  --primary-foreground: 0 0% 10%; /* Dark text color for primary buttons */
+  --background: 0 0% 100%;
+  --foreground: 0 0% 10%;
+
+  /* ===== Status Colors ===== */
+  --error: 0 84% 60%;
+  --error-light: 0 100% 90%;
+  --success: var(--surf-teal);
+  --warning: 38 92% 50%;
+  --info: 199 89% 48%;
+
+  /* ===== Neutral Colors ===== */
+  --gray-100: 0 0% 98%;
+  /* Light mode background */
+  --gray-200: 214 32% 91%;
+  /* Light mode borders/inputs */
+  --gray-300: 220 9% 46%;
+  /* Light mode muted text */
+  --gray-800: 217 33% 17%;
+  /* Dark mode muted background */
+  --gray-900: 220 30% 15%;
+  
+  /* Border and input colors */
+  --border: var(--gray-200);
+  --input: var(--gray-200);
+  /* Dark mode dark gray */
+
+  /* ===== Gradients ===== */
+  --gradient-start: 191 80% 87%;
+  --gradient-middle: 161 40% 35%;
+  --gradient-end: 161 40% 40%;
+  --gradient: linear-gradient(135deg,
+      hsl(var(--gradient-start)),
+      hsl(var(--gradient-middle)),
+      hsl(var(--gradient-end)));
+
+  /* ===== Card Gradients ===== */
+  /* 
+   * Primary Card Gradient
+   * Used for primary action cards and important content
+   * Gradient goes from deep navy to a slightly lighter navy
+   */
+  --card-primary-start: 195 80% 10%;
+  --card-primary-end: var(--gray-800);
+  /* Slightly lighter navy */
+  --card-primary: linear-gradient(135deg,
+      hsl(var(--card-primary-start)),
+      hsl(var(--card-primary-end)));
+
+  /* 
+   * Secondary Card Gradient
+   * Used for secondary content and less prominent cards
+   * Gradient goes from teal to the same end color as primary
+   */
+  --card-secondary-start: 195 80% 10%;
+  /* Teal accent color */
+  --card-secondary-end: 189 92% 26%;
+  /* Matches primary end for consistency */
+  --card-secondary: linear-gradient(135deg,
+      hsl(var(--card-secondary-start)),
+      hsl(var(--card-secondary-end)));
+
+  /* Card Border Colors */
+  --card-border: var(--surf-teal);
+  --card-border-dark: var(--surf-teal);
+  --card-hover: 170 45% 75%;
+  /* Lighter teal for hover states */
+
+  /* ===== Typography ===== */
+  --font-sans: 'Montserrat', ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue',
+    Arial, 'Noto Sans', sans-serif;
+
+  /* ===== Base Theme ===== */
+  --background: var(--sand);
+  --foreground: var(--deep-navy);
+  --card: var(--deep-navy);
+  --card-foreground: var(--deep-navy);
+  --popover: var(--deep-navy);
+  --popover-foreground: var(--deep-navy);
+
+  /* ===== Semantic Colors ===== */
+  --primary: var(--ocean-blue);
+  --primary-foreground: var(--deep-navy);
+  --secondary: var(--surf-teal);
+  --secondary-foreground: var(--white);
+  --accent: var(--surf-teal-light);
+  --accent-foreground: var(--deep-navy);
+  --muted: var(--sand);
+  --muted-foreground: var(--gray-300);
+  --border: var(--gray-200);
+  --input: var(--gray-200);
+  --ring: var(--ocean-blue);
+
+  /* ===== Status Foregrounds ===== */
+  --error-foreground: var(--white);
+  --success-foreground: var(--white);
+  --warning-foreground: var(--white);
+  --info-foreground: var(--white);
+
+  /* ===== Chart Colors ===== */
+  --chart-1: var(--ocean-blue);
+  --chart-2: var(--surf-teal);
+  --chart-3: var(--sand);
+  --chart-4: var(--gray-900);
+  --chart-5: var(--surf-teal);
+
+  /* ===== Card Styling ===== */
+  --card-light-bg: var(--sand);
+  --card-light-foreground: var(--deep-navy);
+  --card-dark-bg: var(--white);
+  --card-dark-foreground: var(--deep-navy);
+  --card-border: var(--surf-teal);
+  --card-border-dark: var(--surf-teal);
+  --card-hover: 170 45% 75%;
+  /* Lighter Surf Teal */
+
+  /* ===== Border Radius ===== */
+  --radius: 0.5rem;
+
+}
+
+.dark {
+  /* ===== Base Theme ===== */
+  --background: var(--deep-navy);
+  --foreground: var(--gray-100);
+  --card: var(--deep-navy);
+  --card-foreground: var(--gray-100);
+  --popover: var(--deep-navy);
+  --popover-foreground: var(--gray-100);
+
+  /* ===== Semantic Colors ===== */
+  --primary: var(--ocean-blue);
+  --primary-foreground: var(--deep-navy);
+  --secondary: var(--surf-teal);
+  --secondary-foreground: var(--white);
+  --accent: var(--surf-teal-light);
+  --accent-foreground: var(--deep-navy);
+  --muted: var(--gray-800);
+  --muted-foreground: var(--gray-100);
+  --border: var(--gray-800);
+  --input: var(--gray-800);
+  --ring: 212 27% 84%;
+
+  /* ===== Card Styling ===== */
+  --card-light-bg: var(--gray-800);
+  --card-light-foreground: var(--gray-100);
+  --card-dark-bg: var(--deep-navy);
+  --card-dark-foreground: var(--gray-100);
+  --card-border: var(--surf-teal);
+  --card-border-dark: var(--surf-teal);
+  --card-hover: 170 35% 35%;
+  /* Darker Surf Teal for dark mode */
+
+  /* ===== Chart Colors ===== */
+  --chart-1: 198 70% 55%;
+  /* Brighter Ocean Blue */
+  --chart-2: 170 60% 45%;
+  /* Brighter Surf Teal */
+  --chart-3: 45 40% 75%;
+  /* Warmer Sand */
+  --chart-4: 220 30% 25%;
+  /* Lighter Deep Navy */
+  --chart-5: 170 45% 75%;
+  /* Brighter Light Surf Teal */
+}

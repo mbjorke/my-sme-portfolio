@@ -1,6 +1,6 @@
 import React from 'react';
 import { useLanguage } from '@/context/LanguageContext';
-import { Card, CardHeader, CardTitle, CardDescription } from '@/components/ui/Card';
+import { Card, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { siteConfig } from '@/config/siteConfig';
 import {
   SiFramer,
@@ -30,18 +30,28 @@ export function HowSection() {
 
   return (
     <section id="how" className="py-20 text-center">
-      <h2 className="mb-8 text-3xl font-bold">{how.title}</h2>
-      <div className="mx-auto w-full max-w-3xl">
-        <div className="flex flex-col gap-6 items-center w-full">
+      <h2 className="mb-12 text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/80">
+        {how.title}
+      </h2>
+      <div className="mx-auto w-full max-w-4xl px-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {how.steps.map((step, idx) => (
-            <Card key={step.title + idx} gradientBorder className="w-full">
-              <CardHeader>
-                <CardTitle className="mb-2 text-xl font-semibold transition-colors group-hover:text-primary">
-                  {step.title}
-                </CardTitle>
-                <div className="flex flex-row gap-4 justify-center items-center pt-4 pb-8">
-                  {hasImages(step) && step.images.length > 0
-                    ? step.images.map((iconName: string, i: number) => {
+            <Card 
+              key={step.title + idx} 
+              className="card-hover group relative overflow-hidden bg-background/50 backdrop-blur-sm"
+            >
+              {/* Decorative background elements */}
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              
+              <CardHeader className="relative z-10">
+                <div className="flex flex-col items-center">
+                  <CardTitle className="mb-4 text-xl font-semibold text-foreground group-hover:text-primary transition-colors duration-300">
+                    {step.title}
+                  </CardTitle>
+                  
+                  {hasImages(step) && step.images.length > 0 && (
+                    <div className="flex flex-wrap justify-center gap-3 py-4 mb-4">
+                      {step.images.map((iconName: string, i: number) => {
                         const icons: Record<string, IconType> = {
                           SiNotion,
                           SiMiro,
@@ -56,18 +66,24 @@ export function HowSection() {
                         };
                         const Icon = icons[iconName];
                         return Icon ? (
-                          <Icon
+                          <div 
                             key={iconName + i}
-                            className="inline-block mx-1 transition-colors text-primary group-hover:text-accent-foreground"
-                            title={iconName.replace('Si', '')}
-                            aria-label={iconName.replace('Si', '')}
-                            size={36}
-                          />
+                            className="p-2 rounded-full bg-background/80 shadow-sm icon-hover hover:bg-primary/10"
+                          >
+                            <Icon
+                              className="text-foreground/70 hover:text-primary"
+                              title={iconName.replace('Si', '')}
+                              aria-label={iconName.replace('Si', '')}
+                              size={24}
+                            />
+                          </div>
                         ) : null;
-                      })
-                    : null}
+                      })}
+                    </div>
+                  )}
                 </div>
-                <CardDescription className="text-base text-left">
+                
+                <CardDescription className="text-foreground/80 text-left leading-relaxed">
                   {step.description}
                 </CardDescription>
               </CardHeader>

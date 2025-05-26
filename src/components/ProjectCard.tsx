@@ -1,15 +1,16 @@
 'use client';
-import React from 'react';
-import { useState } from 'react';
-import { useLanguage } from '@/context/LanguageContext';
-import { usePathname, useRouter } from 'next/navigation';
-import { ExternalLink } from 'lucide-react';
-import { ProjectCaseStudy } from '@/types/project';
-import { ProjectDialog } from './ProjectDialog';
-import { cardBase } from '@/styles/card-decorations';
+import React, { useState } from 'react';
+import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
-import { Card, CardContent } from '@/components/ui/Card';
+import { useLanguage } from '@/context/LanguageContext';
+import { ProjectCaseStudy } from '@/types/project';
+import Button from '@/components/ui/Button';
+import { ArrowRight, ExternalLink } from 'lucide-react';
+import { useRouter, usePathname } from 'next/navigation';
 import Image from 'next/image';
+import { CardHeader, CardTitle } from './ui/card';
+import { cardBase } from '@/styles/card-decorations';
+import { ProjectDialog } from './ProjectDialog';
 
 interface ProjectCardProps {
   project: ProjectCaseStudy;
@@ -18,7 +19,6 @@ interface ProjectCardProps {
 
 export function ProjectCard({ project, className = '' }: ProjectCardProps) {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const pathname = usePathname();
   const router = useRouter();
 
   // Combine technologies from both root and content for display
@@ -53,7 +53,7 @@ export function ProjectCard({ project, className = '' }: ProjectCardProps) {
     // Always open dialog for this project since it has a prototype or is marked for dialog
     if (project.openInDialog || project.content || hasPrototypeLink) {
       console.log('Opening dialog for project:', project.title);
-      window.history.pushState({}, '', `${pathname}?project=${encodeURIComponent(project.title)}`);
+      window.history.pushState({}, '', `${window.location.pathname}?project=${encodeURIComponent(project.title)}`);
       setIsDialogOpen(true);
       return;
     }
@@ -73,62 +73,48 @@ export function ProjectCard({ project, className = '' }: ProjectCardProps) {
   return (
     <>
       <Card
-        className={cn(
-          'group flex flex-col h-full transition-all duration-300',
-          cardBase,
-          'group-hover:bg-[rgba(20,23,28,0.92)]',
-          className,
-        )}
+        className={`group relative flex flex-col h-full overflow-hidden transition-all duration-300 hover:shadow-lg ${className}`}
         onClick={handleCardClick}
       >
-        <div className="overflow-hidden relative z-0 aspect-video">
-          <Image
-            src={project.image}
-            alt={project.title}
-            className="object-cover w-full h-full transition-transform duration-500 transform-gpu group-hover:scale-110"
-            fill
-            sizes="(max-width: 768px) 100vw, 100vw"
-            priority={false}
-          />
-          <div className="flex absolute inset-0 z-10 items-end p-4 bg-gradient-to-t to-transparent opacity-0 transition-opacity duration-300 from-black/60 group-hover:opacity-100">
-            <span className="text-sm font-medium text-white">
-              {project.openInDialog ? viewDetailsText : viewProjectText}
-              {project.openInNewTab && <ExternalLink className="inline-block ml-1 w-4 h-4" />}
-            </span>
+        <div className="relative aspect-video overflow-hidden">
+          <div className="absolute inset-0 z-0">
+            <Image
+              src={project.image}
+              alt={project.title}
+              className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-110"
+              width={600}
+              height={400}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              priority={false}
+            />
           </div>
-        </div>
-        <CardContent className="flex flex-col flex-1 p-6">
-          <h3 className="mb-2 text-xl font-semibold transition-colors group-hover:text-primary">
-            {project.title}
-          </h3>
-          <p className="mb-4 text-muted-foreground line-clamp-2">{project.summary}</p>
-          <div className="pt-4 mt-auto border-t border-border">
-            <div className="flex justify-between items-center">
-              <span className="flex items-center text-sm font-medium text-primary">
-                {project.cta?.text || viewProjectCta}
-                <ExternalLink className="ml-1 w-3 h-3" />
+
+          {/* Overlay with gradient and hover effect */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">
+            <div className="translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+              <span className="text-white text-sm font-medium flex items-center gap-2 group-hover:gap-3 transition-all duration-300">
+                {project.openInDialog ? viewDetailsText : viewProjectText}
+                <ExternalLink className="inline-block h-4 w-4 group-hover:translate-x-1 transition-transform duration-300" />
               </span>
-              {displayTechnologies.length > 0 && (
-                <div className="flex -space-x-1">
-                  {displayTechnologies.map((tech: string, i: number) => (
-                    <span
-                      key={i}
-                      className="flex justify-center items-center w-6 h-6 text-xs rounded-full border shadow-sm bg-muted border-background"
-                      title={tech}
-                    >
-                      {tech.charAt(0).toUpperCase()}
-                    </span>
-                  ))}
-                  {hasMoreTechnologies && (
-                    <span className="flex justify-center items-center w-6 h-6 text-xs rounded-full border shadow-sm bg-muted border-background">
-                      +{allTechnologies.length - 3}
-                    </span>
-                  )}
-                </div>
-              )}
             </div>
           </div>
+        </div>
+
+        <CardContent className="flex flex-col flex-1 p-6 transition-colors duration-300 group-hover:bg-accent/5">
+          <h3 className="mb-3 text-xl font-semibold text-foreground group-hover:text-primary transition-colors duration-300">
+            {project.title}
+          </h3>
+          <p className="mb-4 text-muted-foreground line-clamp-2 group-hover:text-foreground/80 transition-colors duration-300">
+            {project.summary}
+          </p>
         </CardContent>
+
+        <CardFooter>
+          <span className="text-sm font-medium text-primary flex items-center gap-1">
+            {project.cta?.text || viewProjectCta}
+            <ExternalLink className="h-4 w-4" />
+          </span>
+        </CardFooter>
       </Card>
       <ProjectDialog project={project} open={isDialogOpen} onOpenChange={setIsDialogOpen} />
     </>

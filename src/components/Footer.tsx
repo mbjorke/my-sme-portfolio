@@ -19,6 +19,12 @@ export function Footer() {
           Card Gradient Color Picker Showcase
         </Link>
         <Link
+          href="/design-system"
+          className="underline transition-colors text-primary hover:text-purple-500"
+        >
+          Design System
+        </Link>
+        <Link
           href="/button-showcase"
           className="underline transition-colors text-primary hover:text-blue-500"
         >

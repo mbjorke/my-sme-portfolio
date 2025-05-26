@@ -45,14 +45,19 @@ export function HeroSection() {
         <p className="mb-2 max-w-xl text-base text-left md:text-lg text-white/80">
           {hero.callToAction}
         </p>
-        <Button
-          asChild
-          className="flex justify-center items-center mt-2 w-16 h-16 text-black bg-white rounded-full shadow-xl transition-all duration-200 hover:bg-gray-200"
-        >
-          <Link href="#contact" aria-label={hero.callToAction}>
-            <ArrowRight className="w-8 h-8" />
-          </Link>
-        </Button>
+        <div className="mt-4">
+          <Button
+            asChild
+            variant="default"
+            size="lg"
+            className="inline-flex items-center justify-center gap-2 text-primary-foreground"
+          >
+            <Link href="#contact" aria-label={hero.callToAction}>
+              <span>{hero.callToAction}</span>
+              <ArrowRight className="w-5 h-5" />
+            </Link>
+          </Button>
+        </div>
       </div>
     </section>
   );

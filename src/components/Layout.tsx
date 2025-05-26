@@ -9,7 +9,7 @@ import Image from 'next/image';
 export function Layout({ children }: { children: ReactNode }) {
   return (
     <div>
-      <header className="flex gap-4 justify-between items-center p-4 w-full">
+      <header className="bg-background flex gap-4 justify-between items-center p-4 w-full border-b">
         <div className="flex gap-4 items-center">
           <Link href="/" className="flex items-center">
             <Image
@@ -28,7 +28,7 @@ export function Layout({ children }: { children: ReactNode }) {
           <ThemeSwitcher />
         </div>
       </header>
-      <main>{children}</main>
+      <main className="bg-background">{children}</main>
     </div>
   );
 }

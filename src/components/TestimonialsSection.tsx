@@ -1,12 +1,10 @@
 import React from 'react';
 import { siteConfig } from '@/config/siteConfig';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Card, CardContent } from '@/components/ui/Card';
+import { Card, CardContent } from '@/components/ui/card';
 import { Quote } from 'lucide-react';
-import { useLanguage } from '@/context/LanguageContext';
 import { Carousel } from './Carousel';
 import { cn } from '@/lib/utils';
-import { cardBase, cardContent } from '@/styles/card-decorations';
+import { useLanguage } from '@/context/LanguageContext';
 
 interface Testimonial {
   type: string;
@@ -32,41 +30,34 @@ export function TestimonialsSection() {
 
   return (
     <section id="testimonials" className="py-16 md:py-24 bg-background">
-      <div className="container flex flex-col items-center px-4 mx-auto">
+      <div className="flex flex-col items-center px-4 mx-auto">
         <div className="mb-12 w-full text-center">
           <h2 className="mb-4 text-3xl font-bold md:text-4xl text-foreground">
             {translations.title}
           </h2>
           <div className="mx-auto w-20 h-1 bg-primary"></div>
         </div>
-        <div className="relative mx-auto w-full max-w-4xl">
+        <div className="relative mx-auto w-full max-w-3xl">
           <Carousel
             autoPlay={3000}
             items={testimonials}
             renderItem={(testimonial: Testimonial) => (
-              <div className="p-[2px] rounded-2xl bg-transparent transition-all duration-300 group hover:bg-gradient-to-r hover:from-[#7ed6df] hover:via-[#16a085] hover:to-[#1de9b6]">
-                <Card className={cn(cardBase, 'relative p-0 group')}>
-                  {/* No cardGradient or cardBlur here */}
+              <div className="p-[2px] rounded-2xl bg-transparent transition-all duration-300 group hover:bg-primary/10">
+                <Card variant="secondary" className="relative p-0 group">
                   <Quote
                     className="absolute top-8 left-8 z-0 w-12 h-12 pointer-events-none text-primary/10 md:w-16 md:h-16"
                     strokeWidth={1.5}
                   />
-                  <CardContent className={cn(cardContent, 'relative z-10')}>
+                  <CardContent className={cn('p-6', 'relative z-10')}>
                     <div className="flex relative z-10 flex-col items-center md:flex-row md:items-start">
                       <div className="mb-6 md:mb-0 md:mr-8">
-                        <Avatar className="w-24 h-24 border-4 border-primary/20 shadow-glow">
-                          <AvatarImage
+                        <div className="w-24 h-24 rounded-full border-4 border-primary/20 shadow-glow overflow-hidden">
+                          <img
                             src={testimonial.badgeUrl}
                             alt={testimonial.badge}
-                            className="object-cover"
+                            className="w-full h-full object-cover"
                           />
-                          <AvatarFallback className="text-2xl bg-primary/10 text-primary">
-                            {testimonial.name
-                              .split(' ')
-                              .map((n: string) => n[0])
-                              .join('')}
-                          </AvatarFallback>
-                        </Avatar>
+                        </div>
                       </div>
                       <div className="flex-1">
                         <blockquote className="relative z-10 mb-6 text-lg md:text-xl text-foreground/80">

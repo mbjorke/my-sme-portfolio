@@ -3,7 +3,7 @@ import React from 'react';
 import dynamic from 'next/dynamic';
 
 const CardGradientColorPickerShowcase = dynamic(
-  () => import('../components/CardGradientColorPickerShowcase'),
+  () => import('../components/showcases/CardGradientColorPickerShowcase'),
   { ssr: false },
 );
 

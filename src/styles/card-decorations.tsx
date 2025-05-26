@@ -1,33 +1,68 @@
 import React, { HTMLAttributes, ReactNode } from 'react';
-import { cn } from '@/lib/utils';
+import { cn } from '../lib/utils';
 
-// Base card styles - should be applied to all cards
+// Base card styles with smooth transitions
 export const cardBase = [
-  'relative',
-  'overflow-hidden',
-  'rounded-xl',
-  'bg-card/50 dark:bg-card/70',
-  'backdrop-blur-sm',
-  'border',
-  'border-border/50',
-  'shadow-lg',
-  'transition-all duration-200',
-  'cursor-pointer',
+  'flex',
+  'flex-col',
+  'h-full',
+  'transition-all',
+  'duration-300',
+  'rounded-lg',
+  'overflow-hidden'
 ].join(' ');
 
-// Card content padding - use for main content areas
-export const cardContent = ['p-8', 'md:p-12'].join(' ');
+// Card content padding and layout
+export const cardContent = 'flex flex-col flex-1 p-6';
 
-// Gradient overlay - for decorative backgrounds
-export const cardGradient = [
-  'absolute inset-0',
-  'rounded-xl',
-  'bg-gradient-to-br from-card/50 via-card/30 to-card/50',
-  'z-0',
-].join(' ');
+// Card variants using design system colors
+export const cardVariants = {
+  default: 'bg-card border border-border hover:border-primary/50 hover:shadow-sm',
+  primary: 'bg-primary text-primary-foreground hover:bg-primary/90',
+  secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/90',
+  accent: [
+    'bg-accent/10 dark:bg-accent/20',
+    'text-foreground',
+    'border',
+    'border-accent/20 dark:border-accent/30',
+    'hover:border-accent/40 dark:hover:border-accent/50',
+    'hover:shadow-sm',
+    'dark:shadow-[0_4px_24px_rgba(0,0,0,0.15)]',
+  ].join(' '),
+  outline: 'bg-transparent border border-border hover:border-primary/50',
+  elevated: [
+    'bg-card',
+    'border',
+    'border-border/70 dark:border-border/30',
+    'shadow-lg dark:shadow-[0_4px_24px_rgba(0,0,0,0.2)]',
+    'hover:shadow-xl dark:hover:shadow-[0_8px_32px_rgba(0,0,0,0.25)]',
+    'transition-all',
+    'duration-200',
+    'relative',
+    'z-0',
+    'hover:z-10',
+  ].join(' '),
+  sand: [
+    '!bg-[#f0e6d2]',
+    'dark:!bg-[#3a3429]',
+    '!text-foreground',
+    'border',
+    '!border-[#e0d6c2]',
+    'dark:!border-[#4a4439]',
+    'hover:!border-[#d0c6b2]',
+    'dark:hover:!border-[#5a5449]',
+    'hover:shadow-sm',
+  ].join(' '),
+};
 
-// Blur effect - use sparingly for glass-like effects
-export const cardBlur = ['backdrop-blur-sm'].join(' ');
+// Card title styles
+export const cardTitle = 'text-lg font-semibold leading-tight tracking-tight';
+
+// Card description styles
+export const cardDescription = 'text-sm text-muted-foreground';
+
+// Card footer styles
+export const cardFooter = 'flex items-center p-6 pt-0';
 
 // Card hover effects - for standard cards (border and shadow only)
 export const cardHover = [

@@ -1,125 +1,153 @@
 import React from 'react';
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardContent,
-  CardDescription,
-  CardFooter,
-} from '@/components/ui/Card';
+import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '../components/ui/card';
+import { cn } from '../lib/utils';
 
 export default function CardShowcase() {
   return (
-    <div className="flex flex-col gap-12 items-center px-4 py-16 min-h-screen bg-background">
-      <h1 className="mb-8 text-4xl font-bold text-primary">Card Component Showcase</h1>
-      <div className="grid grid-cols-1 gap-12 w-full max-w-4xl md:grid-cols-2">
-        {/* Default Card */}
-        <Card>
+    <div className="container mx-auto p-6 max-w-7xl">
+      <div className="mb-12 text-center">
+        <h1 className="text-4xl font-bold tracking-tight mb-3">Card Components</h1>
+        <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+          A collection of card components built with Radix UI and styled with our design system.
+        </p>
+      </div>
+      
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-2">
+        {/* Primary Card */}
+        <Card variant="primary" className="h-full flex flex-col">
           <CardHeader>
-            <CardTitle>Default Card</CardTitle>
-            <CardDescription>No gradient, standard border and shadow.</CardDescription>
+            <CardTitle className="text-xl font-semibold text-white">Primary Card</CardTitle>
+            <CardDescription className="text-blue-100/80">
+              For primary actions and important content.
+            </CardDescription>
           </CardHeader>
-          <CardContent>
-            <p className="text-muted-foreground">You can use this for standard content blocks.</p>
+          <CardContent className="flex-1">
+            <p className="text-sm text-blue-50/90">
+              This card uses our primary gradient with a subtle hover effect.
+            </p>
           </CardContent>
-          <CardFooter>
-            <span className="text-xs text-muted-foreground">Footer actions here</span>
+          <CardFooter className="pt-0">
+            <div className="text-xs text-blue-100/60">Hover to see the elevation effect</div>
           </CardFooter>
         </Card>
 
-        {/* Gradient Border p-[2px] */}
-        <div className="p-[2px] rounded-2xl bg-gradient-to-r from-[#7ed6df] via-[#16a085] to-[#1de9b6] transition-all duration-300 group hover:bg-gradient-to-tr hover:from-[#1de9b6] hover:via-[#16a085] hover:to-[#7ed6df] hover:shadow-lg">
-          <Card className="rounded-2xl shadow-sm bg-card text-card-foreground">
-            <CardHeader>
-              <CardTitle>Gradient Border p-[2px]</CardTitle>
-              <CardDescription>
-                Very thin border using p-[2px].{' '}
-                <span className="text-emerald-500">Hover for effect!</span>
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <p className="text-muted-foreground">Subtle, minimal accent.</p>
-            </CardContent>
-          </Card>
-        </div>
-
-        {/* Gradient Border p-1 */}
-        {/* Use slightly smaller rounding for inner card to keep border natural */}
-        <div className="p-1 rounded-2xl bg-gradient-to-r from-[#7ed6df] via-[#16a085] to-[#1de9b6] transition-all duration-300 group hover:bg-gradient-to-tr hover:from-[#1de9b6] hover:via-[#16a085] hover:to-[#7ed6df] hover:shadow-lg">
-          <Card className="rounded-xl shadow-sm bg-card text-card-foreground">
-            <CardHeader>
-              <CardTitle>Gradient Border p-1</CardTitle>
-              <CardDescription>
-                Balanced border using p-1 (4px).{' '}
-                <span className="text-emerald-500">Hover for effect!</span> <br />
-                <span className="text-xs text-muted-foreground">
-                  Inner card uses <code>rounded-xl</code> for a more natural border.
-                </span>
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <p className="text-muted-foreground">Modern, visible accent.</p>
-            </CardContent>
-          </Card>
-        </div>
-
-        {/* Gradient Border p-1.5 */}
-        {/* Use even smaller rounding for thicker border */}
-        <div className="p-1.5 rounded-2xl bg-gradient-to-r from-[#7ed6df] via-[#16a085] to-[#1de9b6] transition-all duration-300 group hover:bg-gradient-to-tr hover:from-[#1de9b6] hover:via-[#16a085] hover:to-[#7ed6df] hover:shadow-lg">
-          <Card className="rounded-[calc(1rem-6px)] bg-card text-card-foreground shadow-sm">
-            <CardHeader>
-              <CardTitle>Gradient Border p-1.5</CardTitle>
-              <CardDescription>
-                Medium border using p-1.5 (6px).{' '}
-                <span className="text-emerald-500">Hover for effect!</span> <br />
-                <span className="text-xs text-muted-foreground">
-                  Inner card uses <code>rounded-[calc(1rem-6px)]</code> for a pixel-perfect border.
-                </span>
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <p className="text-muted-foreground">Noticeable, but not overwhelming.</p>
-            </CardContent>
-          </Card>
-        </div>
-
-        {/* Gradient Border p-2 */}
-        {/* Use much smaller rounding for thickest border */}
-        <div className="p-2 rounded-2xl bg-gradient-to-r from-[#7ed6df] via-[#16a085] to-[#1de9b6] transition-all duration-300 group hover:bg-gradient-to-tr hover:from-[#1de9b6] hover:via-[#16a085] hover:to-[#7ed6df] hover:shadow-lg">
-          <Card className="rounded-[calc(1rem-8px)] bg-card text-card-foreground shadow-sm">
-            <CardHeader>
-              <CardTitle>Gradient Border p-2</CardTitle>
-              <CardDescription>
-                Bold border using p-2 (8px).{' '}
-                <span className="text-emerald-500">Hover for effect!</span> <br />
-                <span className="text-xs text-muted-foreground">
-                  Inner card uses <code>rounded-[calc(1rem-8px)]</code> for a pixel-perfect border.
-                </span>
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <p className="text-muted-foreground">Strong, eye-catching accent.</p>
-            </CardContent>
-          </Card>
-        </div>
-        {/* Reveal Gradient on Hover */}
-        <Card gradientBorder>
+        {/* Secondary Card */}
+        <Card variant="secondary" className="h-full flex flex-col">
           <CardHeader>
-            <CardTitle>Reveal Gradient on Hover</CardTitle>
-            <CardDescription>
-              Looks like a default card until hovered.{' '}
-              <span className="text-emerald-500">
-                Hover to reveal a thin gradient border (p-[2px]).
-              </span>
+            <CardTitle className="text-xl font-semibold text-white">Secondary Card</CardTitle>
+            <CardDescription className="text-teal-100/80">
+              For secondary actions and content.
             </CardDescription>
           </CardHeader>
-          <CardContent>
-            <p className="text-muted-foreground">
-              This is a popular interactive effect for modern UI cards.
+          <CardContent className="flex-1">
+            <p className="text-sm text-teal-50/90">
+              This card uses our teal gradient with a border and stronger shadow.
             </p>
           </CardContent>
+          <CardFooter className="pt-0">
+            <div className="text-xs text-teal-100/60">Hover to see the elevation effect</div>
+          </CardFooter>
         </Card>
+      </div>
+
+      {/* Card Footer Documentation */}
+      <div className="mt-16">
+        <h2 className="text-2xl font-bold mb-6">Card Footer</h2>
+        <p className="text-muted-foreground mb-6 max-w-3xl">
+          The <code className="bg-muted px-1.5 py-0.5 rounded text-sm">CardFooter</code> component is used to display actions, metadata, or additional information at the bottom of a card. It includes proper spacing and alignment by default.
+        </p>
+        
+        <div className="grid gap-6 md:grid-cols-2 mb-12">
+          <Card className="h-full flex flex-col">
+            <CardHeader>
+              <CardTitle>Card with Footer</CardTitle>
+              <CardDescription>Example of a card with a footer section</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm text-muted-foreground">
+                This is the main content area of the card. The footer will be positioned at the bottom.
+              </p>
+            </CardContent>
+            <CardFooter className="border-t pt-4">
+              <div className="text-sm text-muted-foreground">
+                Footer content goes here
+              </div>
+            </CardFooter>
+          </Card>
+          
+          <div className="space-y-4">
+            <h3 className="text-lg font-medium">Usage</h3>
+            <div className="rounded-lg border bg-muted/50 p-6">
+              <pre className="bg-background p-4 rounded-md overflow-x-auto text-sm">
+{`<Card>
+  <CardHeader>
+    <CardTitle>Card Title</CardTitle>
+    <CardDescription>Card description</CardDescription>
+  </CardHeader>
+  <CardContent>
+    <p>Card content goes here</p>
+  </CardContent>
+  <CardFooter className="border-t pt-4">
+    <div>Footer content</div>
+  </CardFooter>
+</Card>`}
+              </pre>
+            </div>
+            
+            <div className="space-y-2">
+              <h4 className="font-medium">Props</h4>
+              <ul className="text-sm space-y-1 text-muted-foreground">
+                <li><code>className</code> - Optional. Additional CSS classes to apply</li>
+                <li><code>children</code> - The content of the footer</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      {/* Usage Examples */}
+      <div className="mt-16 space-y-8">
+        <div>
+          <h2 className="text-2xl font-bold mb-6">Usage Examples</h2>
+          
+          <div className="grid gap-6 md:grid-cols-2">
+            <div className="space-y-4">
+              <h3 className="text-lg font-medium">Primary Card</h3>
+              <div className="rounded-lg border bg-muted/50 p-6">
+                <pre className="bg-background p-4 rounded-md overflow-x-auto text-sm">
+{`<Card variant="primary">
+  <CardHeader>
+    <CardTitle>Card Title</CardTitle>
+    <CardDescription>Card description</CardDescription>
+  </CardHeader>
+  <CardContent>
+    <p>Card content goes here</p>
+  </CardContent>
+</Card>`}
+                </pre>
+              </div>
+            </div>
+
+            <div className="space-y-4">
+              <h3 className="text-lg font-medium">Secondary Card</h3>
+              <div className="rounded-lg border bg-muted/50 p-6">
+                <pre className="bg-background p-4 rounded-md overflow-x-auto text-sm">
+{`<Card variant="secondary">
+  <CardHeader>
+    <CardTitle>Card Title</CardTitle>
+    <CardDescription>Card description</CardDescription>
+  </CardHeader>
+  <CardContent>
+    <p>Card content goes here</p>
+  </CardContent>
+</Card>`}
+                </pre>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
 }
+

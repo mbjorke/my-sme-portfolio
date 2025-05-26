@@ -32,7 +32,7 @@ export function Carousel<T>({ items, renderItem, className = '', autoPlay }: Car
 
   return (
     <div
-      className={`mx-auto w-full max-w-2xl ${className}`}
+      className={`mx-auto w-full ${className}`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
@@ -50,9 +50,8 @@ export function Carousel<T>({ items, renderItem, className = '', autoPlay }: Car
           {items.map((_, idx) => (
             <button
               key={idx}
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                idx === currentIndex ? 'bg-primary scale-110' : 'bg-primary/20 hover:bg-primary/40'
-              }`}
+              className={`w-3 h-3 rounded-full transition-all duration-300 ${idx === currentIndex ? 'bg-primary scale-110' : 'bg-primary/20 hover:bg-primary/40'
+                }`}
               onClick={() => setCurrentIndex(idx)}
               aria-label={`Go to slide ${idx + 1}`}
             />
