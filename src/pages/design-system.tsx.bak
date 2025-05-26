@@ -1,23 +1,25 @@
+import React from 'react';
 import { Metadata } from 'next';
-import Link from 'next/link';
 import dynamic from 'next/dynamic';
-import { Download, Heart, ArrowRight, ExternalLink, Settings } from 'lucide-react';
 import { HoverEffectsShowcase } from '@/components/showcases/HoverEffectsShowcase';
-import Button from '@/components/ui/Button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import Image from 'next/image';
 import { cn } from '@/lib/utils';
 
 // Dynamically import the ColorPalette component with no SSR
 const ColorPalette = dynamic(
   () => import('@/components/showcases/ColorPalette'),
-  { ssr: false }
+  { 
+    ssr: false, 
+    loading: () => <div>Loading colors...</div> 
+  }
 );
 
-export const metadata: Metadata = {
-  title: 'Design System',
-  description: 'Comprehensive documentation of the design system components and patterns',
-};
+// Metadata is not supported in client components
+// Moved to layout.tsx or page.tsx in the design system folder
+// export const metadata: Metadata = {
+//   title: 'Design System',
+//   description: 'Comprehensive documentation of the design system components and patterns',
+// };
 
 // Navigation component for the design system
 const DesignSystemNav = () => (

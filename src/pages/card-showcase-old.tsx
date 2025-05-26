@@ -34,7 +34,8 @@ export default function CardShowcase() {
           <CardHeader>
             <CardTitle>Standard Card</CardTitle>
             <CardDescription>
-              A simple card with a clean design. <span className="text-emerald-500">Hover for shadow effect!</span>
+              A simple card with a clean design.{' '}
+              <span className="text-emerald-500">Hover for shadow effect!</span>
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -47,7 +48,8 @@ export default function CardShowcase() {
           <CardHeader>
             <CardTitle>Card with Padding</CardTitle>
             <CardDescription>
-              Additional padding for more breathing room. <span className="text-emerald-500">Hover for shadow effect!</span>
+              Additional padding for more breathing room.{' '}
+              <span className="text-emerald-500">Hover for shadow effect!</span>
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -60,7 +62,8 @@ export default function CardShowcase() {
           <CardHeader>
             <CardTitle>Card with Rounded Corners</CardTitle>
             <CardDescription>
-              Soft corners for a modern look. <span className="text-emerald-500">Hover for shadow effect!</span>
+              Soft corners for a modern look.{' '}
+              <span className="text-emerald-500">Hover for shadow effect!</span>
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -73,7 +76,8 @@ export default function CardShowcase() {
           <CardHeader>
             <CardTitle>Card with Shadow</CardTitle>
             <CardDescription>
-              Enhanced shadow for depth. <span className="text-emerald-500">Hover for shadow effect!</span>
+              Enhanced shadow for depth.{' '}
+              <span className="text-emerald-500">Hover for shadow effect!</span>
             </CardDescription>
           </CardHeader>
           <CardContent>

@@ -14,14 +14,14 @@ function getTranslatedProject(project: ProjectCaseStudy, locale: Locale): Projec
       summary: project.summarySv || project.summary,
       content: project.content
         ? {
-          ...project.content,
-          description: project.content.descriptionSv || project.content.description,
-          features: project.content.featuresSv || project.content.features,
-          links: project.content.links?.map((link) => ({
-            ...link,
-            text: link.textSv || link.text,
-          })),
-        }
+            ...project.content,
+            description: project.content.descriptionSv || project.content.description,
+            features: project.content.featuresSv || project.content.features,
+            links: project.content.links?.map((link) => ({
+              ...link,
+              text: link.textSv || link.text,
+            })),
+          }
         : undefined,
       cta: {
         ...project.cta,
@@ -56,7 +56,10 @@ export function ProjectsSection() {
               key={index}
               className="snap-center shrink-0 flex-1 min-w-[400px] max-w-[600px] cursor-pointer"
             >
-              <ProjectCard project={project} className="hover:shadow-lg transition-all duration-300" />
+              <ProjectCard
+                project={project}
+                className="hover:shadow-lg transition-all duration-300"
+              />
             </div>
           ))}
         </div>

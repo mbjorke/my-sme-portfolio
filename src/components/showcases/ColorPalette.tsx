@@ -9,16 +9,11 @@ interface ColorSwatchProps {
 }
 
 const ColorSwatch: React.FC<ColorSwatchProps> = ({ name, value, isGradient = false }) => {
-  const colorStyle = isGradient
-    ? { background: value }
-    : { backgroundColor: `hsl(${value})` };
+  const colorStyle = isGradient ? { background: value } : { backgroundColor: `hsl(${value})` };
 
   return (
     <div className="space-y-2">
-      <div
-        className="w-full h-20 rounded-md border shadow-sm"
-        style={colorStyle}
-      />
+      <div className="w-full h-20 rounded-md border shadow-sm" style={colorStyle} />
       <div className="text-sm">
         <div className="font-medium">{name}</div>
         <div className="text-muted-foreground text-xs">{value}</div>
@@ -44,20 +39,20 @@ const ColorPalette: React.FC = () => {
   const gradients = [
     {
       name: 'Primary Card Gradient',
-      value: 'var(--card-primary)'
+      value: 'var(--card-primary)',
     },
     {
       name: 'Secondary Card Gradient',
-      value: 'var(--card-secondary)'
+      value: 'var(--card-secondary)',
     },
     {
       name: 'Vibrant Gradient',
-      value: 'linear-gradient(165deg, #00FFFF 0%, #02d19d 10%, #305854 19%, #000000 29%)'
+      value: 'linear-gradient(165deg, #00FFFF 0%, #02d19d 10%, #305854 19%, #000000 29%)',
     },
     {
       name: 'Vibrant Gradient 2',
-      value: 'linear-gradient(165deg, #FF0000 0%, #f8aa07 10%, #fa07e5 19%, #000000 29%)'
-    }
+      value: 'linear-gradient(165deg, #FF0000 0%, #f8aa07 10%, #fa07e5 19%, #000000 29%)',
+    },
   ];
 
   return (
@@ -88,25 +83,21 @@ const ColorPalette: React.FC = () => {
       <section>
         <h3 className="text-xl font-semibold mb-6">Card Variants</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <Card variant='primary'>
+          <Card variant="primary">
             <CardHeader>
               <CardTitle>Primary Variant</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-muted-foreground">
-                This card uses the primary variant.
-              </p>
+              <p className="text-muted-foreground">This card uses the primary variant.</p>
             </CardContent>
           </Card>
 
-          <Card variant='secondary'>
+          <Card variant="secondary">
             <CardHeader>
               <CardTitle>Secondary Variant</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-muted-foreground">
-                This card uses the secondary variant.
-              </p>
+              <p className="text-muted-foreground">This card uses the secondary variant.</p>
             </CardContent>
           </Card>
         </div>

@@ -27,16 +27,16 @@
       'rlig' 1,
       'calt' 1;
   }
-  
+
   /* Debug styles */
   .debug-size {
     border: 1px solid red !important;
   }
-  
+
   button[class*='size-'] {
     outline: 2px dashed blue !important;
   }
-  
+
   [class*='h-12'] {
     background-color: rgba(255, 0, 0, 0.1) !important;
   }

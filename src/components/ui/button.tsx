@@ -77,23 +77,16 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           className={cn(
             buttonVariants({ variant, size }),
             'inline-flex items-center justify-center',
-            className
+            className,
           )}
-          ref={ref as any}
+          ref={ref as React.Ref<HTMLButtonElement>}
           {...props}
         />
       );
     }
 
     return (
-      <button
-        className={cn(
-          buttonVariants({ variant, size }),
-          className
-        )}
-        ref={ref}
-        {...props}
-      />
+      <button className={cn(buttonVariants({ variant, size }), className)} ref={ref} {...props} />
     );
   },
 );

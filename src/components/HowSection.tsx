@@ -36,19 +36,19 @@ export function HowSection() {
       <div className="mx-auto w-full max-w-4xl px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {how.steps.map((step, idx) => (
-            <Card 
-              key={step.title + idx} 
+            <Card
+              key={step.title + idx}
               className="card-hover group relative overflow-hidden bg-background/50 backdrop-blur-sm"
             >
               {/* Decorative background elements */}
               <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              
+
               <CardHeader className="relative z-10">
                 <div className="flex flex-col items-center">
                   <CardTitle className="mb-4 text-xl font-semibold text-foreground group-hover:text-primary transition-colors duration-300">
                     {step.title}
                   </CardTitle>
-                  
+
                   {hasImages(step) && step.images.length > 0 && (
                     <div className="flex flex-wrap justify-center gap-3 py-4 mb-4">
                       {step.images.map((iconName: string, i: number) => {
@@ -66,7 +66,7 @@ export function HowSection() {
                         };
                         const Icon = icons[iconName];
                         return Icon ? (
-                          <div 
+                          <div
                             key={iconName + i}
                             className="p-2 rounded-full bg-background/80 shadow-sm icon-hover hover:bg-primary/10"
                           >
@@ -82,7 +82,7 @@ export function HowSection() {
                     </div>
                   )}
                 </div>
-                
+
                 <CardDescription className="text-foreground/80 text-left leading-relaxed">
                   {step.description}
                 </CardDescription>

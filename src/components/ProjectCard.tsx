@@ -1,15 +1,11 @@
 'use client';
 import React, { useState } from 'react';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
-import { cn } from '@/lib/utils';
 import { useLanguage } from '@/context/LanguageContext';
 import { ProjectCaseStudy } from '@/types/project';
-import Button from '@/components/ui/Button';
-import { ArrowRight, ExternalLink } from 'lucide-react';
-import { useRouter, usePathname } from 'next/navigation';
+import { ExternalLink } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import { CardHeader, CardTitle } from './ui/card';
-import { cardBase } from '@/styles/card-decorations';
 import { ProjectDialog } from './ProjectDialog';
 
 interface ProjectCardProps {
@@ -21,14 +17,7 @@ export function ProjectCard({ project, className = '' }: ProjectCardProps) {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const router = useRouter();
 
-  // Combine technologies from both root and content for display
-  const allTechnologies = [
-    ...(project.technologies || []),
-    ...(project.content?.technologies || []),
-  ];
-
-  const displayTechnologies = allTechnologies.slice(0, 3);
-  const hasMoreTechnologies = allTechnologies.length > 3;
+  // Technologies are now handled in the ProjectDialog component
 
   const handleCardClick = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -53,7 +42,11 @@ export function ProjectCard({ project, className = '' }: ProjectCardProps) {
     // Always open dialog for this project since it has a prototype or is marked for dialog
     if (project.openInDialog || project.content || hasPrototypeLink) {
       console.log('Opening dialog for project:', project.title);
-      window.history.pushState({}, '', `${window.location.pathname}?project=${encodeURIComponent(project.title)}`);
+      window.history.pushState(
+        {},
+        '',
+        `${window.location.pathname}?project=${encodeURIComponent(project.title)}`,
+      );
       setIsDialogOpen(true);
       return;
     }

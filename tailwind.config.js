@@ -46,11 +46,11 @@ module.exports = {
           DEFAULT: 'hsl(var(--secondary))',
           foreground: 'hsl(var(--secondary-foreground))',
         },
-        
+
         // Background and foreground
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
-        
+
         // Card colors
         card: {
           light: 'hsl(var(--card-light-bg))',
@@ -58,7 +58,7 @@ module.exports = {
           foreground: 'hsl(var(--card-light-foreground))',
           DEFAULT: 'hsl(var(--card))',
         },
-        
+
         // Status colors
         destructive: {
           DEFAULT: 'hsl(var(--destructive))',
@@ -67,13 +67,13 @@ module.exports = {
         success: 'hsl(var(--success))',
         warning: 'hsl(var(--warning))',
         info: 'hsl(var(--info))',
-        
+
         // Accent colors (used in forms)
         accent: {
           DEFAULT: 'hsl(var(--accent))',
           foreground: 'hsl(var(--accent-foreground))',
         },
-        
+
         // Chart colors
         chart: {
           1: 'hsl(var(--chart-1))',
@@ -82,7 +82,7 @@ module.exports = {
           4: 'hsl(var(--chart-4))',
           5: 'hsl(var(--chart-5))',
         },
-        
+
         // Neutral colors
         gray: {
           50: 'hsl(var(--gray-50))',
@@ -96,12 +96,12 @@ module.exports = {
           800: 'hsl(var(--gray-800))',
           900: 'hsl(var(--gray-900))',
         },
-        
+
         // Border and input
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
-        
+
         // Text colors
         muted: {
           DEFAULT: 'hsl(var(--muted))',

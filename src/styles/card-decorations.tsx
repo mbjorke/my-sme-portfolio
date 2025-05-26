@@ -9,7 +9,7 @@ export const cardBase = [
   'transition-all',
   'duration-300',
   'rounded-lg',
-  'overflow-hidden'
+  'overflow-hidden',
 ].join(' ');
 
 // Card content padding and layout

@@ -2,10 +2,9 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { SiGithub, SiLinkedin, SiInstagram, SiBluesky } from 'react-icons/si';
-import { Card, CardContent } from '@/components/ui/card';
+import { Card, CardContent } from './ui/card';
 import { Badge } from './ui/badge';
 import { cn } from '@/lib/utils';
-import { cardBase, cardContent, cardVariants } from '@/styles/card-decorations';
 
 export interface TeamMember {
   avatar?: string;
@@ -29,10 +28,13 @@ interface TeamMemberCarouselProps {
 
 export function TeamMemberCarousel({ member }: TeamMemberCarouselProps) {
   return (
-    <div className="w-full max-w-2xl p-[2px] rounded-3xl bg-transparent group h-full">
-      <Card
-        variant="secondary">
-        <CardContent className={cn(cardContent, 'relative z-10')}>
+    <div
+      className="w-full max-w-2xl p-[2px] rounded-3xl bg-transparent group h-full"
+      role="article"
+      aria-label={`Team member: ${member?.name || 'Unnamed member'}`}
+    >
+      <Card className="bg-gradient-to-br from-[hsl(var(--card-secondary-start))] to-[hsl(var(--card-secondary-end))]">
+        <CardContent className={cn('p-6 relative z-10')}>
           {/* Avatar & Socials */}
           <div className="flex z-10 flex-col items-center mb-2">
             <Image
@@ -43,13 +45,15 @@ export function TeamMemberCarousel({ member }: TeamMemberCarouselProps) {
               className="object-cover rounded-full border-4 shadow-lg aspect-square border-primary bg-background"
               unoptimized={!!member?.avatar && member.avatar.includes('github')}
             />
-            {/* Social icons themed */}
+            {/* Social icons */}
             <div className="flex gap-4 justify-center mt-4">
               {member?.social?.github && (
                 <Link
                   href={member.social.github}
                   target="_blank"
+                  rel="noopener noreferrer"
                   className="flex justify-center items-center w-10 h-10 rounded-full transition-all duration-300 hover:bg-primary/10 hover:scale-110"
+                  aria-label="GitHub profile"
                 >
                   <span className="text-primary">
                     <SiGithub size={24} />
@@ -60,7 +64,9 @@ export function TeamMemberCarousel({ member }: TeamMemberCarouselProps) {
                 <Link
                   href={member.social.linkedin}
                   target="_blank"
+                  rel="noopener noreferrer"
                   className="flex justify-center items-center w-10 h-10 rounded-full transition-all duration-300 hover:bg-primary/10 hover:scale-110"
+                  aria-label="LinkedIn profile"
                 >
                   <span className="text-primary">
                     <SiLinkedin size={24} />
@@ -71,7 +77,9 @@ export function TeamMemberCarousel({ member }: TeamMemberCarouselProps) {
                 <Link
                   href={member.social.instagram}
                   target="_blank"
+                  rel="noopener noreferrer"
                   className="flex justify-center items-center w-10 h-10 rounded-full transition-all duration-300 hover:bg-primary/10 hover:scale-110"
+                  aria-label="Instagram profile"
                 >
                   <span className="text-primary">
                     <SiInstagram size={24} />
@@ -82,7 +90,9 @@ export function TeamMemberCarousel({ member }: TeamMemberCarouselProps) {
                 <Link
                   href={member.social.bluesky}
                   target="_blank"
+                  rel="noopener noreferrer"
                   className="flex justify-center items-center w-10 h-10 rounded-full transition-all duration-300 hover:bg-primary/10 hover:scale-110"
+                  aria-label="Bluesky profile"
                 >
                   <span className="text-primary">
                     <SiBluesky size={24} />
@@ -91,14 +101,13 @@ export function TeamMemberCarousel({ member }: TeamMemberCarouselProps) {
               )}
             </div>
           </div>
+
           {/* Info */}
           <div className="flex z-10 flex-col flex-1 gap-2 justify-center items-center mt-2">
             <span className="text-3xl font-extrabold drop-shadow-lg">
               {member?.name || 'No Name'}
             </span>
-            <span className="text-xl font-semibold">
-              {member?.title || 'No Title'}
-            </span>
+            <span className="text-xl font-semibold">{member?.title || 'No Title'}</span>
             {member?.bio && (
               <p className="px-2 py-1 mt-2 text-base rounded-lg shadow-inner text-muted-foreground bg-card/80 border border-border">
                 {member.bio}
@@ -109,7 +118,7 @@ export function TeamMemberCarousel({ member }: TeamMemberCarouselProps) {
                 {member.skills.map((skill: string) => (
                   <Badge
                     key={skill}
-                    variant={skill === 'Vibe Code Wizard' ? 'outline' : 'outline'}
+                    variant="outline"
                     className="transition-colors duration-300 hover:bg-primary/90 hover:scale-105"
                   >
                     {skill}
@@ -133,3 +142,5 @@ export function TeamMemberCarousel({ member }: TeamMemberCarouselProps) {
     </div>
   );
 }
+
+export default TeamMemberCarousel;
