@@ -44,22 +44,19 @@ export function ProjectsSection() {
       : 'Explore some of my recent projects. Click on a project to learn more.';
 
   return (
-    <section id="projects" className="relative px-4 py-20 mx-auto mb-12 max-w-7xl">
+    <section id="projects" className="relative z-10 px-4 py-20 mx-auto mb-12 max-w-7xl">
       <div className="text-center">
         <h2 className="mb-4 text-4xl font-bold">{sectionTitle}</h2>
         <p className="text-lg text-muted-foreground">{description}</p>
       </div>
-      <div className="relative overflow-x-auto pb-12 w-full">
-        <div className="flex gap-6 snap-x snap-mandatory w-full">
+      <div className="overflow-x-auto relative pb-12 w-full">
+        <div className="flex gap-6 w-full snap-x snap-mandatory">
           {projects.map((project, index) => (
             <div
               key={index}
               className="snap-center shrink-0 flex-1 min-w-[400px] max-w-[600px] cursor-pointer"
             >
-              <ProjectCard
-                project={project}
-                className="hover:shadow-lg transition-all duration-300"
-              />
+              <ProjectCard project={project} index={index} />
             </div>
           ))}
         </div>

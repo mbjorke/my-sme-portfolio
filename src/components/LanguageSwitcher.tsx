@@ -53,7 +53,7 @@ export function LanguageSwitcher() {
           <Button
             key={loc}
             onClick={() => handleLocaleChange(loc)}
-            variant={isActive ? 'default' : 'outline'}
+            variant={isActive ? 'default' : 'ghost'}
             size="sm"
             className={` transition-opacity ${isChanging ? 'opacity-70' : ''}`}
             aria-label={`${languageNames[loc] || loc.toUpperCase()} ${isActive ? '(selected)' : ''}`}

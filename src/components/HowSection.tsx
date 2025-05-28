@@ -29,28 +29,26 @@ export function HowSection() {
   const how = siteConfig.translations[locale as Locale].how;
 
   return (
-    <section id="how" className="py-20 text-center">
-      <h2 className="mb-12 text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/80">
-        {how.title}
-      </h2>
-      <div className="mx-auto w-full max-w-4xl px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <section id="how" className="relative z-10 py-20 text-center bg-background/50">
+      <h2 className="mb-12 text-4xl font-bold">{how.title}</h2>
+      <div className="px-4 mx-auto w-full max-w-4xl">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           {how.steps.map((step, idx) => (
             <Card
               key={step.title + idx}
-              className="card-hover group relative overflow-hidden bg-background/50 backdrop-blur-sm"
+              variant={(['sunset', 'blueberry', 'tertiary', 'secondary'] as const)[idx]}
             >
-              {/* Decorative background elements */}
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              {/* Gradient overlay for better text contrast */}
+              <div className="absolute inset-0 -m-px bg-gradient-to-b to-transparent rounded-xl opacity-70 pointer-events-none from-black/30" />
 
               <CardHeader className="relative z-10">
                 <div className="flex flex-col items-center">
-                  <CardTitle className="mb-4 text-xl font-semibold text-foreground group-hover:text-primary transition-colors duration-300">
+                  <CardTitle className="mb-4 text-xl font-semibold text-white transition-colors duration-300 group-hover:text-white/90">
                     {step.title}
                   </CardTitle>
 
                   {hasImages(step) && step.images.length > 0 && (
-                    <div className="flex flex-wrap justify-center gap-3 py-4 mb-4">
+                    <div className="flex flex-wrap gap-3 justify-center py-4 mb-4">
                       {step.images.map((iconName: string, i: number) => {
                         const icons: Record<string, IconType> = {
                           SiNotion,
@@ -68,7 +66,7 @@ export function HowSection() {
                         return Icon ? (
                           <div
                             key={iconName + i}
-                            className="p-2 rounded-full bg-background/80 shadow-sm icon-hover hover:bg-primary/10"
+                            className="p-2 rounded-full shadow-sm bg-background/80 icon-hover hover:bg-primary/10"
                           >
                             <Icon
                               className="text-foreground/70 hover:text-primary"
@@ -83,7 +81,7 @@ export function HowSection() {
                   )}
                 </div>
 
-                <CardDescription className="text-foreground/80 text-left leading-relaxed">
+                <CardDescription className="leading-relaxed text-left text-white/90">
                   {step.description}
                 </CardDescription>
               </CardHeader>

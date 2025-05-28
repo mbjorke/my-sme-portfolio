@@ -7,8 +7,8 @@ import type { TeamMember } from './TeamMemberCarousel';
 
 export function AboutSection() {
   return (
-    <section className="px-4 py-20 mx-auto max-w-7xl">
-      <div className="flex flex-col gap-12 items-center lg:flex-row">
+    <section className="relative z-10 px-4 py-20 bg-background/90">
+      <div className="flex flex-col gap-12 items-center mx-auto max-w-7xl lg:flex-row">
         {/* Left: About Text */}
         <div className="space-y-8 basis-1/2">
           <h2 className="text-3xl font-bold">Laser focused on results</h2>

@@ -11,9 +11,10 @@ import { ProjectDialog } from './ProjectDialog';
 interface ProjectCardProps {
   project: ProjectCaseStudy;
   className?: string;
+  index?: number;
 }
 
-export function ProjectCard({ project, className = '' }: ProjectCardProps) {
+export function ProjectCard({ project, className = '', index = 0 }: ProjectCardProps) {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const router = useRouter();
 
@@ -66,46 +67,70 @@ export function ProjectCard({ project, className = '' }: ProjectCardProps) {
   return (
     <>
       <Card
-        className={`group relative flex flex-col h-full overflow-hidden transition-all duration-300 hover:shadow-lg ${className}`}
+        key={project.title + index}
+        variant={(['primary', 'primary', 'primary', 'primary'] as const)[index % 4]}
+        className={`flex overflow-hidden relative flex-col h-full transition-all duration-500 group hover:shadow-lg ${className}`}
         onClick={handleCardClick}
+        role="article"
+        aria-label={`Project: ${project.title}`}
       >
-        <div className="relative aspect-video overflow-hidden">
+        <div className="overflow-hidden relative aspect-video">
           <div className="absolute inset-0 z-0">
             <Image
               src={project.image}
-              alt={project.title}
-              className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-110"
-              width={600}
-              height={400}
+              alt={`Screenshot of ${project.title} project`}
+              className="object-cover w-full h-full transition-transform duration-700 ease-out group-hover:scale-105"
+              width={800}
+              height={450}
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              priority={false}
+              priority={index < 3} // Only preload first 3 images
+              placeholder="blur"
+              blurDataURL={
+                project.blurDataURL ||
+                'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAwIiBoZWlnaHQ9IjQ1MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjVmNWY2Ii8+Cjwvc3ZnPg=='
+              }
             />
           </div>
 
           {/* Overlay with gradient and hover effect */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">
-            <div className="translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-              <span className="text-white text-sm font-medium flex items-center gap-2 group-hover:gap-3 transition-all duration-300">
+          <div
+            className="flex absolute inset-0 items-end p-6 bg-gradient-to-t to-transparent opacity-0 transition-opacity duration-500 from-black/80 via-black/30 group-hover:opacity-100"
+            aria-hidden="true"
+          >
+            <div className="transition-transform duration-500 translate-y-4 group-hover:translate-y-0">
+              <span className="flex gap-2 items-center text-sm text-white duration-300 font-mediumtransition-all group-hover:gap-3">
                 {project.openInDialog ? viewDetailsText : viewProjectText}
-                <ExternalLink className="inline-block h-4 w-4 group-hover:translate-x-1 transition-transform duration-300" />
+                <ExternalLink className="inline-block w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
               </span>
             </div>
           </div>
         </div>
 
-        <CardContent className="flex flex-col flex-1 p-6 transition-colors duration-300 group-hover:bg-accent/5">
-          <h3 className="mb-3 text-xl font-semibold text-foreground group-hover:text-primary transition-colors duration-300">
+        <CardContent className="flex flex-col flex-1 p-6 transition-colors duration-300">
+          <h3 className="mb-2 text-xl font-semibold transition-colors duration-300 text-foreground">
             {project.title}
           </h3>
-          <p className="mb-4 text-muted-foreground line-clamp-2 group-hover:text-foreground/80 transition-colors duration-300">
+          <p className="mb-4 transition-colors duration-300 line-clamp-2 text-muted-foreground">
             {project.summary}
           </p>
+          {project.tags?.length ? (
+            <div className="flex flex-wrap gap-2 pt-2 mt-auto">
+              {project.tags.slice(0, 3).map((tag: string) => (
+                <span
+                  key={tag}
+                  className="px-2 py-1 text-xs font-medium rounded-full bg-primary/10 text-primary"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          ) : null}
         </CardContent>
 
-        <CardFooter>
-          <span className="text-sm font-medium text-primary flex items-center gap-1">
+        <CardFooter className="p-4 border-t border-border/50">
+          <span className="flex gap-2 items-center text-sm font-medium transition-colors duration-200 text-muted-foreground group-hover:text-foreground">
             {project.cta?.text || viewProjectCta}
-            <ExternalLink className="h-4 w-4" />
+            <ExternalLink className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
           </span>
         </CardFooter>
       </Card>

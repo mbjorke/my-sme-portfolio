@@ -8,11 +8,10 @@ const ThemeSwitcher = () => {
 
   return (
     <Button
-      variant="outline"
+      variant="ghost"
       size="sm"
       onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-      className={`flex items-center justify-center p-2 rounded-lg transition-colors duration-300 
-                  ${theme === 'dark' ? 'text-white bg-gray-800' : 'text-black bg-gray-200'}`}
+      className={`flex justify-center items-center p-2 rounded-lg transition-colors duration-300`}
     >
       <span className="check">
         <span className="icon">

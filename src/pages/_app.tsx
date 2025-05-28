@@ -5,6 +5,7 @@ import { ThemeProvider } from '@/components/ThemeProvider';
 import { LanguageProvider } from '@/context/LanguageContext';
 import { Layout } from '@/components/Layout';
 import { useEffect } from 'react';
+import Head from 'next/head';
 import '@/styles/globals.css';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -25,12 +26,20 @@ export default function App({ Component, pageProps }: AppProps) {
   }, [locale]);
 
   return (
-    <ThemeProvider>
-      <LanguageProvider>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-      </LanguageProvider>
-    </ThemeProvider>
+    <>
+      <Head>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap"
+          rel="stylesheet"
+        />
+      </Head>
+      <ThemeProvider>
+        <LanguageProvider>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </LanguageProvider>
+      </ThemeProvider>
+    </>
   );
 }

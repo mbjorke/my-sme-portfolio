@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { cn } from '@/lib/utils';
 
-type CardVariant = 'primary' | 'secondary';
+type CardVariant = 'primary' | 'secondary' | 'tertiary' | 'blueberry' | 'sunset' | 'transparent';
 
 interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
   children?: React.ReactNode;
@@ -10,42 +10,51 @@ interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
 
 const Card = React.forwardRef<HTMLDivElement, CardProps>(
   ({ className, variant = 'primary', ...props }, ref) => {
-    const baseStyles = 'rounded-lg transition-all duration-300';
+    const baseStyles = 'rounded-xl transition-all duration-500 hover:scale-[1.02]';
 
     const variantStyles = {
       primary: [
-        'bg-gradient-to-br',
-        'from-[hsl(var(--card-primary-start))]',
-        'to-[hsl(var(--card-primary-end))]',
-        'text-foreground',
-        'rounded-xl',
-        'overflow-hidden',
-        'transition-all duration-300',
-        'border border-primary/10',
-        'hover:border-primary/40',
-        'backdrop-blur-sm',
-        'relative',
-        'group',
-        'before:absolute before:inset-0 before:border-t before:border-white/5 before:pointer-events-none',
+        'bg-gradient-to-br from-primary-800 to-primary-900',
+        'text-primary-foreground',
+        'border border-primary-600/50',
+        'hover:border-primary-600/90',
       ].join(' '),
 
       secondary: [
-        'bg-gradient-to-br',
-        'from-[hsl(var(--card-secondary-start))]',
-        'to-[hsl(var(--card-secondary-end))]',
-        'text-foreground',
-        'rounded-xl',
-        'overflow-hidden',
-        'transition-all duration-300',
-        'border border-primary/10',
-        'hover:border-primary/40',
-        'backdrop-blur-sm',
-        'relative',
-        'group',
-        'before:absolute before:inset-0 before:border-t before:border-white/5 before:pointer-events-none',
+        'bg-gradient-to-r from-primary-500 to-primary-600',
+        'text-secondary-foreground',
+        'border border-primary-400/60',
+        'hover:border-primary-400/70',
+      ].join(' '),
+
+      tertiary: [
+        'bg-gradient-to-r from-accent-500 to-primary-400',
+        'text-accent-foreground',
+        'border border-blue-900/90',
+        'hover:border-blue-900/80',
+      ].join(' '),
+
+      sunset: [
+        'bg-gradient-to-r from-orange-500 via-pink-600 to-purple-700',
+        'text-white',
+        'border border-purple-900/70',
+        'hover:border-purple-900/60',
+      ].join(' '),
+
+      blueberry: [
+        'bg-gradient-to-r from-purple-600 via-blue-900 to-blue-950',
+        'text-white',
+        'border border-blue-900/60',
+        'hover:border-blue-900/70',
+      ].join(' '),
+
+      transparent: [
+        'bg-accent/10',
+        'text-white',
+        'border border-accent/5',
+        'hover:border-accent/10',
       ].join(' '),
     };
-
     return (
       <div
         ref={ref}
@@ -73,7 +82,7 @@ const CardTitle = React.forwardRef<HTMLParagraphElement, CardTitleProps>(
   ({ className, as: Component = 'h3', ...props }, ref) => (
     <Component
       ref={ref}
-      className={cn('text-2xl font-semibold leading-none tracking-tight', className)}
+      className={cn('text-lg font-semibold tracking-tight leading-tight', className)}
       {...props}
     />
   ),
@@ -104,7 +113,7 @@ const CardFooter = React.forwardRef<
     className={cn(
       'flex flex-col gap-4 p-6 pt-4',
       withBorder &&
-        'border-t border-border/50 group-hover:border-primary/20 transition-colors duration-300',
+        'border-t border-primary/10 group-hover:border-primary/20 transition-colors duration-300',
       className,
     )}
     {...props}

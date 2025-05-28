@@ -1,97 +1,18 @@
 :root {
   /* ===== Base Colors ===== */
-  --white: 0 0% 100%;
-  --black: 0 0% 0%;
+  --white: #ffffff;
+  --black: #000000;
 
   /* ===== Brand Colors ===== */
-  /* --ocean-blue: 187 80% 52%; */
-  --ocean-blue: 185 96% 90%;
-  --surf-teal: 158 64% 52%;
-  --sand: 45 30% 85%;
-  --deep-navy: 191 87% 6%;
+  --ocean-blue: #e0f2fe; /* Light blue */
+  --surf-teal: #2dd4bf; /* Teal */
+  --sand: #f5f0e6; /* Light sand */
+  --deep-navy: #0f172a; /* Dark navy */
+  --surf-teal-light: #99f6e4; /* Light teal */
 
   /* Theme colors */
   --primary: var(--ocean-blue);
-  --primary-foreground: 0 0% 10%; /* Dark text color for primary buttons */
-  --background: 0 0% 100%;
-  --foreground: 0 0% 10%;
-
-  /* ===== Status Colors ===== */
-  --error: 0 84% 60%;
-  --error-light: 0 100% 90%;
-  --success: var(--surf-teal);
-  --warning: 38 92% 50%;
-  --info: 199 89% 48%;
-
-  /* ===== Neutral Colors ===== */
-  --gray-100: 0 0% 98%;
-  /* Light mode background */
-  --gray-200: 214 32% 91%;
-  /* Light mode borders/inputs */
-  --gray-300: 220 9% 46%;
-  /* Light mode muted text */
-  --gray-800: 217 33% 17%;
-  /* Dark mode muted background */
-  --gray-900: 220 30% 15%;
-
-  /* Border and input colors */
-  --border: var(--gray-200);
-  --input: var(--gray-200);
-  /* Dark mode dark gray */
-
-  /* ===== Gradients ===== */
-  --gradient-start: 191 80% 87%;
-  --gradient-middle: 161 40% 35%;
-  --gradient-end: 161 40% 40%;
-  --gradient: linear-gradient(
-    135deg,
-    hsl(var(--gradient-start)),
-    hsl(var(--gradient-middle)),
-    hsl(var(--gradient-end))
-  );
-
-  /* ===== Card Gradients ===== */
-  /* 
-   * Primary Card Gradient
-   * Used for primary action cards and important content
-   * Gradient goes from deep navy to a slightly lighter navy
-   */
-  --card-primary-start: 195 80% 10%;
-  --card-primary-end: var(--gray-800);
-  /* Slightly lighter navy */
-  --card-primary: linear-gradient(
-    135deg,
-    hsl(var(--card-primary-start)),
-    hsl(var(--card-primary-end))
-  );
-
-  /* 
-   * Secondary Card Gradient
-   * Used for secondary content and less prominent cards
-   * Gradient goes from teal to the same end color as primary
-   */
-  --card-secondary-start: 195 80% 10%;
-  /* Teal accent color */
-  --card-secondary-end: 189 92% 26%;
-  /* Matches primary end for consistency */
-  --card-secondary: linear-gradient(
-    135deg,
-    hsl(var(--card-secondary-start)),
-    hsl(var(--card-secondary-end))
-  );
-
-  /* Card Border Colors */
-  --card-border: var(--surf-teal);
-  --card-border-dark: var(--surf-teal);
-  --card-hover: 170 45% 75%;
-  /* Lighter teal for hover states */
-
-  /* ===== Typography ===== */
-  --font-sans:
-    'Montserrat', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-    'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
-
-  /* ===== Base Theme ===== */
+  --primary-foreground: #1a1a1a; /* Dark gray for text */
   --background: var(--sand);
   --foreground: var(--deep-navy);
   --card: var(--deep-navy);
@@ -99,17 +20,63 @@
   --popover: var(--deep-navy);
   --popover-foreground: var(--deep-navy);
 
+  /* ===== Status Colors ===== */
+  --error: #ef4444; /* Red */
+  --error-light: #fee2e2; /* Light red */
+  --success: var(--surf-teal);
+  --warning: #f59e0b; /* Amber */
+  --info: #3b82f6; /* Blue */
+
+  /* ===== Neutral Colors ===== */
+  --gray-100: #f8fafc; /* Light mode background */
+  --gray-200: #e2e8f0; /* Light mode borders/inputs */
+  --gray-300: #94a3b8; /* Light mode muted text */
+  --gray-800: #1e293b; /* Dark mode muted background */
+  --gray-900: #0f172a; /* Dark mode text */
+
+  /* Border and input colors */
+  --border: var(--gray-200);
+  --input: var(--gray-200);
+
+  /* ===== Gradients ===== */
+  --gradient: linear-gradient(135deg, #e0f2fe 0%, #2dd4bf 50%, #22d3ee 100%);
+
+  /* ===== Card Styles ===== */
+  /* Card colors */
+  /* Primary to Accent Gradient */
+  --card-primary: linear-gradient(
+    135deg,
+    var(--primary-800, #00222c) 0%,
+    var(--primary-900, #001114) 100%
+  );
+  --card-primary-foreground: #ffffff;
+
+  /* Primary to Accent Gradient (Lighter) */
+  --card-secondary: linear-gradient(
+    135deg,
+    var(--primary-600, #0284c7) 0%,
+    var(--accent-500, #14b8a6) 100%
+  );
+  --card-secondary-foreground: #ffffff;
+
+  /* Card Border Colors */
+  --card-border: #0f172a; /* deep-navy */
+  --card-border-dark: #0f172a; /* deep-navy */
+  --card-hover: #e0f2fe; /* ocean-blue */
+  --card-hover-opacity: 0.5;
+
+  /* ===== Typography ===== */
+  --font-sans:
+    'Montserrat', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
+
   /* ===== Semantic Colors ===== */
-  --primary: var(--ocean-blue);
-  --primary-foreground: var(--deep-navy);
   --secondary: var(--surf-teal);
   --secondary-foreground: var(--white);
   --accent: var(--surf-teal-light);
   --accent-foreground: var(--deep-navy);
   --muted: var(--sand);
   --muted-foreground: var(--gray-300);
-  --border: var(--gray-200);
-  --input: var(--gray-200);
   --ring: var(--ocean-blue);
 
   /* ===== Status Foregrounds ===== */
@@ -130,10 +97,11 @@
   --card-light-foreground: var(--deep-navy);
   --card-dark-bg: var(--white);
   --card-dark-foreground: var(--deep-navy);
-  --card-border: var(--surf-teal);
-  --card-border-dark: var(--surf-teal);
-  --card-hover: 170 45% 75%;
-  /* Lighter Surf Teal */
+  --card-border-hsl: 191 87% 6%; /* deep-navy */
+  --card-border-dark-hsl: 191 87% 6%; /* deep-navy */
+  --card-hover-hsl: 185 96% 90%; /* ocean-blue */
+  --card-hover-opacity: 0.5;
+  /* Card border and hover styles */
 
   /* ===== Border Radius ===== */
   --radius: 0.5rem;
@@ -166,10 +134,11 @@
   --card-light-foreground: var(--gray-100);
   --card-dark-bg: var(--deep-navy);
   --card-dark-foreground: var(--gray-100);
-  --card-border: var(--surf-teal);
-  --card-border-dark: var(--surf-teal);
-  --card-hover: 170 35% 35%;
-  /* Darker Surf Teal for dark mode */
+  --card-border: 191 87% 6%; /* deep-navy */
+  --card-border-dark: 191 87% 6%; /* deep-navy */
+  --card-hover: 185 96% 90%; /* ocean-blue */
+  --card-hover-opacity: 0.5;
+  /* Card border and hover styles for dark mode */
 
   /* ===== Chart Colors ===== */
   --chart-1: 198 70% 55%;

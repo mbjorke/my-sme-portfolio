@@ -6,6 +6,7 @@ import { useLanguage } from '@/context/LanguageContext';
 import Button from '@/components/ui/Button';
 import Image from 'next/image';
 import Link from 'next/link';
+// TestimonialsSection is not used in this file
 
 export function HeroSection() {
   const { locale } = useLanguage();
@@ -14,17 +15,19 @@ export function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative flex items-center justify-center min-h-[60vh] w-full overflow-hidden text-center"
+      className="relative flex flex-col justify-center items-center pt-20 w-full min-h-screen text-center"
     >
       {/* Background image */}
-      <div className="absolute inset-0 z-0">
-        <Image
-          src="/assets/alone-surfer.jpg"
-          alt="Surfer background"
-          fill
-          className="object-cover w-full h-full"
-          priority
-        />
+      <div className="fixed inset-0 z-0">
+        <div className="absolute inset-0">
+          <Image
+            src="/assets/alone-surfer-horizontal.jpg"
+            alt="Surfer background"
+            fill
+            className="object-cover"
+            priority
+          />
+        </div>
         {/* Overlay for readability */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70" />
       </div>
@@ -50,7 +53,7 @@ export function HeroSection() {
             asChild
             variant="default"
             size="lg"
-            className="inline-flex items-center justify-center gap-2 text-primary-foreground"
+            className="inline-flex gap-2 justify-center items-center text-primary-foreground"
           >
             <Link href="#contact" aria-label={hero.callToAction}>
               <span>{hero.callToAction}</span>

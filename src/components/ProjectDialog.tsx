@@ -13,7 +13,7 @@ import {
 } from '@/components/ui/dialog';
 import Button from '@/components/ui/Button';
 import { ExternalLink, Monitor, FileText } from 'lucide-react';
-import { cn } from '@/lib/utils';
+// cn is not used in this file
 import { ProjectCaseStudy } from '@/types/project';
 
 interface ProjectDialogProps {
@@ -102,15 +102,10 @@ export function ProjectDialog({ project, open, onOpenChange }: ProjectDialogProp
           <div className="px-6 mt-4 border-b">
             <div className="flex space-x-4">
               <Button
-                variant="ghost"
+                variant="tab"
                 size="sm"
+                active={activeTab === 'details'}
                 onClick={() => setActiveTab('details')}
-                className={cn(
-                  'rounded-none border-b-2 h-auto py-2 px-3',
-                  activeTab === 'details'
-                    ? 'border-primary text-primary bg-secondary/50'
-                    : 'border-transparent text-muted-foreground hover:bg-transparent hover:text-foreground',
-                )}
               >
                 <FileText className="mr-2 w-4 h-4" />
                 {translations.details}
@@ -118,15 +113,10 @@ export function ProjectDialog({ project, open, onOpenChange }: ProjectDialogProp
 
               {hasPrototypeLink && (
                 <Button
-                  variant="ghost"
+                  variant="tab"
                   size="sm"
+                  active={activeTab === 'prototype'}
                   onClick={() => setActiveTab('prototype')}
-                  className={cn(
-                    'rounded-none border-b-2 h-auto py-2 px-3',
-                    activeTab === 'prototype'
-                      ? 'border-primary text-primary bg-secondary/50'
-                      : 'border-transparent text-muted-foreground hover:bg-transparent hover:text-foreground',
-                  )}
                 >
                   <Monitor className="mr-2 w-4 h-4" />
                   {translations.livePrototype}

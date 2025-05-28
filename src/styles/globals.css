@@ -1,43 +1,21 @@
-@import './design-system/variables.css';
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap');
-@import 'tailwindcss/base';
-@import './design-system/forms.css';
-@import './design-system/hero.css';
+@tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@layer utilities {
-  .bg-background {
-    background-color: hsl(var(--background));
-  }
-
-  .text-foreground {
-    color: hsl(var(--foreground));
-  }
+:root {
+  --font-sans: 'Montserrat', sans-serif;
 }
 
 @layer base {
   * {
     @apply border-border;
   }
-
   body {
-    font-family: var(--font-sans, sans-serif);
+    @apply bg-background text-foreground;
     font-feature-settings:
       'rlig' 1,
       'calt' 1;
-  }
-
-  /* Debug styles */
-  .debug-size {
-    border: 1px solid red !important;
-  }
-
-  button[class*='size-'] {
-    outline: 2px dashed blue !important;
-  }
-
-  [class*='h-12'] {
-    background-color: rgba(255, 0, 0, 0.1) !important;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 }

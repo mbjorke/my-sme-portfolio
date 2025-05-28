@@ -11,7 +11,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(({ className, ...pr
     <input
       ref={ref}
       className={cn(
-        'p-2 px-3 py-2 w-full rounded-md border text-foreground bg-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary',
+        'p-2 px-3 py-2 w-full rounded-md border border-primary/90 text-foreground bg-primary-800 placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary',
         className,
       )} // Combine default styles with custom class
       {...props} // Spread the rest of the props to the input
