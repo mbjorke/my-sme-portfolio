@@ -29,18 +29,15 @@ export function HowSection() {
   const how = siteConfig.translations[locale as Locale].how;
 
   return (
-    <section id="how" className="relative z-10 py-20 text-center bg-background/50">
+    <section id="how" className="relative z-10 py-20 text-center bg-background/60">
       <h2 className="mb-12 text-4xl font-bold">{how.title}</h2>
       <div className="px-4 mx-auto w-full max-w-4xl">
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           {how.steps.map((step, idx) => (
             <Card
               key={step.title + idx}
-              variant={(['sunset', 'blueberry', 'tertiary', 'secondary'] as const)[idx]}
+              variant={(['primary', 'secondary', 'tertiary', 'quaternary'] as const)[idx]}
             >
-              {/* Gradient overlay for better text contrast */}
-              <div className="absolute inset-0 -m-px bg-gradient-to-b to-transparent rounded-xl opacity-70 pointer-events-none from-black/30" />
-
               <CardHeader className="relative z-10">
                 <div className="flex flex-col items-center">
                   <CardTitle className="mb-4 text-xl font-semibold text-white transition-colors duration-300 group-hover:text-white/90">

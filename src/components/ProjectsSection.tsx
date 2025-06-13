@@ -44,7 +44,7 @@ export function ProjectsSection() {
       : 'Explore some of my recent projects. Click on a project to learn more.';
 
   return (
-    <section id="projects" className="relative z-10 px-4 py-20 mx-auto mb-12 max-w-7xl">
+    <section id="projects" className="relative z-10 p-40 text-center bg-background/70">
       <div className="text-center">
         <h2 className="mb-4 text-4xl font-bold">{sectionTitle}</h2>
         <p className="text-lg text-muted-foreground">{description}</p>

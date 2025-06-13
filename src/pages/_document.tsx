@@ -13,6 +13,10 @@ export default function Document({ locale = siteConfig.defaultLocale }: Document
         <meta charSet="utf-8" />
         <meta name="theme-color" content="#000000" />
         <link rel="icon" href="/favicon.ico" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap"
+          rel="stylesheet"
+        />
       </Head>
       <body>
         <Main />

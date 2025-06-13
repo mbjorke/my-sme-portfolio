@@ -5,6 +5,7 @@ import ThemeSwitcher from '@/components/ThemeSwitcher';
 import type { ReactNode } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { Card, CardHeader, CardTitle } from './ui/card';
 
 export function Layout({ children }: { children: ReactNode }) {
   return (
@@ -12,14 +13,20 @@ export function Layout({ children }: { children: ReactNode }) {
       <header className="flex fixed top-0 right-0 left-0 z-50 gap-4 justify-between items-center p-4 w-full border-b backdrop-blur-sm border-foreground/10 bg-background/80">
         <div className="flex gap-4 items-center">
           <Link href="/" className="flex items-center">
-            <Image
-              src="/logo.svg"
-              alt="Logo"
-              width={32}
-              height={32}
-              className="mr-2 w-auto h-8"
-              priority
-            />
+            <Card variant="blueberry" className="rounded-full">
+              <CardHeader>
+                <CardTitle>
+                  <Image
+                    src="/logo.svg"
+                    alt="Logo"
+                    width={32}
+                    height={32}
+                    className="mr-2 w-auto h-8"
+                    priority
+                  />
+                </CardTitle>
+              </CardHeader>
+            </Card>
           </Link>
           <Nav />
         </div>

@@ -1,7 +1,7 @@
 import React from 'react';
+import { ArrowUpRight, Heart } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
-import { Heart } from 'lucide-react';
-import { cn } from '@/lib/utils';
+// Utility functions can be imported here if needed
 
 type HoverEffectType = 'SCALE' | 'COLOR' | 'GLOW';
 
@@ -14,36 +14,39 @@ interface HoverEffectExample {
 const hoverEffectExamples: HoverEffectExample[] = [
   {
     type: 'SCALE',
-    label: 'Scale Effect',
+    label: 'Scale on Hover',
     component: (
-      <div className="group relative p-6 rounded-lg bg-background border border-border hover:border-primary/20 transition-all duration-300 hover:scale-[1.02]">
-        <div className="text-lg font-medium mb-2">Scale Effect</div>
-        <p className="text-muted-foreground group-hover:text-foreground/80 transition-colors duration-300">
-          Hover to see subtle scaling
+      <CardContent className="p-6 text-center group">
+        <div className="flex justify-center items-center mx-auto mb-4 w-16 h-16 rounded-full transition-transform duration-300 bg-primary/10 group-hover:scale-110">
+          <ArrowUpRight className="w-8 h-8 text-primary" />
+        </div>
+        <div className="text-lg font-medium">Scale Effect</div>
+        <p className="transition-colors duration-300 text-muted-foreground group-hover:text-foreground/80">
+          Hover to scale up
         </p>
-      </div>
+      </CardContent>
     ),
   },
   {
     type: 'COLOR',
     label: 'Color Transition',
     component: (
-      <div className="group p-6 rounded-lg bg-background border border-border hover:border-primary/30 transition-colors duration-300">
-        <Heart className="w-8 h-8 text-muted-foreground group-hover:text-primary transition-colors duration-300" />
+      <CardContent className="p-6 text-center group">
+        <Heart className="w-8 h-8 transition-colors duration-300 text-muted-foreground group-hover:text-primary" />
         <div className="mt-3 text-lg font-medium">Color Transition</div>
-        <p className="text-muted-foreground group-hover:text-foreground/80 transition-colors duration-300">
-          Hover to see color transitions
+        <p className="transition-colors duration-300 text-muted-foreground group-hover:text-foreground/80">
+          Hover to change colors
         </p>
-      </div>
+      </CardContent>
     ),
   },
   {
     type: 'GLOW',
-    label: 'Glow Effect',
+    label: 'Glow on Hover',
     component: (
-      <div className="group relative p-6 rounded-lg bg-background border border-border hover:shadow-[0_0_20px_rgba(59,130,246,0.2)] hover:border-primary/30 transition-all duration-300">
+      <CardContent className="overflow-hidden relative p-6 text-center group">
         <div
-          className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+          className="absolute -inset-0.5 rounded-lg opacity-0 group-hover:opacity-100 blur transition duration-300"
           style={{
             background:
               'radial-gradient(ellipse at center, rgba(59,130,246,0.1) 0%, rgba(59,130,246,0) 70%)',
@@ -51,52 +54,34 @@ const hoverEffectExamples: HoverEffectExample[] = [
         />
         <div className="relative z-10">
           <div className="text-lg font-medium">Glow Effect</div>
-          <p className="text-muted-foreground group-hover:text-foreground/80 transition-colors duration-300">
+          <p className="transition-colors duration-300 text-muted-foreground group-hover:text-foreground/80">
             Hover to see glow effect
           </p>
         </div>
-      </div>
+      </CardContent>
     ),
   },
 ];
 
 export function HoverEffectsShowcase() {
   const [activeTab, setActiveTab] = React.useState<HoverEffectType>('SCALE');
-  const activeExample = hoverEffectExamples.find((example) => example.type === activeTab);
 
   return (
-    <div className="w-full max-w-4xl mx-auto">
-      <h2 className="text-2xl font-bold mb-6">Hover Effects</h2>
+    <div className="mx-auto w-full max-w-4xl">
+      <h2 className="mb-6 text-2xl font-bold">Hover Effects</h2>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+      <div className="grid grid-cols-1 gap-4 mb-8 md:grid-cols-3">
         {hoverEffectExamples.map(({ type, component }) => (
           <div key={type} className="cursor-pointer" onClick={() => setActiveTab(type)}>
             <Card
-              className={cn(
-                'h-full transition-all duration-200',
-                activeTab === type
-                  ? 'ring-2 ring-primary ring-offset-2'
-                  : 'opacity-75 hover:opacity-100',
-              )}
+              variant={activeTab === type ? 'primary' : 'secondary'}
+              className="h-full transition-all duration-200"
             >
               {component}
             </Card>
           </div>
         ))}
       </div>
-
-      {activeExample && (
-        <Card>
-          <CardContent className="p-6">
-            <h3 className="text-lg font-medium mb-4">{activeExample.label}</h3>
-            <div className="bg-muted/50 p-4 rounded-lg">
-              <pre className="text-sm overflow-x-auto">
-                {JSON.stringify(activeExample.component, null, 2)}
-              </pre>
-            </div>
-          </CardContent>
-        </Card>
-      )}
     </div>
   );
 }

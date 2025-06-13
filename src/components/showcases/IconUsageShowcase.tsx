@@ -1,155 +1,151 @@
 import React from 'react';
 import { SiGithub, SiLinkedin } from 'react-icons/si';
-import { FiMail, FiPhone, FiMapPin } from 'react-icons/fi';
-
-type IconVariant = 'social' | 'contact' | 'action';
-
-interface IconExample {
-  name: string;
-  icon: React.ReactNode;
-  variant: IconVariant;
-  className?: string;
-  href?: string;
-}
+import {
+  FiDownload,
+  FiSettings,
+  FiHeart,
+  FiArrowRight,
+  FiZap,
+  FiCode,
+  FiCheckCircle,
+  FiAlertCircle,
+  FiInfo,
+  FiMail,
+  FiPhone,
+} from 'react-icons/fi';
+import { Card } from '@/components/ui/card';
+import { Button } from '@/components/ui/Button';
+import Link from 'next/link';
 
 export function IconUsageShowcase() {
-  const iconExamples: IconExample[] = [
-    {
-      name: 'GitHub',
-      icon: <SiGithub size={24} />,
-      variant: 'social',
-      href: 'https://github.com/username',
-    },
-    {
-      name: 'LinkedIn',
-      icon: <SiLinkedin size={24} />,
-      variant: 'social',
-      href: 'https://linkedin.com/in/username',
-    },
-    {
-      name: 'Email',
-      icon: <FiMail size={20} />,
-      variant: 'contact',
-      href: 'mailto:example@example.com',
-    },
-    {
-      name: 'Phone',
-      icon: <FiPhone size={20} />,
-      variant: 'contact',
-      href: 'tel:+1234567890',
-    },
-    {
-      name: 'Location',
-      icon: <FiMapPin size={20} />,
-      variant: 'contact',
-      className: 'flex items-center space-x-2',
-    },
-    {
-      name: 'External Link',
-      icon: <span>→</span>,
-      variant: 'action',
-      className: 'inline ml-1',
-    },
-  ];
-
-  const getVariantClasses = (variant: IconVariant) => {
-    switch (variant) {
-      case 'social':
-        return 'text-gray-600 hover:text-primary transition-colors';
-      case 'contact':
-        return 'flex items-center space-x-3 group hover:text-primary transition-colors';
-      case 'action':
-        return 'inline-flex items-center';
-      default:
-        return '';
-    }
-  };
-
-  const renderIconExample = (example: IconExample) => {
-    const content = (
-      <>
-        <span className={example.variant === 'social' ? 'text-primary' : ''}>{example.icon}</span>
-        {example.variant === 'contact' && <span>{example.name}</span>}
-        {example.variant === 'action' && <span className="ml-1">{example.name}</span>}
-      </>
-    );
-
-    if (example.href) {
-      return (
-        <a
-          key={example.name}
-          href={example.href}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={`${getVariantClasses(example.variant)} ${example.className || ''}`}
-          aria-label={`${example.name} link`}
-        >
-          {content}
-        </a>
-      );
-    }
-
-    return (
-      <div
-        key={example.name}
-        className={`${getVariantClasses(example.variant)} ${example.className || ''}`}
-      >
-        {content}
-      </div>
-    );
-  };
-
   return (
     <div className="space-y-8">
+      {/* Icons in Buttons */}
       <div>
-        <h3 className="text-lg font-medium mb-4">Social Icons</h3>
-        <div className="flex flex-wrap gap-4 p-4 border rounded-lg">
-          {iconExamples
-            .filter((icon) => icon.variant === 'social')
-            .map((icon) => renderIconExample(icon))}
+        <h3 className="mb-4 text-lg font-medium">Icons in Buttons</h3>
+        <Card className="p-6">
+          <div className="flex flex-wrap items-center gap-4">
+            <Button>
+              <FiDownload className="mr-2 h-4 w-4" />
+              Download
+            </Button>
+            <Button variant="outline">
+              <FiSettings className="mr-2 h-4 w-4" />
+              Settings
+            </Button>
+            <Button variant="ghost" size="icon">
+              <FiHeart className="h-4 w-4" />
+            </Button>
+            <Button variant="secondary">
+              <FiCheckCircle className="mr-2 h-4 w-4" />
+              Complete
+            </Button>
+          </div>
+        </Card>
+      </div>
+
+      {/* Icons in Links */}
+      <div>
+        <h3 className="mb-4 text-lg font-medium">Icons in Links</h3>
+        <Card className="p-6">
+          <div className="space-y-4">
+            <Link href="/" className="group flex items-center text-primary hover:underline">
+              Learn more{' '}
+              <FiArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </Link>
+            <div className="flex items-center space-x-6">
+              <Link
+                href="https://github.com"
+                target="_blank"
+                rel="noopener"
+                className="text-muted-foreground hover:text-foreground transition-colors"
+                aria-label="GitHub"
+              >
+                <SiGithub className="h-5 w-5" />
+              </Link>
+              <Link
+                href="https://linkedin.com"
+                target="_blank"
+                rel="noopener"
+                className="text-muted-foreground hover:text-blue-600 transition-colors"
+                aria-label="LinkedIn"
+              >
+                <SiLinkedin className="h-5 w-5" />
+              </Link>
+            </div>
+          </div>
+        </Card>
+      </div>
+
+      {/* Standalone Icons */}
+      <div>
+        <h3 className="mb-4 text-lg font-medium">Standalone Icons</h3>
+        <Card className="p-6">
+          <div className="space-y-6">
+            <div className="flex items-center space-x-6">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary">
+                <FiMail className="h-5 w-5" />
+              </div>
+              <div className="text-sm">
+                <p className="font-medium">Email us</p>
+                <p className="text-muted-foreground">contact@example.com</p>
+              </div>
+            </div>
+
+            <div className="flex items-center space-x-6">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-secondary text-secondary-foreground">
+                <FiPhone className="h-5 w-5" />
+              </div>
+              <div className="text-sm">
+                <p className="font-medium">Call us</p>
+                <p className="text-muted-foreground">+1 (555) 123-4567</p>
+              </div>
+            </div>
+          </div>
+        </Card>
+      </div>
+
+      {/* Icons in Cards */}
+      <div>
+        <h3 className="mb-4 text-lg font-medium">Icons in Cards</h3>
+        <div className="grid gap-4 md:grid-cols-2">
+          <Card className="p-6 transition-all hover:shadow-md">
+            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary">
+              <FiZap className="h-6 w-6" />
+            </div>
+            <h4 className="mb-2 text-lg font-medium">Feature Title</h4>
+            <p className="text-muted-foreground">Short description of the feature goes here.</p>
+          </Card>
+
+          <Card variant="secondary" className="p-6 transition-all hover:shadow-md">
+            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-secondary-foreground/10 text-secondary-foreground">
+              <FiCode className="h-6 w-6" />
+            </div>
+            <h4 className="mb-2 text-lg font-medium">Another Feature</h4>
+            <p className="text-muted-foreground">Another description goes here.</p>
+          </Card>
         </div>
       </div>
 
+      {/* Status Icons */}
       <div>
-        <h3 className="text-lg font-medium mb-4">Contact Icons</h3>
-        <div className="space-y-4 p-4 border rounded-lg">
-          {iconExamples
-            .filter((icon) => icon.variant === 'contact')
-            .map((icon) => renderIconExample(icon))}
-        </div>
-      </div>
-
-      <div>
-        <h3 className="text-lg font-medium mb-4">Action Icons</h3>
-        <div className="p-4 border rounded-lg">
-          <button className="flex items-center text-primary hover:underline">
-            View more {renderIconExample(iconExamples.find((icon) => icon.variant === 'action')!)}
-          </button>
-        </div>
-      </div>
-
-      <div className="mt-8 p-4 bg-muted rounded-lg">
-        <h3 className="font-medium mb-2">Usage Example</h3>
-        <pre className="bg-background p-4 rounded text-sm overflow-x-auto">
-          {`// Social Icon
-<Link
-  href="https://github.com/username"
-  target="_blank"
-  rel="noopener noreferrer"
-  className="flex justify-center items-center w-10 h-10 rounded-full transition-all duration-300 hover:bg-primary/10 hover:scale-110"
-  aria-label="GitHub profile"
->
-  <SiGithub size={24} className="text-primary" />
-</Link>
-
-// Contact Icon
-<div className="flex items-center space-x-3 group hover:text-primary transition-colors">
-  <div className="flex items-center justify-center w-10 h-10 rounded-full bg-primary/10 text-primary">
-    <FiPhone size={20} />
-  </div>
-  <span>+123 456 7890</span>
-</div>`}
-        </pre>
+        <h3 className="mb-4 text-lg font-medium">Status Icons</h3>
+        <Card className="p-6">
+          <div className="flex flex-wrap items-center gap-6">
+            <div className="flex items-center space-x-2 text-emerald-500">
+              <FiCheckCircle className="h-5 w-5" />
+              <span>Success</span>
+            </div>
+            <div className="flex items-center space-x-2 text-amber-500">
+              <FiAlertCircle className="h-5 w-5" />
+              <span>Warning</span>
+            </div>
+            <div className="flex items-center space-x-2 text-blue-500">
+              <FiInfo className="h-5 w-5" />
+              <span>Info</span>
+            </div>
+          </div>
+        </Card>
       </div>
     </div>
   );

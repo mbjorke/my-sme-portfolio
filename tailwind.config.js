@@ -7,6 +7,26 @@ const forms = require('@tailwindcss/forms');
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: 'class',
+  safelist: [
+    // Safelist all color and opacity combinations
+    {
+      pattern:
+        /(bg|text|border|ring|outline|divide|from|via|to)-(primary|secondary|accent|destructive|success|warning|muted|card|purple|blue)-(50|100|200|300|400|500|600|700|800|900|950|DEFAULT)/,
+      variants: ['hover', 'focus', 'dark'],
+    },
+    {
+      pattern:
+        /(bg|text|border|ring|outline|divide|from|via|to)-(primary|secondary|accent|destructive|success|warning|muted|card|purple|blue)-(50|100|200|300|400|500|600|700|800|900|950|DEFAULT)\/(25|50|75|90|100)/,
+      variants: ['hover', 'focus', 'dark'],
+    },
+    // Ensure gradient classes are included
+    'from-purple-600',
+    'via-blue-800',
+    'to-blue-900',
+    'from-orange-500',
+    'via-pink-600',
+    'to-purple-700',
+  ],
   content: ['./src/pages/**/*.{js,ts,jsx,tsx,mdx}', './src/components/**/*.{js,ts,jsx,tsx,mdx}'],
   theme: {
     container: {
@@ -27,16 +47,43 @@ module.exports = {
         primary: {
           DEFAULT: '#044957',
           foreground: '#f5f0e6',
-          50: '#e6f0f2',
-          100: '#b3d1d8',
-          200: '#80b3bf',
-          300: '#4d94a6',
+          50: '#f0f7f9',
+          100: '#e6f0f2',
+          200: '#b3d1d8',
+          300: '#80b3bf',
           400: '#1a758d',
           500: '#005674',
           600: '#00445c',
           700: '#003344',
           800: '#00222c',
           900: '#001114',
+          950: '#00090c',
+        },
+        purple: {
+          50: '#faf5ff',
+          100: '#f3e8ff',
+          200: '#e9d5ff',
+          300: '#d8b4fe',
+          400: '#c084fc',
+          500: '#a855f7',
+          600: '#9333ea',
+          700: '#7e22ce',
+          800: '#6b21a8',
+          900: '#581c87',
+          950: '#3b0764',
+        },
+        blue: {
+          50: '#eff6ff',
+          100: '#dbeafe',
+          200: '#bfdbfe',
+          300: '#93c5fd',
+          400: '#60a5fa',
+          500: '#3b82f6',
+          600: '#2563eb',
+          700: '#1d4ed8',
+          800: '#1e40af',
+          900: '#1e3a8a',
+          950: '#172554',
         },
         secondary: {
           DEFAULT: '#e0f2fe',
@@ -51,6 +98,7 @@ module.exports = {
           700: '#0369a1',
           800: '#075985',
           900: '#0c4a6e',
+          950: '#083049',
         },
         card: {
           light: '#ffffff',
@@ -73,11 +121,12 @@ module.exports = {
           700: '#b91c1c',
           800: '#991b1b',
           900: '#7f1d1d',
+          950: '#450a0a',
         },
         success: {
           DEFAULT: '#10b981' /* emerald-500 */,
           foreground: '#ffffff',
-          50: '#ecfdf5',
+          50: '#f0fdfa',
           100: '#d1fae5',
           200: '#a7f3d0',
           300: '#6ee7b7',
@@ -87,6 +136,7 @@ module.exports = {
           700: '#047857',
           800: '#065f46',
           900: '#064e3b',
+          950: '#022c22',
         },
         warning: {
           DEFAULT: '#f59e0b' /* amber-500 */,
@@ -101,6 +151,7 @@ module.exports = {
           700: '#b45309',
           800: '#92400e',
           900: '#78350f',
+          950: '#451a03',
         },
         info: {
           DEFAULT: '#b3d1d8' /* blue-500 */,
@@ -131,7 +182,7 @@ module.exports = {
           foreground: '#f5f0e6' /* white/foreground */,
         },
 
-        // Accent colors (used in forms)
+        // Accent colors (used in forms and gradients)
         accent: {
           DEFAULT: '#2dd4bf' /* teal */,
           foreground: '#ffffff',

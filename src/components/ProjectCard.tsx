@@ -127,7 +127,7 @@ export function ProjectCard({ project, className = '', index = 0 }: ProjectCardP
           ) : null}
         </CardContent>
 
-        <CardFooter className="p-4 border-t border-border/50">
+        <CardFooter>
           <span className="flex gap-2 items-center text-sm font-medium transition-colors duration-200 text-muted-foreground group-hover:text-foreground">
             {project.cta?.text || viewProjectCta}
             <ExternalLink className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />

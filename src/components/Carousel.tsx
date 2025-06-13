@@ -32,40 +32,47 @@ export function Carousel<T>({ items, renderItem, className = '', autoPlay }: Car
 
   return (
     <div
-      className={`mx-auto w-full ${className}`}
+      className={`grid grid-rows-[1fr_auto] h-full ${className}`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <div>{renderItem(items[currentIndex], currentIndex)}</div>
-      <div className="flex justify-center mt-8 space-x-4">
-        <button
-          className="flex justify-center items-center w-10 h-10 rounded-full text-primary hover:bg-primary/10"
-          onClick={prev}
-          aria-label="Previous"
-        >
-          <span className="sr-only">Previous</span>
-          &#8592;
-        </button>
-        <div className="flex items-center space-x-2">
-          {items.map((_, idx) => (
-            <button
-              key={idx}
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                idx === currentIndex ? 'bg-primary scale-110' : 'bg-primary/20 hover:bg-primary/40'
-              }`}
-              onClick={() => setCurrentIndex(idx)}
-              aria-label={`Go to slide ${idx + 1}`}
-            />
-          ))}
+      {/* Content Area */}
+      <div className="min-h-0">{renderItem(items[currentIndex], currentIndex)}</div>
+
+      {/* Navigation Controls */}
+      <div className="mt-4 flex justify-center">
+        <div className="inline-flex items-center bg-background/80 backdrop-blur-sm px-3 py-1.5 rounded-full border border-accent/10 shadow-md">
+          <button
+            className="flex justify-center items-center w-8 h-8 rounded-full text-accent hover:bg-primary/20 transition-colors"
+            onClick={prev}
+            aria-label="Previous"
+          >
+            <span className="sr-only">Previous</span>
+            &#8592;
+          </button>
+
+          <div className="flex items-center mx-2 space-x-1.5">
+            {items.map((_, idx) => (
+              <button
+                key={idx}
+                className={`w-2 h-2 rounded-full transition-all duration-200 ${
+                  idx === currentIndex ? 'bg-accent scale-125' : 'bg-accent/30 hover:bg-accent/50'
+                }`}
+                onClick={() => setCurrentIndex(idx)}
+                aria-label={`Go to slide ${idx + 1}`}
+              />
+            ))}
+          </div>
+
+          <button
+            className="flex justify-center items-center w-8 h-8 rounded-full text-accent hover:bg-primary/20 transition-colors"
+            onClick={next}
+            aria-label="Next"
+          >
+            <span className="sr-only">Next</span>
+            &#8594;
+          </button>
         </div>
-        <button
-          className="flex justify-center items-center w-10 h-10 rounded-full text-primary hover:bg-primary/10"
-          onClick={next}
-          aria-label="Next"
-        >
-          <span className="sr-only">Next</span>
-          &#8594;
-        </button>
       </div>
     </div>
   );

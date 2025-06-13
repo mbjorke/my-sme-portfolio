@@ -15,7 +15,7 @@ export function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative flex flex-col justify-center items-center pt-20 w-full min-h-screen text-center"
+      className="flex relative flex-col justify-center items-center pt-20 w-full min-h-screen text-center"
     >
       {/* Background image */}
       <div className="fixed inset-0 z-0">
@@ -37,24 +37,16 @@ export function HeroSection() {
           {hero.subheading}
         </span>
         <h1 className="text-white text-[clamp(2.5rem,8vw,4rem)] leading-tight text-left mb-2 font-normal">
-          {hero.heading} {/* Classic Tailwind gradient */}
-          <span className="text-transparent bg-gradient-to-r from-[#7ed6df] via-[#16a085] to-[#1de9b6] bg-clip-text font-bold">
+          {hero.heading} {''}
+          <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-accent-200 via-success-400 to-success-600">
             {hero.highlight}
           </span>
         </h1>
         <p className="mb-2 max-w-xl text-base text-left md:text-lg text-white/80">
-          {hero.description}
-        </p>
-        <p className="mb-2 max-w-xl text-base text-left md:text-lg text-white/80">
           {hero.callToAction}
         </p>
         <div className="mt-4">
-          <Button
-            asChild
-            variant="default"
-            size="lg"
-            className="inline-flex gap-2 justify-center items-center text-primary-foreground"
-          >
+          <Button asChild variant="primary" size="lg">
             <Link href="#contact" aria-label={hero.callToAction}>
               <span>{hero.callToAction}</span>
               <ArrowRight className="w-5 h-5" />

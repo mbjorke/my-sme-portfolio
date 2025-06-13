@@ -5,45 +5,43 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center whitespace-nowrap rounded-lg font-bold transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
+  'active:scale-[0.98] inline-flex items-center transition-colors duration-200 justify-center whitespace-nowrap rounded-lg font-bold ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
   {
     variants: {
       variant: {
         // Primary button - Ocean Blue
-        default: [
-          'relative bg-primary/90 text-primary-foreground shadow-sm',
-          'hover:shadow-md hover:scale-[1.02] hover:bg-primary',
-          'active:translate-y-0 active:scale-[0.98]',
-          'active:bg-accent/50',
+        primary: [
+          'bg-primary-100 text-primary-900 shadow-sm',
+          'hover:shadow-md hover:bg-secondary-100 hover:text-primary-900',
+          'active:translate-y-0 ',
+          'active:bg-secondary-100/90',
         ].join(' '),
 
         // Secondary button - Surf Teal
         secondary: [
-          'bg-secondary/90 text-secondary-foreground shadow-sm',
-          'hover:shadow-md hover:scale-[1.02] hover:bg-secondary',
-          'active:translate-y-0 active:scale-[0.98]',
-          'active:bg-accent/70',
+          'bg-accent-600 text-primary-foreground shadow-sm',
+          'hover:shadow-md hover:bg-accent-500 hover:text-primary-foreground',
+          'active:translate-y-0',
+          'active:bg-accent-500/90',
         ].join(' '),
 
         // Outline button - For less prominent actions
         outline: [
-          'border border-primary/10 border-input bg-background shadow-sm',
-          'hover:border-primary/30 hover:scale-[1.02]',
-          'active:bg-accent/70',
-          'transition-colors duration-200',
+          'border border-accent/10 border-input bg-background shadow-sm',
+          'hover:border-accent',
+          'active:bg-accent-600/20',
         ].join(' '),
 
         // Ghost button - For subtle actions
         ghost: [
-          'hover:bg-accent/50 hover:text-accent-foreground',
-          'active:bg-accent/70',
-          'transition-colors duration-200',
+          'hover:bg-primary-900/90 hover:text-primary-foreground',
+          'active:bg-primary-900/50',
         ].join(' '),
 
         // Link button - For navigation
         link: [
-          'text-primary underline-offset-4 hover:underline',
-          'relative after:absolute after:bottom-0 after:left-1/2 after:h-0.5 after:w-0 after:bg-primary',
+          'text-accent underline-offset-4 hover:underline',
+          'relative after:absolute after:bottom-0 after:left-1/2 after:h-0.5 after:w-0 after:bg-accent',
           'after:transition-all after:duration-200 after:-translate-x-1/2',
           'hover:after:w-3/4 hover:no-underline',
         ].join(' '),
@@ -55,7 +53,6 @@ const buttonVariants = cva(
           'hover:bg-transparent hover:text-primary',
           'focus-visible:ring-0 focus-visible:ring-offset-0',
           'data-[state=active]:border-primary data-[state=active]:text-primary/90 data-[state=active]:bg-primary/10',
-          'transition-colors duration-200',
         ].join(' '),
       },
       size: {
@@ -67,7 +64,7 @@ const buttonVariants = cva(
       },
     },
     defaultVariants: {
-      variant: 'default',
+      variant: 'primary',
       size: 'default',
     },
   },
@@ -82,7 +79,7 @@ type ButtonProps = {
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   (
-    { className, variant = 'default', size = 'default', asChild = false, active, ...props },
+    { className, variant = 'primary', size = 'default', asChild = false, active, ...props },
     ref,
   ) => {
     if (asChild) {

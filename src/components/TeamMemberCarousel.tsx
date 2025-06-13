@@ -2,10 +2,9 @@ import React from 'react';
 // Image is not used in this file
 import Link from 'next/link';
 import { SiGithub, SiLinkedin, SiInstagram, SiBluesky } from 'react-icons/si';
-import { Card, CardContent } from './ui/card';
-import { Badge } from './ui/badge';
-import { cn } from '@/lib/utils';
+import { Card } from './ui/card';
 import { Avatar, AvatarImage } from './ui/avatar';
+import { SkillBadge } from './SkillBadge';
 
 export interface TeamMember {
   avatar?: string;
@@ -30,12 +29,12 @@ interface TeamMemberCarouselProps {
 export function TeamMemberCarousel({ member }: TeamMemberCarouselProps) {
   return (
     <div
-      className="w-full max-w-2xl p-[2px] rounded-3xl bg-transparent group h-full"
+      className="p-1 w-full h-full bg-transparent rounded-3xl group"
       role="article"
       aria-label={`Team member: ${member?.name || 'Unnamed member'}`}
     >
-      <Card>
-        <CardContent className={cn('relative z-10 p-6')}>
+      <Card className="h-full">
+        <div className="flex flex-col p-4 h-full md:p-6">
           {/* Avatar & Socials */}
           <div className="flex z-10 flex-col items-center mb-2">
             <Avatar className="w-24 h-24">
@@ -104,37 +103,45 @@ export function TeamMemberCarousel({ member }: TeamMemberCarouselProps) {
           </div>
 
           {/* Info */}
-          <div className="flex z-10 flex-col flex-1 gap-2 justify-center items-center mt-2">
-            <span className="text-3xl font-extrabold drop-shadow-lg">
-              {member?.name || 'No Name'}
-            </span>
-            <span className="text-xl font-semibold">{member?.title || 'No Title'}</span>
+          <div className="flex overflow-y-auto flex-col flex-1 items-center space-y-3 text-center">
+            <div className="space-y-1">
+              <h3 className="text-2xl font-extrabold md:text-3xl text-foreground">
+                {member?.name || 'No Name'}
+              </h3>
+              {member?.title && (
+                <p className="text-lg md:text-xl text-muted-foreground">{member.title}</p>
+              )}
+            </div>
+
             {member?.bio && (
-              <p className="px-2 py-1 mt-2 text-base rounded-lg border shadow-inner border-primary-500/50 text-muted-foreground bg-primary-600">
+              <p className="px-3 py-2 text-sm rounded-lg md:text-base bg-secondary-100 text-primary">
                 {member.bio}
               </p>
             )}
+
             {member?.skills && member.skills.length > 0 && (
-              <div className="flex flex-wrap gap-2 mt-2">
+              <div className="flex flex-wrap gap-2 justify-center mt-1 w-full">
                 {member.skills.map((skill: string) => (
-                  <Badge variant="primary" key={skill}>
-                    {skill}
-                  </Badge>
+                  <SkillBadge key={skill} skill={skill} />
                 ))}
               </div>
             )}
-            {member?.favoriteSnack && (
-              <div className="px-2 py-1 mt-1 w-full text-sm text-red-100 rounded-lg border border-red-300 shadow-inner bg-destructive">
-                <span className="font-bold">Favorite Snack:</span> {member.favoriteSnack}
-              </div>
-            )}
-            {member?.funFact && (
-              <div className="px-2 py-1 mt-1 text-sm italic text-orange-900 bg-orange-200 rounded-lg border border-orange-300 shadow-inne0r">
-                <span className="font-bold">Fun Fact:</span> {member.funFact}
-              </div>
-            )}
+
+            <div className="mt-auto space-y-2 w-full">
+              {member?.favoriteSnack && (
+                <div className="px-3 py-1.5 text-xs md:text-sm border-2 border-destructive-300 bg-destructive-200 text-destructive-900 rounded-md">
+                  <span className="font-semibold">Favorite Snack:</span> {member.favoriteSnack}
+                </div>
+              )}
+
+              {member?.funFact && (
+                <div className="px-3 py-1.5 text-xs md:text-sm border-2 border-success-300 bg-success-200 text-success-900 rounded-md italic">
+                  <span className="font-semibold">Fun Fact:</span> {member.funFact}
+                </div>
+              )}
+            </div>
           </div>
-        </CardContent>
+        </div>
       </Card>
     </div>
   );

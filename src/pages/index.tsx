@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { HeroSection } from '@/components/HeroSection';
 import { AboutSection } from '@/components/AboutSection';
 import { ProjectsSection } from '@/components/ProjectsSection';
@@ -9,7 +9,7 @@ import { Footer } from '@/components/Footer';
 
 export default function HomePage() {
   return (
-    <main>
+    <>
       <HeroSection />
       <TestimonialsSection />
       <HowSection />
@@ -17,6 +17,6 @@ export default function HomePage() {
       <ContactSection />
       <AboutSection />
       <Footer />
-    </main>
+    </>
   );
 }

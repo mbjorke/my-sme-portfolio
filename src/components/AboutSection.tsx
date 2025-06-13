@@ -7,10 +7,10 @@ import type { TeamMember } from './TeamMemberCarousel';
 
 export function AboutSection() {
   return (
-    <section className="relative z-10 px-4 py-20 bg-background/90">
-      <div className="flex flex-col gap-12 items-center mx-auto max-w-7xl lg:flex-row">
+    <section className="relative z-10 px-4 py-12 md:py-20 bg-background/90">
+      <div className="flex flex-col gap-8 items-stretch mx-auto max-w-7xl lg:flex-row">
         {/* Left: About Text */}
-        <div className="space-y-8 basis-1/2">
+        <div className="space-y-6 lg:basis-1/2 pr-0 lg:pr-8">
           <h2 className="text-3xl font-bold">Laser focused on results</h2>
           <p className="text-lg">I help build trust, drive engagement and support your growth.</p>
           <p>
@@ -44,12 +44,19 @@ export function AboutSection() {
           </div>
         </div>
         {/* Right: Carousel */}
-        <div className="flex justify-center w-full basis-1/2">
-          <Carousel
-            autoPlay={3000}
-            items={siteConfig.teamMembers}
-            renderItem={(member: TeamMember) => <TeamMemberCarousel member={member} />}
-          />
+        <div className="flex justify-center w-full h-auto min-h-[500px] lg:basis-1/2">
+          <div className="w-full h-full">
+            <Carousel
+              autoPlay={3000}
+              items={siteConfig.teamMembers}
+              className="h-full"
+              renderItem={(member: TeamMember) => (
+                <div className="h-full">
+                  <TeamMemberCarousel member={member} />
+                </div>
+              )}
+            />
+          </div>
         </div>
       </div>
     </section>
