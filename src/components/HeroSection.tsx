@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 import { ArrowRight } from 'lucide-react';
 
-import Button from '@/components/ui/Button'; // eslint-disable-line import/no-named-as-default
+import Button from '@/components/ui/Button';
 import { siteConfig } from '@/config/siteConfig';
 import { useLanguage } from '@/context/LanguageContext';
 // TestimonialsSection is not used in this file

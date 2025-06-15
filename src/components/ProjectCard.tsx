@@ -17,7 +17,7 @@ interface ProjectCardProps {
 export function ProjectCard({ project, className = '', index = 0 }: ProjectCardProps) {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
-  const cardRef = useRef<HTMLDivElement>(null);
+  const cardRef = useRef<HTMLButtonElement>(null);
   const router = useRouter();
   const { locale } = useLanguage();
 
@@ -28,54 +28,57 @@ export function ProjectCard({ project, className = '', index = 0 }: ProjectCardP
   const externalLinkText = locale === 'sv' ? 'Öppnar i ny flik' : 'Opens in new tab';
 
   // Handle click and keyboard interactions
-  const handleCardInteraction = useCallback((e: React.MouseEvent | React.KeyboardEvent) => {
-    // Only handle keyboard events for Enter/Space
-    if (e.type === 'keydown') {
-      const keyboardEvent = e as React.KeyboardEvent;
-      if (keyboardEvent.key !== 'Enter' && keyboardEvent.key !== ' ') {
+  const handleCardInteraction = useCallback(
+    (e: React.MouseEvent | React.KeyboardEvent) => {
+      // Only handle keyboard events for Enter/Space
+      if (e.type === 'keydown') {
+        const keyboardEvent = e as React.KeyboardEvent;
+        if (keyboardEvent.key !== 'Enter' && keyboardEvent.key !== ' ') {
+          return;
+        }
+      }
+
+      e.preventDefault();
+      e.stopPropagation();
+
+      // Check if the click was on a link or button inside the card
+      const target = e.target as HTMLElement;
+      if (target.tagName === 'A' || target.tagName === 'BUTTON' || target.closest('a, button')) {
         return;
       }
-    }
 
-    e.preventDefault();
-    e.stopPropagation();
+      // Check if there's a prototype URL in the links or if it's a Framer URL
+      const hasPrototypeLink =
+        project.content?.links?.some(
+          (link) =>
+            link.url.includes('framer.website') ||
+            link.url.includes('framer.site') ||
+            link.text?.toLowerCase().includes('prototype') ||
+            link.text?.toLowerCase().includes('demo'),
+        ) ||
+        project.url?.includes('framer.website') ||
+        project.url?.includes('framer.site');
 
-    // Check if the click was on a link or button inside the card
-    const target = e.target as HTMLElement;
-    if (target.tagName === 'A' || target.tagName === 'BUTTON' || target.closest('a, button')) {
-      return;
-    }
+      // Always open dialog for this project since it has a prototype or is marked for dialog
+      if (project.openInDialog || project.content || hasPrototypeLink) {
+        window.history.pushState(
+          {},
+          '',
+          `${window.location.pathname}?project=${encodeURIComponent(project.title)}`,
+        );
+        setIsDialogOpen(true);
+        return;
+      }
 
-    // Check if there's a prototype URL in the links or if it's a Framer URL
-    const hasPrototypeLink =
-      project.content?.links?.some(
-        (link) =>
-          link.url.includes('framer.website') ||
-          link.url.includes('framer.site') ||
-          link.text?.toLowerCase().includes('prototype') ||
-          link.text?.toLowerCase().includes('demo'),
-      ) ||
-      project.url?.includes('framer.website') ||
-      project.url?.includes('framer.site');
-
-    // Always open dialog for this project since it has a prototype or is marked for dialog
-    if (project.openInDialog || project.content || hasPrototypeLink) {
-      window.history.pushState(
-        {},
-        '',
-        `${window.location.pathname}?project=${encodeURIComponent(project.title)}`,
-      );
-      setIsDialogOpen(true);
-      return;
-    }
-
-    // Handle regular link behavior
-    if (project.openInNewTab && project.url) {
-      window.open(project.url, '_blank', 'noopener,noreferrer');
-    } else if (project.url) {
-      router.push(project.url);
-    }
-  }, [project, router]);
+      // Handle regular link behavior
+      if (project.openInNewTab && project.url) {
+        window.open(project.url, '_blank', 'noopener,noreferrer');
+      } else if (project.url) {
+        router.push(project.url);
+      }
+    },
+    [project, router],
+  );
 
   // Handle focus events for better keyboard navigation
   const handleFocus = useCallback(() => setIsFocused(true), []);
@@ -97,32 +100,37 @@ export function ProjectCard({ project, className = '', index = 0 }: ProjectCardP
     return () => card.removeEventListener('keydown', handleKeyDown);
   }, [handleCardInteraction]);
 
+  // Extract the variant to use for the Card component
+  const cardVariant = (['primary', 'primary', 'primary', 'primary'] as const)[index % 4];
+
+  // Extract the dialog ID for ARIA
+  const dialogId = `project-dialog-${project.title.replace(/\s+/g, '-').toLowerCase()}`;
 
   return (
-    <>
-      <article 
+    <div className={`relative ${className}`}>
+      <button
+        type="button"
         ref={cardRef}
-        className={`relative flex flex-col h-full overflow-hidden transition-all duration-500 group hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background rounded-xl ${className}`}
+        className="w-full h-full text-left p-0 bg-transparent border-0 focus:outline-none group"
+        onClick={handleCardInteraction}
+        onKeyDown={(e: React.KeyboardEvent) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            handleCardInteraction(e as unknown as React.MouseEvent);
+          }
+        }}
         onFocus={handleFocus}
         onBlur={handleBlur}
         onMouseEnter={handleFocus}
         onMouseLeave={handleBlur}
-        onClick={handleCardInteraction}
-        onKeyDown={(e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            handleCardInteraction(e);
-          }
-        }}
-        role="button"
-        tabIndex={0}
         aria-label={`${project.title}. ${project.summary}. ${openDialogText}`}
         aria-haspopup="dialog"
         aria-expanded={isDialogOpen}
-        aria-controls={isDialogOpen ? `project-dialog-${project.title.replace(/\s+/g, '-').toLowerCase()}` : undefined}
+        aria-controls={isDialogOpen ? dialogId : undefined}
       >
         <Card
-          variant={(['primary', 'primary', 'primary', 'primary'] as const)[index % 4]}
-          className="h-full overflow-hidden"
+          variant={cardVariant}
+          className="h-full overflow-hidden transition-all duration-500 group-hover:shadow-lg focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background"
         >
           <div className="relative overflow-hidden aspect-video">
             <div className="absolute inset-0 z-0">
@@ -144,18 +152,20 @@ export function ProjectCard({ project, className = '', index = 0 }: ProjectCardP
             </div>
 
             {/* Overlay with gradient and hover effect */}
-            <div 
+            <div
               className={`absolute inset-0 flex items-end p-6 bg-gradient-to-t to-transparent transition-opacity duration-500 from-black/80 via-black/30 ${
                 isFocused ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
               }`}
               aria-hidden="true"
             >
-              <div className={`transition-transform duration-500 ${isFocused ? 'translate-y-0' : 'translate-y-4 group-hover:translate-y-0'}`}>
+              <div
+                className={`transition-transform duration-500 ${isFocused ? 'translate-y-0' : 'translate-y-4 group-hover:translate-y-0'}`}
+              >
                 <span className="flex items-center gap-2 text-sm font-medium text-white transition-all duration-300 group-hover:gap-3">
                   {project.openInDialog || project.content ? viewDetailsText : viewProjectText}
-                  <ExternalLink 
-                    className="inline-block w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" 
-                    aria-hidden="true" 
+                  <ExternalLink
+                    className="inline-block w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
+                    aria-hidden="true"
                   />
                 </span>
               </div>
@@ -168,11 +178,9 @@ export function ProjectCard({ project, className = '', index = 0 }: ProjectCardP
                 <h3 className="mb-2 text-xl font-extrabold transition-colors duration-300 text-foreground">
                   {project.title}
                 </h3>
-                <p className="mb-4 text-foreground/95 line-clamp-2">
-                  {project.summary}
-                </p>
+                <p className="mb-4 text-foreground/95 line-clamp-2">{project.summary}</p>
               </div>
-              
+
               {project.technologies && project.technologies.length > 0 && (
                 <div className="flex flex-wrap gap-2 mb-4" aria-label="Technologies used">
                   {project.technologies.slice(0, 3).map((tech, i) => (
@@ -197,7 +205,7 @@ export function ProjectCard({ project, className = '', index = 0 }: ProjectCardP
               <span className="sr-only">
                 {project.openInDialog || project.content ? viewDetailsText : viewProjectText}
               </span>
-              
+
               {project.url && (
                 <a
                   href={project.url}
@@ -207,23 +215,23 @@ export function ProjectCard({ project, className = '', index = 0 }: ProjectCardP
                   aria-label={project.cta?.text || viewProjectText}
                 >
                   {project.cta?.text || viewProjectText}
-                  <ExternalLink 
-                    className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5" 
-                    aria-hidden="true" 
+                  <ExternalLink
+                    className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5"
+                    aria-hidden="true"
                   />
                 </a>
               )}
             </CardFooter>
           </CardContent>
         </Card>
-      </article>
+      </button>
 
-      <ProjectDialog 
-        project={project} 
-        open={isDialogOpen} 
+      <ProjectDialog
+        project={project}
+        open={isDialogOpen}
         onOpenChange={setIsDialogOpen}
-        dialogId={`project-dialog-${project.title.replace(/\s+/g, '-').toLowerCase()}`}
+        dialogId={dialogId}
       />
-    </>
+    </div>
   );
 }

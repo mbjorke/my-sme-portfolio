@@ -74,7 +74,7 @@ export function BadgeShowcase({ className }: BadgeShowcaseProps) {
               Enhance badges with icons for better visual communication.
             </p>
           </div>
-          <Card variant="tertiary" className="p-6">
+          <Card variant="secondary" className="p-6">
             <div className="flex flex-wrap items-center gap-3">
               <Badge variant="outline" className="gap-1">
                 <Settings className="h-3 w-3" /> Settings

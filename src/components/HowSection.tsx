@@ -18,7 +18,6 @@ import { Card, CardHeader, CardTitle, CardDescription } from '@/components/ui/ca
 import { siteConfig } from '@/config/siteConfig';
 import { useLanguage } from '@/context/LanguageContext';
 
-
 type Locale = 'en' | 'sv'; // Add all supported locales here
 
 type Step = { title: string; description: string; images?: string[] };
@@ -39,7 +38,7 @@ export function HowSection() {
           {how.steps.map((step, idx) => (
             <Card
               key={step.title + idx}
-              variant={(['primary', 'secondary', 'tertiary', 'quaternary'] as const)[idx]}
+              variant={(['primary', 'secondary', 'transparent', 'primary'] as const)[idx]}
             >
               <CardHeader className="relative z-10">
                 <div className="flex flex-col items-center">

@@ -1,11 +1,11 @@
-/* eslint-disable @typescript-eslint/no-var-requires, @typescript-eslint/no-require-imports */
-const { fontFamily } = require('tailwindcss/defaultTheme');
-const tailwindcssAnimate = require('tailwindcss-animate');
-const typography = require('@tailwindcss/typography');
-const forms = require('@tailwindcss/forms');
+import { fontFamily } from 'tailwindcss/defaultTheme';
+import tailwindcssAnimate from 'tailwindcss-animate';
+import typography from '@tailwindcss/typography';
+import forms from '@tailwindcss/forms';
+import containerQueries from '@tailwindcss/container-queries';
 
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+const config = {
   darkMode: 'class',
   safelist: [
     // Safelist all color and opacity combinations
@@ -224,5 +224,7 @@ module.exports = {
       },
     },
   },
-  plugins: [tailwindcssAnimate, typography, forms, require('@tailwindcss/container-queries')],
+  plugins: [tailwindcssAnimate, typography, forms, containerQueries],
 };
+
+export default config;
