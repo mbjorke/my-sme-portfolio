@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import Head from 'next/head';
 import type { AppProps } from 'next/app';
 import { useRouter } from 'next/router';
+
+import { Layout } from '@/components/Layout';
 import { ThemeProvider } from '@/components/ThemeProvider';
 import { LanguageProvider } from '@/context/LanguageContext';
-import { Layout } from '@/components/Layout';
-import { useEffect } from 'react';
-import Head from 'next/head';
+import { AccessibilityTestWrapper } from '@/utils/a11y/AccessibilityTestWrapper';
+import { siteConfig } from '@/config/siteConfig';
 import '@/styles/globals.css';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -25,21 +27,27 @@ export default function App({ Component, pageProps }: AppProps) {
     document.documentElement.lang = locale || 'en';
   }, [locale]);
 
+  // Get the current locale from the router
+  const currentLocale = locale || siteConfig.defaultLocale;
+  const isEnglish = currentLocale === 'en';
+
   return (
     <>
       <Head>
-        <link
-          href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap"
-          rel="stylesheet"
-        />
+        <title>{siteConfig.title}</title>
+        <meta name="description" content={siteConfig.description} />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+        <meta name="theme-color" content="#010e14" />
       </Head>
       <ThemeProvider>
-        <LanguageProvider>
+      <LanguageProvider>
+        <AccessibilityTestWrapper>
           <Layout>
             <Component {...pageProps} />
           </Layout>
-        </LanguageProvider>
-      </ThemeProvider>
+        </AccessibilityTestWrapper>
+      </LanguageProvider>
+    </ThemeProvider>
     </>
   );
 }

@@ -1,7 +1,9 @@
 import React from 'react';
+
 import { render, screen, fireEvent } from '@testing-library/react';
-import { LanguageProvider } from '@/context/LanguageContext';
+
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
+import { LanguageProvider } from '@/context/LanguageContext';
 
 // Mock the router
 const mockPush = jest.fn();

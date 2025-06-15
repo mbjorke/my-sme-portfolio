@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "private": true,
   "scripts": {
     "test": "echo 'No tests yet' && exit 0",
@@ -7,7 +8,11 @@
     "lint": "eslint .",
     "start": "next start",
     "type-check": "tsc",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "a11y:dev": "cross-env NODE_OPTIONS=--openssl-legacy-provider next dev",
+    "a11y:check": "node scripts/check-a11y.js -u http://localhost:3000",
+    "a11y:ci": "start-server-and-test a11y:dev http-get://localhost:3000 a11y:check",
+    "a11y:fix": "node scripts/check-a11y.js --fix"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.0.1",
@@ -37,10 +42,21 @@
     "tailwindcss-animate": "^1.0.7",
     "zod": "^3.25.30"
   },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md,mdx,css,scss}": [
+      "prettier --write"
+    ]
+  },
   "devDependencies": {
+    "@axe-core/react": "^4.10.2",
     "@eslint/js": "^9.26.0",
     "@shadcn/ui": "^0.0.4",
     "@supabase/supabase-js": "^2.49.4",
+    "@tailwindcss/container-queries": "^0.1.1",
     "@tailwindcss/forms": "^0.5.10",
     "@tailwindcss/typography": "^0.5.16",
     "@testing-library/jest-dom": "^6.6.3",
@@ -51,22 +67,33 @@
     "@types/node": "^20.11.19",
     "@types/react": "^18.2.56",
     "@types/react-dom": "^18.2.19",
+    "@types/testing-library__jest-dom": "^5.14.9",
     "@typescript-eslint/eslint-plugin": "^8.32.1",
-    "@typescript-eslint/parser": "^8.32.1",
+    "@typescript-eslint/parser": "^8.34.0",
     "autoprefixer": "^10.4.16",
+    "axe-core": "^4.10.3",
+    "chalk": "^5.4.1",
+    "commander": "^14.0.0",
+    "cross-env": "^7.0.3",
     "eslint": "^8.57.1",
     "eslint-config-next": "14.0.4",
     "eslint-config-prettier": "^10.1.5",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-prettier": "^5.4.0",
     "eslint-plugin-react": "^7.37.5",
     "globals": "^16.1.0",
     "husky": "^8.0.0",
     "jest": "^29.7.0",
+    "lint-staged": "^16.1.1",
+    "pa11y": "^9.0.0",
+    "pa11y-ci": "^3.1.0",
     "postcss": "^8.4.33",
     "postcss-import": "^16.1.0",
     "postcss-nesting": "^13.0.1",
     "prettier": "^3.2.4",
     "shadcn": "^2.5.0",
+    "start-server-and-test": "^2.0.12",
     "tailwindcss": "^3.4.1",
     "typescript": "^5.3.3",
     "typescript-eslint": "^8.32.1"

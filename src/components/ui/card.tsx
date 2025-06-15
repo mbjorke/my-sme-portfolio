@@ -21,22 +21,6 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
         ' ',
       ),
 
-      tertiary: ['bg-gradient-to-br', gradientStyles.tertiary, 'text-primary-foreground'].join(' '),
-
-      quaternary: ['bg-gradient-to-br', gradientStyles.quaternary, 'text-primary-foreground'].join(
-        ' ',
-      ),
-
-      sunset: [
-        'bg-gradient-to-r',
-        'from-orange-500 via-pink-600 to-purple-700',
-        'text-primary-foreground',
-      ].join(' '),
-
-      blueberry: ['bg-gradient-to-br', gradientStyles.blueberry, 'text-primary-foreground'].join(
-        ' ',
-      ),
-
       transparent: ['bg-accent/10', 'text-white'].join(' '),
     };
     return (

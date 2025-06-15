@@ -1,7 +1,6 @@
 import React from 'react';
-import { useLanguage } from '@/context/LanguageContext';
-import { Card, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { siteConfig } from '@/config/siteConfig';
+
+import { IconType } from 'react-icons';
 import {
   SiFramer,
   SiNotion,
@@ -14,7 +13,11 @@ import {
   SiVercel,
   SiSupabase,
 } from 'react-icons/si';
-import { IconType } from 'react-icons';
+
+import { Card, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { siteConfig } from '@/config/siteConfig';
+import { useLanguage } from '@/context/LanguageContext';
+
 
 type Locale = 'en' | 'sv'; // Add all supported locales here
 

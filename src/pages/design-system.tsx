@@ -1,13 +1,15 @@
 'use client';
 
 import React from 'react';
-import Image from 'next/image';
+
 import dynamic from 'next/dynamic';
-import { HoverEffectsShowcase } from '@/components/showcases/HoverEffectsShowcase';
-import { IconUsageShowcase } from '@/components/showcases/IconUsageShowcase';
-import { CardShowcase } from '@/components/showcases/CardShowcase';
-import { ButtonShowcase } from '@/components/showcases/ButtonShowcase';
+import Image from 'next/image';
+
+import { DesignSystemNav } from '@/components/DesignSystemNav';
 import { BadgeShowcase } from '@/components/showcases/BadgeShowcase';
+import { ButtonShowcase } from '@/components/showcases/ButtonShowcase';
+import { CardShowcase } from '@/components/showcases/CardShowcase';
+import { IconUsageShowcase } from '@/components/showcases/IconUsageShowcase';
 
 // Dynamically import the ColorPalette component with no SSR
 const ColorPalette = dynamic(() => import('@/components/showcases/ColorPalette'), {
@@ -23,7 +25,6 @@ const ColorPalette = dynamic(() => import('@/components/showcases/ColorPalette')
 // };
 
 // Import the DesignSystemNav component
-import { DesignSystemNav } from '@/components/DesignSystemNav';
 
 // Section component for consistent section layout
 const Section = ({
@@ -135,32 +136,6 @@ export default function DesignSystemPage() {
               description="Consistent patterns for using icons throughout the application."
             >
               <IconUsageShowcase />
-            </Section>
-
-            {/* Card Variants Section */}
-            <Section
-              id="card-variants"
-              title="Card Variants"
-              description="Pre-styled card variants with gradient backgrounds and subtle border effects."
-            >
-              <div className="space-y-8">
-                <div className="space-y-2">
-                  <h3 className="text-lg font-medium">Gradient Backgrounds</h3>
-                  <p className="text-sm text-muted-foreground">
-                    Cards use gradient backgrounds defined in the design system. The gradients are
-                    responsive and include subtle hover effects.
-                  </p>
-                </div>
-              </div>
-            </Section>
-
-            {/* Hover Effects Section */}
-            <Section
-              id="hover-effects"
-              title="Hover Effects"
-              description="Interactive hover effects for cards and other elements."
-            >
-              <HoverEffectsShowcase />
             </Section>
           </div>
         </div>

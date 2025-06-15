@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+
 import { CardShowcase } from '@/components/showcases/CardShowcase';
 
 export default function GradientCardsPage() {

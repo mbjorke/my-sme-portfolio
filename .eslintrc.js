@@ -1,27 +1,41 @@
+// @ts-check
+
+/** @type {import('eslint').Linter.Config} */
 module.exports = {
+  root: true,
   env: {
-    node: true,
     browser: true,
     es2021: true,
+    node: true,
   },
   extends: [
     'eslint:recommended',
     'plugin:react/recommended',
+    'plugin:react-hooks/recommended',
     'plugin:@typescript-eslint/recommended',
-    'prettier',
+    'plugin:prettier/recommended',
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
-    ecmaVersion: 12,
+    ecmaVersion: 'latest',
     sourceType: 'module',
+    ecmaFeatures: {
+      jsx: true,
+    },
   },
-  plugins: ['react', '@typescript-eslint'],
+  plugins: ['react', 'react-hooks', '@typescript-eslint'],
   rules: {
-    // Custom rules can be added here
+    'react/react-in-jsx-scope': 'off',
+    'react/prop-types': 'off',
+    'react/display-name': 'off',
+    '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
+    'react-hooks/rules-of-hooks': 'error',
+    'react-hooks/exhaustive-deps': 'warn',
+    'no-undef': 'off', // Handled by TypeScript
   },
   settings: {
     react: {
-      version: 'detect', // Automatically picks the React version you have installed
+      version: 'detect',
     },
   },
 };

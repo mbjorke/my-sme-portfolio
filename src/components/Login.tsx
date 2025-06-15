@@ -1,5 +1,6 @@
 'use client';
 import React, { useState } from 'react';
+
 import { signUp } from '../utils/auth';
 
 const Login = () => {

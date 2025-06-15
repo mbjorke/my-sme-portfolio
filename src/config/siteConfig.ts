@@ -1,6 +1,8 @@
 import type { TeamMember } from '@/types/siteConfig';
 
 export const siteConfig = {
+  title: 'Marcus Björke | Web Developer & Designer',
+  description: 'Portfolio showcasing my work and expertise in web development and design',
   locales: ['en', 'sv'],
   defaultLocale: 'en',
   translations: {

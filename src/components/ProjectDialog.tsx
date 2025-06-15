@@ -1,9 +1,13 @@
 'use client';
-import React from 'react';
-import { useState, useEffect } from 'react';
-import { useLanguage } from '@/context/LanguageContext';
-import { usePathname } from 'next/navigation';
+import React, { useState, useEffect } from 'react';
+
+
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
+
+import { ExternalLink, Monitor, FileText } from 'lucide-react';
+
+import Button from '@/components/ui/Button';
 import {
   Dialog,
   DialogContent,
@@ -11,8 +15,7 @@ import {
   DialogTitle,
   DialogDescription,
 } from '@/components/ui/dialog';
-import Button from '@/components/ui/Button';
-import { ExternalLink, Monitor, FileText } from 'lucide-react';
+import { useLanguage } from '@/context/LanguageContext';
 // cn is not used in this file
 import { ProjectCaseStudy } from '@/types/project';
 
@@ -20,11 +23,12 @@ interface ProjectDialogProps {
   project: ProjectCaseStudy | null;
   open: boolean;
   onOpenChange: (open: boolean) => void;
+  dialogId?: string;
 }
 
 type TabType = 'details' | 'prototype';
 
-export function ProjectDialog({ project, open, onOpenChange }: ProjectDialogProps) {
+export function ProjectDialog({ project, open, onOpenChange, dialogId }: ProjectDialogProps) {
   const pathname = usePathname();
   const { locale } = useLanguage();
   const [mounted, setMounted] = useState(false);
@@ -88,18 +92,20 @@ export function ProjectDialog({ project, open, onOpenChange }: ProjectDialogProp
 
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
-      <DialogContent className="max-w-5xl max-h-[90vh] p-0 overflow-hidden">
+      {/* Add dialog ID for aria-controls */}
+      {dialogId && <span id={dialogId} className="sr-only" aria-hidden="true" />}
+      <DialogContent className="max-w-5xl max-h-[90vh] p-0 overflow-hidden bg-background">
         <div className="flex flex-col h-full">
           {/* Header */}
-          <DialogHeader className="p-6 pb-0">
+          <DialogHeader className="p-6 pb-0 bg-card/50 border-b border-border/30">
             <div>
-              <DialogTitle className="text-2xl font-bold">{project.title}</DialogTitle>
-              <DialogDescription>{project.summary}</DialogDescription>
+              <DialogTitle className="text-2xl font-bold text-foreground">{project.title}</DialogTitle>
+              <DialogDescription className="text-foreground/90">{project.summary}</DialogDescription>
             </div>
           </DialogHeader>
 
           {/* Tabs */}
-          <div className="px-6 mt-4 border-b">
+          <div className="px-6 mt-4 border-b border-border/30">
             <div className="flex space-x-4">
               <Button
                 variant="tab"
@@ -142,20 +148,20 @@ export function ProjectDialog({ project, open, onOpenChange }: ProjectDialogProp
                   </div>
                 )}
 
-                <div className="max-w-none prose dark:prose-invert">
+                <div className="max-w-none prose dark:prose-invert prose-p:text-foreground/90 prose-strong:text-foreground prose-headings:text-foreground">
                   {project.content?.description && (
                     <div className="mb-6">
-                      <h3 className="mb-2 text-xl font-semibold">{translations.aboutProject}</h3>
-                      <p>{project.content.description}</p>
+                      <h3 className="mb-3 text-xl font-semibold text-foreground">{translations.aboutProject}</h3>
+                      <p className="leading-relaxed text-foreground/90">{project.content.description}</p>
                     </div>
                   )}
 
                   {project.content?.features && project.content.features.length > 0 && (
                     <div className="mb-6">
-                      <h3 className="mb-2 text-xl font-semibold">{translations.keyFeatures}</h3>
-                      <ul className="pl-5 space-y-1 list-disc">
+                      <h3 className="mb-3 text-xl font-semibold text-foreground">{translations.keyFeatures}</h3>
+                      <ul className="pl-5 space-y-2 list-disc">
                         {project.content.features.map((feature, index) => (
-                          <li key={index}>{feature}</li>
+                          <li key={index} className="text-foreground/90">{feature}</li>
                         ))}
                       </ul>
                     </div>
@@ -163,14 +169,14 @@ export function ProjectDialog({ project, open, onOpenChange }: ProjectDialogProp
 
                   {project.content?.technologies && project.content.technologies.length > 0 && (
                     <div className="mb-6">
-                      <h3 className="mb-2 text-xl font-semibold">
+                      <h3 className="mb-3 text-xl font-semibold text-foreground">
                         {translations.technologiesUsed}
                       </h3>
                       <div className="flex flex-wrap gap-2">
                         {project.content.technologies.map((tech, index) => (
                           <span
                             key={index}
-                            className="px-3 py-1 text-sm rounded-full bg-muted text-muted-foreground"
+                            className="px-3 py-1 text-sm font-medium rounded-full bg-primary/10 text-primary-foreground/90"
                           >
                             {tech}
                           </span>
@@ -180,7 +186,7 @@ export function ProjectDialog({ project, open, onOpenChange }: ProjectDialogProp
                   )}
                 </div>
 
-                <div className="flex flex-wrap gap-4 pt-4">
+                <div className="flex flex-wrap gap-4 pt-6 mt-4 border-t border-border/30">
                   {project.cta && (
                     <Button
                       onClick={() =>

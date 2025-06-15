@@ -1,8 +1,11 @@
 import React from 'react';
-import { useLanguage } from '@/context/LanguageContext';
+
 import { siteConfig } from '@/config/siteConfig';
-import { ProjectCard } from './ProjectCard';
+import { useLanguage } from '@/context/LanguageContext';
 import { ProjectCaseStudy } from '@/types/project';
+
+import { ProjectCard } from './ProjectCard';
+
 
 type Locale = 'en' | 'sv';
 
@@ -44,10 +47,10 @@ export function ProjectsSection() {
       : 'Explore some of my recent projects. Click on a project to learn more.';
 
   return (
-    <section id="projects" className="relative z-10 p-40 text-center bg-background/70">
+    <section id="projects" className="relative z-10 p-40 text-center bg-background/95">
       <div className="text-center">
-        <h2 className="mb-4 text-4xl font-bold">{sectionTitle}</h2>
-        <p className="text-lg text-muted-foreground">{description}</p>
+        <h2 className="mb-4 text-4xl font-bold text-foreground">{sectionTitle}</h2>
+        <p className="text-lg text-foreground">{description}</p>
       </div>
       <div className="overflow-x-auto relative pb-12 w-full">
         <div className="flex gap-6 w-full snap-x snap-mandatory">

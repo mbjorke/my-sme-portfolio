@@ -1,7 +1,9 @@
 'use client';
 
 import React from 'react';
-import Button from '@/components/ui/Button';
+
+import { Button } from '@/components/ui/Button';
+
 import Input from './ui/Input';
 
 interface ContactFormProps {
@@ -26,11 +28,11 @@ export function ContactForm({
 }: ContactFormProps) {
   return (
     <div>
-      <h3 className="mb-6 text-2xl font-bold">Get in Touch</h3>
+      <h3 className="mb-6 text-2xl font-bold text-foreground">Get in Touch</h3>
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="space-y-2 text-left">
-          <label htmlFor="name" className="block text-sm font-medium text-foreground/80">
-            Name <span className="text-red-500">*</span>
+          <label htmlFor="name" className="block text-sm font-semibold text-foreground">
+            <span className="text-destructive">*</span> Name
           </label>
           <Input
             id="name"
@@ -47,8 +49,8 @@ export function ContactForm({
         </div>
 
         <div className="space-y-2 text-left">
-          <label htmlFor="email" className="block text-sm font-medium text-foreground/80">
-            Email <span className="text-red-500">*</span>
+          <label htmlFor="email" className="block text-sm font-semibold text-foreground">
+            Email <span className="text-destructive">*</span>
           </label>
           <Input
             id="email"
@@ -65,8 +67,8 @@ export function ContactForm({
         </div>
 
         <div className="space-y-2 text-left">
-          <label htmlFor="message" className="block text-sm font-medium text-foreground/80">
-            Message <span className="text-red-500">*</span>
+          <label htmlFor="message" className="block text-sm font-semibold text-foreground">
+            Message <span className="text-destructive">*</span>
           </label>
           <textarea
             id="message"
@@ -76,7 +78,9 @@ export function ContactForm({
             onChange={handleChange}
             required
             aria-invalid={!!errors.message}
+            aria-errormessage={errors.message ? 'message-error' : undefined}
             placeholder="How can I help you?"
+            className="w-full px-3 py-2 text-base border rounded-md shadow-sm border-input bg-background text-foreground placeholder:text-foreground/80 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-70"
           />
           {errors.message && (
             <p className="text-sm font-medium text-destructive">{errors.message}</p>

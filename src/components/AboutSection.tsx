@@ -1,8 +1,11 @@
 'use client';
 import React from 'react';
+
 import { siteConfig } from '@/config/siteConfig';
-import { TeamMemberCarousel } from './TeamMemberCarousel';
+
 import { Carousel } from './Carousel';
+import { TeamMemberCarousel } from './TeamMemberCarousel';
+
 import type { TeamMember } from './TeamMemberCarousel';
 
 export function AboutSection() {

@@ -6,9 +6,26 @@ interface CarouselProps<T> {
   renderItem: (item: T, index: number) => ReactNode;
   className?: string;
   autoPlay?: boolean | number;
+  nextButtonAriaLabel?: string;
+  prevButtonAriaLabel?: string;
+  nextButtonClassName?: string;
+  prevButtonClassName?: string;
+  dotButtonClassName?: string;
+  activeDotClassName?: string;
 }
 
-export function Carousel<T>({ items, renderItem, className = '', autoPlay }: CarouselProps<T>) {
+export function Carousel<T>({ 
+  items, 
+  renderItem, 
+  className = '', 
+  autoPlay, 
+  nextButtonAriaLabel = 'Next item',
+  prevButtonAriaLabel = 'Previous item',
+  nextButtonClassName = 'text-foreground hover:bg-primary/20',
+  prevButtonClassName = 'text-foreground hover:bg-primary/20',
+  dotButtonClassName = 'bg-foreground/30 hover:bg-foreground/50',
+  activeDotClassName = 'bg-foreground scale-125'
+}: CarouselProps<T>) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
@@ -43,11 +60,11 @@ export function Carousel<T>({ items, renderItem, className = '', autoPlay }: Car
       <div className="mt-4 flex justify-center">
         <div className="inline-flex items-center bg-background/80 backdrop-blur-sm px-3 py-1.5 rounded-full border border-accent/10 shadow-md">
           <button
-            className="flex justify-center items-center w-8 h-8 rounded-full text-accent hover:bg-primary/20 transition-colors"
+            className={`flex justify-center items-center w-8 h-8 rounded-full transition-colors ${prevButtonClassName}`}
             onClick={prev}
-            aria-label="Previous"
+            aria-label={prevButtonAriaLabel}
           >
-            <span className="sr-only">Previous</span>
+            <span className="sr-only">{prevButtonAriaLabel}</span>
             &#8592;
           </button>
 
@@ -55,8 +72,10 @@ export function Carousel<T>({ items, renderItem, className = '', autoPlay }: Car
             {items.map((_, idx) => (
               <button
                 key={idx}
-                className={`w-2 h-2 rounded-full transition-all duration-200 ${
-                  idx === currentIndex ? 'bg-accent scale-125' : 'bg-accent/30 hover:bg-accent/50'
+                className={`w-2.5 h-2.5 rounded-full transition-all duration-200 ${
+                  idx === currentIndex 
+                    ? `${activeDotClassName} ${dotButtonClassName}` 
+                    : `${dotButtonClassName} hover:opacity-100`
                 }`}
                 onClick={() => setCurrentIndex(idx)}
                 aria-label={`Go to slide ${idx + 1}`}
@@ -65,11 +84,11 @@ export function Carousel<T>({ items, renderItem, className = '', autoPlay }: Car
           </div>
 
           <button
-            className="flex justify-center items-center w-8 h-8 rounded-full text-accent hover:bg-primary/20 transition-colors"
+            className={`flex justify-center items-center w-8 h-8 rounded-full transition-colors ${nextButtonClassName}`}
             onClick={next}
-            aria-label="Next"
+            aria-label={nextButtonAriaLabel}
           >
-            <span className="sr-only">Next</span>
+            <span className="sr-only">{nextButtonAriaLabel}</span>
             &#8594;
           </button>
         </div>

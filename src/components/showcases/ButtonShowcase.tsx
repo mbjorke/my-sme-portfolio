@@ -1,9 +1,11 @@
 'use client';
 
 import React from 'react';
+
+import { Download, Heart, ArrowRight, ExternalLink, Settings } from 'lucide-react';
+
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/card';
-import { Download, Heart, ArrowRight, ExternalLink, Settings } from 'lucide-react';
 
 interface ButtonShowcaseProps {
   className?: string;
@@ -28,6 +30,8 @@ export function ButtonShowcase({ className }: ButtonShowcaseProps) {
               <Button variant="outline">Outline</Button>
               <Button variant="ghost">Ghost</Button>
               <Button variant="link">Link</Button>
+              <Button variant="tab" active>Tab</Button>
+              <Button variant="tab">Tab</Button>
             </div>
           </Card>
         </div>
@@ -72,7 +76,7 @@ export function ButtonShowcase({ className }: ButtonShowcaseProps) {
               Use appropriate sizes for different contexts.
             </p>
           </div>
-          <Card variant="tertiary" className="p-6">
+          <Card variant="primary" className="p-6">
             <div className="flex flex-wrap gap-6 items-center">
               <div className="space-y-3">
                 <p className="text-sm font-medium">Small (sm)</p>
@@ -104,7 +108,7 @@ export function ButtonShowcase({ className }: ButtonShowcaseProps) {
               Different states for user interaction feedback.
             </p>
           </div>
-          <Card variant="blueberry" className="p-6">
+          <Card variant="primary" className="p-6">
             <div className="flex flex-wrap gap-4 items-center">
               <Button disabled>Disabled</Button>
               <Button disabled aria-busy="true">

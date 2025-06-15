@@ -1,10 +1,13 @@
 import React from 'react';
+
 // Image is not used in this file
 import Link from 'next/link';
+
 import { SiGithub, SiLinkedin, SiInstagram, SiBluesky } from 'react-icons/si';
-import { Card } from './ui/card';
-import { Avatar, AvatarImage } from './ui/avatar';
+
 import { SkillBadge } from './SkillBadge';
+import { Avatar, AvatarImage } from './ui/avatar';
+import { Card } from './ui/card';
 
 export interface TeamMember {
   avatar?: string;

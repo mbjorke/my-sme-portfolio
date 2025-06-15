@@ -1,28 +1,19 @@
 'use client';
+
 import React, { useState } from 'react';
 
-import GradientPicker from '@/components/showcases/GradientPicker';
-import { Slider } from '@/components/ui/slider';
 import { Card, CardContent } from '@/components/ui/card';
+import { Slider } from '@/components/ui/slider';
 
-export default function CardGradientColorPickerShowcase() {
-  const [palette, setPalette] = useState([
-    { offset: 0, color: '#01fdee' },
-    { offset: 0.1, color: '#02d19d' },
-    { offset: 0.19, color: '#07fae3' },
-    { offset: 0.29, color: '#000000' },
-  ]);
+export default function CardGradientShowcase() {
   const [angle, setAngle] = useState(165);
   const [borderThickness, setBorderThickness] = useState(4);
 
-  const gradient = `linear-gradient(${angle}deg, ${palette
-    .map((stop) => `${stop.color} ${Math.round(stop.offset * 100)}%`)
-    .join(', ')})`;
+  const gradient = `linear-gradient(${angle}deg, #01fdee 0%, #02d19d 10%, #07fae3 19%, #000000 29%)`;
 
   return (
     <div className="px-8 py-8 mx-auto max-w-xl">
-      <h2 className="mb-4 text-lg font-semibold">Card Gradient Color Picker Showcase</h2>
-      <GradientPicker palette={palette} angle={angle} onPaletteChange={setPalette} />
+      <h2 className="mb-4 text-lg font-semibold">Card Gradient Showcase</h2>
 
       <div className="my-6 space-y-6">
         {/* First Card Example */}

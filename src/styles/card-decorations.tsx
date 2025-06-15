@@ -1,4 +1,5 @@
 import React, { HTMLAttributes, ReactNode } from 'react';
+
 import { cn } from '../lib/utils';
 
 // Base card styles with smooth transitions

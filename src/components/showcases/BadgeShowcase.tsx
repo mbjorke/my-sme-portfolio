@@ -1,9 +1,11 @@
 'use client';
 
 import React from 'react';
+
+import { Settings, Download } from 'lucide-react';
+
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
-import { Settings, Download } from 'lucide-react';
 
 interface BadgeShowcaseProps {
   className?: string;

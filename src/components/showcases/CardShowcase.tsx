@@ -1,6 +1,8 @@
 import React from 'react';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '../ui/card';
+
 import { gradientStyles, GradientVariant } from '@/config/gradients';
+
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '../ui/card';
 
 export function CardShowcase() {
   return (

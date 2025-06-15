@@ -1,5 +1,9 @@
 'use client';
 import React from 'react';
+
+import Image from 'next/image';
+import type { ImageProps } from 'next/image';
+
 import { cn } from '@/lib/utils';
 
 function Avatar({ className, children, ...props }: React.HTMLAttributes<HTMLDivElement>) {
@@ -12,10 +16,6 @@ function Avatar({ className, children, ...props }: React.HTMLAttributes<HTMLDivE
     </div>
   );
 }
-
-import Image from 'next/image';
-
-import type { ImageProps } from 'next/image';
 
 interface AvatarImageProps extends Omit<ImageProps, 'src' | 'alt'> {
   src: string;
