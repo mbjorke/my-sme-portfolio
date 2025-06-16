@@ -47,6 +47,12 @@ Visit [http://localhost:3000](http://localhost:3000)
 - Set the same environment variables in your deployment dashboard
 - For Spaceship, see their docs for custom domain and email setup
 
+## Documentation
+
+For detailed documentation on components and their usage, see:
+
+- [Component Documentation](/docs/components/) - Detailed documentation for all reusable components
+
 ## Contact Form & Supabase
 
 - Submits messages to the `contact_messages` table in Supabase

@@ -2,6 +2,8 @@
 
 Based on [Zhu Liang's comprehensive framework](https://paradite.github.io/ai-coding/) inspired by autonomous vehicle classifications. This list is updated in June 2025 and is not exhaustive and is subject to change. The list is based on my personal experience with some of the tools and my understanding of the market.
 
+TODO: Compare and find missing tools against another article: https://madhukarkumar.substack.com/p/a-comprehensive-guide-to-vibe-coding
+
 ## L1-L5 Framework Overview
 
 The coding industry is experiencing rapid changes with AI coding tools, ranging from basic code completion to full-scale software development lifecycle. These are categorized into five levels:
