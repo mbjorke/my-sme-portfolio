@@ -110,15 +110,30 @@ export function ProjectDialog({ project, open, onOpenChange, dialogId }: Project
           </DialogHeader>
 
           {/* Tabs */}
-          <div className="px-6 mt-4 border-b border-border/30">
+          <div
+            className="px-6 mt-4 border-b border-border/30"
+            role="tablist"
+            aria-label="Project details"
+          >
             <div className="flex space-x-4">
               <Button
                 variant="tab"
                 size="sm"
+                role="tab"
+                aria-selected={activeTab === 'details'}
+                aria-controls={`${dialogId}-details`}
+                id={`${dialogId}-details-tab`}
+                tabIndex={activeTab === 'details' ? 0 : -1}
                 active={activeTab === 'details'}
                 onClick={() => setActiveTab('details')}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    setActiveTab('details');
+                  }
+                }}
               >
-                <FileText className="mr-2 w-4 h-4" />
+                <FileText className="mr-2 w-4 h-4" aria-hidden="true" />
                 {translations.details}
               </Button>
 
@@ -126,10 +141,21 @@ export function ProjectDialog({ project, open, onOpenChange, dialogId }: Project
                 <Button
                   variant="tab"
                   size="sm"
+                  role="tab"
+                  aria-selected={activeTab === 'prototype'}
+                  aria-controls={`${dialogId}-prototype`}
+                  id={`${dialogId}-prototype-tab`}
+                  tabIndex={activeTab === 'prototype' ? 0 : -1}
                   active={activeTab === 'prototype'}
                   onClick={() => setActiveTab('prototype')}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      setActiveTab('prototype');
+                    }
+                  }}
                 >
-                  <Monitor className="mr-2 w-4 h-4" />
+                  <Monitor className="mr-2 w-4 h-4" aria-hidden="true" />
                   {translations.livePrototype}
                 </Button>
               )}
@@ -138,7 +164,15 @@ export function ProjectDialog({ project, open, onOpenChange, dialogId }: Project
 
           {/* Content */}
           <div className="overflow-auto flex-1">
-            {activeTab === 'details' ? (
+            {/* Details Tab Panel */}
+            <div
+              id={`${dialogId}-details`}
+              role="tabpanel"
+              tabIndex={0}
+              aria-labelledby={`${dialogId}-details-tab`}
+              hidden={activeTab !== 'details'}
+              className="h-full"
+            >
               <div className="p-6 space-y-6">
                 {project.image && (
                   <div className="overflow-hidden relative w-full h-64 rounded-lg md:h-80">
@@ -211,7 +245,7 @@ export function ProjectDialog({ project, open, onOpenChange, dialogId }: Project
                       className="flex gap-2 items-center"
                     >
                       {project.cta.text}
-                      <ExternalLink className="w-4 h-4" />
+                      <ExternalLink className="w-4 h-4" aria-hidden="true" />
                     </Button>
                   )}
 
@@ -229,42 +263,54 @@ export function ProjectDialog({ project, open, onOpenChange, dialogId }: Project
                         className="flex gap-2 items-center"
                       >
                         {link.text}
-                        <ExternalLink className="w-4 h-4" />
+                        <ExternalLink className="w-4 h-4" aria-hidden="true" />
                       </Button>
                     ))}
                 </div>
               </div>
-            ) : (
-              <div className="h-[70vh] min-h-[500px] relative border rounded-lg overflow-hidden bg-muted/20">
-                <div className="flex absolute inset-0 flex-col">
-                  <div className="p-2 text-xs bg-muted/30 text-muted-foreground">
-                    {translations.embeddedPrototype}: {prototypeUrl}
-                  </div>
-                  <div className="relative flex-1">
-                    {prototypeUrl ? (
-                      <>
-                        <iframe
-                          key={prototypeUrl}
-                          src={prototypeUrl}
-                          className="w-full h-full border-0"
-                          allowFullScreen
-                          loading="eager"
-                          title={`${project.title} Prototype`}
-                          onLoad={() => {
-                            setIsIframeLoaded(true);
-                          }}
-                        />
-                        {!isIframeLoaded && (
-                          <div className="flex absolute inset-0 justify-center items-center bg-background/80">
-                            <div className="animate-pulse">{translations.loadingPrototype}</div>
-                          </div>
-                        )}
-                      </>
-                    ) : (
-                      <div className="flex justify-center items-center h-full text-muted-foreground">
-                        {translations.noPrototype}
-                      </div>
-                    )}
+            </div>
+
+            {/* Prototype Tab Panel */}
+            {hasPrototypeLink && (
+              <div
+                id={`${dialogId}-prototype`}
+                role="tabpanel"
+                tabIndex={0}
+                aria-labelledby={`${dialogId}-prototype-tab`}
+                hidden={activeTab !== 'prototype'}
+                className="h-full"
+              >
+                <div className="h-[70vh] min-h-[500px] relative border rounded-lg overflow-hidden bg-muted/20">
+                  <div className="flex absolute inset-0 flex-col">
+                    <div className="p-2 text-xs bg-muted/30 text-muted-foreground">
+                      {translations.embeddedPrototype}: {prototypeUrl}
+                    </div>
+                    <div className="relative flex-1">
+                      {prototypeUrl ? (
+                        <>
+                          <iframe
+                            key={prototypeUrl}
+                            src={prototypeUrl}
+                            className="w-full h-full border-0"
+                            allowFullScreen
+                            loading="eager"
+                            title={`${project.title} Prototype`}
+                            onLoad={() => {
+                              setIsIframeLoaded(true);
+                            }}
+                          />
+                          {!isIframeLoaded && (
+                            <div className="flex absolute inset-0 justify-center items-center bg-background/80">
+                              <div className="animate-pulse">{translations.loadingPrototype}</div>
+                            </div>
+                          )}
+                        </>
+                      ) : (
+                        <div className="flex justify-center items-center h-full text-muted-foreground">
+                          {translations.noPrototype}
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>

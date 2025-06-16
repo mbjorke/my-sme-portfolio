@@ -10,10 +10,11 @@
     "type-check": "tsc",
     "prepare": "husky install",
     "a11y:dev": "cross-env NODE_OPTIONS=--openssl-legacy-provider next dev",
-    "a11y:check": "node scripts/check-a11y.js -u http://localhost:3000",
-    "a11y:test": "node scripts/check-a11y.js -u http://localhost:3000",
-    "a11y:ci": "start-server-and-test a11y:dev http-get://localhost:3000 a11y:check",
-    "a11y:fix": "node scripts/check-a11y.js --fix"
+    "a11y:check": "node scripts/accessibility-test.js",
+    "a11y:test": "node scripts/accessibility-test.js",
+    "a11y:ci": "start-server-and-test dev http-get://localhost:3000 a11y:check",
+    "a11y:fix": "node scripts/accessibility-test.js",
+    "test:e2e": "playwright test"
   },
   "overrides": {
     "semver": "^7.5.2"
@@ -59,6 +60,7 @@
     "@axe-core/playwright": "^4.10.2",
     "@axe-core/react": "^4.10.2",
     "@eslint/js": "^9.26.0",
+    "@playwright/test": "^1.53.0",
     "@shadcn/ui": "^0.0.4",
     "@supabase/supabase-js": "^2.49.4",
     "@tailwindcss/container-queries": "^0.1.1",

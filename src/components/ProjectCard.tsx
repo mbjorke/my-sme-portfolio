@@ -136,7 +136,7 @@ export function ProjectCard({ project, className = '', index = 0 }: ProjectCardP
             <div className="absolute inset-0 z-0">
               <Image
                 src={project.image}
-                alt=""
+                alt={project.title ? `Screenshot of ${project.title}` : 'Project screenshot'}
                 className="object-cover w-full h-full transition-transform duration-700 ease-out group-hover:scale-105"
                 width={800}
                 height={450}
@@ -147,7 +147,6 @@ export function ProjectCard({ project, className = '', index = 0 }: ProjectCardP
                   project.blurDataURL ||
                   'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAwIiBoZWlnaHQ9IjQ1MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjVmNWY2Ii8+Cjwvc3ZnPg=='
                 }
-                aria-hidden="true"
               />
             </div>
 
@@ -176,7 +175,7 @@ export function ProjectCard({ project, className = '', index = 0 }: ProjectCardP
             <div className="flex flex-col justify-between flex-1 p-6">
               <div>
                 <h3 className="mb-2 text-xl font-extrabold transition-colors duration-300 text-foreground">
-                  {project.title}
+                  {project.title || 'Untitled Project'}
                 </h3>
                 <p className="mb-4 text-foreground/95 line-clamp-2">{project.summary}</p>
               </div>

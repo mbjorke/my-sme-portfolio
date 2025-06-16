@@ -36,15 +36,16 @@ export function HeroSection() {
       </div>
       {/* Content */}
       <div className="flex relative z-10 flex-col gap-6 justify-center items-start px-4 py-24 mx-auto w-full max-w-3xl md:py-44">
-        <span className="mb-2 text-xs font-bold tracking-widest text-left uppercase md:text-sm text-white">
+        <h1 className="sr-only">{siteConfig.title}</h1>
+        <p className="mb-2 text-xs font-bold tracking-widest text-left uppercase md:text-sm text-white">
           {hero.subheading}
-        </span>
-        <h1 className="text-white text-[clamp(2.5rem,8vw,4rem)] leading-tight text-left mb-2 font-normal">
+        </p>
+        <h2 className="text-white text-[clamp(2.5rem,8vw,4rem)] leading-tight text-left mb-2 font-normal">
           {hero.heading}{' '}
           <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-accent-100 via-success-300 to-success-500">
             {hero.highlight}
           </span>
-        </h1>
+        </h2>
         <p className="mb-2 max-w-xl text-base text-left md:text-lg text-white">
           {hero.callToAction}
         </p>

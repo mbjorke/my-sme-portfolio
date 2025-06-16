@@ -29,13 +29,15 @@ const ThemeSwitcher = () => {
       title={label}
     >
       <span className="sr-only">{label}</span>
-      <Sun 
-        className={`h-5 w-5 transition-transform duration-200 ${isDark ? 'scale-0' : 'scale-100'}`} 
-        aria-hidden="true" 
+      <Sun
+        className={`h-5 w-5 transition-transform duration-200 ${isDark ? 'scale-0' : 'scale-100'}`}
+        aria-hidden={isDark}
+        aria-label="Light mode"
       />
-      <Moon 
-        className={`absolute h-5 w-5 transition-transform duration-200 ${isDark ? 'scale-100' : 'scale-0'}`} 
-        aria-hidden="true" 
+      <Moon
+        className={`absolute h-5 w-5 transition-transform duration-200 ${isDark ? 'scale-100' : 'scale-0'}`}
+        aria-hidden={!isDark}
+        aria-label="Dark mode"
       />
     </Button>
   );
