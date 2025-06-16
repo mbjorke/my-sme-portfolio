@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
@@ -28,11 +28,51 @@ interface ProjectDialogProps {
 type TabType = 'details' | 'prototype';
 
 export function ProjectDialog({ project, open, onOpenChange, dialogId }: ProjectDialogProps) {
+  console.log('ProjectDialog rendering', { open, project: project?.title });
   const pathname = usePathname();
   const { locale } = useLanguage();
   const [mounted, setMounted] = useState(false);
   const [activeTab, setActiveTab] = useState<TabType>('details');
   const [isIframeLoaded, setIsIframeLoaded] = useState(false);
+  const dialogRef = useRef<HTMLDivElement>(null);
+
+  // Log whenever the component receives new props
+  useEffect(() => {
+    console.log('ProjectDialog received new props:', { open, project: project?.title });
+  }, [open, project]);
+
+  // Debug effect for open prop changes
+  useEffect(() => {
+    console.log('ProjectDialog open prop changed:', open);
+  }, [open]);
+
+  // Debug effect for project prop changes
+  useEffect(() => {
+    if (project) {
+      console.log('Project data:', {
+        title: project.title,
+        hasContent: !!project.content,
+        hasPrototype:
+          project.url?.includes('framer.') ||
+          project.content?.links?.some(
+            (link: { url?: string; text?: string }) =>
+              link.url?.includes('framer.') ||
+              false ||
+              link.text?.toLowerCase().includes('prototype') ||
+              false ||
+              link.text?.toLowerCase().includes('demo') ||
+              false,
+          ),
+      });
+    }
+  }, [project]);
+
+  // Debug effect for dialog ref
+  useEffect(() => {
+    if (dialogRef.current) {
+      console.log('Dialog DOM node:', dialogRef.current);
+    }
+  }, [open]);
 
   // Get translations from siteConfig based on current locale
   const translations = {
@@ -57,45 +97,90 @@ export function ProjectDialog({ project, open, onOpenChange, dialogId }: Project
     }
   }, [open]);
 
-  if (!mounted || !project) return null;
+  // Only check for mounted state in the effect
+  useEffect(() => {
+    setMounted(true);
+    return () => setMounted(false);
+  }, []);
 
-  const handleOpenChange = (isOpen: boolean) => {
-    console.log('Dialog open state changing to:', isOpen);
-    if (!isOpen) {
-      console.log('Updating URL for dialog close');
-      window.history.pushState({}, '', pathname);
+  // Define all hooks at the top of the component
+  const handleOpenChange = useCallback(
+    (newOpenState: boolean) => {
+      console.log('handleOpenChange called with:', newOpenState, 'current open state:', open);
+      console.log('Dialog open state changing to:', newOpenState, {
+        currentPath: typeof window !== 'undefined' ? window.location.pathname : '',
+        hasProject: !!project,
+        projectTitle: project?.title || 'No project',
+      });
+
+      if (!newOpenState) {
+        console.log('Updating URL for dialog close');
+        try {
+          if (typeof window !== 'undefined') {
+            window.history.pushState({}, '', pathname);
+            console.log('URL updated to:', pathname);
+          }
+        } catch (error) {
+          console.error('Error updating URL:', error);
+        }
+      }
+
+      console.log('Calling onOpenChange with:', newOpenState);
+      onOpenChange(newOpenState);
+    },
+    [open, project, pathname, onOpenChange],
+  );
+
+  // Define all callbacks at the top of the component
+  const handleExternalLink = useCallback((url: string | undefined, target = '_blank') => {
+    if (url && typeof window !== 'undefined') {
+      window.open(url, target, 'noopener,noreferrer');
     }
-    onOpenChange(isOpen);
-  };
-
-  const handleExternalLink = (url: string, target = '_blank') => {
-    window.open(url, target);
-  };
+  }, []);
 
   // Get the prototype URL from the project
-  const getPrototypeUrl = () => {
+  const getPrototypeUrl = useCallback((proj: ProjectCaseStudy | null): string | null => {
+    if (!proj) return null;
+
     // First check for a 'Live Prototype' link
-    const prototypeLink = project.content?.links?.find(
-      (link) =>
-        link.text.toLowerCase().includes('prototype') || link.text.toLowerCase().includes('demo'),
-    );
+    const prototypeLink = proj.content?.links?.find((link) => {
+      const linkText = link.text?.toLowerCase() || '';
+      return linkText.includes('prototype') || linkText.includes('demo');
+    });
 
     // If no prototype link found, check if main URL is a Framer site
-    const isFramerUrl =
-      project.url?.includes('framer.website') || project.url?.includes('framer.site');
+    const isFramerUrl = proj.url
+      ? proj.url.includes('framer.website') || proj.url.includes('framer.site')
+      : false;
 
-    const url = prototypeLink?.url || (isFramerUrl ? project.url : '');
-    return url;
-  };
+    return prototypeLink?.url || (isFramerUrl && proj.url ? proj.url : null);
+  }, []);
 
-  const prototypeUrl = getPrototypeUrl();
+  // Early return only if not mounted yet or no project
+  if (!mounted || !project) {
+    if (open && !project) {
+      console.log('ProjectDialog: No project provided but dialog is open');
+    }
+    return null;
+  }
+
+  const prototypeUrl = getPrototypeUrl(project);
   const hasPrototypeLink = !!prototypeUrl;
+
+  console.log('ProjectDialog rendering with project:', project?.title || 'none');
+
+  if (!project) {
+    return null;
+  }
 
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
-      {/* Add dialog ID for aria-controls */}
-      {dialogId && <span id={dialogId} className="sr-only" aria-hidden="true" />}
-      <DialogContent className="max-w-5xl max-h-[90vh] p-0 overflow-hidden bg-background">
+      <DialogContent
+        ref={dialogRef}
+        className="max-w-5xl max-h-[90vh] p-0 overflow-hidden bg-background"
+      >
+        {/* Add dialog ID for aria-controls */}
+        {dialogId && <span id={dialogId} className="sr-only" aria-hidden="true" />}
         <div className="flex flex-col h-full">
           {/* Header */}
           <DialogHeader className="p-6 pb-0 bg-card/50 border-b border-border/30">
@@ -126,7 +211,7 @@ export function ProjectDialog({ project, open, onOpenChange, dialogId }: Project
                 tabIndex={activeTab === 'details' ? 0 : -1}
                 active={activeTab === 'details'}
                 onClick={() => setActiveTab('details')}
-                onKeyDown={(e) => {
+                onKeyDown={(e: React.KeyboardEvent) => {
                   if (e.key === 'Enter' || e.key === ' ') {
                     e.preventDefault();
                     setActiveTab('details');

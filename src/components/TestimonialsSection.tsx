@@ -45,7 +45,7 @@ export function TestimonialsSection() {
             {translations.title}
           </h2>
           <div
-            className="mx-auto w-20 h-1.5 bg-accent-950"
+            className="mx-auto w-20 h-1.5 bg-accent-500"
             aria-hidden="true"
             role="presentation"
           ></div>
@@ -64,10 +64,7 @@ export function TestimonialsSection() {
                 aria-roledescription="testimonial"
                 aria-label={`Testimonial ${index + 1} of ${testimonials.length}`}
               >
-                <Card
-                  variant="primary"
-                  className="relative h-full p-0 group bg-card/95 border border-foreground/10 shadow-lg"
-                >
+                <Card variant="primary">
                   <CardContent className="h-full flex flex-col p-6">
                     <div className="flex flex-col items-center h-full md:flex-row md:items-start">
                       <div className="relative z-0 flex-shrink-0 mb-6 md:mb-0 md:mr-8 flex-shrink-0">

@@ -4,10 +4,13 @@ import Link from 'next/link';
 import { siteConfig } from '@/config/siteConfig';
 import { Button } from './ui/Button';
 import { usePathname } from 'next/navigation';
+import { useRouter } from 'next/router';
 
 const Nav = () => {
   const pathname = usePathname();
+  const router = useRouter();
   const [activeSection, setActiveSection] = useState<string | null>(null);
+  const [isOpen, setIsOpen] = useState(false);
   const navRef = useRef<HTMLElement>(null);
 
   // Update active section based on scroll position
@@ -41,6 +44,14 @@ const Nav = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [pathname]);
 
+  // Handle nav link click (for mobile menu)
+  const handleNavLinkClick = (e: React.MouseEvent) => {
+    // Close mobile menu if open
+    if (isOpen) {
+      setIsOpen(false);
+    }
+  };
+
   // Handle keyboard navigation for the nav menu
   const handleKeyDown = (e: React.KeyboardEvent, index: number, totalItems: number) => {
     if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
@@ -68,6 +79,22 @@ const Nav = () => {
     }
   };
 
+  // Handle language change
+  const handleLanguageChange = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    const newLang = e.currentTarget.getAttribute('data-lang');
+    if (newLang === 'sv' || newLang === 'en') {
+      router.push(
+        {
+          pathname,
+          query: { ...router.query, lang: newLang },
+        },
+        undefined,
+        { locale: newLang },
+      );
+    }
+  };
+
   const navItems = Object.entries(siteConfig.translations.en.navLinks);
   const totalItems = navItems.length + 1; // +1 for login button
 
@@ -88,9 +115,8 @@ const Nav = () => {
               key={key}
               asChild
               variant="link"
-              size="sm"
-              className={`px-3 py-2 text-white hover:text-white/90 transition-colors ${
-                isActive ? 'text-white' : 'text-white/70'
+              className={`focus:outline-none px-3 py-2 text-white hover:text-white/90 transition-colors ${
+                isActive ? 'text-white focus:ring-primary' : 'text-white/70 focus:ring-primary'
               }`}
               active={isActive}
               onKeyDown={(e) => handleKeyDown(e, index, totalItems)}
