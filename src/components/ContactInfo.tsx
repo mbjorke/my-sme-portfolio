@@ -26,10 +26,10 @@ export function ContactInfo() {
         <div className="space-y-4">
           <a
             href={`tel:${siteConfig.contact.phone}`}
-            className="flex items-center space-x-3 transition-colors group text-foreground hover:text-accent-700 dark:hover:text-accent-500"
+            className="flex items-center space-x-3 text-accent-100 hover:text-accent-500"
             aria-label={`Phone number: ${siteConfig.contact.phone.replace(/(\d{3})(\d{2})(\d{3})(\d{2})/, '$1 $2 $3 $4')}`}
           >
-            <div className="flex justify-center items-center w-10 h-10 rounded-full transition-colors bg-primary/10 text-primary group-hover:bg-primary/20">
+            <div className="flex justify-center items-center w-10 h-10 rounded-full">
               <FiPhone size={20} aria-hidden="true" />
             </div>
             <span className="font-medium">
@@ -39,10 +39,10 @@ export function ContactInfo() {
 
           <a
             href={`mailto:${siteConfig.contact.social.github}`}
-            className="flex items-center space-x-3 transition-colors group text-foreground hover:text-accent-700 dark:hover:text-accent-500"
+            className="flex items-center space-x-3 text-accent-100 hover:text-accent-500"
             aria-label={`GitHub profile: ${siteConfig.contact.social.github}`}
           >
-            <div className="flex justify-center items-center w-10 h-10 rounded-full transition-colors bg-primary/10 text-primary group-hover:bg-primary/20">
+            <div className="flex justify-center items-center w-10 h-10 rounded-full">
               <SiGithub size={20} aria-hidden="true" />
             </div>
             <span className="font-medium">{siteConfig.contact.social.github}</span>
@@ -52,17 +52,19 @@ export function ContactInfo() {
             href={siteConfig.contact.social.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center space-x-3 transition-colors group text-foreground hover:text-accent-700 dark:hover:text-accent-500"
+            className="flex items-center space-x-3 text-accent-100 hover:text-accent-500"
             aria-label={`LinkedIn profile: ${siteConfig.contact.social.linkedin.replace('https://', '')}`}
           >
-            <div className="flex justify-center items-center w-10 h-10 rounded-full transition-colors bg-primary/10 text-primary group-hover:bg-primary/20">
+            <div className="flex justify-center items-center w-10 h-10 rounded-full">
               <SiLinkedin size={20} aria-hidden="true" />
             </div>
-            <span className="font-medium">{siteConfig.contact.social.linkedin.replace('https://', '')}</span>
+            <span className="font-medium">
+              {siteConfig.contact.social.linkedin.replace('https://', '')}
+            </span>
           </a>
 
-          <div className="flex items-center space-x-3">
-            <div className="flex justify-center items-center w-10 h-10 rounded-full bg-muted text-foreground">
+          <div className="flex items-center space-x-3 text-accent-100 hover:text-accent-500">
+            <div className="flex justify-center items-center w-10 h-10 rounded-full">
               <FiMapPin size={20} aria-hidden="true" />
             </div>
             <span className="font-medium">{siteConfig.contact.location}</span>

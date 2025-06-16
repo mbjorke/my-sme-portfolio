@@ -32,7 +32,7 @@ export function ContactForm({
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="space-y-2 text-left">
           <label htmlFor="name" className="block text-sm font-semibold text-foreground">
-            <span className="text-destructive">*</span> Name
+            <span className="text-destructive-200">*</span> Name
           </label>
           <Input
             id="name"
@@ -45,7 +45,7 @@ export function ContactForm({
             aria-invalid={!!errors.name}
             placeholder="Your name"
           />
-          {errors.name && <p className="text-sm font-medium text-destructive">{errors.name}</p>}
+          {errors.name && <p className="text-sm font-medium text-destructive-200">{errors.name}</p>}
         </div>
 
         <div className="space-y-2 text-left">

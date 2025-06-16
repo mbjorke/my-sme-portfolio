@@ -14,17 +14,17 @@ interface CarouselProps<T> {
   activeDotClassName?: string;
 }
 
-export function Carousel<T>({ 
-  items, 
-  renderItem, 
-  className = '', 
-  autoPlay, 
+export function Carousel<T>({
+  items,
+  renderItem,
+  className = '',
+  autoPlay,
   nextButtonAriaLabel = 'Next item',
   prevButtonAriaLabel = 'Previous item',
-  nextButtonClassName = 'text-foreground hover:bg-primary/20',
-  prevButtonClassName = 'text-foreground hover:bg-primary/20',
-  dotButtonClassName = 'bg-foreground/30 hover:bg-foreground/50',
-  activeDotClassName = 'bg-foreground scale-125'
+  nextButtonClassName = 'text-accent-100 hover:bg-accent-50',
+  prevButtonClassName = 'text-accent-100 hover:bg-accent-50',
+  dotButtonClassName = 'bg-accent-100 hover:bg-accent-50',
+  activeDotClassName = 'bg-accent-500 scale-125',
 }: CarouselProps<T>) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
@@ -73,8 +73,8 @@ export function Carousel<T>({
               <button
                 key={idx}
                 className={`w-2.5 h-2.5 rounded-full transition-all duration-200 ${
-                  idx === currentIndex 
-                    ? `${activeDotClassName} ${dotButtonClassName}` 
+                  idx === currentIndex
+                    ? `${activeDotClassName} ${dotButtonClassName}`
                     : `${dotButtonClassName} hover:opacity-100`
                 }`}
                 onClick={() => setCurrentIndex(idx)}

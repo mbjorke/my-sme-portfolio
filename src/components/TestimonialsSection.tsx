@@ -34,18 +34,18 @@ export function TestimonialsSection() {
   if (testimonials.length === 0) return null;
 
   return (
-    <section 
-      id="testimonials" 
+    <section
+      id="testimonials"
       className="relative z-10 py-16 md:py-24 bg-background/20"
       aria-label="Testimonials from clients and colleagues"
     >
       <div className="flex flex-col items-center px-4 mx-auto">
         <div className="relative z-10 mb-12 w-full text-center">
-          <h2 className="mb-4 text-3xl font-bold md:text-4xl text-foreground">
+          <h2 className="mb-4 text-3xl font-bold md:text-4xl text-foreground/95">
             {translations.title}
           </h2>
-          <div 
-            className="mx-auto w-20 h-1.5 bg-accent-950" 
+          <div
+            className="mx-auto w-20 h-1.5 bg-accent-950"
             aria-hidden="true"
             role="presentation"
           ></div>
@@ -57,23 +57,26 @@ export function TestimonialsSection() {
             className="h-full"
             nextButtonAriaLabel="Next testimonial"
             prevButtonAriaLabel="Previous testimonial"
-            nextButtonClassName="text-foreground hover:bg-foreground/20"
-            prevButtonClassName="text-foreground hover:bg-foreground/20"
-            dotButtonClassName="bg-foreground/60 hover:bg-foreground/80"
-            activeDotClassName="bg-foreground text-white"
+            nextButtonClassName="text-accent/90 hover:bg-accent/10"
+            prevButtonClassName="text-accent/90 hover:bg-accent/10"
+            dotButtonClassName="bg-accent/70 hover:bg-accent/90"
+            activeDotClassName="bg-accent text-white"
             renderItem={(testimonial: Testimonial, index: number) => (
-              <div 
-                className="h-full" 
-                role="group" 
+              <div
+                className="h-full"
+                role="group"
                 aria-roledescription="testimonial"
                 aria-label={`Testimonial ${index + 1} of ${testimonials.length}`}
               >
-                <Card variant="primary" className="relative h-full p-0 group bg-card/95 border border-foreground/10 shadow-lg">
+                <Card
+                  variant="primary"
+                  className="relative h-full p-0 group bg-card/95 border border-foreground/10 shadow-lg"
+                >
                   <CardContent className="h-full flex flex-col p-6">
                     <div className="flex flex-col items-center h-full md:flex-row md:items-start">
                       <div className="relative z-0 flex-shrink-0 mb-6 md:mb-0 md:mr-8 flex-shrink-0">
                         <Quote
-                          className="absolute left-1 top-4 z-10 w-10 h-10 text-accent"
+                          className="absolute left-1 top-4 z-10 w-10 h-10 text-accent-700 dark:text-accent-500"
                           strokeWidth={1.5}
                           aria-hidden="true"
                         />
@@ -88,7 +91,7 @@ export function TestimonialsSection() {
                         </div>
                       </div>
                       <div className="flex-1 mt-6 min-h-[200px]">
-                        <blockquote 
+                        <blockquote
                           className="relative z-10 mb-6 text-lg md:text-xl text-foreground leading-relaxed"
                           cite={testimonial.url}
                         >
@@ -101,7 +104,7 @@ export function TestimonialsSection() {
                           <h3 className="text-xl font-semibold text-foreground/95">
                             {testimonial.name}
                           </h3>
-                          <p className="text-foreground/95">{testimonial.type}</p>
+                          <p className="text-foreground/90">{testimonial.type}</p>
                         </div>
                       </div>
                     </div>

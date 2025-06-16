@@ -33,7 +33,10 @@ export function Form<TFormValues extends FieldValues>({
   ...props
 }: FormProps<TFormValues>) {
   const methods = useForm<TFormValues>({
-    ...(schema && { resolver: zodResolver(schema) }),
+    ...(schema && {
+      // @ts-ignore - Type issue with zodResolver and newer versions of Zod
+      resolver: zodResolver(schema as any),
+    }),
     ...options,
   });
 

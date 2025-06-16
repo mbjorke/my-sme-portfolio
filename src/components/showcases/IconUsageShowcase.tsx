@@ -1,5 +1,3 @@
-import React from 'react';
-
 import Link from 'next/link';
 
 import {
@@ -19,7 +17,6 @@ import { SiGithub, SiLinkedin } from 'react-icons/si';
 
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/card';
-
 
 export function IconUsageShowcase() {
   return (
@@ -53,9 +50,11 @@ export function IconUsageShowcase() {
         <h3 className="mb-4 text-lg font-medium">Icons in Links</h3>
         <Card className="p-6">
           <div className="space-y-4">
-            <Link href="/" className="flex items-center group text-accent-100 hover:text-accent-50 hover:underline">
-              Learn more{' '}
-              <FiArrowRight className="ml-2 w-4 h-4 transition-transform" />
+            <Link
+              href="/"
+              className="flex items-center group text-accent-100 hover:text-accent-50 hover:underline"
+            >
+              Learn more <FiArrowRight className="ml-2 w-4 h-4 transition-transform" />
             </Link>
             <div className="flex items-center space-x-6">
               <Link

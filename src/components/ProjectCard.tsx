@@ -201,7 +201,7 @@ export function ProjectCard({ project, className = '', index = 0 }: ProjectCardP
               )}
             </div>
 
-            <CardFooter className="flex justify-between px-6 pt-0 pb-6">
+            <CardFooter className="flex justify-between px-6 pt-6 pb-6">
               <span className="sr-only">
                 {project.openInDialog || project.content ? viewDetailsText : viewProjectText}
               </span>
@@ -211,7 +211,7 @@ export function ProjectCard({ project, className = '', index = 0 }: ProjectCardP
                   href={project.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex items-center gap-2 text-sm font-semibold transition-colors duration-200 text-accent-700 dark:text-accent-500 hover:text-accent-900 dark:hover:text-accent-400"
+                  className="group flex items-center gap-2 text-sm font-semibold transition-colors duration-200 text-accent-100 hover:text-accent-500"
                   aria-label={project.cta?.text || viewProjectText}
                 >
                   {project.cta?.text || viewProjectText}
