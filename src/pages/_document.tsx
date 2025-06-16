@@ -13,8 +13,12 @@ export default function Document({ locale = siteConfig.defaultLocale }: Document
     <Html lang={locale}>
       <Head>
         <meta charSet="utf-8" />
+        <title>Portfolio | Marcus Björke - Web Developer</title>
         <meta name="theme-color" content="#010e14" />
-        <meta name="description" content="Portfolio showcasing my work and expertise in web development and design" />
+        <meta
+          name="description"
+          content="Portfolio showcasing my work and expertise in web development and design"
+        />
         <link rel="icon" href="/favicon.ico" />
         <link
           href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap"
@@ -22,7 +26,9 @@ export default function Document({ locale = siteConfig.defaultLocale }: Document
         />
       </Head>
       <body>
-        <Main />
+        <div id="main-content">
+          <Main />
+        </div>
         <NextScript />
       </body>
     </Html>
