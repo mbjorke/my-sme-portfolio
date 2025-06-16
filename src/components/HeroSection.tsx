@@ -24,7 +24,7 @@ export function HeroSection() {
       <div className="fixed inset-0 z-0">
         <div className="absolute inset-0">
           <Image
-            src="/assets/alone-surfer.jpg"
+            src="/assets/alone-surfer-horizontal.jpg"
             alt="Surfer background"
             fill
             className="object-cover"
@@ -32,7 +32,7 @@ export function HeroSection() {
           />
         </div>
         {/* Overlay for readability */}
-        <div className="absolute inset-0 bg-gradient-to-b from-primary-50/90 via-primary-950/70 to-primary-950/90" />
+        <div className="absolute inset-0 screenreader-only:bg-primary-950 bg-gradient-to-b from-primary-900/90 via-primary-900/70 to-primary-900/90" />
       </div>
       {/* Content */}
       <div className="flex relative z-10 flex-col gap-6 justify-center items-start px-4 py-24 mx-auto w-full max-w-3xl md:py-44">

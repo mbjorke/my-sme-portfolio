@@ -162,7 +162,7 @@ export function ContactForm({
                 </svg>
               </div>
               <div className="ml-3">
-                <p className="text-sm font-medium text-red-800">
+                <p className="text-sm font-medium text-red-800 dark:text-red-200">
                   Something went wrong. Please try again or contact me directly using the details on
                   this page.
                 </p>

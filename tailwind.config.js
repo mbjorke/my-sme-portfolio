@@ -224,7 +224,15 @@ const config = {
       },
     },
   },
-  plugins: [tailwindcssAnimate, typography, forms, containerQueries],
+  plugins: [
+    tailwindcssAnimate,
+    typography,
+    forms,
+    containerQueries,
+    function ({ addVariant }) {
+      addVariant('state-active', '&[data-state="active"]');
+    },
+  ],
 };
 
 export default config;

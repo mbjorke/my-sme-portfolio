@@ -1,7 +1,6 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 
-
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 
@@ -61,7 +60,9 @@ export function ProjectDialog({ project, open, onOpenChange, dialogId }: Project
   if (!mounted || !project) return null;
 
   const handleOpenChange = (isOpen: boolean) => {
+    console.log('Dialog open state changing to:', isOpen);
     if (!isOpen) {
+      console.log('Updating URL for dialog close');
       window.history.pushState({}, '', pathname);
     }
     onOpenChange(isOpen);
@@ -99,8 +100,12 @@ export function ProjectDialog({ project, open, onOpenChange, dialogId }: Project
           {/* Header */}
           <DialogHeader className="p-6 pb-0 bg-card/50 border-b border-border/30">
             <div>
-              <DialogTitle className="text-2xl font-bold text-foreground">{project.title}</DialogTitle>
-              <DialogDescription className="text-foreground/90">{project.summary}</DialogDescription>
+              <DialogTitle className="text-2xl font-bold text-foreground">
+                {project.title}
+              </DialogTitle>
+              <DialogDescription className="text-foreground/90">
+                {project.summary}
+              </DialogDescription>
             </div>
           </DialogHeader>
 
@@ -151,17 +156,25 @@ export function ProjectDialog({ project, open, onOpenChange, dialogId }: Project
                 <div className="max-w-none prose dark:prose-invert prose-p:text-foreground/90 prose-strong:text-foreground prose-headings:text-foreground">
                   {project.content?.description && (
                     <div className="mb-6">
-                      <h3 className="mb-3 text-xl font-semibold text-foreground">{translations.aboutProject}</h3>
-                      <p className="leading-relaxed text-foreground/90">{project.content.description}</p>
+                      <h3 className="mb-3 text-xl font-semibold text-foreground">
+                        {translations.aboutProject}
+                      </h3>
+                      <p className="leading-relaxed text-foreground/90">
+                        {project.content.description}
+                      </p>
                     </div>
                   )}
 
                   {project.content?.features && project.content.features.length > 0 && (
                     <div className="mb-6">
-                      <h3 className="mb-3 text-xl font-semibold text-foreground">{translations.keyFeatures}</h3>
+                      <h3 className="mb-3 text-xl font-semibold text-foreground">
+                        {translations.keyFeatures}
+                      </h3>
                       <ul className="pl-5 space-y-2 list-disc">
                         {project.content.features.map((feature, index) => (
-                          <li key={index} className="text-foreground/90">{feature}</li>
+                          <li key={index} className="text-foreground/90">
+                            {feature}
+                          </li>
                         ))}
                       </ul>
                     </div>

@@ -21,9 +21,9 @@ export function Carousel<T>({
   autoPlay,
   nextButtonAriaLabel = 'Next item',
   prevButtonAriaLabel = 'Previous item',
-  nextButtonClassName = 'text-accent-100 hover:bg-accent-50',
-  prevButtonClassName = 'text-accent-100 hover:bg-accent-50',
-  dotButtonClassName = 'bg-accent-100 hover:bg-accent-50',
+  nextButtonClassName = 'text-accent-100 hover:bg-accent-500/20',
+  prevButtonClassName = 'text-accent-100 hover:bg-accent-500/20',
+  dotButtonClassName = 'bg-accent-100 hover:bg-accent-500/20',
   activeDotClassName = 'bg-accent-500 scale-125',
 }: CarouselProps<T>) {
   const [currentIndex, setCurrentIndex] = useState(0);

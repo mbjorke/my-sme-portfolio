@@ -57,10 +57,6 @@ export function TestimonialsSection() {
             className="h-full"
             nextButtonAriaLabel="Next testimonial"
             prevButtonAriaLabel="Previous testimonial"
-            nextButtonClassName="text-accent/90 hover:bg-accent/10"
-            prevButtonClassName="text-accent/90 hover:bg-accent/10"
-            dotButtonClassName="bg-accent/70 hover:bg-accent/90"
-            activeDotClassName="bg-accent text-white"
             renderItem={(testimonial: Testimonial, index: number) => (
               <div
                 className="h-full"
@@ -92,7 +88,7 @@ export function TestimonialsSection() {
                       </div>
                       <div className="flex-1 mt-6 min-h-[200px]">
                         <blockquote
-                          className="relative z-10 mb-6 text-lg md:text-xl text-foreground leading-relaxed"
+                          className="relative z-10 mb-6 text-lg md:text-xl text-foreground/95 leading-relaxed"
                           cite={testimonial.url}
                         >
                           <span className="sr-only">Testimonial from {testimonial.name}:</span>

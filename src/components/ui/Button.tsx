@@ -38,10 +38,12 @@ const buttonVariants = cva(
 
         // Link button - For navigation
         link: [
-          'text-primary-foreground underline-offset-4 hover:underline',
+          'text-primary-foreground underline-offset-4 hover:underline active:underline',
           'relative after:absolute after:bottom-0 after:left-1/2 after:h-0.5 after:w-0 after:bg-primary-foreground',
           'after:transition-all after:duration-200 after:-translate-x-1/2',
           'hover:after:w-3/4 hover:no-underline',
+          'active:bg-primary-600/20',
+          'data-[state=active]:border-accent data-[state=active]:text-accent-50 data-[state=active]:bg-accent/10',
         ].join(' '),
 
         // Tab button - For tab navigation
@@ -95,14 +97,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     }
 
     return (
-      <button
-        className={cn(buttonVariants({ variant, size }), className, {
-          'data-[state=active]': active,
-        })}
-        ref={ref}
-        data-state={active ? 'active' : 'inactive'}
-        {...props}
-      />
+      <button className={cn(buttonVariants({ variant, size }), className)} ref={ref} {...props} />
     );
   },
 );
