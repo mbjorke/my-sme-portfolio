@@ -2,6 +2,13 @@
 
 A modern, accessible portfolio and contact site for small businesses or professionals, built with Next.js, TypeScript, and Supabase.
 
+## Current Status (Demo - June 24, 2025)
+
+- 🚀 Ready for production deployment
+- ✨ Performance optimizations in progress
+- 🔒 Secure authentication with Supabase
+- 🌐 Custom domain configured: blueberry.surf
+
 ## Features
 
 - Beautiful, consistent UI with unified button and card styles
