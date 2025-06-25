@@ -1,22 +1,28 @@
 'use client';
 import React, { useState } from 'react';
 
+import { useLanguage } from '@/context/LanguageContext';
+import { siteConfig } from '@/config/siteConfig';
 import { ContactForm } from '@/components/ContactForm';
 import { ContactInfo } from '@/components/ContactInfo';
 
 import { Card } from './ui/card';
 
 export function ContactSection() {
+  const { locale } = useLanguage();
+  const t = siteConfig.translations[locale as keyof typeof siteConfig.translations].contact;
+  const formT = t.form;
+
   const [form, setForm] = useState({ name: '', email: '', message: '', website: '' });
   const [status, setStatus] = useState<'idle' | 'success' | 'error' | 'loading'>('idle');
   const [errors, setErrors] = useState<{ name?: string; email?: string; message?: string }>({});
 
   const validate = () => {
     const errs: typeof errors = {};
-    if (!form.name.trim()) errs.name = 'Name is required';
+    if (!form.name.trim()) errs.name = formT.validation.nameRequired;
     if (!form.email.trim() || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(form.email))
-      errs.email = 'Valid email is required';
-    if (!form.message.trim()) errs.message = 'Message is required';
+      errs.email = formT.validation.invalidEmail;
+    if (!form.message.trim()) errs.message = formT.validation.messageRequired;
     return errs;
   };
 
@@ -60,12 +66,9 @@ export function ContactSection() {
         <div className="mx-auto max-w-6xl">
           <div className="mb-16 text-center">
             <h2 className="mb-4 text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
-              Let&apos;s build something meaningful together
+              {t.heading}
             </h2>
-            <p className="mx-auto max-w-[700px] text-muted-foreground text-lg">
-              Have a project in mind or want to discuss potential opportunities? I&apos;d love to
-              hear from you.
-            </p>
+            <p className="mx-auto max-w-[700px] text-muted-foreground text-lg">{t.description}</p>
           </div>
 
           <Card

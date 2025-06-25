@@ -73,10 +73,40 @@ export const siteConfig = {
       },
       contact: {
         title: 'Contact',
-        successMessage: 'Thank you for reaching out! I’ll get back to you soon.',
-        name: 'Name',
-        email: 'Email',
-        message: 'Message',
+        heading: "Let's build something meaningful together",
+        description:
+          "Have a project in mind or want to discuss potential opportunities? I'd love to hear from you.",
+        info: {
+          title: 'Contact Information',
+          description:
+            'Feel free to reach out through any of these channels. I typically respond within 24 hours.',
+          phone: 'Phone',
+          github: 'GitHub',
+          linkedin: 'LinkedIn',
+          location: 'Location',
+        },
+        successMessage: "Thank you for your message! I'll get back to you soon.",
+        form: {
+          title: 'Get in Touch',
+          name: 'Name',
+          email: 'Email',
+          message: 'Message',
+          requiredField: 'Required',
+          namePlaceholder: 'Your name',
+          emailPlaceholder: 'your.email@example.com',
+          messagePlaceholder: 'How can I help you?',
+          submit: 'Send Message',
+          submitting: 'Sending...',
+          success: 'Message sent successfully!',
+          error: 'Error sending message. Please try again.',
+          validation: {
+            nameRequired: 'Name is required',
+            emailRequired: 'Valid email is required',
+            messageRequired: 'Message is required',
+            invalidEmail: 'Please enter a valid email address',
+          },
+          honeypot: "Don't fill this out if you're human",
+        },
       },
       hero: {
         subheading: 'Building digital products since 1997',
@@ -178,10 +208,40 @@ export const siteConfig = {
       },
       contact: {
         title: 'Kontakt',
+        heading: 'Låt oss bygga något meningsfullt tillsammans',
+        description:
+          'Har du ett projekt i åtanke eller vill du diskutera potentiella möjligheter? Jag skulle gärna vilja höra från dig.',
+        info: {
+          title: 'Kontaktinformation',
+          description:
+            'Tveka inte att höra av dig via någon av dessa kanaler. Jag svarar vanligtvis inom 24 timmar.',
+          phone: 'Telefon',
+          github: 'GitHub',
+          linkedin: 'LinkedIn',
+          location: 'Plats',
+        },
         successMessage: 'Tack för ditt meddelande! Jag återkommer snart.',
-        name: 'Namn',
-        email: 'E-post',
-        message: 'Meddelande',
+        form: {
+          title: 'Kontakta mig',
+          name: 'Namn',
+          email: 'E-post',
+          message: 'Meddelande',
+          requiredField: 'Obligatoriskt',
+          namePlaceholder: 'Ditt namn',
+          emailPlaceholder: 'din.epost@example.com',
+          messagePlaceholder: 'Hur kan jag hjälpa dig?',
+          submit: 'Skicka meddelande',
+          submitting: 'Skickar...',
+          success: 'Meddelandet skickat!',
+          error: 'Ett fel uppstod. Försök igen.',
+          validation: {
+            nameRequired: 'Namn krävs',
+            emailRequired: 'Giltig e-post krävs',
+            messageRequired: 'Meddelande krävs',
+            invalidEmail: 'Ange en giltig e-postadress',
+          },
+          honeypot: 'Fyll inte i detta fält om du är människa',
+        },
       },
 
       error: {

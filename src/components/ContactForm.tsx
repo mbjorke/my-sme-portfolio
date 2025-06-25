@@ -2,8 +2,9 @@
 
 import React from 'react';
 
+import { useLanguage } from '@/context/LanguageContext';
+import { siteConfig } from '@/config/siteConfig';
 import { Button } from '@/components/ui/Button';
-
 import Input from './ui/Input';
 
 interface ContactFormProps {
@@ -26,13 +27,16 @@ export function ContactForm({
   handleChange,
   handleSubmit,
 }: ContactFormProps) {
+  const { locale } = useLanguage();
+  const t = siteConfig.translations[locale as keyof typeof siteConfig.translations].contact.form;
+
   return (
     <div>
-      <h3 className="mb-6 text-2xl font-bold text-foreground">Get in Touch</h3>
+      <h3 className="mb-6 text-2xl font-bold text-foreground">{t.title}</h3>
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="space-y-2 text-left">
           <label htmlFor="name" className="block text-sm font-semibold text-foreground">
-            <span className="text-destructive-200">*</span> Name
+            {t.name} <span className="text-destructive-200">*</span>
           </label>
           <Input
             id="name"
@@ -43,14 +47,16 @@ export function ContactForm({
             onChange={handleChange}
             required
             aria-invalid={!!errors.name}
-            placeholder="Your name"
+            placeholder={t.namePlaceholder}
           />
-          {errors.name && <p className="text-sm font-medium text-destructive-200">{errors.name}</p>}
+          {errors.name && (
+            <p className="text-sm font-medium text-destructive-200">{t.validation.nameRequired}</p>
+          )}
         </div>
 
         <div className="space-y-2 text-left">
           <label htmlFor="email" className="block text-sm font-semibold text-foreground">
-            Email <span className="text-destructive">*</span>
+            {t.email} <span className="text-destructive">*</span>
           </label>
           <Input
             id="email"
@@ -61,14 +67,20 @@ export function ContactForm({
             onChange={handleChange}
             required
             aria-invalid={!!errors.email}
-            placeholder="your.email@example.com"
+            placeholder={t.emailPlaceholder}
           />
-          {errors.email && <p className="text-sm font-medium text-destructive">{errors.email}</p>}
+          {errors.email && (
+            <p className="text-sm font-medium text-destructive">
+              {errors.email.includes('valid')
+                ? t.validation.invalidEmail
+                : t.validation.emailRequired}
+            </p>
+          )}
         </div>
 
         <div className="space-y-2 text-left">
           <label htmlFor="message" className="block text-sm font-semibold text-foreground">
-            Message <span className="text-destructive">*</span>
+            {t.message} <span className="text-destructive">*</span>
           </label>
           <textarea
             id="message"
@@ -79,17 +91,17 @@ export function ContactForm({
             required
             aria-invalid={!!errors.message}
             aria-errormessage={errors.message ? 'message-error' : undefined}
-            placeholder="How can I help you?"
+            placeholder={t.messagePlaceholder}
             className="w-full px-3 py-2 text-base border rounded-md shadow-sm border-input bg-background text-foreground placeholder:text-foreground/80 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-70"
           />
           {errors.message && (
-            <p className="text-sm font-medium text-destructive">{errors.message}</p>
+            <p className="text-sm font-medium text-destructive">{t.validation.messageRequired}</p>
           )}
         </div>
 
         {/* Honeypot field for bots */}
         <div className="hidden" aria-hidden="true">
-          <label htmlFor="website">Don&apos;t fill this out if you&apos;re human</label>
+          <label htmlFor="website">{t.honeypot}</label>
           <Input
             id="website"
             name="website"
@@ -120,10 +132,10 @@ export function ContactForm({
                     d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                   ></path>
                 </svg>
-                Sending...
+                {t.submitting}
               </>
             ) : (
-              'Send Message'
+              t.submit
             )}
           </Button>
         </div>
@@ -162,10 +174,7 @@ export function ContactForm({
                 </svg>
               </div>
               <div className="ml-3">
-                <p className="text-sm font-medium text-red-800 dark:text-red-200">
-                  Something went wrong. Please try again or contact me directly using the details on
-                  this page.
-                </p>
+                <p className="text-sm font-medium text-red-800 dark:text-red-200">{t.error}</p>
               </div>
             </div>
           </div>
