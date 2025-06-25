@@ -13,10 +13,18 @@ interface ContactFormProps {
     email: string;
     message: string;
     website: string;
+    referralSource: string;
   };
   status: 'idle' | 'success' | 'error' | 'loading';
-  errors: { name?: string; email?: string; message?: string };
-  handleChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  errors: {
+    name?: string;
+    email?: string;
+    message?: string;
+    referralSource?: string;
+  };
+  handleChange: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
+  ) => void;
   handleSubmit: (e: React.FormEvent) => void;
 }
 
@@ -96,6 +104,30 @@ export function ContactForm({
           />
           {errors.message && (
             <p className="text-sm font-medium text-destructive">{t.validation.messageRequired}</p>
+          )}
+        </div>
+
+        <div className="space-y-2 text-left">
+          <label htmlFor="referralSource" className="block text-sm font-semibold text-foreground">
+            How did you hear about us? <span className="text-destructive">*</span>
+          </label>
+          <select
+            id="referralSource"
+            name="referralSource"
+            value={form.referralSource}
+            onChange={handleChange}
+            required
+            className="w-full px-3 py-2 text-base border rounded-md shadow-sm border-input bg-background text-foreground placeholder:text-foreground/80 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-70"
+          >
+            <option value="">Select an option</option>
+            <option value="search">Search Engine (Google, Bing, etc.)</option>
+            <option value="social">Social Media (LinkedIn, Twitter, etc.)</option>
+            <option value="referral">Referral from a friend/colleague</option>
+            <option value="conference">Conference or Event</option>
+            <option value="other">Other</option>
+          </select>
+          {errors.referralSource && (
+            <p className="text-sm font-medium text-destructive">{errors.referralSource}</p>
           )}
         </div>
 

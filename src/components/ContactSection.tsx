@@ -13,20 +13,34 @@ export function ContactSection() {
   const t = siteConfig.translations[locale as keyof typeof siteConfig.translations].contact;
   const formT = t.form;
 
-  const [form, setForm] = useState({ name: '', email: '', message: '', website: '' });
+  const [form, setForm] = useState({
+    name: '',
+    email: '',
+    message: '',
+    website: '',
+    referralSource: '', // New field for how they heard about us
+  });
   const [status, setStatus] = useState<'idle' | 'success' | 'error' | 'loading'>('idle');
-  const [errors, setErrors] = useState<{ name?: string; email?: string; message?: string }>({});
+  const [errors, setErrors] = useState<{
+    name?: string;
+    email?: string;
+    message?: string;
+    referralSource?: string;
+  }>({}); // Initialize as empty object instead of undefined
 
   const validate = () => {
-    const errs: typeof errors = {};
+    const errs: { [key: string]: string } = {};
     if (!form.name.trim()) errs.name = formT.validation.nameRequired;
     if (!form.email.trim() || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(form.email))
       errs.email = formT.validation.invalidEmail;
     if (!form.message.trim()) errs.message = formT.validation.messageRequired;
+    if (!form.referralSource) errs.referralSource = 'Please select how you heard about us';
     return errs;
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
+  ) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
@@ -34,7 +48,7 @@ export function ContactSection() {
     e.preventDefault();
     const errs = validate();
     setErrors(errs);
-    if (Object.keys(errs).length > 0) return;
+    if (errs && Object.keys(errs).length > 0) return;
     // Honeypot check
     if (form.website) return setStatus('error');
     setStatus('loading');
@@ -46,7 +60,7 @@ export function ContactSection() {
       });
       if (res.ok) {
         setStatus('success');
-        setForm({ name: '', email: '', message: '', website: '' });
+        setForm({ name: '', email: '', message: '', website: '', referralSource: '' });
       } else {
         setStatus('error');
       }
