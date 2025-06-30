@@ -10,12 +10,17 @@ import { AccessibilityTestWrapper } from '@/utils/a11y/AccessibilityTestWrapper'
 import { siteConfig } from '@/config/siteConfig';
 import '@/styles/globals.css';
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+// Initialize Supabase with environment variables
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
 
-if (!supabaseUrl || !supabaseAnonKey) {
-  console.error('Supabase URL or Anon Key is not defined');
-  throw new Error('Supabase configuration is missing');
+// Only validate in browser environment, not during build
+if (typeof window !== 'undefined' && (!supabaseUrl || !supabaseAnonKey)) {
+  console.warn('Supabase URL or Anon Key is not defined in client-side environment');
+  // Don't throw an error during build
+  if (process.env.NODE_ENV === 'production') {
+    console.error('Supabase configuration is missing in production');
+  }
 }
 
 export default function App({ Component, pageProps }: AppProps) {
