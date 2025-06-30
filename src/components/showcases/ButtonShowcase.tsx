@@ -30,7 +30,9 @@ export function ButtonShowcase({ className }: ButtonShowcaseProps) {
               <Button variant="outline">Outline</Button>
               <Button variant="ghost">Ghost</Button>
               <Button variant="link">Link</Button>
-              <Button variant="tab" active>Tab</Button>
+              <Button variant="tab" active>
+                Tab
+              </Button>
               <Button variant="tab">Tab</Button>
             </div>
           </Card>

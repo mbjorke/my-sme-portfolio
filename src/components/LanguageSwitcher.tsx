@@ -54,7 +54,7 @@ export function LanguageSwitcher() {
       const currentIndex = siteConfig.locales.indexOf(loc);
       const nextIndex = (currentIndex + 1) % siteConfig.locales.length;
       const nextButton = document.querySelector<HTMLButtonElement>(
-        `button[data-locale="${siteConfig.locales[nextIndex]}"]`
+        `button[data-locale="${siteConfig.locales[nextIndex]}"]`,
       );
       nextButton?.focus();
     } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
@@ -62,23 +62,23 @@ export function LanguageSwitcher() {
       const currentIndex = siteConfig.locales.indexOf(loc);
       const prevIndex = (currentIndex - 1 + siteConfig.locales.length) % siteConfig.locales.length;
       const prevButton = document.querySelector<HTMLButtonElement>(
-        `button[data-locale="${siteConfig.locales[prevIndex]}"]`
+        `button[data-locale="${siteConfig.locales[prevIndex]}"]`,
       );
       prevButton?.focus();
     }
   };
 
   return (
-    <div 
-      className="flex gap-2" 
-      role="radiogroup" 
+    <div
+      className="flex gap-2"
+      role="radiogroup"
       aria-label="Select language"
       aria-busy={isChanging}
     >
       {siteConfig.locales.map((loc) => {
         const isActive = locale === loc;
         const label = `${languageNames[loc] || loc.toUpperCase()} ${isActive ? '(selected)' : ''}`;
-        
+
         return (
           <Button
             key={loc}

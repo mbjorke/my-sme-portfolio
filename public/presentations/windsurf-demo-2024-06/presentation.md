@@ -185,12 +185,10 @@ _Bonus:_ Tidigt skede av denna förändring – enorma möjligheter väntar!
 ### 3. Effektivt AI-kodningsflöde
 
 1. **Tydliga mål**
-
    - Bryt ner komplexa uppgifter
    - Ange tydlig kontext
 
 2. **Iterativ utveckling**
-
    - Granska och förfina AI:ns utdata
    - Behåll mänsklig översyn
 

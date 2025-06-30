@@ -26,13 +26,16 @@ export function AccessibilityTestWrapper({
             console.error('A11y test failed:', err);
             return;
           }
-          
+
           if (results.violations.length > 0) {
-            console.group(`%cAccessibility Issues (${pathname || 'unknown'})`, 'color: #e53e3e; font-weight: bold');
+            console.group(
+              `%cAccessibility Issues (${pathname || 'unknown'})`,
+              'color: #e53e3e; font-weight: bold',
+            );
             results.violations.forEach((violation) => {
               console.groupCollapsed(
                 `%c${violation.impact?.toUpperCase()}: ${violation.help}`,
-                'color: #e53e3e;'
+                'color: #e53e3e;',
               );
               console.log('Description:', violation.description);
               console.log('Help URL:', violation.helpUrl);
@@ -47,7 +50,10 @@ export function AccessibilityTestWrapper({
             });
             console.groupEnd();
           } else {
-            console.log('%cNo accessibility violations detected!', 'color: #38a169; font-weight: bold');
+            console.log(
+              '%cNo accessibility violations detected!',
+              'color: #38a169; font-weight: bold',
+            );
           }
         });
       }, 1000);

@@ -45,13 +45,11 @@
 ## Feature Requests
 
 1. **Stricter Demo Mode**
-
    - Enforce plan adherence in demo mode
    - Require explicit confirmation for deviations
    - Visual timeline with time tracking
 
 2. **Improved Notifications**
-
    - More prominent deviation warnings
    - Option to require confirmation before proceeding with deviations
    - Audio/visual cues for important state changes

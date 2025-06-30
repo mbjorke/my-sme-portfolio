@@ -3,10 +3,9 @@ import React, { useState } from 'react';
 
 import dynamic from 'next/dynamic';
 
-const CardGradientShowcase = dynamic(
-  () => import('../components/showcases/CardGradientShowcase'),
-  { ssr: false },
-);
+const CardGradientShowcase = dynamic(() => import('../components/showcases/CardGradientShowcase'), {
+  ssr: false,
+});
 
 import { useTheme } from 'next-themes';
 

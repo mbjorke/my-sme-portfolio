@@ -40,14 +40,14 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta name="theme-color" content="#010e14" />
       </Head>
       <ThemeProvider>
-      <LanguageProvider>
-        <AccessibilityTestWrapper>
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
-        </AccessibilityTestWrapper>
-      </LanguageProvider>
-    </ThemeProvider>
+        <LanguageProvider>
+          <AccessibilityTestWrapper>
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+          </AccessibilityTestWrapper>
+        </LanguageProvider>
+      </ThemeProvider>
     </>
   );
 }

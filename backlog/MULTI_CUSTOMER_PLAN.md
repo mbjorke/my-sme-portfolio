@@ -66,11 +66,9 @@ This approach ensures that everything is set up correctly from the start, provid
 - **Dynamic Loading of Environment Variables**:
   - Implement a mechanism to load the appropriate `.env` file based on the customer context.
 - **API Routes**:
-
   - Structure API routes to handle requests based on customer context.
 
 - **User Management**:
-
   - Build functionality for creating, updating, and deleting users associated with the correct customer.
 
 - **Run psql command to create the customers table**:

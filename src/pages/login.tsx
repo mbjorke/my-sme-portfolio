@@ -110,7 +110,9 @@ const Login = () => {
                       <Label htmlFor="login-password">Password</Label>
                       <button
                         type="button"
-                        onClick={() => {/* TODO: Implement forgot password functionality */}}
+                        onClick={() => {
+                          /* TODO: Implement forgot password functionality */
+                        }}
                         className="text-sm text-counseling-purple hover:text-counseling-dark-purple focus:outline-none focus:ring-2 focus:ring-counseling-purple focus:ring-offset-2 rounded"
                       >
                         Forgot password?
@@ -200,17 +202,21 @@ const Login = () => {
 
             <div className="mt-6 text-sm text-center text-gray-500">
               <span>By using our services, you agree to our </span>
-              <button 
-                type="button" 
-                onClick={() => {/* TODO: Navigate to Terms of Service */}}
+              <button
+                type="button"
+                onClick={() => {
+                  /* TODO: Navigate to Terms of Service */
+                }}
                 className="text-counseling-purple hover:text-counseling-dark-purple focus:outline-none focus:ring-2 focus:ring-counseling-purple focus:ring-offset-2 rounded"
               >
                 Terms of Service
               </button>
               <span> and </span>
-              <button 
-                type="button" 
-                onClick={() => {/* TODO: Navigate to Privacy Policy */}}
+              <button
+                type="button"
+                onClick={() => {
+                  /* TODO: Navigate to Privacy Policy */
+                }}
                 className="text-counseling-purple hover:text-counseling-dark-purple focus:outline-none focus:ring-2 focus:ring-counseling-purple focus:ring-offset-2 rounded"
               >
                 Privacy Policy
@@ -221,8 +227,8 @@ const Login = () => {
       </div>
 
       <div className="py-4 text-center bg-gray-50">
-        <Link 
-          href="/" 
+        <Link
+          href="/"
           className="text-gray-600 hover:text-counseling-purple focus:outline-none focus:ring-2 focus:ring-counseling-purple focus:ring-offset-2 rounded"
         >
           &larr; Back to Home

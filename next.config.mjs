@@ -30,6 +30,7 @@ const nextConfig = {
   webpack(config) {
     return config;
   },
+  pageExtensions: ['ts', 'tsx', 'js', 'jsx'],
 };
 
 export default nextConfig;
