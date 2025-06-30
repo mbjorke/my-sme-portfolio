@@ -34,7 +34,7 @@ const config = {
         sans: ['var(--font-sans)', ...fontFamily.sans],
       },
       colors: {
-        background: '#010e14',
+        background: '#252525',
         foreground: '#ffffff', // Brighter foreground for better contrast
         white: '#ffffff',
         primary: {
