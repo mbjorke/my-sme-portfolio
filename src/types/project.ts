@@ -16,8 +16,13 @@ export interface ProjectCaseStudy {
   summary: string;
   summarySv?: string;
   image: string;
+  /** Optional base64-encoded blurred placeholder image */
+  blurDataURL?: string;
   url: string;
+  /** @deprecated Use tags instead */
   technologies?: string[];
+  /** Array of tags to display on the project card */
+  tags?: string[];
   cta: ProjectLink & {
     textSv?: string;
   };

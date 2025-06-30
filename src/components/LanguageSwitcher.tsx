@@ -1,9 +1,9 @@
 'use client';
-import React from 'react';
-import { useState, useEffect } from 'react';
-import { useLanguage } from '@/context/LanguageContext';
-import { siteConfig } from '@/config/siteConfig';
+import React, { useState, useEffect } from 'react';
+
 import Button from '@/components/ui/Button';
+import { siteConfig } from '@/config/siteConfig';
+import { useLanguage } from '@/context/LanguageContext';
 
 const languageNames: Record<string, string> = {
   en: 'English',
@@ -45,23 +45,60 @@ export function LanguageSwitcher() {
     );
   }
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>, loc: string) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      handleLocaleChange(loc);
+    } else if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+      e.preventDefault();
+      const currentIndex = siteConfig.locales.indexOf(loc);
+      const nextIndex = (currentIndex + 1) % siteConfig.locales.length;
+      const nextButton = document.querySelector<HTMLButtonElement>(
+        `button[data-locale="${siteConfig.locales[nextIndex]}"]`,
+      );
+      nextButton?.focus();
+    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+      e.preventDefault();
+      const currentIndex = siteConfig.locales.indexOf(loc);
+      const prevIndex = (currentIndex - 1 + siteConfig.locales.length) % siteConfig.locales.length;
+      const prevButton = document.querySelector<HTMLButtonElement>(
+        `button[data-locale="${siteConfig.locales[prevIndex]}"]`,
+      );
+      prevButton?.focus();
+    }
+  };
+
   return (
-    <div className="flex gap-2" role="radiogroup" aria-label="Select language">
+    <div
+      className="flex gap-2"
+      role="radiogroup"
+      aria-label="Select language"
+      aria-busy={isChanging}
+    >
       {siteConfig.locales.map((loc) => {
         const isActive = locale === loc;
+        const label = `${languageNames[loc] || loc.toUpperCase()} ${isActive ? '(selected)' : ''}`;
+
         return (
           <Button
             key={loc}
+            data-locale={loc}
             onClick={() => handleLocaleChange(loc)}
-            variant={isActive ? 'default' : 'outline'}
+            onKeyDown={(e) => handleKeyDown(e, loc)}
+            variant={isActive ? 'primary' : 'outline'}
             size="sm"
-            className={` transition-opacity ${isChanging ? 'opacity-70' : ''}`}
-            aria-label={`${languageNames[loc] || loc.toUpperCase()} ${isActive ? '(selected)' : ''}`}
+            className={`min-w-[3rem] transition-all ${isChanging ? 'opacity-70' : ''} ${
+              isActive ? 'ring-2 ring-offset-2 ring-primary' : 'hover:bg-accent/50'
+            }`}
+            aria-label={label}
+            title={label}
             role="radio"
             aria-checked={isActive}
             disabled={isChanging}
+            tabIndex={isActive ? 0 : -1}
           >
-            {loc.toUpperCase()}
+            <span className="sr-only">{languageNames[loc] || loc.toUpperCase()}</span>
+            <span aria-hidden="true">{loc.toUpperCase()}</span>
           </Button>
         );
       })}

@@ -1,14 +1,13 @@
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
+
 import dynamic from 'next/dynamic';
 
-const CardGradientColorPickerShowcase = dynamic(
-  () => import('../components/CardGradientColorPickerShowcase'),
-  { ssr: false },
-);
+const CardGradientShowcase = dynamic(() => import('../components/showcases/CardGradientShowcase'), {
+  ssr: false,
+});
 
 import { useTheme } from 'next-themes';
-import { useState } from 'react';
 
 export default function TestGradientPage() {
   const { theme } = useTheme();
@@ -41,7 +40,7 @@ export default function TestGradientPage() {
         </button>
       </div>
       <div className={isLightPreview ? 'light-preview' : 'dark-preview'}>
-        <CardGradientColorPickerShowcase />
+        <CardGradientShowcase />
       </div>
     </div>
   );

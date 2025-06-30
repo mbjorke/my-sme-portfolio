@@ -1,5 +1,8 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
+# Run tests first (if any)
 npm test
-npx eslint . && npx prettier --check .
+
+# Run lint-staged to check and fix staged files
+npx lint-staged

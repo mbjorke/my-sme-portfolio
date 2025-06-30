@@ -51,3 +51,14 @@ next-env.d.ts
 # password files
 .pgpass
 
+# Test artifacts
+/playwright-report/
+/playwright/.cache/
+/test-results/
+
+# Temporary files
+*.new
+*.bak
+*.swp
+*~
+

@@ -1,7 +1,6 @@
 import React from 'react';
-import { useLanguage } from '@/context/LanguageContext';
-import { Card, CardHeader, CardTitle, CardDescription } from '@/components/ui/Card';
-import { siteConfig } from '@/config/siteConfig';
+
+import { IconType } from 'react-icons';
 import {
   SiFramer,
   SiNotion,
@@ -14,7 +13,10 @@ import {
   SiVercel,
   SiSupabase,
 } from 'react-icons/si';
-import { IconType } from 'react-icons';
+
+import { Card, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { siteConfig } from '@/config/siteConfig';
+import { useLanguage } from '@/context/LanguageContext';
 
 type Locale = 'en' | 'sv'; // Add all supported locales here
 
@@ -29,19 +31,24 @@ export function HowSection() {
   const how = siteConfig.translations[locale as Locale].how;
 
   return (
-    <section id="how" className="py-20 text-center">
-      <h2 className="mb-8 text-3xl font-bold">{how.title}</h2>
-      <div className="mx-auto w-full max-w-3xl">
-        <div className="flex flex-col gap-6 items-center w-full">
+    <section id="how" className="relative z-10 py-20 text-center bg-background/60">
+      <h2 className="mb-12 text-4xl font-bold">{how.title}</h2>
+      <div className="px-4 mx-auto w-full max-w-4xl">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           {how.steps.map((step, idx) => (
-            <Card key={step.title + idx} gradientBorder className="w-full">
-              <CardHeader>
-                <CardTitle className="mb-2 text-xl font-semibold transition-colors group-hover:text-primary">
-                  {step.title}
-                </CardTitle>
-                <div className="flex flex-row gap-4 justify-center items-center pt-4 pb-8">
-                  {hasImages(step) && step.images.length > 0
-                    ? step.images.map((iconName: string, i: number) => {
+            <Card
+              key={step.title + idx}
+              variant={(['primary', 'secondary', 'transparent', 'primary'] as const)[idx]}
+            >
+              <CardHeader className="relative z-10">
+                <div className="flex flex-col items-center">
+                  <CardTitle className="mb-4 text-xl font-semibold text-white transition-colors duration-300 group-hover:text-white/90">
+                    {step.title}
+                  </CardTitle>
+
+                  {hasImages(step) && step.images.length > 0 && (
+                    <div className="flex flex-wrap gap-3 justify-center py-4 mb-4">
+                      {step.images.map((iconName: string, i: number) => {
                         const icons: Record<string, IconType> = {
                           SiNotion,
                           SiMiro,
@@ -56,18 +63,24 @@ export function HowSection() {
                         };
                         const Icon = icons[iconName];
                         return Icon ? (
-                          <Icon
+                          <div
                             key={iconName + i}
-                            className="inline-block mx-1 transition-colors text-primary group-hover:text-accent-foreground"
-                            title={iconName.replace('Si', '')}
-                            aria-label={iconName.replace('Si', '')}
-                            size={36}
-                          />
+                            className="p-2 rounded-full shadow-sm bg-background/80 icon-hover hover:bg-primary/10"
+                          >
+                            <Icon
+                              className="text-foreground/70 hover:text-primary"
+                              title={iconName.replace('Si', '')}
+                              aria-label={iconName.replace('Si', '')}
+                              size={24}
+                            />
+                          </div>
                         ) : null;
-                      })
-                    : null}
+                      })}
+                    </div>
+                  )}
                 </div>
-                <CardDescription className="text-base text-left">
+
+                <CardDescription className="leading-relaxed text-left text-white/90">
                   {step.description}
                 </CardDescription>
               </CardHeader>

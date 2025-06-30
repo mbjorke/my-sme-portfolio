@@ -1,7 +1,8 @@
 'use client';
-import React from 'react';
-import { createContext, useContext, useState, useEffect, useCallback } from 'react';
+import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
+
 import { useRouter, usePathname } from 'next/navigation';
+
 import { siteConfig } from '@/config/siteConfig';
 
 const COOKIE_NAME = 'NEXT_LOCALE';

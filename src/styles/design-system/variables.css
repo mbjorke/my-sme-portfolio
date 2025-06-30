@@ -1,0 +1,154 @@
+:root {
+  /* ===== Base Colors ===== */
+  --white: #ffffff;
+  --black: #000000;
+
+  /* ===== Brand Colors ===== */
+  --ocean-blue: #e0f2fe; /* Light blue */
+  --surf-teal: #2dd4bf; /* Teal */
+  --sand: #f5f0e6; /* Light sand */
+  --deep-navy: #0f172a; /* Dark navy */
+  --surf-teal-light: #99f6e4; /* Light teal */
+
+  /* Theme colors */
+  --primary: var(--ocean-blue);
+  --primary-foreground: #1a1a1a; /* Dark gray for text */
+  --background: var(--sand);
+  --foreground: var(--deep-navy);
+  --card: var(--deep-navy);
+  --card-foreground: var(--deep-navy);
+  --popover: var(--deep-navy);
+  --popover-foreground: var(--deep-navy);
+
+  /* ===== Status Colors ===== */
+  --error: #ef4444; /* Red */
+  --error-light: #fee2e2; /* Light red */
+  --success: var(--surf-teal);
+  --warning: #f59e0b; /* Amber */
+  --info: #3b82f6; /* Blue */
+
+  /* ===== Neutral Colors ===== */
+  --gray-100: #f8fafc; /* Light mode background */
+  --gray-200: #e2e8f0; /* Light mode borders/inputs */
+  --gray-300: #94a3b8; /* Light mode muted text */
+  --gray-800: #1e293b; /* Dark mode muted background */
+  --gray-900: #0f172a; /* Dark mode text */
+
+  /* Border and input colors */
+  --border: var(--gray-200);
+  --input: var(--gray-200);
+
+  /* ===== Gradients ===== */
+  --gradient: linear-gradient(135deg, #e0f2fe 0%, #2dd4bf 50%, #22d3ee 100%);
+
+  /* ===== Card Styles ===== */
+  /* Card colors */
+  /* Primary to Accent Gradient */
+  --card-primary: linear-gradient(
+    135deg,
+    var(--primary-800, #00222c) 0%,
+    var(--primary-900, #001114) 100%
+  );
+  --card-primary-foreground: #ffffff;
+
+  /* Primary to Accent Gradient (Lighter) */
+  --card-secondary: linear-gradient(
+    135deg,
+    var(--primary-600, #0284c7) 0%,
+    var(--accent-500, #14b8a6) 100%
+  );
+  --card-secondary-foreground: #ffffff;
+
+  /* Card Border Colors */
+  --card-border: #0f172a; /* deep-navy */
+  --card-border-dark: #0f172a; /* deep-navy */
+  --card-hover: #e0f2fe; /* ocean-blue */
+  --card-hover-opacity: 0.5;
+
+  /* ===== Typography ===== */
+  --font-sans:
+    'Montserrat', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
+
+  /* ===== Semantic Colors ===== */
+  --secondary: var(--surf-teal);
+  --secondary-foreground: var(--white);
+  --accent: var(--surf-teal-light);
+  --accent-foreground: var(--deep-navy);
+  --muted: var(--sand);
+  --muted-foreground: var(--gray-300);
+  --ring: var(--ocean-blue);
+
+  /* ===== Status Foregrounds ===== */
+  --error-foreground: var(--white);
+  --success-foreground: var(--white);
+  --warning-foreground: var(--white);
+  --info-foreground: var(--white);
+
+  /* ===== Chart Colors ===== */
+  --chart-1: var(--ocean-blue);
+  --chart-2: var(--surf-teal);
+  --chart-3: var(--sand);
+  --chart-4: var(--gray-900);
+  --chart-5: var(--surf-teal);
+
+  /* ===== Card Styling ===== */
+  --card-light-bg: var(--sand);
+  --card-light-foreground: var(--deep-navy);
+  --card-dark-bg: var(--white);
+  --card-dark-foreground: var(--deep-navy);
+  --card-border-hsl: 191 87% 6%; /* deep-navy */
+  --card-border-dark-hsl: 191 87% 6%; /* deep-navy */
+  --card-hover-hsl: 185 96% 90%; /* ocean-blue */
+  --card-hover-opacity: 0.5;
+  /* Card border and hover styles */
+
+  /* ===== Border Radius ===== */
+  --radius: 0.5rem;
+}
+
+.dark {
+  /* ===== Base Theme ===== */
+  --background: var(--deep-navy);
+  --foreground: var(--gray-100);
+  --card: var(--deep-navy);
+  --card-foreground: var(--gray-100);
+  --popover: var(--deep-navy);
+  --popover-foreground: var(--gray-100);
+
+  /* ===== Semantic Colors ===== */
+  --primary: var(--ocean-blue);
+  --primary-foreground: var(--deep-navy);
+  --secondary: var(--surf-teal);
+  --secondary-foreground: var(--white);
+  --accent: var(--surf-teal-light);
+  --accent-foreground: var(--deep-navy);
+  --muted: var(--gray-800);
+  --muted-foreground: var(--gray-100);
+  --border: var(--gray-800);
+  --input: var(--gray-800);
+  --ring: 212 27% 84%;
+
+  /* ===== Card Styling ===== */
+  --card-light-bg: var(--gray-800);
+  --card-light-foreground: var(--gray-100);
+  --card-dark-bg: var(--deep-navy);
+  --card-dark-foreground: var(--gray-100);
+  --card-border: 191 87% 6%; /* deep-navy */
+  --card-border-dark: 191 87% 6%; /* deep-navy */
+  --card-hover: 185 96% 90%; /* ocean-blue */
+  --card-hover-opacity: 0.5;
+  /* Card border and hover styles for dark mode */
+
+  /* ===== Chart Colors ===== */
+  --chart-1: 198 70% 55%;
+  /* Brighter Ocean Blue */
+  --chart-2: 170 60% 45%;
+  /* Brighter Surf Teal */
+  --chart-3: 45 40% 75%;
+  /* Warmer Sand */
+  --chart-4: 220 30% 25%;
+  /* Lighter Deep Navy */
+  --chart-5: 170 45% 75%;
+  /* Brighter Light Surf Teal */
+}

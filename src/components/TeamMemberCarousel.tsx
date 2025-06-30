@@ -1,24 +1,28 @@
 import React from 'react';
-import Image from 'next/image';
+
+// Image is not used in this file
 import Link from 'next/link';
+
 import { SiGithub, SiLinkedin, SiInstagram, SiBluesky } from 'react-icons/si';
-import { Badge } from './ui/badge';
+
+import { SkillBadge } from './SkillBadge';
+import { Avatar, AvatarImage } from './ui/avatar';
+import { Card } from './ui/card';
 
 export interface TeamMember {
-  showLogo?: boolean;
-  name: string;
-  title: string;
-  avatar: string;
+  avatar?: string;
+  name?: string;
+  title?: string;
   bio?: string;
   skills?: string[];
   favoriteSnack?: string;
+  funFact?: string;
   social?: {
     github?: string;
     linkedin?: string;
     instagram?: string;
     bluesky?: string;
   };
-  funFact?: string;
 }
 
 interface TeamMemberCarouselProps {
@@ -27,104 +31,123 @@ interface TeamMemberCarouselProps {
 
 export function TeamMemberCarousel({ member }: TeamMemberCarouselProps) {
   return (
-    <div className="w-full max-w-2xl p-[2px] rounded-3xl bg-transparent transition-all duration-300 group hover:bg-gradient-to-r hover:from-[#7ed6df] hover:via-[#16a085] hover:to-[#1de9b6] h-full">
-      <div className="bg-[#023a47] p-8 rounded-3xl w-full flex flex-col items-center gap-6 min-h-[380px] h-full relative overflow-hidden flex-1">
-        {/* Avatar & Socials */}
-        <div className="flex z-10 flex-col items-center mb-2">
-          <Image
-            src={member?.avatar || '/default-avatar.png'}
-            alt={member?.name || 'Avatar'}
-            width={120}
-            height={120}
-            className="object-cover rounded-full border-4 shadow-lg aspect-square border-primary bg-background"
-            unoptimized={!!member?.avatar && member.avatar.includes('github')}
-          />
-          {/* Social icons themed */}
-          <div className="flex gap-4 justify-center mt-4">
-            {member?.social?.github && (
-              <Link
-                href={member.social.github}
-                target="_blank"
-                className="flex justify-center items-center w-10 h-10 rounded-full transition-colors group"
-              >
-                <span className="text-white hover:text-[#1de9b6] transition-colors">
-                  <SiGithub size={24} />
-                </span>
-              </Link>
+    <div
+      className="p-1 w-full h-full bg-transparent rounded-3xl group"
+      role="article"
+      aria-label={`Team member: ${member?.name || 'Unnamed member'}`}
+    >
+      <Card className="h-full">
+        <div className="flex flex-col p-4 h-full md:p-6">
+          {/* Avatar & Socials */}
+          <div className="flex z-10 flex-col items-center mb-2">
+            <Avatar className="w-24 h-24">
+              <AvatarImage
+                src={member?.avatar || '/default-avatar.png'}
+                alt={member?.name || 'Avatar'}
+                className="object-cover rounded-full border-4 shadow-lg aspect-square border-primary bg-background"
+                unoptimized={!!member?.avatar && member.avatar.includes('github')}
+              />
+            </Avatar>
+            {/* Social icons */}
+            <div className="flex gap-4 justify-center mt-4">
+              {member?.social?.github && (
+                <Link
+                  href={member.social.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex justify-center items-center w-10 h-10 rounded-full transition-all duration-300 hover:bg-primary/10 hover:scale-110"
+                  aria-label="GitHub profile"
+                >
+                  <span className="text-white">
+                    <SiGithub size={24} />
+                  </span>
+                </Link>
+              )}
+              {member?.social?.linkedin && (
+                <Link
+                  href={member.social.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex justify-center items-center w-10 h-10 rounded-full transition-all duration-300 hover:bg-primary/10 hover:scale-110"
+                  aria-label="LinkedIn profile"
+                >
+                  <span className="text-white">
+                    <SiLinkedin size={24} />
+                  </span>
+                </Link>
+              )}
+              {member?.social?.instagram && (
+                <Link
+                  href={member.social.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex justify-center items-center w-10 h-10 rounded-full transition-all duration-300 hover:bg-primary/10 hover:scale-110"
+                  aria-label="Instagram profile"
+                >
+                  <span className="text-white">
+                    <SiInstagram size={24} />
+                  </span>
+                </Link>
+              )}
+              {member?.social?.bluesky && (
+                <Link
+                  href={member.social.bluesky}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex justify-center items-center w-10 h-10 rounded-full transition-all duration-300 hover:bg-primary/10 hover:scale-110"
+                  aria-label="Bluesky profile"
+                >
+                  <span className="text-white">
+                    <SiBluesky size={24} />
+                  </span>
+                </Link>
+              )}
+            </div>
+          </div>
+
+          {/* Info */}
+          <div className="flex overflow-y-auto flex-col flex-1 items-center space-y-3 text-center">
+            <div className="space-y-1">
+              <h3 className="text-2xl font-extrabold md:text-3xl text-foreground">
+                {member?.name || 'No Name'}
+              </h3>
+              {member?.title && (
+                <p className="text-lg md:text-xl text-muted-foreground">{member.title}</p>
+              )}
+            </div>
+
+            {member?.bio && (
+              <p className="px-3 py-2 text-sm rounded-lg md:text-base bg-secondary-100 text-primary">
+                {member.bio}
+              </p>
             )}
-            {member?.social?.linkedin && (
-              <Link
-                href={member.social.linkedin}
-                target="_blank"
-                className="flex justify-center items-center w-10 h-10 rounded-full transition-colors group"
-              >
-                <span className="text-white hover:text-[#1de9b6] transition-colors">
-                  <SiLinkedin size={24} />
-                </span>
-              </Link>
+
+            {member?.skills && member.skills.length > 0 && (
+              <div className="flex flex-wrap gap-2 justify-center mt-1 w-full">
+                {member.skills.map((skill: string) => (
+                  <SkillBadge key={skill} skill={skill} />
+                ))}
+              </div>
             )}
-            {member?.social?.instagram && (
-              <Link
-                href={member.social.instagram}
-                target="_blank"
-                className="flex justify-center items-center w-10 h-10 rounded-full transition-colors group"
-              >
-                <span className="text-white hover:text-[#1de9b6] transition-colors">
-                  <SiInstagram size={24} />
-                </span>
-              </Link>
-            )}
-            {member?.social?.bluesky && (
-              <Link
-                href={member.social.bluesky}
-                target="_blank"
-                className="flex justify-center items-center w-10 h-10 rounded-full transition-colors group"
-              >
-                <span className="text-white hover:text-[#1de9b6] transition-colors">
-                  <SiBluesky size={24} />
-                </span>
-              </Link>
-            )}
+
+            <div className="mt-auto space-y-2 w-full">
+              {member?.favoriteSnack && (
+                <div className="px-3 py-1.5 text-xs md:text-sm border-2 border-destructive-300 bg-destructive-200 text-destructive-900 rounded-md">
+                  <span className="font-semibold">Favorite Snack:</span> {member.favoriteSnack}
+                </div>
+              )}
+
+              {member?.funFact && (
+                <div className="px-3 py-1.5 text-xs md:text-sm border-2 border-success-300 bg-success-200 text-success-900 rounded-md italic">
+                  <span className="font-semibold">Fun Fact:</span> {member.funFact}
+                </div>
+              )}
+            </div>
           </div>
         </div>
-        {/* Info */}
-        <div className="flex z-10 flex-col flex-1 gap-2 justify-center items-center mt-2">
-          <span className="text-3xl font-extrabold drop-shadow-lg text-primary">
-            {member?.name || 'No Name'}
-          </span>
-          <span className="text-xl font-semibold text-transparent bg-gradient-to-r from-[#7ed6df] via-[#16a085] to-[#1de9b6] bg-clip-text">
-            {member?.title || 'No Title'}
-          </span>
-          {member?.bio && (
-            <p className="px-2 py-1 mt-2 text-base rounded-lg shadow-inner text-[#037b81] bg-[#e0f7fa]/90 border border-[#7ed6df]">
-              {member.bio}
-            </p>
-          )}
-          {member?.skills && member.skills.length > 0 && (
-            <div className="flex flex-wrap gap-2 mt-2">
-              {member.skills.map((skill) => (
-                <Badge
-                  key={skill}
-                  variant={skill === 'Vibe Code Wizard' ? 'outline' : 'secondary'}
-                  className="text-white bg-[#023a47] border border-[#062e2e] hover:bg-gradient-to-r hover:from-[#7ed6df] hover:via-[#16a085] hover:to-[#1de9b6] hover:text-[#062e2e] transition-colors duration-300"
-                >
-                  {skill}
-                </Badge>
-              ))}
-            </div>
-          )}
-          {member?.favoriteSnack && (
-            <div className="mt-1 text-sm rounded-lg shadow-inner text-[#b91c1c] bg-[#fee2e2]/90 border border-[#f87171] px-2 py-1">
-              <span className="font-bold">Favorite Snack:</span> {member.favoriteSnack}
-            </div>
-          )}
-          {member?.funFact && (
-            <div className="mt-1 text-sm italic rounded-lg shadow-inner text-[#b45309] bg-[#fef9c3]/90 border border-[#fbbf24] px-2 py-1">
-              <span className="font-bold">Fun Fact:</span> {member.funFact}
-            </div>
-          )}
-        </div>
-      </div>
+      </Card>
     </div>
   );
 }
+
+export default TeamMemberCarousel;

@@ -6,9 +6,26 @@ interface CarouselProps<T> {
   renderItem: (item: T, index: number) => ReactNode;
   className?: string;
   autoPlay?: boolean | number;
+  nextButtonAriaLabel?: string;
+  prevButtonAriaLabel?: string;
+  nextButtonClassName?: string;
+  prevButtonClassName?: string;
+  dotButtonClassName?: string;
+  activeDotClassName?: string;
 }
 
-export function Carousel<T>({ items, renderItem, className = '', autoPlay }: CarouselProps<T>) {
+export function Carousel<T>({
+  items,
+  renderItem,
+  className = '',
+  autoPlay,
+  nextButtonAriaLabel = 'Next item',
+  prevButtonAriaLabel = 'Previous item',
+  nextButtonClassName = 'text-accent-100 hover:bg-accent-500/20',
+  prevButtonClassName = 'text-accent-100 hover:bg-accent-500/20',
+  dotButtonClassName = 'bg-accent-100 hover:bg-accent-500/20',
+  activeDotClassName = 'bg-accent-500 scale-125',
+}: CarouselProps<T>) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
@@ -32,40 +49,49 @@ export function Carousel<T>({ items, renderItem, className = '', autoPlay }: Car
 
   return (
     <div
-      className={`mx-auto w-full max-w-2xl ${className}`}
+      className={`grid grid-rows-[1fr_auto] h-full ${className}`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <div>{renderItem(items[currentIndex], currentIndex)}</div>
-      <div className="flex justify-center mt-8 space-x-4">
-        <button
-          className="flex justify-center items-center w-10 h-10 rounded-full text-primary hover:bg-primary/10"
-          onClick={prev}
-          aria-label="Previous"
-        >
-          <span className="sr-only">Previous</span>
-          &#8592;
-        </button>
-        <div className="flex items-center space-x-2">
-          {items.map((_, idx) => (
-            <button
-              key={idx}
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                idx === currentIndex ? 'bg-primary scale-110' : 'bg-primary/20 hover:bg-primary/40'
-              }`}
-              onClick={() => setCurrentIndex(idx)}
-              aria-label={`Go to slide ${idx + 1}`}
-            />
-          ))}
+      {/* Content Area */}
+      <div className="min-h-0">{renderItem(items[currentIndex], currentIndex)}</div>
+
+      {/* Navigation Controls */}
+      <div className="mt-4 flex justify-center">
+        <div className="inline-flex items-center bg-background/80 backdrop-blur-sm px-3 py-1.5 rounded-full border border-accent/10 shadow-md">
+          <button
+            className={`flex justify-center items-center w-8 h-8 rounded-full transition-colors ${prevButtonClassName}`}
+            onClick={prev}
+            aria-label={prevButtonAriaLabel}
+          >
+            <span className="sr-only">{prevButtonAriaLabel}</span>
+            &#8592;
+          </button>
+
+          <div className="flex items-center mx-2 space-x-1.5">
+            {items.map((_, idx) => (
+              <button
+                key={idx}
+                className={`w-2.5 h-2.5 rounded-full transition-all duration-200 ${
+                  idx === currentIndex
+                    ? `${activeDotClassName} ${dotButtonClassName}`
+                    : `${dotButtonClassName} hover:opacity-100`
+                }`}
+                onClick={() => setCurrentIndex(idx)}
+                aria-label={`Go to slide ${idx + 1}`}
+              />
+            ))}
+          </div>
+
+          <button
+            className={`flex justify-center items-center w-8 h-8 rounded-full transition-colors ${nextButtonClassName}`}
+            onClick={next}
+            aria-label={nextButtonAriaLabel}
+          >
+            <span className="sr-only">{nextButtonAriaLabel}</span>
+            &#8594;
+          </button>
         </div>
-        <button
-          className="flex justify-center items-center w-10 h-10 rounded-full text-primary hover:bg-primary/10"
-          onClick={next}
-          aria-label="Next"
-        >
-          <span className="sr-only">Next</span>
-          &#8594;
-        </button>
       </div>
     </div>
   );

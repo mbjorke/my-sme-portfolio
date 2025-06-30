@@ -1,18 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import Head from 'next/head';
 import type { AppProps } from 'next/app';
 import { useRouter } from 'next/router';
+
+import { Layout } from '@/components/Layout';
 import { ThemeProvider } from '@/components/ThemeProvider';
 import { LanguageProvider } from '@/context/LanguageContext';
-import { Layout } from '@/components/Layout';
-import { useEffect } from 'react';
+import { AccessibilityTestWrapper } from '@/utils/a11y/AccessibilityTestWrapper';
+import { siteConfig } from '@/config/siteConfig';
 import '@/styles/globals.css';
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+// Initialize Supabase with environment variables
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
 
-if (!supabaseUrl || !supabaseAnonKey) {
-  console.error('Supabase URL or Anon Key is not defined');
-  throw new Error('Supabase configuration is missing');
+// Only validate in browser environment, not during build
+if (typeof window !== 'undefined' && (!supabaseUrl || !supabaseAnonKey)) {
+  console.warn('Supabase URL or Anon Key is not defined in client-side environment');
+  // Don't throw an error during build
+  if (process.env.NODE_ENV === 'production') {
+    console.error('Supabase configuration is missing in production');
+  }
 }
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -24,13 +32,27 @@ export default function App({ Component, pageProps }: AppProps) {
     document.documentElement.lang = locale || 'en';
   }, [locale]);
 
+  // Get the current locale from the router
+  const currentLocale = locale || siteConfig.defaultLocale;
+  const isEnglish = currentLocale === 'en';
+
   return (
-    <ThemeProvider>
-      <LanguageProvider>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-      </LanguageProvider>
-    </ThemeProvider>
+    <>
+      <Head>
+        <title>{siteConfig.title}</title>
+        <meta name="description" content={siteConfig.description} />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+        <meta name="theme-color" content="#010e14" />
+      </Head>
+      <ThemeProvider>
+        <LanguageProvider>
+          <AccessibilityTestWrapper>
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+          </AccessibilityTestWrapper>
+        </LanguageProvider>
+      </ThemeProvider>
+    </>
   );
 }

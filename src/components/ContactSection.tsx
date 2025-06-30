@@ -1,22 +1,46 @@
 'use client';
 import React, { useState } from 'react';
-import Button from '@/components/ui/Button';
+
+import { useLanguage } from '@/context/LanguageContext';
+import { siteConfig } from '@/config/siteConfig';
+import { ContactForm } from '@/components/ContactForm';
+import { ContactInfo } from '@/components/ContactInfo';
+
+import { Card } from './ui/card';
 
 export function ContactSection() {
-  const [form, setForm] = useState({ name: '', email: '', message: '', website: '' });
+  const { locale } = useLanguage();
+  const t = siteConfig.translations[locale as keyof typeof siteConfig.translations].contact;
+  const formT = t.form;
+
+  const [form, setForm] = useState({
+    name: '',
+    email: '',
+    message: '',
+    website: '',
+    referralSource: '', // New field for how they heard about us
+  });
   const [status, setStatus] = useState<'idle' | 'success' | 'error' | 'loading'>('idle');
-  const [errors, setErrors] = useState<{ name?: string; email?: string; message?: string }>({});
+  const [errors, setErrors] = useState<{
+    name?: string;
+    email?: string;
+    message?: string;
+    referralSource?: string;
+  }>({}); // Initialize as empty object instead of undefined
 
   const validate = () => {
-    const errs: typeof errors = {};
-    if (!form.name.trim()) errs.name = 'Name is required';
+    const errs: { [key: string]: string } = {};
+    if (!form.name.trim()) errs.name = formT.validation.nameRequired;
     if (!form.email.trim() || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(form.email))
-      errs.email = 'Valid email is required';
-    if (!form.message.trim()) errs.message = 'Message is required';
+      errs.email = formT.validation.invalidEmail;
+    if (!form.message.trim()) errs.message = formT.validation.messageRequired;
+    if (!form.referralSource) errs.referralSource = 'Please select how you heard about us';
     return errs;
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
+  ) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
@@ -24,7 +48,7 @@ export function ContactSection() {
     e.preventDefault();
     const errs = validate();
     setErrors(errs);
-    if (Object.keys(errs).length > 0) return;
+    if (errs && Object.keys(errs).length > 0) return;
     // Honeypot check
     if (form.website) return setStatus('error');
     setStatus('loading');
@@ -36,7 +60,7 @@ export function ContactSection() {
       });
       if (res.ok) {
         setStatus('success');
-        setForm({ name: '', email: '', message: '', website: '' });
+        setForm({ name: '', email: '', message: '', website: '', referralSource: '' });
       } else {
         setStatus('error');
       }
@@ -51,84 +75,31 @@ export function ContactSection() {
   };
 
   return (
-    <section className="flex flex-col justify-center items-center py-20">
-      <h2 className="mb-6 text-3xl font-bold">Contact Me</h2>
-      <form
-        onSubmit={handleSubmit}
-        className="flex flex-col gap-4 p-8 w-full max-w-md text-left rounded-2xl shadow bg-card"
-      >
-        <div>
-          <label htmlFor="name" className="block mb-1 font-semibold">
-            Name
-          </label>
-          <input
-            id="name"
-            name="name"
-            type="text"
-            autoComplete="name"
-            value={form.name}
-            onChange={handleChange}
-            required
-            aria-invalid={!!errors.name}
-          />
-          {errors.name && <div className="mt-1 text-xs text-red-600">{errors.name}</div>}
+    <section id="contact" className="relative z-10 py-16 w-full md:py-24 lg:py-32 bg-background/80">
+      <div className="container px-4 md:px-6">
+        <div className="mx-auto max-w-6xl">
+          <div className="mb-16 text-center">
+            <h2 className="mb-4 text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
+              {t.heading}
+            </h2>
+            <p className="mx-auto max-w-[700px] text-muted-foreground text-lg">{t.description}</p>
+          </div>
+
+          <Card
+            variant="primary"
+            className="grid grid-cols-1 gap-12 items-start p-10 lg:grid-cols-2"
+          >
+            <ContactForm
+              form={form}
+              status={status}
+              errors={errors}
+              handleChange={handleChange}
+              handleSubmit={handleSubmit}
+            />
+            <ContactInfo />
+          </Card>
         </div>
-        <div>
-          <label htmlFor="email" className="block mb-1 font-semibold">
-            Email
-          </label>
-          <input
-            id="email"
-            name="email"
-            type="email"
-            autoComplete="email"
-            className="px-3 py-2 w-full rounded-lg border text-foreground bg-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
-            value={form.email}
-            onChange={handleChange}
-            required
-            aria-invalid={!!errors.email}
-          />
-          {errors.email && <div className="mt-1 text-xs text-red-600">{errors.email}</div>}
-        </div>
-        <div>
-          <label htmlFor="message" className="block mb-1 font-semibold">
-            Message
-          </label>
-          <textarea
-            id="message"
-            name="message"
-            rows={5}
-            className="px-3 py-2 w-full rounded-lg border text-foreground bg-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
-            value={form.message}
-            onChange={handleChange}
-            required
-            aria-invalid={!!errors.message}
-          />
-          {errors.message && <div className="mt-1 text-xs text-red-600">{errors.message}</div>}
-        </div>
-        {/* Honeypot field for bots */}
-        <div style={{ display: 'none' }}>
-          <label htmlFor="website">Website</label>
-          <input
-            id="website"
-            name="website"
-            type="text"
-            value={form.website}
-            onChange={handleChange}
-            tabIndex={-1}
-            autoComplete="off"
-          />
-        </div>
-        <Button type="submit" className="mt-2 w-full" disabled={status === 'loading'}>
-          {status === 'loading' ? 'Sending…' : 'Send Message'}
-        </Button>
-        {status === 'success' && (
-          <div className="text-center text-green-600">Thanks! Your message was sent.</div>
-        )}
-        {status === 'error' && (
-          <div className="text-center text-red-600">Something went wrong. Please try again.</div>
-        )}
-      </form>
+      </div>
     </section>
   );
 }

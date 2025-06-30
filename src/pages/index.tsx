@@ -1,15 +1,16 @@
-import React from 'react';
-import { HeroSection } from '@/components/HeroSection';
+import React, { Fragment } from 'react';
+
 import { AboutSection } from '@/components/AboutSection';
-import { ProjectsSection } from '@/components/ProjectsSection';
-import { TestimonialsSection } from '@/components/TestimonialsSection';
-import { HowSection } from '@/components/HowSection';
 import { ContactSection } from '@/components/ContactSection';
 import { Footer } from '@/components/Footer';
+import { HeroSection } from '@/components/HeroSection';
+import { HowSection } from '@/components/HowSection';
+import { ProjectsSection } from '@/components/ProjectsSection';
+import { TestimonialsSection } from '@/components/TestimonialsSection';
 
 export default function HomePage() {
   return (
-    <main>
+    <>
       <HeroSection />
       <TestimonialsSection />
       <HowSection />
@@ -17,6 +18,6 @@ export default function HomePage() {
       <ContactSection />
       <AboutSection />
       <Footer />
-    </main>
+    </>
   );
 }

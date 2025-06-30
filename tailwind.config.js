@@ -1,13 +1,25 @@
+import { fontFamily } from 'tailwindcss/defaultTheme';
 import tailwindcssAnimate from 'tailwindcss-animate';
-import typography from '@tailwindcss/typography';
 import forms from '@tailwindcss/forms';
-module.exports = {
-  darkMode: ['class'],
-  content: [
-    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+import containerQueries from '@tailwindcss/container-queries';
+
+/** @type {import('tailwindcss').Config} */
+const config = {
+  darkMode: 'class',
+  safelist: [
+    // Safelist all color and opacity combinations
+    {
+      pattern:
+        /(bg|text|border|ring|outline|divide|from|via|to)-(primary|secondary|accent|destructive|success|warning|muted|card|purple|blue|violet|teal|pink|orange)-(50|100|200|300|400|500|600|700|800|900|950|DEFAULT)/,
+      variants: ['hover', 'focus', 'dark'],
+    },
+    {
+      pattern:
+        /(bg|text|border|ring|outline|divide|from|via|to)-(primary|secondary|accent|destructive|success|warning|muted|card|purple|blue|violet|teal|pink|orange)-(50|100|200|300|400|500|600|700|800|900|950|DEFAULT)\/(25|50|75|90|100)/,
+      variants: ['hover', 'focus', 'dark'],
+    },
   ],
+  content: ['./src/pages/**/*.{js,ts,jsx,tsx,mdx}', './src/components/**/*.{js,ts,jsx,tsx,mdx}'],
   theme: {
     container: {
       center: true,
@@ -18,70 +30,174 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        sans: [
-          'Montserrat',
-          'ui-sans-serif',
-          'system-ui',
-          '-apple-system',
-          'BlinkMacSystemFont',
-          'Segoe UI',
-          'Roboto',
-          'Helvetica Neue',
-          'Arial',
-          'Noto Sans',
-          'sans-serif',
-        ],
-      },
-      backgroundImage: {
-        'gradient-border':
-          'linear-gradient(158deg, #01fdee 0%, #02d19d 10%, #07fae3 19%, #000000 29%)',
+        sans: ['var(--font-sans)', ...fontFamily.sans],
       },
       colors: {
-        border: 'hsl(var(--border))',
-        input: 'hsl(var(--input))',
-        ring: 'hsl(var(--ring))',
-        background: 'hsl(var(--background))',
-        foreground: 'hsl(var(--foreground))',
+        background: '#252525',
+        foreground: '#ffffff', // Brighter foreground for better contrast
+        white: '#ffffff',
         primary: {
-          DEFAULT: 'hsl(var(--primary))',
-          foreground: 'hsl(var(--primary-foreground))',
+          DEFAULT: '#044957',
+          foreground: '#f5f0e6',
+          50: '#e6f0f2',
+          100: '#b3d1d8',
+          200: '#80b3bf',
+          300: '#4d94a6',
+          400: '#1a758d',
+          500: '#005674',
+          600: '#00445c',
+          700: '#003344',
+          800: '#00222c',
+          900: '#001114',
+          950: '#000000',
         },
         secondary: {
-          DEFAULT: 'hsl(var(--secondary))',
-          foreground: 'hsl(var(--secondary-foreground))',
+          DEFAULT: '#e0f2fe',
+          foreground: '#1a1a1a',
+          50: '#f0f9ff',
+          100: '#e0f2fe',
+          200: '#bae6fd',
+          300: '#7dd3fc',
+          400: '#38bdf8',
+          500: '#0ea5e9',
+          600: '#0284c7',
+          700: '#0369a1',
+          800: '#075985',
+          900: '#0c4a6e',
+          950: '#083049',
         },
+
+        // Status colors - Enhanced for better contrast
         destructive: {
-          DEFAULT: 'hsl(var(--destructive))',
-          foreground: 'hsl(var(--destructive-foreground))',
+          DEFAULT: '#dc2626', // Brighter red for better contrast
+          foreground: '#ffffff',
+          50: '#fef2f2',
+          100: '#fee2e2',
+          200: '#fecaca',
+          300: '#fca5a5',
+          400: '#f87171',
+          500: '#dc2626', // Was #ef4444
+          600: '#b91c1c',
+          700: '#991b1b',
+          800: '#7f1d1d',
+          900: '#450a0a',
+          950: '#2b0707',
         },
-        muted: {
-          DEFAULT: 'hsl(var(--muted))',
-          foreground: 'hsl(var(--muted-foreground))',
+        success: {
+          DEFAULT: '#059669', // Darker green for better contrast
+          foreground: '#ffffff',
+          50: '#ecfdf5',
+          100: '#d1fae5',
+          200: '#a7f3d0',
+          300: '#6ee7b7',
+          400: '#34d399',
+          500: '#059669', // Was #10b981
+          600: '#047857',
+          700: '#047857',
+          800: '#065f46',
+          900: '#064e3b',
+          950: '#022c22',
         },
+        warning: {
+          DEFAULT: '#d97706', // Darker amber for better contrast
+          foreground: '#000000',
+          50: '#fffbeb',
+          100: '#fef3c7',
+          200: '#fde68a',
+          300: '#fcd34d',
+          400: '#fbbf24',
+          500: '#d97706', // Was #f59e0b
+          600: '#b45309',
+          700: '#92400e',
+          800: '#78350f',
+          900: '#451a03',
+          950: '#2e1102',
+        },
+        info: {
+          DEFAULT: '#b3d1d8' /* blue-500 */,
+          foreground: '#ffffff',
+          50: '#eff6ff',
+          100: '#dbeafe',
+          200: '#bfdbfe',
+          300: '#93c5fd',
+          400: '#60a5fa',
+          500: '#3b82f6',
+          600: '#2563eb',
+          700: '#1d4ed8',
+          800: '#1e40af',
+          900: '#1e3a8a',
+        },
+
+        // UI Element Colors - Enhanced for better contrast
+        border: {
+          DEFAULT: '#d1d5db', // Slightly darker gray
+          foreground: '#111827', // Darker gray for text
+        },
+        input: {
+          DEFAULT: '#d1d5db', // Slightly darker gray
+          foreground: '#111827', // Darker gray for text
+        },
+        ring: {
+          DEFAULT: '#0a6b7d', // Updated to match primary
+          foreground: '#ffffff',
+        },
+
+        // Accent colors - Enhanced for better contrast
         accent: {
-          DEFAULT: 'hsl(var(--accent))',
-          foreground: 'hsl(var(--accent-foreground))',
+          DEFAULT: '#2dd4bf' /* teal */,
+          foreground: '#ffffff',
+          50: '#f0fdfa',
+          100: '#ccfbf1',
+          200: '#99f6e4',
+          300: '#5eead4',
+          400: '#2dd4bf',
+          500: '#14b8a6',
+          600: '#0d9488',
+          700: '#0f766e',
+          800: '#115e59',
+          900: '#134e4a',
+          950: '#083049',
         },
-        popover: {
-          DEFAULT: 'hsl(var(--popover))',
-          foreground: 'hsl(var(--popover-foreground))',
-        },
-        card: {
-          DEFAULT: 'hsl(var(--card))',
-          foreground: 'hsl(var(--card-foreground))',
-        },
+
+        // Chart colors
         chart: {
-          1: 'hsl(var(--chart-1))',
-          2: 'hsl(var(--chart-2))',
-          3: 'hsl(var(--chart-3))',
-          4: 'hsl(var(--chart-4))',
-          5: 'hsl(var(--chart-5))',
+          1: '#3b82f6' /* blue-500 */,
+          2: '#10b981' /* emerald-500 */,
+          3: '#f59e0b' /* amber-500 */,
+          4: '#ef4444' /* red-500 */,
+          5: '#8b5cf6' /* violet-500 */,
         },
-      },
-      borderRadius: {
-        lg: 'var(--radius)',
-        md: 'calc(var(--radius) - 2px)',
-        sm: 'calc(var(--radius) - 4px)',
+
+        // Neutral colors (shades of gray)
+        gray: {
+          50: '#f9fafb',
+          100: '#f3f4f6',
+          200: '#e5e7eb',
+          300: '#d1d5db',
+          400: '#9ca3af',
+          500: '#6b7280',
+          600: '#4b5563',
+          700: '#374151',
+          800: '#1f2937',
+          900: '#111827',
+        },
+
+        // Text colors - Enhanced for better contrast
+        muted: {
+          DEFAULT: '#9ca3af' /* gray-400 */,
+          foreground: '#9ca3af' /* gray-400 */,
+          50: '#f9fafb',
+          100: '#f3f4f6',
+          200: '#e5e7eb',
+          300: '#d1d5db',
+          400: '#9ca3af', // Brighter for better contrast
+          500: '#6b7280',
+          600: '#4b5563',
+          700: '#374151',
+          800: '#1f2937',
+          900: '#111827',
+          950: '#030712',
+        },
       },
       keyframes: {
         'accordion-down': {
@@ -107,5 +223,14 @@ module.exports = {
       },
     },
   },
-  plugins: [tailwindcssAnimate, typography, forms],
+  plugins: [
+    tailwindcssAnimate,
+    forms,
+    containerQueries,
+    function ({ addVariant }) {
+      addVariant('state-active', '&[data-state="active"]');
+    },
+  ],
 };
+
+export default config;

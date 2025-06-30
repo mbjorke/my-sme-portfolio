@@ -1,12 +1,14 @@
 import React from 'react';
-import { siteConfig } from '@/config/siteConfig';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Card, CardContent } from '@/components/ui/Card';
+
 import { Quote } from 'lucide-react';
+
+import { Card, CardContent } from '@/components/ui/card';
+import { siteConfig } from '@/config/siteConfig';
 import { useLanguage } from '@/context/LanguageContext';
+
 import { Carousel } from './Carousel';
-import { cn } from '@/lib/utils';
-import { cardBase, cardContent } from '@/styles/card-decorations';
+// cn is not used in this file
+import { Avatar, AvatarImage } from './ui/avatar';
 
 interface Testimonial {
   type: string;
@@ -20,9 +22,10 @@ interface Testimonial {
 
 export function TestimonialsSection() {
   const { locale } = useLanguage();
-  const testimonials = (siteConfig.testimonials as Testimonial[]).filter(
-    (t) => t.show && !!t.quote,
-  );
+
+  // Get testimonials from siteConfig
+  const allTestimonials = siteConfig.testimonials as Testimonial[];
+  const testimonials = allTestimonials.filter((t) => t.show && !!t.quote);
 
   const translations = {
     title: locale === 'sv' ? 'Vad andra säger' : 'What others say',
@@ -31,52 +34,70 @@ export function TestimonialsSection() {
   if (testimonials.length === 0) return null;
 
   return (
-    <section id="testimonials" className="py-16 md:py-24 bg-background">
-      <div className="container flex flex-col items-center px-4 mx-auto">
-        <div className="mb-12 w-full text-center">
-          <h2 className="mb-4 text-3xl font-bold md:text-4xl text-foreground">
+    <section
+      id="testimonials"
+      className="relative z-10 py-16 md:py-24 bg-background/20"
+      aria-label="Testimonials from clients and colleagues"
+    >
+      <div className="flex flex-col items-center px-4 mx-auto">
+        <div className="relative z-10 mb-12 w-full text-center">
+          <h2 className="mb-4 text-3xl font-bold md:text-4xl text-foreground/95">
             {translations.title}
           </h2>
-          <div className="mx-auto w-20 h-1 bg-primary"></div>
+          <div
+            className="mx-auto w-20 h-1.5 bg-accent-500"
+            aria-hidden="true"
+            role="presentation"
+          ></div>
         </div>
-        <div className="relative mx-auto w-full max-w-4xl">
+        <div className="relative mx-auto w-full max-w-3xl h-[420px]">
           <Carousel
             autoPlay={3000}
             items={testimonials}
-            renderItem={(testimonial: Testimonial) => (
-              <div className="p-[2px] rounded-2xl bg-transparent transition-all duration-300 group hover:bg-gradient-to-r hover:from-[#7ed6df] hover:via-[#16a085] hover:to-[#1de9b6]">
-                <Card className={cn(cardBase, 'relative p-0 group')}>
-                  {/* No cardGradient or cardBlur here */}
-                  <Quote
-                    className="absolute top-8 left-8 z-0 w-12 h-12 pointer-events-none text-primary/10 md:w-16 md:h-16"
-                    strokeWidth={1.5}
-                  />
-                  <CardContent className={cn(cardContent, 'relative z-10')}>
-                    <div className="flex relative z-10 flex-col items-center md:flex-row md:items-start">
-                      <div className="mb-6 md:mb-0 md:mr-8">
-                        <Avatar className="w-24 h-24 border-4 border-primary/20 shadow-glow">
-                          <AvatarImage
-                            src={testimonial.badgeUrl}
-                            alt={testimonial.badge}
-                            className="object-cover"
-                          />
-                          <AvatarFallback className="text-2xl bg-primary/10 text-primary">
-                            {testimonial.name
-                              .split(' ')
-                              .map((n: string) => n[0])
-                              .join('')}
-                          </AvatarFallback>
-                        </Avatar>
+            className="h-full"
+            nextButtonAriaLabel="Next testimonial"
+            prevButtonAriaLabel="Previous testimonial"
+            renderItem={(testimonial: Testimonial, index: number) => (
+              <div
+                className="h-full"
+                role="group"
+                aria-roledescription="testimonial"
+                aria-label={`Testimonial ${index + 1} of ${testimonials.length}`}
+              >
+                <Card variant="primary">
+                  <CardContent className="h-full flex flex-col p-6">
+                    <div className="flex flex-col items-center h-full md:flex-row md:items-start">
+                      <div className="relative z-0 flex-shrink-0 mb-6 md:mb-0 md:mr-8 flex-shrink-0">
+                        <Quote
+                          className="absolute left-1 top-4 z-10 w-10 h-10 text-accent-700 dark:text-accent-500"
+                          strokeWidth={1.5}
+                          aria-hidden="true"
+                        />
+                        <div className="pt-12">
+                          <Avatar className="relative left-1 top-6 w-24 h-24">
+                            <AvatarImage
+                              src={testimonial.badgeUrl}
+                              alt={testimonial.badge}
+                              className="object-cover"
+                            />
+                          </Avatar>
+                        </div>
                       </div>
-                      <div className="flex-1">
-                        <blockquote className="relative z-10 mb-6 text-lg md:text-xl text-foreground/80">
-                          &quot;{testimonial.quote}&quot;
+                      <div className="flex-1 mt-6 min-h-[200px]">
+                        <blockquote
+                          className="relative z-10 mb-6 text-lg md:text-xl text-foreground/95 leading-relaxed"
+                          cite={testimonial.url}
+                        >
+                          <span className="sr-only">Testimonial from {testimonial.name}:</span>
+                          <span aria-hidden="true">&ldquo;</span>
+                          <span>{testimonial.quote}</span>
+                          <span aria-hidden="true">&rdquo;</span>
                         </blockquote>
                         <div>
-                          <h4 className="text-xl font-semibold text-foreground">
+                          <h3 className="text-xl font-semibold text-foreground/95">
                             {testimonial.name}
-                          </h4>
-                          <p className="text-foreground/60">{testimonial.type}</p>
+                          </h3>
+                          <p className="text-foreground/90">{testimonial.type}</p>
                         </div>
                       </div>
                     </div>

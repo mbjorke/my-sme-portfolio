@@ -2,6 +2,13 @@
 
 A modern, accessible portfolio and contact site for small businesses or professionals, built with Next.js, TypeScript, and Supabase.
 
+## Current Status (Demo - June 24, 2025)
+
+- 🚀 Ready for production deployment
+- ✨ Performance optimizations in progress
+- 🔒 Secure authentication with Supabase
+- 🌐 Custom domain configured: blueberry.surf
+
 ## Features
 
 - Beautiful, consistent UI with unified button and card styles
@@ -46,6 +53,12 @@ Visit [http://localhost:3000](http://localhost:3000)
 - Connect your repo to Spaceship, Vercel, or your preferred Next.js host
 - Set the same environment variables in your deployment dashboard
 - For Spaceship, see their docs for custom domain and email setup
+
+## Documentation
+
+For detailed documentation on components and their usage, see:
+
+- [Component Documentation](/docs/components/) - Detailed documentation for all reusable components
 
 ## Contact Form & Supabase
 

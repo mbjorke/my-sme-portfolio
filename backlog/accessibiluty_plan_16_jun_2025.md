@@ -1,0 +1,202 @@
+# Accessibility Color Contrast Audit Plan
+
+## Notes
+
+- Project: Next.js + TailwindCSS.
+- Accessibility tooling: Pa11y via npm scripts (`a11y:dev`, `a11y:check`, `a11y:ci`, `a11y:fix`).
+- Pa11y config is in `scripts/check-a11y.js`; currently **ignores** `color-contrast`.
+- User explicitly wants to check & fix color-contrast issues.
+- Node processes were laggy; environment restarted—dev server not running.
+- Dev server typically runs on port 3000 (Next.js auto-fallback to 3001 when 3000 busy).
+- Tailwind palette tweaked; Pa11y now reports 51 contrast issues (was 53).
+- Team focus: WCAG AA; user handles ContactForm, assistant handles Testimonials, Hero, global text.
+- Proposed darker `muted`/`muted-foreground` colors (#6b7280) and placeholder & label contrast updates.
+- Pa11y run fails on unresolved `wait for 1000ms` action; reliability patch proposed (increase timeout, wait 2000ms, Chrome flags).
+- First retry patch still failed; updated Pa11y `actions` to replace `wait for 1000ms` with `wait for 2000ms` and reduced global `wait` to 5 s—still failed.
+- Second patch also failed to remove the error; proposed **minimal Pa11y config** with zero custom actions and HMR-safe Chrome flags—applied but Pa11y still executes legacy wait actions.
+- Current hypothesis: dev HMR injects actions; switch to production build to eliminate HMR interference.
+- Updated `a11y:check` script to: `npm run build && next start & sleep 10 && node scripts/check-a11y.js ...`; simplified `check-a11y.js` accordingly—awaiting test run.
+- Connection refused (`ERR_CONNECTION_REFUSED`) showed production server wasn’t started—`a11y:check` in package.json still old.
+- Proposed new `a11y:check` script (build + `npm run start` in background, `wait-on` to block until http://localhost:3000 is up, then run Pa11y, finally kill server).
+- Installed `wait-on` dev dependency; automated background start still failed, so switched to **manual server control**: added `a11y:test` script and changed `a11y:check` to echo step-by-step instructions.
+- Production build succeeded after removing `<title>` from `_document.tsx` and fixing Zod resolver typing in `Form.tsx`.
+- Added `a11y:test` script to `package.json`; Pa11y now fails with Puppeteer "Target closed" error—extended Chrome flags and timeouts to improve stability.
+- Removed custom wait actions from `check-a11y.js` and improved retry logic.
+- Running `a11y:test` still fails with Puppeteer "Target closed" even after extra Chrome flags; console shows HMR messages, suggesting dev overlay still present—need deeper investigation.
+- Performed clean production build & `next start`; Pa11y still fails with "Target closed"—issue persists even in production mode.
+- Created minimal ES-module Pa11y script (`scripts/mini-test.js`) that succeeds (2 issues) using default runner; confirms production server reachable and problem lies in `check-a11y.js` (likely `axe` runner or flags).
+- Verified production server responds (curl 200 OK).
+- Committed accessibility config and component updates; minimal Pa11y script successful (2 issues).
+- `_document.tsx` reintroduced `<title>`; needs removal to avoid ESLint warning.
+- `npm audit` found 3 high-severity vulnerabilities (semver RDoS) via `pa11y`/`pa11y-ci`; `npm audit fix` did not resolve. Requires `npm audit fix --force` (breaking) or manual upgrade.
+- Pa11y latest version remains 9.0.0 (no newer security patch); pa11y-ci latest 3.1.0. Vulnerability stems from transitive `semver` <7.5.2 inside pa11y-ci → pa11y. Need override/patch or downgrade.
+- Added npm "overrides" forcing semver ^7.5.2; `npm audit` now reports 0 vulnerabilities.
+- Regression spotted: ProjectDialog no longer opens after recent changes; requires investigation.
+- Reviewed ProjectCard and ProjectDialog code; click handler sets `isDialogOpen` but Dialog not rendering—root cause still unknown.
+- Reviewed custom Dialog component implementation & git history; no breaking changes spotted yet.
+- User working on AI coding tools comparison markdown; Codeium renamed to Windsurf, column for former names planned.
+- Comparison table updated: Tabby renamed to TabbyML, added Sourcegraph Cody, refined Continue & Aider entries; Zed row still pending; visualization plan drafted (interactive table, radar chart, decision tree).
+- Dev server processes reset; app running on port 3000.
+- Visualization planning requested.
+- Running `node scripts/check-a11y.js` (with production server) still crashes with Puppeteer "Target closed" after 3 retries; `.pa11yci` config missing—need to refactor runner.
+- Initial contrast fixes pushed to TestimonialsSection (text foreground) and ContactForm error messages; HeroSection manually updated by user (needs verification).
+- Created `.pa11yci.js` but pa11y-ci failed to load ("module is not defined"); need to convert to `.pa11yci.json` or proper CJS module.
+- Converted to `.pa11yci.json`, removed `.pa11yci.js`; Pa11y now loads config but fails to run on URLs ("Failed to run")—need to ensure server ready or use production build.
+- Created `.pa11yci.json` config file; Pa11y now loads config but fails to run on URLs ("Failed to run")—need to ensure server ready or use production build.
+- Pivoting to Playwright + axe-core for accessibility tests; installed `@axe-core/playwright` and added initial `e2e/a11y.spec.ts`.
+- Began adding active state to Button `link` variant; current edits introduce TypeScript errors that must be resolved.
+- Nav component now uses `variant="link"` buttons with `active` prop, but visual active underline still not reflected; need to finalize link variant styles.
+- Button link variant updated with `data-state` styling but active underline still missing; confirmed Tailwind config lacks attribute selector variant—need to add plugin or use class-based variant.
+- Button link variant still missing active underline; Tailwind config updated with custom `state-active` variant targeting `[data-state="active"]`.
+- Switched to fallback `.active` class in Button component, but styles still not generated—likely purged by Tailwind. Need to review safelist / content paths.
+- Implemented `.btn-link` global class in `globals.css` for link buttons; Button component updated. Need to verify underline appears.
+- Button link variant transitioned to `.btn-link` global class with underline styles in `globals.css`; Nav buttons now include class. Need to verify underline appears.
+- Nav component now wraps each link in `relative group` with underline `<div>`; hover and active states controlled via width transition, removing dependency on global `.btn-link`.
+- Cleaned up unused global link button styles; underline now confirmed working.
+- Added descriptive alt text and title fallback for ProjectCard images and headings.
+- Verified production server responds (curl 200 OK).
+- Committed accessibility config and component updates; minimal Pa11y script successful (2 issues).
+- `_document.tsx` reintroduced `<title>`; needs removal to avoid ESLint warning.
+- `npm audit` found 3 high-severity vulnerabilities (semver RDoS) via `pa11y`/`pa11y-ci`; `npm audit fix` did not resolve. Requires `npm audit fix --force` (breaking) or manual upgrade.
+- Pa11y latest version remains 9.0.0 (no newer security patch); pa11y-ci latest 3.1.0. Vulnerability stems from transitive `semver` <7.5.2 inside pa11y-ci → pa11y. Need override/patch or downgrade.
+- Added npm "overrides" forcing semver ^7.5.2; `npm audit` now reports 0 vulnerabilities.
+- Regression spotted: ProjectDialog no longer opens after recent changes; requires investigation.
+- ProjectDialog still fails to open; initial debug shows click handler **does** fire.
+- Added debug logs to ProjectCard & ProjectDialog; logs reveal ProjectCard unmounts/remounts on click, resetting `isDialogOpen`.
+- Memoized ProjectCard list in ProjectsSection and fixed stable keys to preserve component instance.
+- Memoized translated projects array in ProjectsSection to avoid recreating data each render.
+- Wrapped ProjectCard with React.memo and corrected export to prevent unnecessary re-renders.
+- User working on AI coding tools comparison markdown; Codeium renamed to Windsurf, column for former names planned.
+- Comparison table updated: Tabby renamed to TabbyML, added Sourcegraph Cody, refined Continue & Aider entries; Zed row still pending; visualization plan drafted (interactive table, radar chart, decision tree).
+- Dev server processes reset; app running on port 3000.
+- Visualization planning requested.
+- Running `node scripts/check-a11y.js` (with production server) still crashes with Puppeteer "Target closed" after 3 retries; `.pa11yci` config missing—need to refactor runner.
+- Initial contrast fixes pushed to TestimonialsSection (text foreground) and ContactForm error messages; HeroSection manually updated by user (needs verification).
+- Created `.pa11yci.js` but pa11y-ci failed to load ("module is not defined"); need to convert to `.pa11yci.json` or proper CJS module.
+- Converted to `.pa11yci.json`, removed `.pa11yci.js`; Pa11y now loads config but fails to run on URLs ("Failed to run")—need to ensure server ready or use production build.
+- Created `.pa11yci.json` config file; Pa11y now loads config but fails to run on URLs ("Failed to run")—need to ensure server ready or use production build.
+- Pivoting to Playwright + axe-core for accessibility tests; installed `@axe-core/playwright` and added initial `e2e/a11y.spec.ts`.
+- Began adding active state to Button `link` variant; current edits introduce TypeScript errors that must be resolved.
+- Nav component now uses `variant="link"` buttons with `active` prop, but visual active underline still not reflected; need to finalize link variant styles.
+- Button link variant updated with `data-state` styling but active underline still missing; confirmed Tailwind config lacks attribute selector variant—need to add plugin or use class-based variant.
+- Button link variant still missing active underline; Tailwind config updated with custom `state-active` variant targeting `[data-state="active"]`.
+- Switched to fallback `.active` class in Button component, but styles still not generated—likely purged by Tailwind. Need to review safelist / content paths.
+- Implemented `.btn-link` global class in `globals.css` for link buttons; Button component updated. Need to verify underline appears.
+- Button link variant transitioned to `.btn-link` global class with underline styles in `globals.css`; Nav buttons now include class. Need to verify underline appears.
+- Nav component now wraps each link in `relative group` with underline `<div>`; hover and active states controlled via width transition, removing dependency on global `.btn-link`.
+- Cleaned up unused global link button styles; underline now confirmed working.
+- Verified production server responds (curl 200 OK).
+- Committed accessibility config and component updates; minimal Pa11y script successful (2 issues).
+- `_document.tsx` reintroduced `<title>`; needs removal to avoid ESLint warning.
+- `npm audit` found 3 high-severity vulnerabilities (semver RDoS) via `pa11y`/`pa11y-ci`; `npm audit fix` did not resolve. Requires `npm audit fix --force` (breaking) or manual upgrade.
+- Pa11y latest version remains 9.0.0 (no newer security patch); pa11y-ci latest 3.1.0. Vulnerability stems from transitive `semver` <7.5.2 inside pa11y-ci → pa11y. Need override/patch or downgrade.
+- Added npm "overrides" forcing semver ^7.5.2; `npm audit` now reports 0 vulnerabilities.
+- Regression spotted: ProjectDialog no longer opens after recent changes; requires investigation.
+- ProjectDialog still fails to open; initial debug shows click handler **does** fire.
+- Added debug logs to ProjectCard & ProjectDialog; logs reveal ProjectCard unmounts/remounts on click, resetting `isDialogOpen`.
+- Memoized ProjectCard list and fixed stable keys to preserve state
+  - [x] Memoize ProjectCard list and fix stable keys to preserve state
+  - [x] Memoize translated projects array to stabilize props
+  - [x] Wrap ProjectCard with React.memo and fix export
+  - [ ] Verify fix and ensure accessibility compliance
+- User working on AI coding tools comparison markdown; Codeium renamed to Windsurf, column for former names planned.
+- Comparison table updated: Tabby renamed to TabbyML, added Sourcegraph Cody, refined Continue & Aider entries; Zed row still pending; visualization plan drafted (interactive table, radar chart, decision tree).
+- Dev server processes reset; app running on port 3000.
+- Visualization planning requested.
+- Running `node scripts/check-a11y.js` (with production server) still crashes with Puppeteer "Target closed" after 3 retries; `.pa11yci` config missing—need to refactor runner.
+- Initial contrast fixes pushed to TestimonialsSection (text foreground) and ContactForm error messages; HeroSection manually updated by user (needs verification).
+- Created `.pa11yci.js` but pa11y-ci failed to load ("module is not defined"); need to convert to `.pa11yci.json` or proper CJS module.
+- Converted to `.pa11yci.json`, removed `.pa11yci.js`; Pa11y now loads config but fails to run on URLs ("Failed to run")—need to ensure server ready or use production build.
+- Created `.pa11yci.json` config file; Pa11y now loads config but fails to run on URLs ("Failed to run")—need to ensure server ready or use production build.
+- Pivoting to Playwright + axe-core for accessibility tests; installed `@axe-core/playwright` and added initial `e2e/a11y.spec.ts`.
+- Began adding active state to Button `link` variant; current edits introduce TypeScript errors that must be resolved.
+- Nav component now uses `variant="link"` buttons with `active` prop, but visual active underline still not reflected; need to finalize link variant styles.
+- Button link variant updated with `data-state` styling but active underline still missing; confirmed Tailwind config lacks attribute selector variant—need to add plugin or use class-based variant.
+- Button link variant still missing active underline; Tailwind config updated with custom `state-active` variant targeting `[data-state="active"]`.
+- Switched to fallback `.active` class in Button component, but styles still not generated—likely purged by Tailwind. Need to review safelist / content paths.
+- Implemented `.btn-link` global class in `globals.css` for link buttons; Button component updated. Need to verify underline appears.
+- Button link variant transitioned to `.btn-link` global class with underline styles in `globals.css`; Nav buttons now include class. Need to verify underline appears.
+
+## Task List
+
+- [x] Locate Pa11y scripts and configuration.
+- [x] Confirm Tailwind color palette in `tailwind.config.js`.
+- [x] Start dev server with `npm run a11y:dev`.
+- [x] Modify Pa11y config to stop ignoring `color-contrast` (or override via CLI).
+- [x] Run accessibility tests with `npm run a11y:check` (or `a11y:ci`).
+- [x] Capture and review contrast errors.
+- [ ] Update Pa11y configuration for reliable headless test execution.
+  - [x] Apply minimal config (no custom actions) and HMR-safe flags
+  - [x] Add extended Chrome flags and increased timeouts
+  - [x] Create `.pa11yci` config file (migrate settings from script)
+  - [ ] Investigate persistent "Target closed" error and HMR overlay in production
+    - [x] Confirm server runs in production (no HMR overlay)
+    - [x] Run Pa11y CLI directly to isolate script issues (mini-test.js)
+    - [ ] Refactor `check-a11y.js` based on minimal config (use stable runner, simplify flags)
+    - [ ] Experiment with different Puppeteer/Pa11y versions or flags
+- [ ] Update `a11y:check` script to run against production build
+  - [x] Replace script with manual build/start instructions (`a11y:check`)
+  - [x] Add `a11y:test` command to package.json
+  - [x] Install `wait-on` as dev dependency (optional)
+  - [x] Fix production build errors
+    - [x] Remove `<title>` from `_document.tsx`
+    - [x] Fix Zod resolver type error in `Form.tsx`
+    - [x] Ensure `npm run build` passes
+  - [x] Verify production server starts and Pa11y connects
+- [ ] Re-run Pa11y against production build and verify it completes
+- [x] Set up Playwright + axe-core accessibility tests
+  - [x] Install `@axe-core/playwright`
+  - [x] Install Playwright browsers (`npx playwright install`)
+  - [x] Add `playwright.config.ts` with Chromium project & dev server
+  - [x] Create initial `e2e/a11y.spec.ts`
+  - [x] Run tests and capture violations
+- [ ] Fix Playwright-reported accessibility violations
+  - [x] Add alt text or aria-hidden to SVG icons (`svg-img-alt`)
+  - [x] Add descriptive alt text to ProjectCard images
+  - [ ] Provide discernible text for logo heading (`empty-heading`)
+  - [ ] Correct heading hierarchy (`heading-order`)
+    - [x] HeroSection heading levels fixed
+  - [ ] Remove nested interactive controls (`nested-interactive`)
+- [ ] Triage remaining 51 Pa11y color-contrast issues.
+- [ ] Fix ContactForm color contrast (user).
+  - [ ] Improve placeholder and label contrast colors
+- [ ] Fix Testimonials section color contrast (needs verification).
+  - [x] Improve error message contrast colors
+- [ ] Fix Hero section color contrast.
+- [ ] Improve global text color contrast.
+- [ ] Update muted palette & Input/ContactForm styles for better contrast.
+- [ ] Re-run Pa11y to update issue count.
+- [ ] Increase touch target sizes for better usability.
+- [ ] Adjust Tailwind colors / component styles to meet WCAG AA contrast.
+  - [ ] Primary & secondary buttons
+  - [ ] Carousel navigation buttons & dots
+  - [ ] Any text on background colors
+- [ ] Re-run Pa11y until zero contrast errors.
+- [ ] Commit changes & document findings.
+- [ ] Remove `<title>` from `_document.tsx` again
+- [ ] Fix empty logo `<h3>` heading (add meaningful text or remove)
+- [x] Ensure unique `main-content` ID (single `<main>` landmark)
+- [ ] Address npm audit vulnerabilities
+  - [x] Evaluate safe upgrade/downgrade path for `pa11y` / `pa11y-ci` (used npm overrides)
+  - [x] Apply semver override and verify `npm audit` passes
+- [ ] Fix ProjectDialog functionality regression
+  - [x] Review ProjectCard and ProjectDialog code
+  - [x] Review custom Dialog component implementation & git history
+  - [x] Identify root cause (state reset) and update code
+    - [x] Investigate why click handler not firing (event interception, state logic)
+    - [x] Investigate why `isDialogOpen` state resets / `open` prop always false
+    - [x] Memoize ProjectCard list and fix stable keys to preserve state
+    - [x] Memoize translated projects array to stabilize props
+    - [x] Wrap ProjectCard with React.memo and fix export
+  - [ ] Verify fix and ensure accessibility compliance
+- [x] Improve active Nav link styling
+  - [x] Update `Nav.tsx` to use `variant="link"` and apply active state based on route
+  - [x] Wrap nav items in relative container with underline div toggled by `isActive`
+  - [x] Remove unused `.btn-link` and related global styles if redundant
+  - [x] Verify active Nav link underline appears in browser
+- [x] Update global CSS to use `data-variant` attribute for link buttons.
+- [x] Verify active Nav link underline appears.
+
+## Current Goal
+
+Verify ProjectDialog opens after memoization

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+
 import Link from 'next/link';
-import Button from '@/components/ui/Button';
+
+import { Button } from '@/components/ui/Button';
 import Input from '@/components/ui/Input';
 import { Label } from '@/components/ui/Label';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/Tabs';
@@ -106,12 +108,15 @@ const Login = () => {
                   <div className="space-y-2">
                     <div className="flex justify-between items-center">
                       <Label htmlFor="login-password">Password</Label>
-                      <Link
-                        href="#"
-                        className="text-sm text-counseling-purple hover:text-counseling-dark-purple"
+                      <button
+                        type="button"
+                        onClick={() => {
+                          /* TODO: Implement forgot password functionality */
+                        }}
+                        className="text-sm text-counseling-purple hover:text-counseling-dark-purple focus:outline-none focus:ring-2 focus:ring-counseling-purple focus:ring-offset-2 rounded"
                       >
                         Forgot password?
-                      </Link>
+                      </button>
                     </div>
                     <Input
                       id="login-password"
@@ -197,20 +202,35 @@ const Login = () => {
 
             <div className="mt-6 text-sm text-center text-gray-500">
               <span>By using our services, you agree to our </span>
-              <Link href="#" className="text-counseling-purple hover:text-counseling-dark-purple">
+              <button
+                type="button"
+                onClick={() => {
+                  /* TODO: Navigate to Terms of Service */
+                }}
+                className="text-counseling-purple hover:text-counseling-dark-purple focus:outline-none focus:ring-2 focus:ring-counseling-purple focus:ring-offset-2 rounded"
+              >
                 Terms of Service
-              </Link>
+              </button>
               <span> and </span>
-              <Link href="#" className="text-counseling-purple hover:text-counseling-dark-purple">
+              <button
+                type="button"
+                onClick={() => {
+                  /* TODO: Navigate to Privacy Policy */
+                }}
+                className="text-counseling-purple hover:text-counseling-dark-purple focus:outline-none focus:ring-2 focus:ring-counseling-purple focus:ring-offset-2 rounded"
+              >
                 Privacy Policy
-              </Link>
+              </button>
             </div>
           </div>
         </div>
       </div>
 
       <div className="py-4 text-center bg-gray-50">
-        <Link href="/" className="text-gray-600 hover:text-counseling-purple">
+        <Link
+          href="/"
+          className="text-gray-600 hover:text-counseling-purple focus:outline-none focus:ring-2 focus:ring-counseling-purple focus:ring-offset-2 rounded"
+        >
           &larr; Back to Home
         </Link>
       </div>

@@ -1,6 +1,8 @@
 import type { TeamMember } from '@/types/siteConfig';
 
 export const siteConfig = {
+  title: 'Marcus Björke | Web Developer & Designer',
+  description: 'Portfolio showcasing my work and expertise in web development and design',
   locales: ['en', 'sv'],
   defaultLocale: 'en',
   translations: {
@@ -26,6 +28,9 @@ export const siteConfig = {
         title: 'Memories',
         quote: 'Where design clarity meets dev mixtape energy.',
         cta: 'See all memories',
+        testimonials: {
+          title: 'What others say',
+        },
       },
       how: {
         title: 'How',
@@ -68,10 +73,40 @@ export const siteConfig = {
       },
       contact: {
         title: 'Contact',
-        successMessage: 'Thank you for reaching out! I’ll get back to you soon.',
-        name: 'Name',
-        email: 'Email',
-        message: 'Message',
+        heading: "Let's build something meaningful together",
+        description:
+          "Have a project in mind or want to discuss potential opportunities? I'd love to hear from you.",
+        info: {
+          title: 'Contact Information',
+          description:
+            'Feel free to reach out through any of these channels. I typically respond within 24 hours.',
+          phone: 'Phone',
+          github: 'GitHub',
+          linkedin: 'LinkedIn',
+          location: 'Location',
+        },
+        successMessage: "Thank you for your message! I'll get back to you soon.",
+        form: {
+          title: 'Get in Touch',
+          name: 'Name',
+          email: 'Email',
+          message: 'Message',
+          requiredField: 'Required',
+          namePlaceholder: 'Your name',
+          emailPlaceholder: 'your.email@example.com',
+          messagePlaceholder: 'How can I help you?',
+          submit: 'Send Message',
+          submitting: 'Sending...',
+          success: 'Message sent successfully!',
+          error: 'Error sending message. Please try again.',
+          validation: {
+            nameRequired: 'Name is required',
+            emailRequired: 'Valid email is required',
+            messageRequired: 'Message is required',
+            invalidEmail: 'Please enter a valid email address',
+          },
+          honeypot: "Don't fill this out if you're human",
+        },
       },
       hero: {
         subheading: 'Building digital products since 1997',
@@ -127,10 +162,13 @@ export const siteConfig = {
         },
         moreInfo: 'Mer info',
       },
-      memories: {
+      minnen: {
         title: 'Minnen',
-        quote: 'Där designklarhet möter dev-mixtape-energi.',
+        quote: 'Där designklarhet möter utvecklarens mixtape-energi.',
         cta: 'Se alla minnen',
+        testimonials: {
+          title: 'Vad andra säger',
+        },
       },
       how: {
         title: 'Så här',
@@ -170,10 +208,40 @@ export const siteConfig = {
       },
       contact: {
         title: 'Kontakt',
+        heading: 'Låt oss bygga något meningsfullt tillsammans',
+        description:
+          'Har du ett projekt i åtanke eller vill du diskutera potentiella möjligheter? Jag skulle gärna vilja höra från dig.',
+        info: {
+          title: 'Kontaktinformation',
+          description:
+            'Tveka inte att höra av dig via någon av dessa kanaler. Jag svarar vanligtvis inom 24 timmar.',
+          phone: 'Telefon',
+          github: 'GitHub',
+          linkedin: 'LinkedIn',
+          location: 'Plats',
+        },
         successMessage: 'Tack för ditt meddelande! Jag återkommer snart.',
-        name: 'Namn',
-        email: 'E-post',
-        message: 'Meddelande',
+        form: {
+          title: 'Kontakta mig',
+          name: 'Namn',
+          email: 'E-post',
+          message: 'Meddelande',
+          requiredField: 'Obligatoriskt',
+          namePlaceholder: 'Ditt namn',
+          emailPlaceholder: 'din.epost@example.com',
+          messagePlaceholder: 'Hur kan jag hjälpa dig?',
+          submit: 'Skicka meddelande',
+          submitting: 'Skickar...',
+          success: 'Meddelandet skickat!',
+          error: 'Ett fel uppstod. Försök igen.',
+          validation: {
+            nameRequired: 'Namn krävs',
+            emailRequired: 'Giltig e-post krävs',
+            messageRequired: 'Meddelande krävs',
+            invalidEmail: 'Ange en giltig e-postadress',
+          },
+          honeypot: 'Fyll inte i detta fält om du är människa',
+        },
       },
 
       error: {
@@ -304,81 +372,8 @@ export const siteConfig = {
       url: '#pricing',
     },
   },
-  // Ensure comma after pricing
-  projects: [
-    {
-      id: 'blueberry-banking',
-      title: 'Project Blueberry Banking',
-      summary:
-        'A mobile Business Banking App themed for a small business owner, surfer vibes, this is built with Framer just to showcase interaction examples',
-      image: '/assets/alone-surfer.jpg',
-      url: 'https://blueberry-bank.framer.website',
-      openInNewTab: true,
-      openInDialog: false,
-      cta: {
-        text: 'Explore this project',
-        url: 'https://blueberry-bank.framer.website',
-        target: '_blank',
-      },
-      content: {
-        description:
-          'A mobile Business Banking App themed for a small business owner with surfer vibes, built with Framer to showcase interaction examples.',
-        features: [
-          'Interactive mobile banking interface',
-          'Surf-themed design system',
-          'Transaction history and analytics',
-          'Bill payment and transfers',
-        ],
-        technologies: ['Framer', 'React', 'TypeScript'],
-        links: [
-          {
-            text: 'View Prototype',
-            url: 'https://blueberry-bank.framer.website',
-            target: '_blank',
-          },
-        ],
-      },
-    },
-    {
-      id: 'rob-watkins-photography',
-      title: 'Rob Watkins Photography',
-      summary:
-        'Rob had ideas—too many. He was stuck, unsure what to offer or how to show it. I helped him cut through the noise and focus on his story. In an hour, we had a solid draft. Now he runs his own site, fully in control and paying less than before.',
-      image: '/assets/rob-watkins-offers.png',
-      url: 'https://robw.framer.photos',
-      openInNewTab: true,
-      openInDialog: false,
-      cta: {
-        text: "Visit Rob's site",
-        url: 'https://robw.framer.photos',
-        target: '_blank',
-      },
-      content: {
-        description:
-          'A photography portfolio website for Rob Watkins, showcasing his work with a clean and focused design.',
-        features: [
-          'Portfolio gallery',
-          'Contact form',
-          'Responsive design',
-          'Easy content management',
-        ],
-        technologies: ['Framer', 'React', 'TypeScript'],
-        links: [
-          {
-            text: 'View Website',
-            url: 'https://robw.framer.photos',
-            target: '_blank',
-          },
-        ],
-      },
-    },
-  ],
-  // Ensure comma after projects array
-  projectsCta: {
-    text: 'View projects',
-    url: '#projects',
-  },
-  // Ensure comma after projectsCta
+
+  // Ensure comma after callToAction
   callToAction: {
     text: 'Let’s build something meaningful together',
     url: '#contact',
@@ -420,10 +415,39 @@ export const siteConfig = {
   ],
   caseStudies: [
     {
-      id: 'career-counseling',
-      title: 'Career Counseling Platform',
+      id: 'rob-watkins-photography',
+      title: 'Rob Watkins Photography',
       summary:
-        'A modern career counseling platform built with Next.js, enabling users to explore counseling packages, read reviews, and book sessions.',
+        'A custom photography portfolio website that puts the focus on stunning visual storytelling and seamless content management.',
+      image: '/assets/rob-watkins-offers.png',
+      url: 'https://robw.framer.photos',
+      openInNewTab: false,
+      openInDialog: true,
+      content: {
+        description:
+          "A custom photography portfolio website built with a focus on performance and visual impact. The site features a clean, minimal design that puts the focus on Rob's stunning photography work, with a custom content management system that allows him to easily update his portfolio.",
+        features: [
+          'Custom image optimization pipeline',
+          'Dynamic gallery with filtering',
+          'Client proofing system',
+          'SEO optimized for photographers',
+          'Mobile-first responsive design',
+          'Fast-loading image delivery',
+        ],
+        technologies: ['Framer'],
+        links: [{ text: 'Visit Live Site', url: 'https://robw.framer.photos' }],
+      },
+      cta: {
+        text: 'See the case',
+        url: 'https://robw.framer.photos',
+        target: '_blank',
+      },
+    },
+    {
+      id: 'career-counseling',
+      title: 'Vibecoding Showcase',
+      summary:
+        'Example Prototype for a modern career counseling platform, enabling users to explore counseling packages, read reviews, and book sessions.',
       image: '/assets/career-path-case.png',
       url: 'https://preeminent-heliotrope-7d4b20.netlify.app',
       openInNewTab: true,
@@ -468,43 +492,6 @@ export const siteConfig = {
       },
     },
     {
-      id: 'ux-high-bias',
-      title: 'UX HIGH BIAS',
-      summary:
-        'A zine-inspired Vibe portfolio framework, under development, but very much like this site you are watching now.',
-      image: '/assets/ux-high-bias.png',
-      url: 'https://ux-high-bias.framer.website',
-      openInNewTab: false,
-      openInDialog: true,
-      content: {
-        description:
-          'A modern, customizable portfolio framework built with Next.js and Tailwind CSS. Designed for developers and designers who want to showcase their work. The base will be with a unique, zine-inspired aesthetic, but that is easily customizable with Modern Vibe Coding Tools like Windsurf.ai.',
-        features: [
-          'Responsive design that works on all devices',
-          'Dark/light mode support, disablable',
-          'Shadcn/ui components with TailwindCSS',
-          'New Theme Editor coming soon from Shadcn',
-          'Multilanguage support, makes it super easy to add how many languages you want by just instructing Windsurf.ai what languages you want',
-          'Easy Customizable color schemes, and even multiple themes if you want',
-          'Markdown support for content, i.e. LinkedIn templates',
-          'Built-in analytics',
-          'Wizard to populate content',
-          'AAA+ accessible from start',
-          'SEO optimized',
-        ],
-        technologies: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion', 'MDX'],
-        links: [
-          { text: 'GitHub Repository', url: 'https://github.com/yourusername/ux-high-bias' },
-          { text: 'Live Demo', url: 'https://ux-high-bias.framer.website' },
-        ],
-      },
-      cta: {
-        text: 'See the case',
-        url: 'https://ux-high-bias.framer.website',
-        target: '_blank',
-      },
-    },
-    {
       title: 'Project Blueberry Banking',
       summary:
         'A mobile Business Banking App themed for a small business owner, surfer vibes, built with Framer to showcase interaction examples',
@@ -534,37 +521,17 @@ export const siteConfig = {
         target: '_self',
       },
     },
-    {
-      id: 'rob-watkins-photography',
-      title: 'Rob Watkins Photography',
-      summary:
-        'A custom photography portfolio website that puts the focus on stunning visual storytelling and seamless content management.',
-      image: '/assets/rob-watkins-offers.png',
-      url: 'https://robw.framer.photos',
-      openInNewTab: false,
-      openInDialog: true,
-      content: {
-        description:
-          "A custom photography portfolio website built with a focus on performance and visual impact. The site features a clean, minimal design that puts the focus on Rob's stunning photography work, with a custom content management system that allows him to easily update his portfolio.",
-        features: [
-          'Custom image optimization pipeline',
-          'Dynamic gallery with filtering',
-          'Client proofing system',
-          'SEO optimized for photographers',
-          'Mobile-first responsive design',
-          'Fast-loading image delivery',
-        ],
-        technologies: ['Framer'],
-        links: [{ text: 'Visit Live Site', url: 'https://robw.framer.photos' }],
-      },
-      cta: {
-        text: 'See the case',
-        url: 'https://robw.framer.photos',
-        target: '_blank',
-      },
-    },
   ],
 
+  contact: {
+    phone: '+358400527010',
+    email: 'your.email@example.com',
+    location: 'Åland, Finland',
+    social: {
+      github: 'https://github.com/mbjorke',
+      linkedin: 'https://linkedin.com/in/mbjorke',
+    },
+  },
   footer: {
     copyright: ' 2025 Marcus Björke. All rights reserved.',
     links: [
@@ -618,17 +585,17 @@ export const siteConfig = {
       avatar: '/assets/love-ice.jpeg',
       bio: "I have a passion for the sea, the wind, and the snow. I'm currently dreaming about making Åland a famous destination for eMTB riders from all over the world.",
       skills: [
-        'Windsurf',
-        'Kitesurf',
-        'Wingfoiling',
-        'eMTB',
-        'Longdistance Ice Skating, Downhillskiing',
+        'Windsurfing (33 years)',
+        'Kitesurfing (12 years)',
+        'Wingfoiling (Noob, 1 year)',
+        'eMTB (Slow learner, 3 years)',
+        'Longdistance Ice Skating (29 years), Downhillskiing (44 years)',
       ],
       funFact:
         'Twice I have windsurfed accross the sea of Åland. Windsurf carreer started when I was 17 years old. I transitioned to Kitesurfing and latest into Wingfoiling. Goal is to be able to fly in 2025.',
       favoriteSnack: "My wife's hemvetebröd or kanelbullar",
       social: {
-        bluesky: 'https://instagram.com/mbjorke',
+        bluesky: 'https://bsky.app/profile/mbjorke.bsky.social',
       },
       showLogo: false,
     },
