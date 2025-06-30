@@ -1,6 +1,5 @@
 import { fontFamily } from 'tailwindcss/defaultTheme';
 import tailwindcssAnimate from 'tailwindcss-animate';
-import typography from '@tailwindcss/typography';
 import forms from '@tailwindcss/forms';
 import containerQueries from '@tailwindcss/container-queries';
 
@@ -226,7 +225,6 @@ const config = {
   },
   plugins: [
     tailwindcssAnimate,
-    typography,
     forms,
     containerQueries,
     function ({ addVariant }) {
