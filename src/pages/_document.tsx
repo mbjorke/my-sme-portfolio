@@ -13,7 +13,6 @@ export default function Document({ locale = siteConfig.defaultLocale }: Document
     <Html lang={locale}>
       <Head>
         <meta charSet="utf-8" />
-        <title>Portfolio | Marcus Björke - Web Developer</title>
         <meta name="theme-color" content="#010e14" />
         <meta
           name="description"
